@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.med.info.mapper.Miss_control_userMapper">
+	<resultMap type="com.med.info.domain.Miss_control_user" id="Miss_control_user">
+		<result column="userUuid" property="userUuid"/>
+		<result column="userName" property="userName" jdbcType="VARCHAR" />
+    	<result column="userCode" property="userCode" jdbcType="VARCHAR" />
+    	<result column="userPassWord" property="userPassWord" jdbcType="VARCHAR" />
+    	<result column="userPhoneNo" property="userPhoneNo" jdbcType="VARCHAR" />
+    	<result column="userEmail" property="userEmail" jdbcType="VARCHAR" />
+    	<result column="userStatus" property="userStatus" jdbcType="VARCHAR" />
+    	<result column="userCreateTime" property="userCreateTime" jdbcType="VARCHAR" />
+    	<result column="userCreateDate" property="userCreateDate" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql  id="Select_Where_Clause">
+    <trim prefix="where" prefixOverrides="and|or">
+      <if test="userUuid != null">
+         and userUuid = #{userUuid,jdbcType=VARCHAR}
+      </if>
+      <if test="userCode != null">
+         and userCode = #{userCode,jdbcType=VARCHAR}
+      </if>
+      <if test="userPassWord != null">
+         and userPassWord = #{userPassWord,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </sql>
+	
+	<insert id="save" parameterType="com.med.info.domain.Miss_control_user">
+		insert into miss_control_user(userUuid, userName, userCode, userPassWord, userPhoneNo, userEmail, userStatus, userCreateTime, userCreateDate) values (#{userUuid},#{userName},#{userCode},#{userPassWord},#{userPhoneNo},#{userEmail},#{userStatus},#{userCreateTime},#{userCreateDate});
+	</insert>
+	
+	<delete id="deleteByPrimaryKey" parameterType="Long">
+		delete from miss_control_user where id = #{userUuid}
+	</delete>
+	
+	<select id="select" parameterType="com.med.info.domain.Miss_control_user" resultMap="userInfo">
+		select * from miss_control_user <include refid="Select_Where_Clause" />
+	</select>
+	
+	<select id="selectList" parameterType="com.med.info.domain.Miss_control_user" resultMap="userInfo">
+		select * from miss_control_user <include refid="Select_Where_Clause" />
+	</select>
+	
+	<update id="update" parameterType="com.med.info.domain.Miss_control_user"></update>
+	
+	<select id="findUserByUnameAndPasswd" parameterType="String" resultMap="userInfo">
+		select * from miss_control_user where userCode = #{userCode} and userPassWord = #{userPassWord}
+	</select>
+</mapper>

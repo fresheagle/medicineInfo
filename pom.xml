@@ -13,10 +13,10 @@
 	<url>http://maven.apache.org</url>
 
 	<modules>
-		<module>medcineInfo_common</module>
-		<module>medcineInfo_dao</module>
-		<module>medcineInfo_service</module>
-		<module>medcineInfo_rest</module>
+		<module>medicineInfo_common</module>
+		<module>medicineInfo_dao</module>
+		<module>medicineInfo_service</module>
+		<module>medicineInfo_rest</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

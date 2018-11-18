@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.med.info.domain.UserInfo;
+import com.med.info.domain.Miss_control_user;
 import com.med.info.service.UserInfoService;
 
 /**
@@ -33,9 +33,9 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public UserInfo all() {
-		UserInfo user = new UserInfo();
-		UserInfo select = userInfoService.select(user );
+	public Miss_control_user all() {
+		Miss_control_user user = new Miss_control_user();
+		Miss_control_user select = userInfoService.select(user );
 		return select;
 	}
 }

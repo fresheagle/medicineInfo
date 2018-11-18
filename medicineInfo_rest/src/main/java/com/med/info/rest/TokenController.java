@@ -40,11 +40,11 @@ public class TokenController {
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	@IgnoreSecurity
-	public Response login(@RequestParam("uname") String uname,
-			@RequestParam("passwd") String passwd, HttpServletResponse response) {
-		boolean flag = userService.login(uname, passwd);
+	public Response login(@RequestParam("userCode") String userCode,
+			@RequestParam("userPassWord") String userPassWord, HttpServletResponse response) {
+		boolean flag = userService.login(userCode, userPassWord);
 		if (flag) {
-			String token = tokenManager.createToken(uname);
+			String token = tokenManager.createToken(userCode);
 			log.debug("**** Generate Token **** : " + token);
 			Cookie cookie = new Cookie(Constants.DEFAULT_TOKEN_NAME, token);
 			log.debug("Write Token to Cookie and return to the Client : " + cookie.toString());

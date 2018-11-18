@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<properties resource="mysql/mysql.properties" />
+
+	<context id="mysqlTables" targetRuntime="MyBatis3">
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="${jdbc.url}" userId="${jdbc.username}"
+			password="${jdbc.password}" />
+		<!--指定生成的类型为java类型，避免数据库中number等类型字段 -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!--自动生成的实体的存放包路径 -->
+		<javaModelGenerator
+			targetPackage="com.med.info.domain" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!--自动生成的*Mapper.xml文件存放路径 -->
+		<sqlMapGenerator targetPackage="mapping"
+			targetProject="src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!--自动生成的*Mapper.java存放路径 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.med.info.mapper" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<table tableName="miss_chinese_disease"
+			domainObjectName="Miss_chinese_disease" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_combination_disease"
+			domainObjectName="Miss_combination_disease"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_department"
+			domainObjectName="Miss_department" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_department_doctor_mapping"
+			domainObjectName="Miss_department_doctor_mapping"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_disease" domainObjectName="Miss_disease"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_disease_department_mapping"
+			domainObjectName="Miss_disease_department_mapping"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_disease_symptom_mapping"
+			domainObjectName="Miss_disease_symptom_mapping"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_dislocation"
+			domainObjectName="Miss_dislocation" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_district"
+			domainObjectName="Miss_district" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_doctor" domainObjectName="Miss_doctor"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_institution"
+			domainObjectName="Miss_institution" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_institution_doctor_mapping"
+			domainObjectName="Miss_institution_doctor_mapping"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_institution_keypartment_mapping"
+			domainObjectName="Miss_institution_keypartment_mapping"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_medical" domainObjectName="Miss_medical"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_medical_company"
+			domainObjectName="Miss_medical_company" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_medical_medicalcompany_mapping"
+			domainObjectName="Miss_medical_medicalcompany_mapping"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_symptom" domainObjectName="Miss_symptom"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_symptom_dislocation_mapping"
+			domainObjectName="Miss_symptom_dislocation_mapping"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_symptom_medical_mapping"
+			domainObjectName="Miss_symptom_medical_mapping"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_western_disease"
+			domainObjectName="Miss_western_disease" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="selectuuid_short()" identity="false" />
+		</table>
+		<table tableName="miss_control_action"
+			domainObjectName="Miss_control_action" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+		<table tableName="miss_control_actionLog"
+			domainObjectName="Miss_control_actionLog"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="miss_control_log"
+			domainObjectName="Miss_control_log" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+		<table tableName="miss_control_role"
+			domainObjectName="Miss_control_role" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+		<table tableName="miss_control_roleAndAction"
+			domainObjectName="Miss_control_roleAndAction"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="miss_control_task_detail"
+			domainObjectName="Miss_control_task_detail"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="miss_control_task_mapTables"
+			domainObjectName="Miss_control_task_mapTables"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="miss_control_task_records"
+			domainObjectName="Miss_control_task_records"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="miss_control_userAndRole"
+			domainObjectName="Miss_control_userAndRole"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+	</context>
+</generatorConfiguration>

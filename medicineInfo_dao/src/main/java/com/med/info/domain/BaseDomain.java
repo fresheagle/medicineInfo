@@ -11,14 +11,14 @@ import java.util.Date;
  */
 public abstract class BaseDomain {
 
-	private Long id;
+	private Integer id;
 	private Date createTime;
 	private Date updateTime;
 	private Date deleteTime;
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public Date getCreateTime() {

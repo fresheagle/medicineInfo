@@ -15,7 +15,7 @@ public interface UserInfoService extends BaseService<Miss_control_user>{
 	
 	public Miss_control_user findUserByUnameAndPasswd( String userCode, String userPassWord);
 	
-	public LoginInfoDTO getLoginInfo( String userCode, String userPassWord);
+	public LoginInfoDTO getLoginInfo( String userCode, String userPassWord) throws Exception;
 	
 	/**     
 	 * @description 用户登录逻辑

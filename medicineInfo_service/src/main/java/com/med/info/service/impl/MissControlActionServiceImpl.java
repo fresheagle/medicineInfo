@@ -1,5 +1,7 @@
 package com.med.info.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,9 +27,15 @@ public class MissControlActionServiceImpl extends BaseServiceImpl<Miss_control_a
 		for (String string : uuids) {
 			int deleteByPrimaryKey = actionMapper.deleteByPrimaryKey(string);
 			if(deleteByPrimaryKey <0 ) {
-				throw new Exception("É¾³ýÊý¾Ý"+string+"´íÎó£¡");
+				throw new Exception("É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"+string+"ï¿½ï¿½ï¿½ï¿½");
 			}
 		}
+	}
+
+	@Override
+	public List<Miss_control_action> getControlActionsByUserCode(String userCode) {
+		// TODO Auto-generated method stub
+		return actionMapper.getControlActionsByUserCode(userCode);
 	}
 
 }

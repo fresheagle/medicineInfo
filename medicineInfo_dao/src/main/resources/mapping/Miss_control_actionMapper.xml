@@ -166,4 +166,11 @@
       actionCreateTime = #{actioncreatetime,jdbcType=VARCHAR}
     where actionUuid = #{actionuuid,jdbcType=VARCHAR}
   </update>
+  
+  <select id="getControlActionsByUserCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select c.*
+  	from miss_control_userandrole a left join miss_control_roleandaction b on a.roleCode = b.roleCode left join miss_control_action c on b.actionCode = c.actionCode
+  	where a.userCode = #{userCode}
+  </select>
+  
 </mapper>

@@ -1,5 +1,7 @@
 package com.med.info.mapper;
 
+import java.util.List;
+
 import com.med.info.domain.Miss_control_action;
 
 public interface Miss_control_actionMapper extends BaseMapper<Miss_control_action>{
@@ -50,4 +52,6 @@ public interface Miss_control_actionMapper extends BaseMapper<Miss_control_actio
      * @mbg.generated Sat Nov 17 18:29:49 CST 2018
      */
     int updateByPrimaryKey(Miss_control_action record);
+
+	List<Miss_control_action> getControlActionsByUserCode(String userCode);
 }

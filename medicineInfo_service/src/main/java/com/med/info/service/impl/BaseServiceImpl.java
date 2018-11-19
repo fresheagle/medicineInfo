@@ -14,45 +14,36 @@ public abstract class BaseServiceImpl<T extends BaseDomain> implements BaseServi
 	 * @see com.med.info.service.BaseService#add(com.med.info.domain.BaseDomain)
 	 */
 	@Override
-	public void add(T t) {
+	public int insert(T t) {
 		// TODO Auto-generated method stub
-		getMapper().add(t);
+		return getMapper().insert(t);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.med.info.service.BaseService#deleteByPrimaryKey(java.lang.Long)
 	 */
 	@Override
-	public void deleteByPrimaryKey(Long id) {
+	public int deleteByPrimaryKey(Long id) {
 		// TODO Auto-generated method stub
-		getMapper().deleteByPrimaryKey(id);
+		return getMapper().deleteByPrimaryKey(id);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.med.info.service.BaseService#select(com.med.info.domain.BaseDomain)
 	 */
 	@Override
-	public T select(T t) {
+	public T selectByPrimaryKey(T t) {
 		// TODO Auto-generated method stub
-		return (T) getMapper().select(t);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.med.info.service.BaseService#selectList(com.med.info.domain.BaseDomain)
-	 */
-	@Override
-	public T selectList(T t) {
-		// TODO Auto-generated method stub
-		return (T) getMapper().selectList(t);
+		return (T) getMapper().selectByPrimaryKey(t);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.med.info.service.BaseService#update(com.med.info.domain.BaseDomain)
 	 */
 	@Override
-	public void update(T t) {
+	public int updateByPrimaryKey(T t) {
 		// TODO Auto-generated method stub
-		getMapper().update(t);
+		return getMapper().updateByPrimaryKey(t);
 	}
 
 	public abstract BaseMapper getMapper();

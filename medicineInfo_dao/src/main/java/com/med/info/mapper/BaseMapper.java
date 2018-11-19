@@ -10,10 +10,9 @@ import com.med.info.domain.BaseDomain;
  *
  */
 public interface BaseMapper<T extends BaseDomain> {
-	public void add(T t);
-	public void deleteByPrimaryKey(Long id);
-	public T select(T t);
-	public T selectList(T t);
-	public void update(T t);
+	public int insert(T t);
+	public int deleteByPrimaryKey(Long id);
+	public T selectByPrimaryKey(T t);
+	public int updateByPrimaryKey(T t);
 	
 }

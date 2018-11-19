@@ -4,6 +4,7 @@
 package com.med.info.service;
 
 import com.med.info.domain.Miss_control_user;
+import com.med.info.service.dto.LoginInfoDTO;
 
 /**
  * @author jialin.jiang
@@ -13,6 +14,8 @@ public interface UserInfoService extends BaseService<Miss_control_user>{
 
 	
 	public Miss_control_user findUserByUnameAndPasswd( String userCode, String userPassWord);
+	
+	public LoginInfoDTO getLoginInfo( String userCode, String userPassWord);
 	
 	/**     
 	 * @description 用户登录逻辑

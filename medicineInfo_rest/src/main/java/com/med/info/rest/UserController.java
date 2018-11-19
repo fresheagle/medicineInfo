@@ -42,6 +42,10 @@ public class UserController {
 		return null;
 	}
 	
+	@RequestMapping(method = RequestMethod.PUT)
+	public Response login(String username, String password) {
+		
+	}
 	
 	/**
 	 * @description 添加指定Id的用户

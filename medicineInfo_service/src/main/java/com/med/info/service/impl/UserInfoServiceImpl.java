@@ -11,6 +11,7 @@ import com.med.info.domain.Miss_control_user;
 import com.med.info.mapper.BaseMapper;
 import com.med.info.mapper.Miss_control_userMapper;
 import com.med.info.service.UserInfoService;
+import com.med.info.service.dto.LoginInfoDTO;
 
 /**
  * @author jialin.jiang
@@ -50,6 +51,12 @@ public class UserInfoServiceImpl extends BaseServiceImpl<Miss_control_user> impl
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public LoginInfoDTO getLoginInfo(String userCode, String userPassWord) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

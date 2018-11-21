@@ -32,7 +32,7 @@
 	</dependencies>
 	
 	<build>
-		<finalName>${app.name}</finalName>
+		<finalName>medicineInfo</finalName>
 		<resources>
 			<resource>
 				<directory>${basedir}/src/main/resources</directory>
@@ -58,13 +58,6 @@
 				<configuration>
 					<mainClass>com.med.info.launch.MedecineInfoLaunch</mainClass>
 				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

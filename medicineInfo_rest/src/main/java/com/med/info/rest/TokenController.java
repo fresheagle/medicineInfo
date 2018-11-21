@@ -15,6 +15,7 @@ import com.med.info.annotation.IgnoreSecurity;
 import com.med.info.response.Response;
 import com.med.info.service.TokenManager;
 import com.med.info.service.UserInfoService;
+import com.med.info.service.dto.LoginInfoDTO;
 import com.med.info.utils.Constants;
   
 /**        
@@ -42,16 +43,19 @@ public class TokenController {
 	@IgnoreSecurity
 	public Response login(@RequestParam("userCode") String userCode,
 			@RequestParam("userPassWord") String userPassWord, HttpServletResponse response) {
-		boolean flag = userService.login(userCode, userPassWord);
-		if (flag) {
+		
+		try {
+			LoginInfoDTO loginInfo = userService.getLoginInfo(userCode, userPassWord);
 			String token = tokenManager.createToken(userCode);
 			log.debug("**** Generate Token **** : " + token);
 			Cookie cookie = new Cookie(Constants.DEFAULT_TOKEN_NAME, token);
 			log.debug("Write Token to Cookie and return to the Client : " + cookie.toString());
 			response.addCookie(cookie);
-			return new Response().success("Login Success...");
+			return new Response().success(loginInfo);
+		} catch (Exception e) {
+			log.error("登录错误 userCode="+userCode,e);
+			return new Response().failure("Login Failure...");
 		}
-		return new Response().failure("Login Failure...");
 	}
 
 	/**     

@@ -8,9 +8,11 @@ package com.med.info.service;
  */      
 public interface TokenManager {
 
-	String createToken(String username);  
+	String createToken(String userCode);  
 
     boolean checkToken(String token); 
     
     void deleteToken(String token);
+    
+   boolean isTokenExpire(String token);
 }

@@ -14,12 +14,19 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
+
+import com.alibaba.fastjson.JSON;
+import com.med.info.response.Response;
+import com.med.info.service.TokenManager;
+import com.med.info.utils.Constants;
 
 /**
  * @author jialin.jiang
@@ -33,6 +40,8 @@ public class UserPrivilegeFilter implements Filter{
 	
 	@Autowired
 	private HashMap uriPrivileges;
+	@Autowired
+	private TokenManager tokenManager;
 	/* (non-Javadoc)
 	 * @see javax.servlet.Filter#init(javax.servlet.FilterConfig)
 	 */
@@ -48,11 +57,23 @@ public class UserPrivilegeFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
+		
 		HttpServletRequest servletRequest = (HttpServletRequest) request;
 		String uri = servletRequest.getRequestURI();
 		if(null != uriPrivileges && !uriPrivileges.isEmpty()) {
 			String string = (String) uriPrivileges.get(uri);
+			HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+			Cookie[] cookies = httpServletRequest.getCookies();
+			String token = null;
+			for (Cookie cookie : cookies) {
+				if(cookie.getName().equals(Constants.DEFAULT_TOKEN_NAME)) {
+					token = cookie.getValue();
+				}
+			}
+			if(null == token || !tokenManager.checkToken(token)) {
+				response.getWriter().write(JSON.toJSONString(new Response().failure("未登录或登录已过期，请重新登录")));
+				return;
+			}
 			logger.info("uri={},对应需要的权限码为 {}",uri,string);
 		}
 		chain.doFilter(request, response);

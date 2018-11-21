@@ -11,7 +11,6 @@
 	</parent>
 	<groupId>com.med.info</groupId>
 	<artifactId>medicineInfo_common</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>medicineInfo_common</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -21,8 +20,14 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.47</version>
+		</dependency>
+
 	</dependencies>
 </project>

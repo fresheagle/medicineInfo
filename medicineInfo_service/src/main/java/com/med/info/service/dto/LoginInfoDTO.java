@@ -1,6 +1,7 @@
 package com.med.info.service.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class LoginInfoDTO implements Serializable{
 	/**
@@ -12,7 +13,7 @@ public class LoginInfoDTO implements Serializable{
 	private String userName;
 	private String userCode;
 	
-	private UserPrivilegeDTO userPrivilege;
+	private List<UserPrivilegeDTO> userPrivilege;
 
 	public String getUserUuid() {
 		return userUuid;
@@ -38,13 +39,12 @@ public class LoginInfoDTO implements Serializable{
 		this.userCode = userCode;
 	}
 
-
-	public UserPrivilegeDTO getUserPrivilege() {
+	public List<UserPrivilegeDTO> getUserPrivilege() {
 		return userPrivilege;
 	}
 
-	public void setUserPrivilege(UserPrivilegeDTO userPrivilege) {
+	public void setUserPrivilege(List<UserPrivilegeDTO> userPrivilege) {
 		this.userPrivilege = userPrivilege;
 	}
-	
+
 }

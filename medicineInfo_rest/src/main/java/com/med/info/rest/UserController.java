@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.med.info.domain.Miss_control_user;
 import com.med.info.response.Response;
 import com.med.info.service.UserInfoService;
-import com.med.info.service.dto.LoginInfoDTO;
 
 /**
  * Title: 用户管理 
@@ -41,16 +40,6 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.PUT)
 	public Response updateUser(@RequestBody Miss_control_user controlUser) {
 		return null;
-	}
-	
-	@RequestMapping(method = RequestMethod.PUT)
-	public Response login(String username, String password) {
-		try {
-			LoginInfoDTO loginInfo = userInfoService.getLoginInfo(username, password);
-			return new Response().success(loginInfo);
-		} catch (Exception e) {
-			return new Response().failure(e.getMessage());
-		}
 	}
 	
 	/**

@@ -27,6 +27,7 @@
 			targetPackage="com.med.info.mapper" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
+		<!--
 		<table tableName="miss_chinese_disease"
 			domainObjectName="Miss_chinese_disease" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
@@ -203,6 +204,7 @@
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
+		-->
 		<table tableName="miss_control_task_detail"
 			domainObjectName="Miss_control_task_detail"
 			enableCountByExample="false" enableUpdateByExample="false"
@@ -215,17 +217,20 @@
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
+
 		<table tableName="miss_control_task_records"
 			domainObjectName="Miss_control_task_records"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
+		<!--
 		<table tableName="miss_control_userAndRole"
 			domainObjectName="Miss_control_userAndRole"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
+		-->
 	</context>
 </generatorConfiguration>

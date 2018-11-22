@@ -102,7 +102,7 @@ public class UserInfoServiceImpl extends BaseServiceImpl<Miss_control_user> impl
 					secondPrivilege.setPath(miss_control_action2.getActioncode());
 					children.add(secondPrivilege);
 				}
-
+				userPrivilege.add(firstPrivilege);
 			}
 			return result;
 		}

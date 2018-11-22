@@ -35,17 +35,17 @@
 		delete from miss_control_user where id = #{userUuid}
 	</delete>
 	
-	<select id="select" parameterType="com.med.info.domain.Miss_control_user" resultMap="userInfo">
+	<select id="select" parameterType="com.med.info.domain.Miss_control_user" resultMap="Miss_control_user">
 		select * from miss_control_user <include refid="Select_Where_Clause" />
 	</select>
 	
-	<select id="selectList" parameterType="com.med.info.domain.Miss_control_user" resultMap="userInfo">
+	<select id="selectList" parameterType="com.med.info.domain.Miss_control_user" resultMap="Miss_control_user">
 		select * from miss_control_user <include refid="Select_Where_Clause" />
 	</select>
 	
 	<update id="update" parameterType="com.med.info.domain.Miss_control_user"></update>
 	
-	<select id="findUserByUnameAndPasswd" parameterType="String" resultMap="userInfo">
+	<select id="findUserByUnameAndPasswd" parameterType="String" resultMap="Miss_control_user">
 		select * from miss_control_user where userCode = #{userCode} and userPassWord = #{userPassWord}
 	</select>
 </mapper>

@@ -50,22 +50,22 @@ public interface DiseasInfoService {
 	
 	/**
 	 * 查询疾病基础信息
-	 * @param diseaseId 疾病基础信息查询接口
+	 * @param diseaseId 疾病基础信息id
 	 * @return 疾病基础信息内容
 	 */
     public Miss_disease queryDiseasInfo(Integer diseaseId);
 	
     /**
-	 * 
-	 * @param diseaseId
-	 * @return
+	 * 查询疾病相关科室部门信息
+	 * @param diseaseId 疾病基础信息id
+	 * @return 疾病相关科室部门信息
 	 */
     public List<Miss_department> queryDepartmentInfo(Integer diseaseId);
     
     /**
-     * 
-     * @param diseaseId
-     * @return
+     * 查询疾病相关症状信息
+     * @param diseaseId 疾病基础信息id
+     * @return 疾病相关症状信息
      */
     public List<Miss_symptom> querySymptomInfo(Integer diseaseId);
     

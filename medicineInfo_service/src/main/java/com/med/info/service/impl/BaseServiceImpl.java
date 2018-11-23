@@ -8,7 +8,7 @@ import com.med.info.service.BaseService;
  * @author jialin.jiang
  *
  */
-public abstract class BaseServiceImpl<T extends BaseDomain> implements BaseService<T>{
+public abstract class BaseServiceImpl<T> implements BaseService<T>{
 
 	/* (non-Javadoc)
 	 * @see com.med.info.service.BaseService#add(com.med.info.domain.BaseDomain)

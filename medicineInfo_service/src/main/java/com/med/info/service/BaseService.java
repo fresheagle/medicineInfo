@@ -9,7 +9,7 @@ import com.med.info.domain.BaseDomain;
  * @author jialin.jiang
  *
  */
-public interface BaseService<T extends BaseDomain> {
+public interface BaseService<T> {
 	
 	public int insert(T t);
 	public int deleteByPrimaryKey(Long id);

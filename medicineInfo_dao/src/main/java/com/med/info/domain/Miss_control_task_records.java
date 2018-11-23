@@ -1,5 +1,7 @@
 package com.med.info.domain;
 
+import java.util.Date;
+
 public class Miss_control_task_records {
     /**
      *
@@ -62,7 +64,7 @@ public class Miss_control_task_records {
      *
      * @mbg.generated Thu Nov 22 14:58:41 CST 2018
      */
-    private String taskcreatetime;
+    private Date taskcreatetime;
 
     /**
      *
@@ -252,7 +254,7 @@ public class Miss_control_task_records {
      *
      * @mbg.generated Thu Nov 22 14:58:41 CST 2018
      */
-    public String getTaskcreatetime() {
+    public Date getTaskcreatetime() {
         return taskcreatetime;
     }
 
@@ -264,8 +266,8 @@ public class Miss_control_task_records {
      *
      * @mbg.generated Thu Nov 22 14:58:41 CST 2018
      */
-    public void setTaskcreatetime(String taskcreatetime) {
-        this.taskcreatetime = taskcreatetime == null ? null : taskcreatetime.trim();
+    public void setTaskcreatetime(Date taskcreatetime) {
+        this.taskcreatetime = taskcreatetime == null ? null : taskcreatetime;
     }
 
     /**

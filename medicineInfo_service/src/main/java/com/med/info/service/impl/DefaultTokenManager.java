@@ -40,6 +40,9 @@ public class DefaultTokenManager implements TokenManager, CommandLineRunner {
 	private static ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 	
 	private static Logger logger = LoggerFactory.getLogger(DefaultTokenManager.class);
+	
+	private static ThreadLocal<String> local = new ThreadLocal<>();
+	
 
 	/** 
 	 * @description 利用UUID创建Token(用户登录时，创建Token)
@@ -122,6 +125,10 @@ public class DefaultTokenManager implements TokenManager, CommandLineRunner {
 		}, 0, token_expire_time, TimeUnit.MINUTES);
 	}
 
+	public static String getLocalUserCode() {
+		return local.get();
+	}
+	
 	public static Integer getToken_expire_time() {
 		return token_expire_time;
 	}

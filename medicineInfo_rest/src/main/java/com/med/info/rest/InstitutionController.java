@@ -24,32 +24,60 @@ public class InstitutionController {
 	private static final Logger log = Logger.getLogger(InstitutionController.class);
 	@Autowired
 	InstitutionInfoService institutionInfoService;
-	@Autowired
-	ParamInfoService paramInfoService;
 
+	/**
+	 * 添加医疗机构信息
+	 * @param institutionInfoDTO 医疗机构信息
+	 * @return 医疗机构id
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public Response addInstitutionInfo(@RequestBody InstitutionInfoDTO institutionInfoDTO) {
-		institutionInfoService.addInstitutionInfo(institutionInfoDTO);
-		return null;
+		try{
+			return new Response().success(institutionInfoService.addInstitutionInfo(institutionInfoDTO));
+		}catch (Exception e){
+			return new Response().failure();
+		}
 	}
 
+	/**
+	 * 修改医疗机构信息
+	 * @param institutionInfoDTO 医疗机构信息
+	 * @return 医疗机构id
+	 */
 	@RequestMapping(method = RequestMethod.PUT)
 	public Response updateInstitutionInfo(@RequestBody InstitutionInfoDTO institutionInfoDTO) {
-		institutionInfoService.updateInstitutionInfo(institutionInfoDTO);
-		return null;
+		try{
+			return new Response().success(institutionInfoService.updateInstitutionInfo(institutionInfoDTO));
+		}catch (Exception e){
+			return new Response().failure();
+		}
 	}
 
+	/**
+	 * 查询医疗机构信息
+	 * @param institutionId 医疗机构id
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public Response queryInstitutionInfo(@RequestBody Integer institutionId) {
-		institutionInfoService.queryInstitutionInfo(institutionId);
-		return null;
+		try{
+			return new Response().success(institutionInfoService.queryInstitutionInfo(institutionId));
+		}catch (Exception e){
+			return new Response().failure();
+		}
 	}
 
+	/**
+	 * 删除医疗机构信息
+	 * @param institutionId 医疗机构id
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.DELETE)
 	public Response deleteInstitutionInfo(@RequestBody Integer institutionId) {
-		institutionInfoService.deleteInstitutionInfo(institutionId);
-		return null;
+		try{
+			return new Response().success(institutionInfoService.deleteInstitutionInfo(institutionId));
+		}catch (Exception e){
+			return new Response().failure();
+		}
 	}
-
-
 }

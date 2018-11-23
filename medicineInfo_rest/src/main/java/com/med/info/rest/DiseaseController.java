@@ -28,28 +28,60 @@ public class DiseaseController {
 	DiseaseInfoService diseaseInfoService;
 	@Autowired
 	ParamInfoService paramInfoService;
-	
+
+	/**
+	 * 添加疾病基础信息
+	 * @param diseaseDTO 疾病基础信息
+	 * @return 疾病信息id
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public Response addDisease(@RequestBody DiseaseDTO diseaseDTO) {
-		diseaseInfoService.addDiseaseInfo(diseaseDTO);
-		return null;
+		try{
+			return new Response().success(diseaseInfoService.addDiseaseInfo(diseaseDTO));
+		}catch (Exception e){
+			return new Response().failure();
+		}
 	}
-	
+
+	/**
+	 * 修改疾病基础信息
+	 * @param diseaseDTO 疾病基础信息
+	 * @return 疾病信息id
+	 */
 	@RequestMapping(method = RequestMethod.PUT)
 	public Response updateDisease(@RequestBody DiseaseDTO diseaseDTO) {
-		diseaseInfoService.updateDiseaseInfo(diseaseDTO);
-		return null;
+		try{
+			return new Response().success(diseaseInfoService.updateDiseaseInfo(diseaseDTO));
+		}catch (Exception e){
+			return new Response().failure();
+		}
 	}
-	
+
+	/**
+	 * 查询疾病基础信息
+	 * @param diseaseId 疾病基础信息id
+	 * @return 疾病基础信息内容
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public Response queryDisease(@RequestBody Integer diseaseId) {
-		diseaseInfoService.queryDiseaseInfo(diseaseId);
-		return null;
+		try{
+			return new Response().success(diseaseInfoService.queryDiseaseInfo(diseaseId));
+		}catch (Exception e){
+			return new Response().failure();
+		}
 	}
-	
+
+	/**
+	 * 删除疾病基础信息
+	 * @param diseaseId 疾病基础信息id
+	 * @return 疾病信息id
+	 */
 	@RequestMapping(method = RequestMethod.DELETE)
 	public Response deleteDisease(@RequestBody Integer diseaseId) {
-		diseaseInfoService.deleteDiseaseInfo(diseaseId);
-		return null;
+		try{
+			return new Response().success(diseaseInfoService.deleteDiseaseInfo(diseaseId));
+		}catch (Exception e){
+			return new Response().failure();
+		}
 	}
 }

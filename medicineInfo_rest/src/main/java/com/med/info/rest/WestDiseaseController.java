@@ -26,28 +26,60 @@ public class WestDiseaseController {
 		
 	@Autowired
 	DiseaseInfoService diseaseInfoService;
-		
+
+	/**
+	 * 添加西医疾病信息
+	 * @param miss_western_diseaseWithBLOBs 包含父类信息参数的西医疾病信息
+	 * @return 西医疾病信息id
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public Response addWestDiseaseBlogInfo(@RequestBody Miss_western_diseaseWithBLOBs miss_western_diseaseWithBLOBs) {
-		diseaseInfoService.addWestDiseaseBlogInfo(miss_western_diseaseWithBLOBs);
-		return null;
+		try{
+			return new Response().success(diseaseInfoService.addWestDiseaseBlogInfo(miss_western_diseaseWithBLOBs));
+		}catch (Exception e){
+			return new Response().failure();
+		}
 	}
-		
+
+	/**
+	 * 修改西医疾病信息
+	 * @param miss_western_diseaseWithBLOBs 包含父类信息参数的西医疾病信息
+	 * @return 西医疾病信息id
+	 */
 	@RequestMapping(method = RequestMethod.PUT)
 	public Response updateWestDiseaseBlogInfo(@RequestBody Miss_western_diseaseWithBLOBs miss_western_diseaseWithBLOBs) {
-		diseaseInfoService.updateWestDiseaseBlogInfo(miss_western_diseaseWithBLOBs);
-		return null;
+		try{
+			return new Response().success(diseaseInfoService.updateWestDiseaseBlogInfo(miss_western_diseaseWithBLOBs));
+		}catch (Exception e){
+			return new Response().failure();
+		}
 	}
-		
+
+	/**
+	 * 查询西医疾病相关信息
+	 * @param western_diseaseId 西医疾病相关信息id
+	 * @return 西医疾病信息
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public Response queryWestDiseaseBlogInfo(@RequestBody Integer western_diseaseId) {
-		diseaseInfoService.queryWestDiseaseBlogInfo(western_diseaseId);
-		return null;
+		try{
+			return new Response().success(diseaseInfoService.queryWestDiseaseBlogInfo(western_diseaseId));
+		}catch (Exception e){
+			return new Response().failure();
+		}
 	}
-		
+
+	/**
+	 * 删除西医疾病信息
+	 * @param western_diseaseId 包含父类信息参数的西医疾病信息id
+	 * @return 西医疾病信息id
+	 */
 	@RequestMapping(method = RequestMethod.DELETE)
 	public Response deleteWestDiseaseBlogInfo(@RequestBody Integer western_diseaseId) {
-		diseaseInfoService.deleteWestDiseaseBlogInfo(western_diseaseId);
-		return null;	
+		try{
+			return new Response().success(diseaseInfoService.deleteWestDiseaseBlogInfo(western_diseaseId));
+		}catch (Exception e){
+			return new Response().failure();
+		}
 	}
 }

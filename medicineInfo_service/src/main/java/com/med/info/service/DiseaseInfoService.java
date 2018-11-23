@@ -9,20 +9,22 @@ import com.med.info.domain.Miss_western_diseaseWithBLOBs;
 import com.med.info.service.dto.DiseaseDTO;
 import com.med.info.service.dto.DiseaseDepartmentMapDTO;
 import com.med.info.service.dto.DiseaseSymptomMapDTO;
+import org.springframework.stereotype.Service;
 
 /**
  * 
  * @author zhangmin
  *
  */
-public interface DiseasInfoService {
+
+public interface DiseaseInfoService {
 
 	/**
 	 * 添加疾病基础信息
 	 * @param diseaseDTO 疾病基础信息
 	 * @return 疾病信息id
 	 */
-	public Integer addDiseasInfo(DiseaseDTO diseaseDTO);
+	public Integer addDiseaseInfo(DiseaseDTO diseaseDTO);
 	
 	/**
 	 * 添加中医疾病信息
@@ -50,14 +52,14 @@ public interface DiseasInfoService {
 	 * @param diseaseId 疾病基础信息id
 	 * @return 疾病基础信息内容
 	 */
-    public DiseaseDTO queryDiseasInfo(Integer diseaseId);
+    public DiseaseDTO queryDiseaseInfo(Integer diseaseId);
     
     /**
 	 * 查询疾病id与名称
 	 * @param
 	 * @return 疾病基础信息的id和名称列表
 	 */
-    public List<Map<Integer,String>> queryDiseasInfoName();
+    public List<Map<Integer,String>> queryDiseaseInfoName();
 	
     /**
 	 * 查询疾病相关科室部门信息
@@ -99,7 +101,7 @@ public interface DiseasInfoService {
 	 * @param diseaseDTO 疾病基础信息
 	 * @return 疾病信息id
 	 */
-	public Integer updateDiseasInfo(DiseaseDTO diseaseDTO);
+	public Integer updateDiseaseInfo(DiseaseDTO diseaseDTO);
 
 	/**
 	 * 修改中医疾病信息
@@ -120,14 +122,14 @@ public interface DiseasInfoService {
 	 * @param miss_combination_diseaseWithBLOBs 包含父类信息参数的中西医结合疾病信息
 	 * @return 中西医结合疾病信息id
 	 */
-	public Integer updateCombinationDiseaseBlogInfo(Miss_combination_diseaseWithBLOBs miss_combination_diseaseWithBLOBs);
+	public abstract Integer updateCombinationDiseaseBlogInfo(Miss_combination_diseaseWithBLOBs miss_combination_diseaseWithBLOBs);
 	
 	/**
 	 * 删除疾病基础信息
 	 * @param diseaseId 疾病基础信息id
 	 * @return 疾病信息id
 	 */
-	public Integer deleteDiseasInfo(Integer diseaseId);
+	public Integer deleteDiseaseInfo(Integer diseaseId);
 	
 	/**
 	 * 删除中医疾病信息

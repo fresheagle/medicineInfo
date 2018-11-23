@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.med.info.response.Response;
-import com.med.info.service.DiseasInfoService;
+import com.med.info.service.DiseaseInfoService;
 import com.med.info.service.dto.DiseaseDTO;
 
 /**
@@ -24,47 +24,47 @@ public class DiseaseController {
 	private static final Logger log = Logger.getLogger(DiseaseController.class);
 	
 	@Autowired
-	DiseasInfoService diseasInfoService;
+	DiseaseInfoService diseaseInfoService;
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public Response addDisease(@RequestBody DiseaseDTO diseaseDTO) {
-		diseasInfoService.addDiseasInfo(diseaseDTO);
+		diseaseInfoService.addDiseaseInfo(diseaseDTO);
 		return null;
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
 	public Response updateDisease(@RequestBody DiseaseDTO diseaseDTO) {
-		diseasInfoService.updateDiseasInfo(diseaseDTO);
+		diseaseInfoService.updateDiseaseInfo(diseaseDTO);
 		return null;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public Response queryDisease(@RequestBody Integer diseaseId) {
-		diseasInfoService.queryDiseasInfo(diseaseId);
+		diseaseInfoService.queryDiseaseInfo(diseaseId);
 		return null;
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE)
 	public Response deleteDisease(@RequestBody Integer diseaseId) {
-		diseasInfoService.deleteDiseasInfo(diseaseId);
+		diseaseInfoService.deleteDiseaseInfo(diseaseId);
 		return null;
 	}
 	
 	@RequestMapping(value="/findDisease",method = RequestMethod.GET)
 	public Response queryDiseasInfoName() {
-		diseasInfoService.queryDiseasInfoName();
+		diseaseInfoService.queryDiseaseInfoName();
 		return null;
 	}
 	
 	@RequestMapping(value="/findDiseaseDepartment",method = RequestMethod.GET)
 	public Response queryDepartmentInfo() {
-		diseasInfoService.queryDepartmentInfo();
+		diseaseInfoService.queryDepartmentInfo();
 		return null;
 	}
 	
 	@RequestMapping(value="/findDiseaseSymptom",method = RequestMethod.GET)
 	public Response querySymptomInfo() {
-		diseasInfoService.querySymptomInfo();
+		diseaseInfoService.querySymptomInfo();
 		return null;
 	}
 }

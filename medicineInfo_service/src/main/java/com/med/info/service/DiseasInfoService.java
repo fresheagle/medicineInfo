@@ -54,21 +54,21 @@ public interface DiseasInfoService {
     
     /**
 	 * 查询疾病id与名称
-	 * @param diseaseName 疾病基础信息名称
+	 * @param
 	 * @return 疾病基础信息的id和名称列表
 	 */
     public List<Map<Integer,String>> queryDiseasInfoName();
 	
     /**
 	 * 查询疾病相关科室部门信息
-	 * @param diseaseId 疾病基础信息id
+	 * @param
 	 * @return 疾病相关科室部门信息
 	 */
     public List<DiseaseDepartmentMapDTO> queryDepartmentInfo();
     
     /**
      * 查询疾病相关症状信息
-     * @param diseaseId 疾病基础信息id
+     * @param
      * @return 疾病相关症状信息
      */
     public List<DiseaseSymptomMapDTO> querySymptomInfo();
@@ -124,28 +124,28 @@ public interface DiseasInfoService {
 	
 	/**
 	 * 删除疾病基础信息
-	 * @param diseaseDTO 疾病基础信息
+	 * @param diseaseId 疾病基础信息id
 	 * @return 疾病信息id
 	 */
 	public Integer deleteDiseasInfo(Integer diseaseId);
 	
 	/**
 	 * 删除中医疾病信息
-	 * @param miss_chinese_diseaseWithBLOBs 包含父类信息参数的中医疾病信息
+	 * @param chinese_diseaseId 包含父类信息参数的中医疾病信息id
 	 * @return 中医疾病信息id
 	 */
 	public Integer deleteChineseDiseaseBlogInfo(Integer chinese_diseaseId);
 	
 	/**
 	 * 删除西医疾病信息
-	 * @param miss_western_diseaseWithBLOBs 包含父类信息参数的西医疾病信息
+	 * @param western_diseaseId 包含父类信息参数的西医疾病信息id
 	 * @return 西医疾病信息id
 	 */
 	public Integer deleteWestDiseaseBlogInfo(Integer western_diseaseId);
 	
 	/**
 	 * 删除中西医结合疾病信息
-	 * @param miss_combination_diseaseWithBLOBs 包含父类信息参数的中西医结合疾病信息
+	 * @param combination_diseaseId 包含父类信息参数的中西医结合疾病信息id
 	 * @return 中西医结合疾病信息id
 	 */
 	public Integer deleteCombinationDiseaseBlogInfo(Integer combination_diseaseId);

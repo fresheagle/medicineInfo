@@ -7,13 +7,13 @@ import com.med.info.domain.Miss_chinese_diseaseWithBLOBs;
 import com.med.info.domain.Miss_combination_diseaseWithBLOBs;
 import com.med.info.domain.Miss_western_diseaseWithBLOBs;
 import com.med.info.service.dto.DiseaseDTO;
-import com.med.info.service.dto.DiseaseDepartmentMapDTO;
-import com.med.info.service.dto.DiseaseSymptomMapDTO;
-import org.springframework.stereotype.Service;
+import com.med.info.service.dto.DepartmentMapDTO;
+import com.med.info.service.dto.SymptomMapDTO;
 
 /**
- * 
- * @author zhangmin
+ * Title: 疾病类型信息维护
+ * Description: 疾病类型信息维护，包含中医、西医、中西医结合疾病
+ * @author DELETE
  *
  */
 
@@ -53,28 +53,7 @@ public interface DiseaseInfoService {
 	 * @return 疾病基础信息内容
 	 */
 	DiseaseDTO queryDiseaseInfo(Integer diseaseId);
-    
-    /**
-	 * 查询疾病id与名称
-	 * @param
-	 * @return 疾病基础信息的id和名称列表
-	 */
-    List<Map<Integer,String>> queryDiseaseInfoName();
-	
-    /**
-	 * 查询疾病相关科室部门信息
-	 * @param
-	 * @return 疾病相关科室部门信息
-	 */
-	List<DiseaseDepartmentMapDTO> queryDepartmentInfo();
-    
-    /**
-     * 查询疾病相关症状信息
-     * @param
-     * @return 疾病相关症状信息
-     */
-	List<DiseaseSymptomMapDTO> querySymptomInfo();
-    
+
     /**
      * 查询中医疾病相关信息
      * @param chinese_diseaseId 中医疾病相关信息id

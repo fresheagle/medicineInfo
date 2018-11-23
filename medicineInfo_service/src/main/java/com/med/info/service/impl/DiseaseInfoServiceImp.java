@@ -5,12 +5,8 @@ import com.med.info.domain.Miss_combination_diseaseWithBLOBs;
 import com.med.info.domain.Miss_western_diseaseWithBLOBs;
 import com.med.info.service.DiseaseInfoService;
 import com.med.info.service.dto.DiseaseDTO;
-import com.med.info.service.dto.DiseaseDepartmentMapDTO;
-import com.med.info.service.dto.DiseaseSymptomMapDTO;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
 
 @Service
 public class DiseaseInfoServiceImp implements DiseaseInfoService {
@@ -37,21 +33,6 @@ public class DiseaseInfoServiceImp implements DiseaseInfoService {
 
     @Override
     public DiseaseDTO queryDiseaseInfo(Integer diseaseId) {
-        return null;
-    }
-
-    @Override
-    public List<Map<Integer, String>> queryDiseaseInfoName() {
-        return null;
-    }
-
-    @Override
-    public List<DiseaseDepartmentMapDTO> queryDepartmentInfo() {
-        return null;
-    }
-
-    @Override
-    public List<DiseaseSymptomMapDTO> querySymptomInfo() {
         return null;
     }
 

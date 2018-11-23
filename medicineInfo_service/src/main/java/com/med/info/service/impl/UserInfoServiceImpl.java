@@ -94,7 +94,7 @@ public class UserInfoServiceImpl extends BaseServiceImpl<Miss_control_user> impl
 				List<UserPrivilegeDTO> children = new ArrayList<>();
 				firstPrivilege.setChildren(children );
 				List<Miss_control_action> secondLevel = controlActionsByUserCode.stream()
-						.filter(action -> action.getActionparentcode().equals(miss_control_action.getActioncode()))
+						.filter(action -> (null != action.getActionparentcode() && action.getActionparentcode().equals(miss_control_action.getActioncode())))
 						.collect(Collectors.toList());
 				for (Miss_control_action miss_control_action2 : secondLevel) {
 					UserPrivilegeDTO secondPrivilege = new UserPrivilegeDTO();

@@ -16,5 +16,7 @@ public interface MissDistrictService extends BaseService<Miss_district>{
 	
 	public void publishData(Miss_district district, String taskMenuType);
 	
+	public void rejectTrial(Miss_district district, String taskMenuType, String currentStatus);
+	
 
 }

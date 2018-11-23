@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
-import com.med.info.domain.Miss_control_task_detail;
 import com.med.info.domain.Miss_control_task_detailWithBLOBs;
 import com.med.info.domain.Miss_control_task_records;
 import com.med.info.domain.Miss_district;
@@ -82,6 +81,7 @@ public class MissDistrictServiceImpl extends BaseServiceImpl<Miss_district> impl
 	}
 
 	@Override
+	@Transactional
 	public Miss_district submitTask(Miss_district district, String taskTitle, String taskType, String taskMenuType) {
 		// 插入数据到
 		if (null == district.getTaskId()) {
@@ -144,6 +144,7 @@ public class MissDistrictServiceImpl extends BaseServiceImpl<Miss_district> impl
 	}
 
 	@Override
+	@Transactional
 	public void firstTrial(Miss_district district, String taskMenuType) {
 		district.setTaskStatus(TrialStatusEnum.SECOND_TRIAL.getId());
 		districtMapper.updateByTaskIdSelective(district);
@@ -161,6 +162,7 @@ public class MissDistrictServiceImpl extends BaseServiceImpl<Miss_district> impl
 	}
 
 	@Override
+	@Transactional
 	public void secondTrial(Miss_district district, String taskMenuType) {
 		district.setTaskStatus(TrialStatusEnum.FINAL_TRIAL.getId());
 		districtMapper.updateByTaskIdSelective(district);
@@ -175,10 +177,13 @@ public class MissDistrictServiceImpl extends BaseServiceImpl<Miss_district> impl
 		controlTaskDetail.setTaskchangetime(new Date());
 		controlTaskDetail.setTaskchangeafterjson(district.getTaskJson());
 		taskDetailMapper.insert(controlTaskDetail);
-
 	}
+	
+	
+	
 
 	@Override
+	@Transactional
 	public void finalTrial(Miss_district district, String taskMenuType) {
 		district.setTaskStatus(TrialStatusEnum.END_TRIAL.getId());
 		districtMapper.updateByTaskIdSelective(district);
@@ -197,9 +202,28 @@ public class MissDistrictServiceImpl extends BaseServiceImpl<Miss_district> impl
 	}
 
 	@Override
+	@Transactional
 	public void publishData(Miss_district district, String taskMenuType) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public void rejectTrial(Miss_district district, String taskMenuType, String currentStatus) {
+		district.setTaskStatus(TrialStatusEnum.CREATING.getId());
+		districtMapper.updateByTaskIdSelective(district);
+		Miss_control_task_detailWithBLOBs controlTaskDetail = new Miss_control_task_detailWithBLOBs();
+		controlTaskDetail.setTaskId(district.getTaskId());
+		controlTaskDetail.setTaskmenutype(taskMenuType);
+		controlTaskDetail.setTaskstatuschangebefore(currentStatus);
+		controlTaskDetail.setTaskchangebeforejson(getLastStatusJson(district.getTaskId(), currentStatus));
+		controlTaskDetail.setTaskstatuschangeafter(TrialStatusEnum.CREATING.getId());
+		controlTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode());
+		controlTaskDetail.setTaskuuid(UuidUtils.generateUUID());
+		controlTaskDetail.setTaskchangetime(new Date());
+		controlTaskDetail.setTaskchangeafterjson(district.getTaskJson());
+		taskDetailMapper.insert(controlTaskDetail);
+		
 	}
 	
 	private String getLastStatusJson(String taskId, String taskStatus) {
@@ -208,5 +232,6 @@ public class MissDistrictServiceImpl extends BaseServiceImpl<Miss_district> impl
 		record.setTaskstatuschangebefore(taskStatus);
 		return taskDetailMapper.getLastStatusJson(record );
 	}
+
 
 }

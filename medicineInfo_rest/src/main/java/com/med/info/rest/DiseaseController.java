@@ -1,5 +1,6 @@
 package com.med.info.rest;
 
+import com.med.info.service.ParamInfoService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,8 @@ public class DiseaseController {
 	
 	@Autowired
 	DiseaseInfoService diseaseInfoService;
+	@Autowired
+	ParamInfoService paramInfoService;
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public Response addDisease(@RequestBody DiseaseDTO diseaseDTO) {
@@ -47,24 +50,6 @@ public class DiseaseController {
 	@RequestMapping(method = RequestMethod.DELETE)
 	public Response deleteDisease(@RequestBody Integer diseaseId) {
 		diseaseInfoService.deleteDiseaseInfo(diseaseId);
-		return null;
-	}
-	
-	@RequestMapping(value="/findDisease",method = RequestMethod.GET)
-	public Response queryDiseasInfoName() {
-		diseaseInfoService.queryDiseaseInfoName();
-		return null;
-	}
-	
-	@RequestMapping(value="/findDiseaseDepartment",method = RequestMethod.GET)
-	public Response queryDepartmentInfo() {
-		diseaseInfoService.queryDepartmentInfo();
-		return null;
-	}
-	
-	@RequestMapping(value="/findDiseaseSymptom",method = RequestMethod.GET)
-	public Response querySymptomInfo() {
-		diseaseInfoService.querySymptomInfo();
 		return null;
 	}
 }

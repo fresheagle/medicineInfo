@@ -25,27 +25,59 @@ public class ParamListController {
     @Autowired
     ParamInfoService paramInfoService;
 
-
+    /**
+     * 查询疾病id与名称
+     * @param
+     * @return 疾病基础信息的id和名称列表
+     */
     @RequestMapping(value="/findDisease",method = RequestMethod.GET)
     public Response queryDiseaseInfoName() {
-        paramInfoService.queryDiseaseInfoName();
-        return null;
+        try{
+            return new Response().success(paramInfoService.queryDiseaseInfoName());
+        }catch (Exception e){
+            return new Response().failure();
+        }
     }
 
+    /**
+     * 查询疾病相关科室部门信息
+     * @param
+     * @return 疾病相关科室部门信息
+     */
     @RequestMapping(value="/findDepartment",method = RequestMethod.GET)
     public Response queryDepartmentInfo() {
-        paramInfoService.queryDepartmentInfo();
-        return null;
+        try{
+            return new Response().success(paramInfoService.queryDepartmentInfo());
+        }catch (Exception e){
+            return new Response().failure();
+        }
     }
 
+    /**
+     * 查询疾病相关症状信息
+     * @param
+     * @return 疾病相关症状信息
+     */
     @RequestMapping(value="/findSymptom",method = RequestMethod.GET)
     public Response querySymptomInfo() {
-        paramInfoService.querySymptomInfo();
-        return null;
+        try{
+            return new Response().success(paramInfoService.querySymptomInfo());
+        }catch (Exception e){
+            return new Response().failure();
+        }
     }
+
+    /**
+     * 查询医疗机构id与名称
+     * @param
+     * @return 医疗机构信息的id和名称列表
+     */
     @RequestMapping(value="/findInstitution",method = RequestMethod.GET)
     public Response queryInstitutionInfoName() {
-        paramInfoService.queryInstitutionInfoName();
-        return null;
+        try{
+            return new Response().success(paramInfoService.queryInstitutionInfoName());
+        }catch (Exception e){
+            return new Response().failure();
+        }
     }
 }

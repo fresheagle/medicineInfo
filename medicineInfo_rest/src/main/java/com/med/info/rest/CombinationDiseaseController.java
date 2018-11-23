@@ -26,28 +26,60 @@ public class CombinationDiseaseController {
 	
 	@Autowired
 	DiseaseInfoService diseaseInfoService;
-		
+
+	/**
+	 * 添加中西医结合疾病信息
+	 * @param miss_combination_diseaseWithBLOBs 包含父类信息参数的中西医结合疾病信息
+	 * @return 中西医结合疾病信息id
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public Response addCombinationDiseaseBlogInfo(@RequestBody Miss_combination_diseaseWithBLOBs miss_combination_diseaseWithBLOBs) {
-		diseaseInfoService.addCombinationDiseaseBlogInfo(miss_combination_diseaseWithBLOBs);
-		return null;
+		try{
+			return new Response().success(diseaseInfoService.addCombinationDiseaseBlogInfo(miss_combination_diseaseWithBLOBs));
+		}catch (Exception e){
+			return new Response().failure();
+		}
 	}
-		
+
+	/**
+	 * 修改中西医结合疾病信息
+	 * @param miss_combination_diseaseWithBLOBs 包含父类信息参数的中西医结合疾病信息
+	 * @return 中西医结合疾病信息id
+	 */
 	@RequestMapping(method = RequestMethod.PUT)
 	public Response updateCombinationDiseaseBlogInfo(@RequestBody Miss_combination_diseaseWithBLOBs miss_combination_diseaseWithBLOBs) {
-		diseaseInfoService.updateCombinationDiseaseBlogInfo(miss_combination_diseaseWithBLOBs);
-		return null;
+		try{
+			return new Response().success(diseaseInfoService.updateCombinationDiseaseBlogInfo(miss_combination_diseaseWithBLOBs));
+		}catch (Exception e){
+			return new Response().failure();
+		}
 	}
-		
+
+	/**
+	 * 查询中西医结合疾病相关信息
+	 * @param combination_diseaseId 中西医结合疾病相关信息id
+	 * @return 中西医结合疾病相关信息
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public Response queryCombinationDiseaseBlogInfo(@RequestBody Integer combination_diseaseId) {
-		diseaseInfoService.queryCombinationDiseaseBlogInfo(combination_diseaseId);
-		return null;
+		try{
+			return new Response().success(diseaseInfoService.queryCombinationDiseaseBlogInfo(combination_diseaseId));
+		}catch (Exception e){
+			return new Response().failure();
+		}
 	}
-		
+
+	/**
+	 * 删除中西医结合疾病信息
+	 * @param combination_diseaseId 包含父类信息参数的中西医结合疾病信息id
+	 * @return 中西医结合疾病信息id
+	 */
 	@RequestMapping(method = RequestMethod.DELETE)
 	public Response deleteCombinationDiseaseBlogInfo(@RequestBody Integer combination_diseaseId) {
-		diseaseInfoService.deleteCombinationDiseaseBlogInfo(combination_diseaseId);
-		return null;	
+		try{
+			return new Response().success(diseaseInfoService.deleteCombinationDiseaseBlogInfo(combination_diseaseId));
+		}catch (Exception e){
+			return new Response().failure();
+		}
 	}
 }

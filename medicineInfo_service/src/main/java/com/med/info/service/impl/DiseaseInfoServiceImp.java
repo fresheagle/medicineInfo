@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class DiseaseInfoServiceImp extends DiseaseInfoService {
+public class DiseaseInfoServiceImp implements DiseaseInfoService {
 
     @Override
     public Integer addDiseaseInfo(DiseaseDTO diseaseDTO) {

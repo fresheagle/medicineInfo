@@ -12,6 +12,7 @@ public class LoginInfoDTO implements Serializable{
 	private String userUuid;    
 	private String userName;
 	private String userCode;
+	private String token;
 	
 	private List<UserPrivilegeDTO> userPrivilege;
 
@@ -45,6 +46,14 @@ public class LoginInfoDTO implements Serializable{
 
 	public void setUserPrivilege(List<UserPrivilegeDTO> userPrivilege) {
 		this.userPrivilege = userPrivilege;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 }

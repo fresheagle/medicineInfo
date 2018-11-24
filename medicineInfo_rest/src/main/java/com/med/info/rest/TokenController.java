@@ -51,6 +51,7 @@ public class TokenController {
 			Cookie cookie = new Cookie(Constants.DEFAULT_TOKEN_NAME, token);
 			log.debug("Write Token to Cookie and return to the Client : " + cookie.toString());
 			response.addCookie(cookie);
+			loginInfo.setToken(token);
 			return new Response().success(loginInfo);
 		} catch (Exception e) {
 			log.error("登录错误 userCode="+userCode,e);

@@ -1,5 +1,7 @@
 package com.med.info.service.operate.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +36,21 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 		} else if (operateDTO.getTaskStatus().equals(TrialStatusEnum.FIRST_TRIAL.getId())) {
 			firstTrialOperate(operateDTO, object, baseService);
 		} else if (operateDTO.getTaskStatus().equals(TrialStatusEnum.SECOND_TRIAL.getId())
-				|| operateDTO.getTaskStatus().equals(TrialStatusEnum.FINAL_TRIAL.getId())
-				|| operateDTO.getTaskStatus().equals(TrialStatusEnum.END_TRIAL.getId())) {
+				|| operateDTO.getTaskStatus().equals(TrialStatusEnum.FINAL_TRIAL.getId())) {
 			updateStatus(operateDTO, object, baseService);
+		} else if(operateDTO.getTaskStatus().equals(TrialStatusEnum.END_TRIAL.getId())) {
+			updateStatus(operateDTO, object, baseService);
+			Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
+			controlTaskRecord.setTaskpublishusercode(DefaultTokenManager.getLocalUserCode());
+			controlTaskRecord.setTaskId(object.getTaskId());
+			controlTaskRecord.setTaskmenutype(operateDTO.getTaskMenuType());
+			controlTaskRecord.setTasktype(operateDTO.getTaskType());
+			controlTaskRecord.setTasktitle(operateDTO.getTaskTitle());
+			controlTaskRecord.setTaskpublishtime(new Date());
+			controlTaskRecord.setTaskpublishfinalcontentjson(operateDTO.getJsonStr());
+			controlTaskRecord.setTaskpublishday(getToday());
+			taskRecordsMapper.updateByPrimaryKeySelective(controlTaskRecord);
+			
 		}
 		return null;
 	}
@@ -60,8 +74,12 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 		controlTaskDetail.setTaskchangebeforejson(taskLastData.getTaskchangeafterjson());
 		controlTaskDetail.setTaskstatuschangeafter(operateDTO.getTaskStatus());
 		controlTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode());
+		controlTaskDetail.setTaskchangepoints(operateDTO.getTaskChangePoints());
+		controlTaskDetail.setTaskchangecomments(operateDTO.getTaskChangeComments());
+		controlTaskDetail.setTaskchangevote(operateDTO.getTaskChangeVote());
 		controlTaskDetail.setTaskuuid(UuidUtils.generateUUID());
 		controlTaskDetail.setTaskchangetime(new Date());
+		controlTaskDetail.setTaskchangeday(getToday());
 		controlTaskDetail.setTaskchangeafterjson(operateDTO.getJsonStr());
 		taskDetailMapper.insert(controlTaskDetail);
 	}
@@ -78,6 +96,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
 			controlTaskRecord.setTaskcreaterusercode(DefaultTokenManager.getLocalUserCode());
 			controlTaskRecord.setTaskcreatetime(new Date());
+			controlTaskRecord.setTaskcreateday(getToday());
 			controlTaskRecord.setTaskId(taskId);
 			controlTaskRecord.setTaskmenutype(operateDTO.getTaskMenuType());
 			controlTaskRecord.setTasktype(operateDTO.getTaskType());
@@ -91,6 +110,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			createTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode());
 			createTaskDetail.setTaskuuid(UuidUtils.generateUUID());
 			createTaskDetail.setTaskchangetime(new Date());
+			createTaskDetail.setTaskchangeday(getToday());
 			createTaskDetail.setTaskchangeafterjson(operateDTO.getJsonStr());
 			taskDetailMapper.insert(createTaskDetail);
 
@@ -102,12 +122,19 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			controlTaskDetail.setTaskstatuschangeafter(TrialStatusEnum.FIRST_TRIAL.getId());
 			controlTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode());
 			controlTaskDetail.setTaskuuid(UuidUtils.generateUUID());
+			controlTaskDetail.setTaskchangeday(getToday());
 			controlTaskDetail.setTaskchangetime(new Date());
 			controlTaskDetail.setTaskchangeafterjson(operateDTO.getJsonStr());
 			taskDetailMapper.insert(controlTaskDetail);
 		} else {
 			updateStatus(operateDTO, object, baseService);
 		}
+	}
+	
+	private String getToday() {
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar c = Calendar.getInstance();
+		return sf.format(c.getTime());
 	}
 
 	private void creatingOperate(OperateDTO operateDTO, T object, BaseService<T> baseService) {
@@ -124,6 +151,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
 			controlTaskRecord.setTaskcreaterusercode(DefaultTokenManager.getLocalUserCode());
 			controlTaskRecord.setTaskcreatetime(new Date());
+			controlTaskRecord.setTaskcreateday(getToday());
 			controlTaskRecord.setTaskId(taskId);
 			controlTaskRecord.setTaskmenutype(operateDTO.getTaskMenuType());
 			controlTaskRecord.setTasktype(operateDTO.getTaskType());
@@ -137,6 +165,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			controlTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode());
 			controlTaskDetail.setTaskuuid(UuidUtils.generateUUID());
 			controlTaskDetail.setTaskchangetime(new Date());
+			controlTaskDetail.setTaskchangeday(getToday());
 			controlTaskDetail.setTaskchangeafterjson(operateDTO.getJsonStr());
 			taskDetailMapper.insert(controlTaskDetail);
 		} else {

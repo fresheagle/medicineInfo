@@ -15,5 +15,7 @@ public interface BaseService<T> {
 	public int deleteByPrimaryKey(Long id);
 	public T selectByPrimaryKey(T t);
 	public int updateByPrimaryKey(T t);
+	
+	public void updateByTaskIdSelective(T t);
 
 }

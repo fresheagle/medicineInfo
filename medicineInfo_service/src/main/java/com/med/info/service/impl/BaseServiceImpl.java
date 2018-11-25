@@ -46,5 +46,10 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 		return getMapper().updateByPrimaryKey(t);
 	}
 
+	@Override
+	public void updateByTaskIdSelective(T t) {
+		getMapper().updateByTaskIdSelective(t);
+	}
+	
 	public abstract BaseMapper getMapper();
 }

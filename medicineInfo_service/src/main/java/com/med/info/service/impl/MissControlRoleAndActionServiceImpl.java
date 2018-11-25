@@ -15,6 +15,7 @@ public class MissControlRoleAndActionServiceImpl extends BaseServiceImpl<Miss_co
 	@Override
 	public BaseMapper getMapper() {
 		return roleAndActionMapper;
+		
 	}
 
 }

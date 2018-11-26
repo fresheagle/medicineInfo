@@ -27,7 +27,7 @@
 			targetPackage="com.med.info.mapper" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
-		<!--
+
 		<table tableName="miss_chinese_disease"
 			domainObjectName="Miss_chinese_disease" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
@@ -35,29 +35,30 @@
 			<generatedKey column="id"
 				sqlStatement="selectuuid_short()" identity="false" />
 		</table>
-		<table tableName="miss_combination_disease"
-			domainObjectName="Miss_combination_disease"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false">
-			<generatedKey column="id"
-				sqlStatement="selectuuid_short()" identity="false" />
-		</table>
-		<table tableName="miss_department"
-			domainObjectName="Miss_department" enableCountByExample="false"
-			enableUpdateByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" selectByExampleQueryId="false">
-			<generatedKey column="id"
-				sqlStatement="selectuuid_short()" identity="false" />
-		</table>
-		<table tableName="miss_department_doctor_mapping"
-			domainObjectName="Miss_department_doctor_mapping"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false">
-			<generatedKey column="id"
-				sqlStatement="selectuuid_short()" identity="false" />
-		</table>
+
+		<!--<table tableName="miss_combination_disease"-->
+			<!--domainObjectName="Miss_combination_disease"-->
+			<!--enableCountByExample="false" enableUpdateByExample="false"-->
+			<!--enableDeleteByExample="false" enableSelectByExample="false"-->
+			<!--selectByExampleQueryId="false">-->
+			<!--<generatedKey column="id"-->
+				<!--sqlStatement="selectuuid_short()" identity="false" />-->
+		<!--</table>-->
+		<!--<table tableName="miss_department"-->
+			<!--domainObjectName="Miss_department" enableCountByExample="false"-->
+			<!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+			<!--enableSelectByExample="false" selectByExampleQueryId="false">-->
+			<!--<generatedKey column="id"-->
+				<!--sqlStatement="selectuuid_short()" identity="false" />-->
+		<!--</table>-->
+		<!--<table tableName="miss_department_doctor_mapping"-->
+			<!--domainObjectName="Miss_department_doctor_mapping"-->
+			<!--enableCountByExample="false" enableUpdateByExample="false"-->
+			<!--enableDeleteByExample="false" enableSelectByExample="false"-->
+			<!--selectByExampleQueryId="false">-->
+			<!--<generatedKey column="id"-->
+				<!--sqlStatement="selectuuid_short()" identity="false" />-->
+		<!--</table>-->
 		<table tableName="miss_disease" domainObjectName="Miss_disease"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
@@ -65,36 +66,36 @@
 			<generatedKey column="id"
 				sqlStatement="selectuuid_short()" identity="false" />
 		</table>
-		<table tableName="miss_disease_department_mapping"
-			domainObjectName="Miss_disease_department_mapping"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false">
-			<generatedKey column="id"
-				sqlStatement="selectuuid_short()" identity="false" />
-		</table>
-		<table tableName="miss_disease_symptom_mapping"
-			domainObjectName="Miss_disease_symptom_mapping"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false">
-			<generatedKey column="id"
-				sqlStatement="selectuuid_short()" identity="false" />
-		</table>
-		<table tableName="miss_dislocation"
-			domainObjectName="Miss_dislocation" enableCountByExample="false"
-			enableUpdateByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" selectByExampleQueryId="false">
-			<generatedKey column="id"
-				sqlStatement="selectuuid_short()" identity="false" />
-		</table>
-		<table tableName="miss_district"
-			domainObjectName="Miss_district" enableCountByExample="false"
-			enableUpdateByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" selectByExampleQueryId="false">
-			<generatedKey column="id"
-				sqlStatement="selectuuid_short()" identity="false" />
-		</table>
+		<!--<table tableName="miss_disease_department_mapping"-->
+			<!--domainObjectName="Miss_disease_department_mapping"-->
+			<!--enableCountByExample="false" enableUpdateByExample="false"-->
+			<!--enableDeleteByExample="false" enableSelectByExample="false"-->
+			<!--selectByExampleQueryId="false">-->
+			<!--<generatedKey column="id"-->
+				<!--sqlStatement="selectuuid_short()" identity="false" />-->
+		<!--</table>-->
+		<!--<table tableName="miss_disease_symptom_mapping"-->
+			<!--domainObjectName="Miss_disease_symptom_mapping"-->
+			<!--enableCountByExample="false" enableUpdateByExample="false"-->
+			<!--enableDeleteByExample="false" enableSelectByExample="false"-->
+			<!--selectByExampleQueryId="false">-->
+			<!--<generatedKey column="id"-->
+				<!--sqlStatement="selectuuid_short()" identity="false" />-->
+		<!--</table>-->
+		<!--<table tableName="miss_dislocation"-->
+			<!--domainObjectName="Miss_dislocation" enableCountByExample="false"-->
+			<!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+			<!--enableSelectByExample="false" selectByExampleQueryId="false">-->
+			<!--<generatedKey column="id"-->
+				<!--sqlStatement="selectuuid_short()" identity="false" />-->
+		<!--</table>-->
+		<!--<table tableName="miss_district"-->
+			<!--domainObjectName="Miss_district" enableCountByExample="false"-->
+			<!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+			<!--enableSelectByExample="false" selectByExampleQueryId="false">-->
+			<!--<generatedKey column="id"-->
+				<!--sqlStatement="selectuuid_short()" identity="false" />-->
+		<!--</table>-->
 		<table tableName="miss_doctor" domainObjectName="Miss_doctor"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
@@ -109,14 +110,14 @@
 			<generatedKey column="id"
 				sqlStatement="selectuuid_short()" identity="false" />
 		</table>
-		<table tableName="miss_institution_doctor_mapping"
-			domainObjectName="Miss_institution_doctor_mapping"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false">
-			<generatedKey column="id"
-				sqlStatement="selectuuid_short()" identity="false" />
-		</table>
+		<!--<table tableName="miss_institution_doctor_mapping"-->
+			<!--domainObjectName="Miss_institution_doctor_mapping"-->
+			<!--enableCountByExample="false" enableUpdateByExample="false"-->
+			<!--enableDeleteByExample="false" enableSelectByExample="false"-->
+			<!--selectByExampleQueryId="false">-->
+			<!--<generatedKey column="id"-->
+				<!--sqlStatement="selectuuid_short()" identity="false" />-->
+		<!--</table>-->
 		<table tableName="miss_institution_keypartment_mapping"
 			domainObjectName="Miss_institution_keypartment_mapping"
 			enableCountByExample="false" enableUpdateByExample="false"
@@ -132,21 +133,21 @@
 			<generatedKey column="id"
 				sqlStatement="selectuuid_short()" identity="false" />
 		</table>
-		<table tableName="miss_medical_company"
-			domainObjectName="Miss_medical_company" enableCountByExample="false"
-			enableUpdateByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" selectByExampleQueryId="false">
-			<generatedKey column="id"
-				sqlStatement="selectuuid_short()" identity="false" />
-		</table>
-		<table tableName="miss_medical_medicalcompany_mapping"
-			domainObjectName="Miss_medical_medicalcompany_mapping"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false">
-			<generatedKey column="id"
-				sqlStatement="selectuuid_short()" identity="false" />
-		</table>
+		<!--<table tableName="miss_medical_company"-->
+			<!--domainObjectName="Miss_medical_company" enableCountByExample="false"-->
+			<!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+			<!--enableSelectByExample="false" selectByExampleQueryId="false">-->
+			<!--<generatedKey column="id"-->
+				<!--sqlStatement="selectuuid_short()" identity="false" />-->
+		<!--</table>-->
+		<!--<table tableName="miss_medical_medicalcompany_mapping"-->
+			<!--domainObjectName="Miss_medical_medicalcompany_mapping"-->
+			<!--enableCountByExample="false" enableUpdateByExample="false"-->
+			<!--enableDeleteByExample="false" enableSelectByExample="false"-->
+			<!--selectByExampleQueryId="false">-->
+			<!--<generatedKey column="id"-->
+				<!--sqlStatement="selectuuid_short()" identity="false" />-->
+		<!--</table>-->
 		<table tableName="miss_symptom" domainObjectName="Miss_symptom"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
@@ -154,70 +155,70 @@
 			<generatedKey column="id"
 				sqlStatement="selectuuid_short()" identity="false" />
 		</table>
-		<table tableName="miss_symptom_dislocation_mapping"
-			domainObjectName="Miss_symptom_dislocation_mapping"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false">
-			<generatedKey column="id"
-				sqlStatement="selectuuid_short()" identity="false" />
-		</table>
-		<table tableName="miss_symptom_medical_mapping"
-			domainObjectName="Miss_symptom_medical_mapping"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false">
-			<generatedKey column="id"
-				sqlStatement="selectuuid_short()" identity="false" />
-		</table>
-		<table tableName="miss_western_disease"
-			domainObjectName="Miss_western_disease" enableCountByExample="false"
-			enableUpdateByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" selectByExampleQueryId="false">
-			<generatedKey column="id"
-				sqlStatement="selectuuid_short()" identity="false" />
-		</table>
-		<table tableName="miss_control_action"
-			domainObjectName="Miss_control_action" enableCountByExample="false"
-			enableUpdateByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" selectByExampleQueryId="false">
-		</table>
-		<table tableName="miss_control_actionlog"
-			domainObjectName="Miss_control_actionLog"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false">
-		</table>
-		<table tableName="miss_control_log"
-			domainObjectName="Miss_control_log" enableCountByExample="false"
-			enableUpdateByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" selectByExampleQueryId="false">
-		</table>
-		<table tableName="miss_control_role"
-			domainObjectName="Miss_control_role" enableCountByExample="false"
-			enableUpdateByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" selectByExampleQueryId="false">
-		</table>
-		<table tableName="miss_control_roleandaction"
-			domainObjectName="Miss_control_roleAndAction"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false">
-		</table>
+		<!--<table tableName="miss_symptom_dislocation_mapping"-->
+			<!--domainObjectName="Miss_symptom_dislocation_mapping"-->
+			<!--enableCountByExample="false" enableUpdateByExample="false"-->
+			<!--enableDeleteByExample="false" enableSelectByExample="false"-->
+			<!--selectByExampleQueryId="false">-->
+			<!--<generatedKey column="id"-->
+				<!--sqlStatement="selectuuid_short()" identity="false" />-->
+		<!--</table>-->
+		<!--<table tableName="miss_symptom_medical_mapping"-->
+			<!--domainObjectName="Miss_symptom_medical_mapping"-->
+			<!--enableCountByExample="false" enableUpdateByExample="false"-->
+			<!--enableDeleteByExample="false" enableSelectByExample="false"-->
+			<!--selectByExampleQueryId="false">-->
+			<!--<generatedKey column="id"-->
+				<!--sqlStatement="selectuuid_short()" identity="false" />-->
+		<!--</table>-->
+		<!--<table tableName="miss_western_disease"-->
+			<!--domainObjectName="Miss_western_disease" enableCountByExample="false"-->
+			<!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+			<!--enableSelectByExample="false" selectByExampleQueryId="false">-->
+			<!--<generatedKey column="id"-->
+				<!--sqlStatement="selectuuid_short()" identity="false" />-->
+		<!--</table>-->
+		<!--<table tableName="miss_control_action"-->
+			<!--domainObjectName="Miss_control_action" enableCountByExample="false"-->
+			<!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+			<!--enableSelectByExample="false" selectByExampleQueryId="false">-->
+		<!--</table>-->
+		<!--<table tableName="miss_control_actionlog"-->
+			<!--domainObjectName="Miss_control_actionLog"-->
+			<!--enableCountByExample="false" enableUpdateByExample="false"-->
+			<!--enableDeleteByExample="false" enableSelectByExample="false"-->
+			<!--selectByExampleQueryId="false">-->
+		<!--</table>-->
+		<!--<table tableName="miss_control_log"-->
+			<!--domainObjectName="Miss_control_log" enableCountByExample="false"-->
+			<!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+			<!--enableSelectByExample="false" selectByExampleQueryId="false">-->
+		<!--</table>-->
+		<!--<table tableName="miss_control_role"-->
+			<!--domainObjectName="Miss_control_role" enableCountByExample="false"-->
+			<!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+			<!--enableSelectByExample="false" selectByExampleQueryId="false">-->
+		<!--</table>-->
+		<!--<table tableName="miss_control_roleandaction"-->
+			<!--domainObjectName="Miss_control_roleAndAction"-->
+			<!--enableCountByExample="false" enableUpdateByExample="false"-->
+			<!--enableDeleteByExample="false" enableSelectByExample="false"-->
+			<!--selectByExampleQueryId="false">-->
+		<!--</table>-->
 
-		<table tableName="miss_control_task_detail"
-			domainObjectName="Miss_control_task_detail"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false">
-		</table>
-		<table tableName="miss_control_task_maptables"
-			domainObjectName="Miss_control_task_mapTables"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false">
-		</table>
-		-->
+		<!--<table tableName="miss_control_task_detail"-->
+			<!--domainObjectName="Miss_control_task_detail"-->
+			<!--enableCountByExample="false" enableUpdateByExample="false"-->
+			<!--enableDeleteByExample="false" enableSelectByExample="false"-->
+			<!--selectByExampleQueryId="false">-->
+		<!--</table>-->
+		<!--<table tableName="miss_control_task_maptables"-->
+			<!--domainObjectName="Miss_control_task_mapTables"-->
+			<!--enableCountByExample="false" enableUpdateByExample="false"-->
+			<!--enableDeleteByExample="false" enableSelectByExample="false"-->
+			<!--selectByExampleQueryId="false">-->
+		<!--</table>-->
+
 		<table tableName="miss_control_task_records"
 			domainObjectName="Miss_control_task_records"
 			enableCountByExample="false" enableUpdateByExample="false"

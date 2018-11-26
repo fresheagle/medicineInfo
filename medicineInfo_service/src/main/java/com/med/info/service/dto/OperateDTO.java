@@ -16,6 +16,26 @@ public class OperateDTO implements Serializable {
 	private String taskChangeVote;
 	private String taskChangePoints;
 	private String taskChangeComments;
+	private String pageNo;
+	private String contentNo;
+	private String jsonStr;
+
+	public String getPageNo() {
+		return pageNo;
+	}
+
+	public void setPageNo(String pageNo) {
+		this.pageNo = pageNo;
+	}
+
+	public String getContentNo() {
+		return contentNo;
+	}
+
+	public void setContentNo(String contentNo) {
+		this.contentNo = contentNo;
+	}
+
 	public String getTaskChangeVote() {
 		return taskChangeVote;
 	}
@@ -39,8 +59,6 @@ public class OperateDTO implements Serializable {
 	public void setTaskChangeComments(String taskChangeComments) {
 		this.taskChangeComments = taskChangeComments;
 	}
-
-	private String jsonStr;
 
 	public String getTaskTitle() {
 		return taskTitle;

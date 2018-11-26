@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.med.info.domain.Miss_disease;
+import com.med.info.domain.Miss_diseaseWithBLOBs;
 
 /**
  * 疾病基础信息传输实体类
@@ -13,14 +14,14 @@ public class DiseaseDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private Miss_disease miss_disease;
+	private Miss_diseaseWithBLOBs miss_disease;
 	private List<DepartmentMapDTO> disease_department_mapping_list;
 	private List<SymptomMapDTO> disease_symptom_mapping_list;
 	
-	public Miss_disease getMiss_disease() {
+	public Miss_diseaseWithBLOBs getMiss_disease() {
 		return miss_disease;
 	}
-	public void setMiss_disease(Miss_disease miss_disease) {
+	public void setMiss_disease(Miss_diseaseWithBLOBs miss_disease) {
 		this.miss_disease = miss_disease;
 	}
 	public List<DepartmentMapDTO> getDisease_department_mapping_list() {

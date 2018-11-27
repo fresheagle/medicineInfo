@@ -142,7 +142,6 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 		// 插入数据到
 		if (null == object.getTaskId()) {
 			String taskId = UuidUtils.generateUUID();
-			String jsonStr = JSON.toJSONString(object);
 			object.setTaskJson(operateDTO.getJsonStr());
 			object.setTaskId(taskId);
 			object.setTaskStatus(TrialStatusEnum.CREATING.getId());

@@ -10,14 +10,14 @@ public class SymptomMapDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private Integer symptom_id;
+	private Long symptom_id;
 	private String symptom_chinese_name;
 	private String symptom_english_name;
 	
-	public Integer getSymptom_id() {
+	public Long getSymptom_id() {
 		return symptom_id;
 	}
-	public void setSymptom_id(Integer symptom_id) {
+	public void setSymptom_id(Long symptom_id) {
 		this.symptom_id = symptom_id;
 	}
 	public String getSymptom_chinese_name() {

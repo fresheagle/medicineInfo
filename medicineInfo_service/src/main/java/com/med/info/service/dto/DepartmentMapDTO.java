@@ -10,14 +10,14 @@ public class DepartmentMapDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private Integer department_id;
+	private Long department_id;
 	private String department_code;
 	private String department_name;
 	
-	public Integer getDepartment_id() {
+	public Long getDepartment_id() {
 		return department_id;
 	}
-	public void setDepartment_id(Integer department_id) {
+	public void setDepartment_id(Long department_id) {
 		this.department_id = department_id;
 	}
 	public String getDepartment_code() {

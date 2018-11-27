@@ -60,26 +60,27 @@ public class UserPrivilegeFilter implements Filter{
 		
 		HttpServletRequest servletRequest = (HttpServletRequest) request;
 		String uri = servletRequest.getRequestURI();
-		if(!noTokenUrls.contains(uri)) {
-			if(null != uriPrivileges && !uriPrivileges.isEmpty()) {
-				String string = (String) uriPrivileges.get(uri);
-				HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-				Cookie[] cookies = httpServletRequest.getCookies();
-				String token = null;
-				for (Cookie cookie : cookies) {
-					if(cookie.getName().equals(Constants.DEFAULT_TOKEN_NAME)) {
-						token = cookie.getValue();
-					}
-				}
-				if(null == token || !tokenManager.checkToken(token)) {
-					response.getWriter().write(JSON.toJSONString(new Response().failure("未登录或登录已过期，请重新登录")));
-					return;
-				}
-				logger.info("uri={},对应需要的权限码为 {}",uri,string);
-			}
-		}else {
-			logger.info("当前请求为{}，跳过token认证",uri);
-		}
+		//先注释 调试时不校验token
+//		if(!noTokenUrls.contains(uri)) {
+//			if(null != uriPrivileges && !uriPrivileges.isEmpty()) {
+//				String string = (String) uriPrivileges.get(uri);
+//				HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+//				Cookie[] cookies = httpServletRequest.getCookies();
+//				String token = null;
+//				for (Cookie cookie : cookies) {
+//					if(cookie.getName().equals(Constants.DEFAULT_TOKEN_NAME)) {
+//						token = cookie.getValue();
+//					}
+//				}
+//				if(null == token || !tokenManager.checkToken(token)) {
+//					response.getWriter().write(JSON.toJSONString(new Response().failure("未登录或登录已过期，请重新登录")));
+//					return;
+//				}
+//				logger.info("uri={},对应需要的权限码为 {}",uri,string);
+//			}
+//		}else {
+//			logger.info("当前请求为{}，跳过token认证",uri);
+//		}
 		chain.doFilter(request, response);
 	}
 

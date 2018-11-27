@@ -52,14 +52,14 @@ public class SecurityAspect {
 		}
 
 		// 从 request header 中获取当前 token
-		String token = WebContextUtil.getRequest().getHeader(
-				Constants.DEFAULT_TOKEN_NAME);
-		// 检查 token 有效性
-		if (!tokenManager.checkToken(token)) {
-			String message = String.format("token [%s] is invalid", token);
-			log.debug("message : " + message);
-			throw new TokenException(message, null);
-		}
+//		String token = WebContextUtil.getRequest().getHeader(
+//				Constants.DEFAULT_TOKEN_NAME);
+//		// 检查 token 有效性
+//		if (!tokenManager.checkToken(token)) {
+//			String message = String.format("token [%s] is invalid", token);
+//			log.debug("message : " + message);
+//			throw new TokenException(message, null);
+//		}
 		// 调用目标方法
 		return pjp.proceed();
 	}

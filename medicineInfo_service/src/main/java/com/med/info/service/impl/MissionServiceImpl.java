@@ -20,7 +20,7 @@ public class MissionServiceImpl implements MissionService{
 		for (IOperateService iOperateService : operateServices) {
 			if (iOperateService.isFilter(operateDTO)) {
 				iOperateService.doOperate(operateDTO);
-				return null;
+				return operateDTO;
 			}
 		}
 		return null;

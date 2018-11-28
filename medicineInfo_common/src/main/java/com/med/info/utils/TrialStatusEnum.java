@@ -2,12 +2,12 @@ package com.med.info.utils;
 
 public enum TrialStatusEnum {
 	
-	CREATING("1","创建中"),
-	FIRST_TRIAL("2","待初审"),
-	SECOND_TRIAL("3","待二审"),
-	FINAL_TRIAL("4","待终审"),
-	END_TRIAL("5","审批完成"),
-	DELETE_TRIAL("6","草稿箱");
+	DRAFTS("drafts","草稿箱"),
+	TO_FIRST_AUDITED("toFirAudited","待初审"),
+	TO_SECOND_AUDITED("toSecAudited","待二审"),
+	TO_FINAL_AUDITED("toFinalAudited","待终审"),
+	FINISHED("finished","已完成任务"),
+	DISCARDED("discarded","已废止任务");
 	
 	private String id;
 	private String desc;

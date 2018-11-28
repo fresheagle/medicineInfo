@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.tomcat.jni.Local;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -69,10 +70,21 @@ public class DefaultTokenManager implements TokenManager, CommandLineRunner {
 		if(!StringUtil.isEmpty(token) && tokenMap.containsValue(token)) {
 			if(!isTokenExpire(token)) {
 				tokenExpire.put(token, System.currentTimeMillis() + token_expire_time * 60 * 1000);
+				local.set(getTokenUserCode(token));
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	private String getTokenUserCode(String token) {
+		Set<Entry<String, String>> entrySet = tokenMap.entrySet();
+		for (Entry<String, String> entry : entrySet) {
+			if(entry.getValue().equals(token)) {
+				return entry.getKey();
+			}
+		}
+		return null;
 	}
 
 	@Override

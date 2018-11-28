@@ -31,14 +31,14 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 
 		T object = (T) JSON.parseObject(operateDTO.getJsonStr(), getCurrentClass());
 		BaseService<T> baseService = getBaseService(operateDTO.getTaskMenuType());
-		if (operateDTO.getTaskStatus().equals(TrialStatusEnum.CREATING.getId())) {
+		if (operateDTO.getTaskStatus().equals(TrialStatusEnum.DRAFTS.getId())) {
 			creatingOperate(operateDTO, object, baseService);
-		} else if (operateDTO.getTaskStatus().equals(TrialStatusEnum.FIRST_TRIAL.getId())) {
+		} else if (operateDTO.getTaskStatus().equals(TrialStatusEnum.TO_FIRST_AUDITED.getId())) {
 			firstTrialOperate(operateDTO, object, baseService);
-		} else if (operateDTO.getTaskStatus().equals(TrialStatusEnum.SECOND_TRIAL.getId())
-				|| operateDTO.getTaskStatus().equals(TrialStatusEnum.FINAL_TRIAL.getId())) {
+		} else if (operateDTO.getTaskStatus().equals(TrialStatusEnum.TO_SECOND_AUDITED.getId())
+				|| operateDTO.getTaskStatus().equals(TrialStatusEnum.TO_FINAL_AUDITED.getId())) {
 			updateStatus(operateDTO, object, baseService);
-		} else if(operateDTO.getTaskStatus().equals(TrialStatusEnum.END_TRIAL.getId())) {
+		} else if(operateDTO.getTaskStatus().equals(TrialStatusEnum.FINISHED.getId())) {
 			updateStatus(operateDTO, object, baseService);
 			Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
 			controlTaskRecord.setTaskpublishusercode(DefaultTokenManager.getLocalUserCode());
@@ -90,7 +90,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			String taskId = UuidUtils.generateUUID();
 			object.setTaskJson(operateDTO.getJsonStr());
 			object.setTaskId(taskId);
-			object.setTaskStatus(TrialStatusEnum.FINAL_TRIAL.getId());
+			object.setTaskStatus(TrialStatusEnum.TO_FIRST_AUDITED.getId());
 			baseService.insert(object);
 
 			Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
@@ -106,7 +106,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			Miss_control_task_detailWithBLOBs createTaskDetail = new Miss_control_task_detailWithBLOBs();
 			createTaskDetail.setTaskId(taskId);
 			createTaskDetail.setTaskmenutype(operateDTO.getTaskMenuType());
-			createTaskDetail.setTaskstatuschangeafter(TrialStatusEnum.CREATING.getId());
+			createTaskDetail.setTaskstatuschangeafter(TrialStatusEnum.DRAFTS.getId());
 			createTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode());
 			createTaskDetail.setTaskuuid(UuidUtils.generateUUID());
 			createTaskDetail.setTaskchangetime(new Date());
@@ -117,9 +117,9 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			Miss_control_task_detailWithBLOBs controlTaskDetail = new Miss_control_task_detailWithBLOBs();
 			controlTaskDetail.setTaskId(taskId);
 			controlTaskDetail.setTaskmenutype(operateDTO.getTaskMenuType());
-			controlTaskDetail.setTaskstatuschangebefore(TrialStatusEnum.CREATING.getId());
+			controlTaskDetail.setTaskstatuschangebefore(TrialStatusEnum.DRAFTS.getId());
 			controlTaskDetail.setTaskchangebeforejson(operateDTO.getJsonStr());
-			controlTaskDetail.setTaskstatuschangeafter(TrialStatusEnum.FIRST_TRIAL.getId());
+			controlTaskDetail.setTaskstatuschangeafter(TrialStatusEnum.TO_FIRST_AUDITED.getId());
 			controlTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode());
 			controlTaskDetail.setTaskuuid(UuidUtils.generateUUID());
 			controlTaskDetail.setTaskchangeday(getToday());
@@ -144,7 +144,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			String taskId = UuidUtils.generateUUID();
 			object.setTaskJson(operateDTO.getJsonStr());
 			object.setTaskId(taskId);
-			object.setTaskStatus(TrialStatusEnum.CREATING.getId());
+			object.setTaskStatus(TrialStatusEnum.DRAFTS.getId());
 			baseService.insert(object);
 
 			Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
@@ -160,7 +160,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			Miss_control_task_detailWithBLOBs controlTaskDetail = new Miss_control_task_detailWithBLOBs();
 			controlTaskDetail.setTaskId(taskId);
 			controlTaskDetail.setTaskmenutype(operateDTO.getTaskMenuType());
-			controlTaskDetail.setTaskstatuschangeafter(TrialStatusEnum.CREATING.getId());
+			controlTaskDetail.setTaskstatuschangeafter(TrialStatusEnum.DRAFTS.getId());
 			controlTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode());
 			controlTaskDetail.setTaskuuid(UuidUtils.generateUUID());
 			controlTaskDetail.setTaskchangetime(new Date());

@@ -67,7 +67,7 @@
       This element was generated on Sat Nov 24 20:26:25 CST 2018.
     -->
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
-      selectuuid_short()
+      select uuid_short()
     </selectKey>
     insert into miss_disease_symptom_mapping (id, disease_id, symptom_id, 
       dataStatus, task_id, task_status, 
@@ -83,7 +83,7 @@
       This element was generated on Sat Nov 24 20:26:25 CST 2018.
     -->
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
-      selectuuid_short()
+      select uuid_short()
     </selectKey>
     insert into miss_disease_symptom_mapping
     <trim prefix="(" suffix=")" suffixOverrides=",">

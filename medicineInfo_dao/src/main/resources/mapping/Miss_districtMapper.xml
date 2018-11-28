@@ -70,7 +70,7 @@
       This element was generated on Sat Nov 24 20:26:25 CST 2018.
     -->
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
-      selectuuid_short()
+      select uuid_short()
     </selectKey>
     insert into miss_district (id, district_code, district_name, 
       level, parent_district_id, dataStatus, 
@@ -88,7 +88,7 @@
       This element was generated on Sat Nov 24 20:26:25 CST 2018.
     -->
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
-      selectuuid_short()
+      select uuid_short()
     </selectKey>
     insert into miss_district
     <trim prefix="(" suffix=")" suffixOverrides=",">

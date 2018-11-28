@@ -21,6 +21,7 @@ import org.springframework.context.annotation.ImportResource;
 @SpringBootApplication
 public class MedecineInfoLaunch {
 
+	
 	public static void main(String[] args) {
 		SpringApplication.run(MedecineInfoLaunch.class, args);
 	}

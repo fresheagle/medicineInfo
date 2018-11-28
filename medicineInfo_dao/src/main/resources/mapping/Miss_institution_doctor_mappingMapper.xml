@@ -68,7 +68,7 @@
       This element was generated on Sat Nov 24 20:26:25 CST 2018.
     -->
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
-      selectuuid_short()
+      select uuid_short()
     </selectKey>
     insert into miss_institution_doctor_mapping (id, institution_id, doctor_id, 
       weight, dataStatus, task_id, 
@@ -84,7 +84,7 @@
       This element was generated on Sat Nov 24 20:26:25 CST 2018.
     -->
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
-      selectuuid_short()
+      select uuid_short()
     </selectKey>
     insert into miss_institution_doctor_mapping
     <trim prefix="(" suffix=")" suffixOverrides=",">

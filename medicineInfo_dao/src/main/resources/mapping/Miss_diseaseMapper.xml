@@ -106,7 +106,7 @@
       This element was generated on Mon Nov 26 11:32:45 CST 2018.
     -->
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
-      selectuuid_short()
+      select uuid_short()
     </selectKey>
     insert into miss_disease (id, chinese_name, english_name, 
       other_name, latin_name, related_diseases, 
@@ -146,7 +146,7 @@
       This element was generated on Mon Nov 26 11:32:45 CST 2018.
     -->
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
-      selectuuid_short()
+      select uuid_short()
     </selectKey>
     insert into miss_disease
     <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -93,7 +93,7 @@
       This element was generated on Sat Nov 24 20:26:25 CST 2018.
     -->
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
-      selectuuid_short()
+      select uuid_short()
     </selectKey>
     insert into miss_medical_company (id, chinese_name, english_name, 
       founded_time, location, sile, 
@@ -125,7 +125,7 @@
       This element was generated on Sat Nov 24 20:26:25 CST 2018.
     -->
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
-      selectuuid_short()
+      select uuid_short()
     </selectKey>
     insert into miss_medical_company
     <trim prefix="(" suffix=")" suffixOverrides=",">

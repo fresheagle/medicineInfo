@@ -99,7 +99,7 @@
       This element was generated on Mon Nov 26 11:32:45 CST 2018.
     -->
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
-      selectuuid_short()
+      select uuid_short()
     </selectKey>
     insert into miss_chinese_disease (id, disease_id, reserve1, 
       reserve2, reserve3, dataStatus, 
@@ -139,7 +139,7 @@
       This element was generated on Mon Nov 26 11:32:45 CST 2018.
     -->
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
-      selectuuid_short()
+      select uuid_short()
     </selectKey>
     insert into miss_chinese_disease
     <trim prefix="(" suffix=")" suffixOverrides=",">

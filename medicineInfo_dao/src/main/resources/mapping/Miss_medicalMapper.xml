@@ -118,7 +118,7 @@
       This element was generated on Mon Nov 26 11:32:45 CST 2018.
     -->
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
-      selectuuid_short()
+      select uuid_short()
     </selectKey>
     insert into miss_medical (id, medical_type, com_name, 
       chinese_pinyin, alisa_name, shop_name, 
@@ -164,7 +164,7 @@
       This element was generated on Mon Nov 26 11:32:45 CST 2018.
     -->
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
-      selectuuid_short()
+      select uuid_short()
     </selectKey>
     insert into miss_medical
     <trim prefix="(" suffix=")" suffixOverrides=",">

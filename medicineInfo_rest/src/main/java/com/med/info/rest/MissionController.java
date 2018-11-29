@@ -17,7 +17,7 @@ import com.med.info.service.dto.OperateDTO;
  *
  */
 @RestController
-@RequestMapping("/mission")
+@RequestMapping("/api/mission")
 public class MissionController {
 	
 	@Autowired

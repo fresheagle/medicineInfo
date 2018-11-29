@@ -13,7 +13,7 @@ import com.med.info.response.Response;
 import com.med.info.service.MissControlRoleService;
 
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/api/role")
 public class RoleController {
 	
 	@Autowired

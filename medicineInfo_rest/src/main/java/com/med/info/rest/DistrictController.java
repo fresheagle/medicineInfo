@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 
  */
 @RestController
-@RequestMapping("/district")
+@RequestMapping("/api/district")
 public class DistrictController {
 	private static final Logger log = Logger.getLogger(DistrictController.class);
 	

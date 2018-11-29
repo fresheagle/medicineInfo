@@ -20,7 +20,7 @@ import com.med.info.service.DiseaseInfoService;
  */
 
 @RestController
-@RequestMapping("/combinationDisease")
+@RequestMapping("/api/combinationDisease")
 public class CombinationDiseaseController {
 	private static final Logger log = Logger.getLogger(WestDiseaseController.class);
 	

@@ -25,7 +25,7 @@ import com.med.info.utils.Constants;
  *   
  */      
 @RestController
-@RequestMapping("/tokens")
+@RequestMapping("/api/tokens")
 public class TokenController {
 
 	@Autowired

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 
  */
 @RestController
-@RequestMapping("/dislocation")
+@RequestMapping("/api/dislocation")
 public class DislocationController {
 	private static final Logger log = Logger.getLogger(DislocationController.class);
 	

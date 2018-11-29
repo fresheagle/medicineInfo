@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 
  */
 @RestController
-@RequestMapping("/medical")
+@RequestMapping("/api/medical")
 public class MedicalController {
 	private static final Logger log = Logger.getLogger(MedicalController.class);
 

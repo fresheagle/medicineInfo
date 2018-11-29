@@ -20,7 +20,7 @@ import com.med.info.service.dto.DiseaseDTO;
  * 
  */
 @RestController
-@RequestMapping("/disease")
+@RequestMapping("/api/disease")
 public class DiseaseController {
 	private static final Logger log = Logger.getLogger(DiseaseController.class);
 	

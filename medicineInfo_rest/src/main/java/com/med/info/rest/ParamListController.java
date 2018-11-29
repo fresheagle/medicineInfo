@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  *
  */
 @RestController
-@RequestMapping("/paramFind")
+@RequestMapping("/api/paramFind")
 public class ParamListController {
     private static final Logger log = Logger.getLogger(ParamListController.class);
 

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 
  */
 @RestController
-@RequestMapping("/institution")
+@RequestMapping("/api/institution")
 public class InstitutionController {
 	private static final Logger log = Logger.getLogger(InstitutionController.class);
 	@Autowired

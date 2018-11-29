@@ -13,7 +13,7 @@ import com.med.info.response.Response;
 import com.med.info.service.MissControlActionService;
 
 @RestController
-@RequestMapping("/action")
+@RequestMapping("/api/action")
 public class ActionController {
 
 	@Autowired

@@ -19,7 +19,7 @@ import com.med.info.service.UserInfoService;
  * 
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 
 	private static final Logger log = Logger.getLogger(UserController.class);

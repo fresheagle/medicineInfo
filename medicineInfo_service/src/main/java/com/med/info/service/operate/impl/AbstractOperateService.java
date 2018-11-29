@@ -28,8 +28,8 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 
 	@Override
 	public String doOperate(OperateDTO operateDTO) {
-
-		T object = (T) JSON.parseObject(operateDTO.getJsonStr(), getCurrentClass());
+		T object = (T) JSON.toJavaObject(operateDTO.getJsonStr(), getCurrentClass());
+//		JSON.parseObject(operateDTO.getJsonStr(), getCurrentClass());
 		BaseService<T> baseService = getBaseService(operateDTO.getTaskMenuType());
 		if (operateDTO.getTaskStatus().equals(TrialStatusEnum.DRAFTS.getId())) {
 			creatingOperate(operateDTO, object, baseService);
@@ -47,7 +47,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			controlTaskRecord.setTasktype(operateDTO.getTaskType());
 			controlTaskRecord.setTasktitle(operateDTO.getTaskTitle());
 			controlTaskRecord.setTaskpublishtime(new Date());
-			controlTaskRecord.setTaskpublishfinalcontentjson(operateDTO.getJsonStr());
+			controlTaskRecord.setTaskpublishfinalcontentjson(JSON.toJSONString(operateDTO.getJsonStr()));
 			controlTaskRecord.setTaskpublishday(getToday());
 			taskRecordsMapper.updateByPrimaryKeySelective(controlTaskRecord);
 			
@@ -63,7 +63,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 	public abstract String getCurrentMenuType();
 
 	private void updateStatus(OperateDTO operateDTO, T object, BaseService<T> baseService) {
-		object.setTaskJson(operateDTO.getJsonStr());
+		object.setTaskJson(JSON.toJSONString(operateDTO.getJsonStr()));
 		object.setTaskStatus(operateDTO.getTaskStatus());
 		Miss_control_task_detailWithBLOBs taskLastData = getTaskLastData(object.getTaskId());
 		baseService.updateByTaskIdSelective(object);
@@ -80,7 +80,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 		controlTaskDetail.setTaskuuid(UuidUtils.generateUUID());
 		controlTaskDetail.setTaskchangetime(new Date());
 		controlTaskDetail.setTaskchangeday(getToday());
-		controlTaskDetail.setTaskchangeafterjson(operateDTO.getJsonStr());
+		controlTaskDetail.setTaskchangeafterjson(JSON.toJSONString(operateDTO.getJsonStr()));
 		taskDetailMapper.insert(controlTaskDetail);
 	}
 
@@ -88,7 +88,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 		// 插入数据到
 		if (null == object.getTaskId()) {
 			String taskId = UuidUtils.generateUUID();
-			object.setTaskJson(operateDTO.getJsonStr());
+			object.setTaskJson(JSON.toJSONString(operateDTO.getJsonStr()));
 			object.setTaskId(taskId);
 			object.setTaskStatus(TrialStatusEnum.TO_FIRST_AUDITED.getId());
 			baseService.insert(object);
@@ -111,20 +111,20 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			createTaskDetail.setTaskuuid(UuidUtils.generateUUID());
 			createTaskDetail.setTaskchangetime(new Date());
 			createTaskDetail.setTaskchangeday(getToday());
-			createTaskDetail.setTaskchangeafterjson(operateDTO.getJsonStr());
+			createTaskDetail.setTaskchangeafterjson(JSON.toJSONString(operateDTO.getJsonStr()));
 			taskDetailMapper.insert(createTaskDetail);
 
 			Miss_control_task_detailWithBLOBs controlTaskDetail = new Miss_control_task_detailWithBLOBs();
 			controlTaskDetail.setTaskId(taskId);
 			controlTaskDetail.setTaskmenutype(operateDTO.getTaskMenuType());
 			controlTaskDetail.setTaskstatuschangebefore(TrialStatusEnum.DRAFTS.getId());
-			controlTaskDetail.setTaskchangebeforejson(operateDTO.getJsonStr());
+			controlTaskDetail.setTaskchangebeforejson(JSON.toJSONString(operateDTO.getJsonStr()));
 			controlTaskDetail.setTaskstatuschangeafter(TrialStatusEnum.TO_FIRST_AUDITED.getId());
 			controlTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode());
 			controlTaskDetail.setTaskuuid(UuidUtils.generateUUID());
 			controlTaskDetail.setTaskchangeday(getToday());
 			controlTaskDetail.setTaskchangetime(new Date());
-			controlTaskDetail.setTaskchangeafterjson(operateDTO.getJsonStr());
+			controlTaskDetail.setTaskchangeafterjson(JSON.toJSONString(operateDTO.getJsonStr()));
 			taskDetailMapper.insert(controlTaskDetail);
 		} else {
 			updateStatus(operateDTO, object, baseService);
@@ -142,7 +142,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 		// 插入数据到
 		if (null == object.getTaskId()) {
 			String taskId = UuidUtils.generateUUID();
-			object.setTaskJson(operateDTO.getJsonStr());
+			object.setTaskJson(JSON.toJSONString(operateDTO.getJsonStr()));
 			object.setTaskId(taskId);
 			object.setTaskStatus(TrialStatusEnum.DRAFTS.getId());
 			baseService.insert(object);
@@ -165,7 +165,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			controlTaskDetail.setTaskuuid(UuidUtils.generateUUID());
 			controlTaskDetail.setTaskchangetime(new Date());
 			controlTaskDetail.setTaskchangeday(getToday());
-			controlTaskDetail.setTaskchangeafterjson(operateDTO.getJsonStr());
+			controlTaskDetail.setTaskchangeafterjson(JSON.toJSONString(operateDTO.getJsonStr()));
 			taskDetailMapper.insert(controlTaskDetail);
 		} else {
 			updateStatus(operateDTO, object, baseService);

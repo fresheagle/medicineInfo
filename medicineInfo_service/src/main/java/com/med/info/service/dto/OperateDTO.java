@@ -2,6 +2,8 @@ package com.med.info.service.dto;
 
 import java.io.Serializable;
 
+import com.alibaba.fastjson.JSONObject;
+
 public class OperateDTO implements Serializable {
 
 	/**
@@ -18,7 +20,7 @@ public class OperateDTO implements Serializable {
 	private String taskChangeComments;
 	private String pageNo;
 	private String contentNo;
-	private String jsonStr;
+	private JSONObject jsonStr;
 
 	public String getPageNo() {
 		return pageNo;
@@ -84,11 +86,11 @@ public class OperateDTO implements Serializable {
 		this.taskMenuType = taskMenuType;
 	}
 
-	public String getJsonStr() {
+	public JSONObject getJsonStr() {
 		return jsonStr;
 	}
 
-	public void setJsonStr(String jsonStr) {
+	public void setJsonStr(JSONObject jsonStr) {
 		this.jsonStr = jsonStr;
 	}
 

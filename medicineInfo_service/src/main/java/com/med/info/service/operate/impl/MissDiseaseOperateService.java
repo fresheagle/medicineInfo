@@ -31,7 +31,7 @@ public class MissDiseaseOperateService extends AbstractOperateService<Miss_disea
 	@Override
 	public Class<?> getCurrentClass() {
 		// TODO Auto-generated method stub
-		return Miss_disease.class;
+		return Miss_diseaseWithBLOBs.class;
 	}
 
 }

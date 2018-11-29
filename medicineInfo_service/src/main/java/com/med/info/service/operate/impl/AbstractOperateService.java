@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.log4j.spi.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSON;
@@ -25,9 +27,13 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 	private Miss_control_task_recordsMapper taskRecordsMapper;
 	@Autowired
 	private Miss_control_task_detailMapper taskDetailMapper;
+	
+	private static Logger logger = org.slf4j.LoggerFactory.getLogger(AbstractOperateService.class);
 
 	@Override
 	public String doOperate(OperateDTO operateDTO) {
+		
+		logger.info("接受到请求参数={}",JSON.toJSONString(operateDTO));
 		T object = (T) JSON.toJavaObject(operateDTO.getJsonStr(), getCurrentClass());
 //		JSON.parseObject(operateDTO.getJsonStr(), getCurrentClass());
 		BaseService<T> baseService = getBaseService(operateDTO.getTaskMenuType());

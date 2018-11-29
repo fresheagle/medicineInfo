@@ -5,12 +5,13 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.med.info.domain.Miss_disease;
+import com.med.info.domain.Miss_diseaseWithBLOBs;
 import com.med.info.service.BaseService;
 import com.med.info.service.MissDiseaseService;
 
 @Component
 @Order(5)
-public class MissDiseaseOperateService extends AbstractOperateService<Miss_disease>{
+public class MissDiseaseOperateService extends AbstractOperateService<Miss_diseaseWithBLOBs>{
 
 	@Autowired
 	private MissDiseaseService diseaseService;
@@ -22,7 +23,7 @@ public class MissDiseaseOperateService extends AbstractOperateService<Miss_disea
 	}
 
 	@Override
-	public BaseService<Miss_disease> getBaseService(String menuType) {
+	public BaseService<Miss_diseaseWithBLOBs> getBaseService(String menuType) {
 		// TODO Auto-generated method stub
 		return diseaseService;
 	}

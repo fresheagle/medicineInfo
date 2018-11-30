@@ -19,4 +19,28 @@ public class MissChineseDiseaseServiceImpl extends BaseServiceImpl<Miss_chinese_
 		return chineseDiseaseMapper;
 	}
 
+	@Override
+	public Long addChineseDiseaseBlogInfo(Miss_chinese_diseaseWithBLOBs miss_chinese_diseaseWithBLOBs) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Miss_chinese_diseaseWithBLOBs queryChineseDiseaseBlogInfo(Long chinese_diseaseId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Long updateChineseDiseaseBlogInfo(Miss_chinese_diseaseWithBLOBs miss_chinese_diseaseWithBLOBs) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer deleteChineseDiseaseBlogInfo(Long chinese_diseaseId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

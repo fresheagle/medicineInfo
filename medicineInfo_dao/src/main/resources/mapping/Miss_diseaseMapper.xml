@@ -725,4 +725,32 @@
       task_status = #{taskStatus,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="showDataByPage" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    from miss_disease
+  </select>
+
+  <select id="showDataAll" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    from miss_disease
+  </select>
+
+  <select id="showDataCondition" parameterType="com.med.info.domain.Miss_diseaseWithBLOBs" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    from miss_disease
+    WHERE
+    <if test="chineseName != null">
+      chinese_name like #{chineseName,jdbcType=VARCHAR}
+    </if>
+    <if test="englishName != null">
+      and english_name like #{englishName,jdbcType=VARCHAR}
+    </if>
+    <if test="otherName != null">
+      and other_name like #{otherName,jdbcType=VARCHAR}
+    </if>
+  </select>
 </mapper>

@@ -20,4 +20,28 @@ public class MissCombinationDiseaseServiceImpl extends BaseServiceImpl<Miss_comb
 		return combinationDiseaseMapper;
 	}
 
+	@Override
+	public Long addCombinationDiseaseBlogInfo(Miss_combination_diseaseWithBLOBs miss_combination_diseaseWithBLOBs) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Miss_combination_diseaseWithBLOBs queryCombinationDiseaseBlogInfo(Long combination_diseaseId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Long updateCombinationDiseaseBlogInfo(Miss_combination_diseaseWithBLOBs miss_combination_diseaseWithBLOBs) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer deleteCombinationDiseaseBlogInfo(Long combination_diseaseId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

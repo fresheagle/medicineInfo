@@ -7,6 +7,7 @@ import com.med.info.domain.Miss_diseaseWithBLOBs;
 import com.med.info.mapper.BaseMapper;
 import com.med.info.mapper.Miss_diseaseMapper;
 import com.med.info.service.MissDiseaseService;
+import com.med.info.service.dto.DiseaseDTO;
 
 @Service
 public class MissDiseaseServiceImpl extends BaseServiceImpl<Miss_diseaseWithBLOBs> implements MissDiseaseService{
@@ -18,6 +19,30 @@ public class MissDiseaseServiceImpl extends BaseServiceImpl<Miss_diseaseWithBLOB
 	public BaseMapper getMapper() {
 		// TODO Auto-generated method stub
 		return diseaseMapper;
+	}
+
+	@Override
+	public Long addDiseaseInfo(DiseaseDTO diseaseDTO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DiseaseDTO queryDiseaseInfo(Long diseaseId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Long updateDiseaseInfo(DiseaseDTO diseaseDTO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer deleteDiseaseInfo(Long diseaseId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

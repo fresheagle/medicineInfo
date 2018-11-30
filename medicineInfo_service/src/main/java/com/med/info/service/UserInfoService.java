@@ -3,8 +3,6 @@
  */
 package com.med.info.service;
 
-import java.util.List;
-
 import com.med.info.domain.Miss_control_user;
 import com.med.info.service.dto.LoginInfoDTO;
 

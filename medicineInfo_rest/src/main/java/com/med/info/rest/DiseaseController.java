@@ -6,10 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.med.info.domain.Miss_diseaseWithBLOBs;
+import com.med.info.response.PageObject;
 import com.med.info.response.Response;
 import com.med.info.service.DiseaseInfoService;
+import com.med.info.service.MissDiseaseService;
 import com.med.info.service.dto.DiseaseDTO;
 
 /**
@@ -24,11 +28,20 @@ import com.med.info.service.dto.DiseaseDTO;
 public class DiseaseController {
 	private static final Logger log = Logger.getLogger(DiseaseController.class);
 	
-	@Autowired
-	DiseaseInfoService diseaseInfoService;
+	@Autowired private DiseaseInfoService diseaseInfoService;
+	@Autowired private MissDiseaseService diseaseService;
 	@Autowired
 	ParamInfoService paramInfoService;
 
+	/**
+	 * 分页查询疾病列表
+	 */
+	@RequestMapping(path="/page", method = RequestMethod.GET)
+	public Response selectPage(@RequestParam("currentPage") Integer currentPage, @RequestParam(value="pageSize",defaultValue = "10") Integer pageSize) {
+		PageObject<Miss_diseaseWithBLOBs> selctPage = diseaseService.selctPage(currentPage, pageSize, new Miss_diseaseWithBLOBs());
+		return new Response().success(selctPage);
+		
+	}
 	/**
 	 * 添加疾病基础信息
 	 * @param diseaseDTO 疾病基础信息

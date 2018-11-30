@@ -1,7 +1,12 @@
 package com.med.info.service.impl;
 
+import java.util.List;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.med.info.domain.BaseDomain;
 import com.med.info.mapper.BaseMapper;
+import com.med.info.response.PageObject;
 import com.med.info.service.BaseService;
 
 /**
@@ -50,6 +55,18 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 	public void updateByTaskIdSelective(T t) {
 		getMapper().updateByTaskIdSelective(t);
 	}
+	
+	@Override
+	public PageObject<T> selctPage(Integer currentPage, Integer pageSize, T t) {
+		PageHelper.startPage(currentPage, pageSize);
+		Page<T> showDataCondition = (Page<T>) getMapper().showDataCondition(t);
+		PageObject object = new PageObject<T>();
+		object.setCurrentPage(showDataCondition.getPageNum());
+		object.setParams(showDataCondition);
+		object.setTotal(showDataCondition.getTotal());
+		return object;
+	}
+	
 	
 	public abstract BaseMapper getMapper();
 }

@@ -1,5 +1,7 @@
 package com.med.info.mapper;
 
+import java.util.List;
+
 import com.med.info.domain.Miss_control_task_records;
 
 public interface Miss_control_task_recordsMapper {
@@ -58,4 +60,8 @@ public interface Miss_control_task_recordsMapper {
      * @mbg.generated Mon Nov 26 11:32:45 CST 2018
      */
     int updateByPrimaryKey(Miss_control_task_records record);
+    
+    void updateByTaskIdSelective(Miss_control_task_records record);
+    
+    List<Miss_control_task_records> selectPageBySelective(Miss_control_task_records record);
 }

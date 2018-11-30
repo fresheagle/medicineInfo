@@ -3,6 +3,7 @@ package com.med.info.service.operate.impl;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.spi.LoggerFactory;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSON;
 import com.med.info.domain.BaseDomain;
+import com.med.info.domain.Miss_control_task_detail;
 import com.med.info.domain.Miss_control_task_detailWithBLOBs;
 import com.med.info.domain.Miss_control_task_records;
 import com.med.info.mapper.Miss_control_task_detailMapper;
@@ -30,6 +32,8 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 	
 	private static Logger logger = org.slf4j.LoggerFactory.getLogger(AbstractOperateService.class);
 
+	
+	
 	@Override
 	public String doOperate(OperateDTO operateDTO) {
 		
@@ -73,6 +77,10 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 		object.setTaskStatus(operateDTO.getTaskStatus());
 		Miss_control_task_detailWithBLOBs taskLastData = getTaskLastData(object.getTaskId());
 		baseService.updateByTaskIdSelective(object);
+		Miss_control_task_records record = new Miss_control_task_records();
+		record.setTaskId(object.getTaskId());
+		record.setTaskstatus(operateDTO.getTaskStatus());
+		taskRecordsMapper.updateByTaskIdSelective(record );
 		Miss_control_task_detailWithBLOBs controlTaskDetail = new Miss_control_task_detailWithBLOBs();
 		controlTaskDetail.setTaskId(object.getTaskId());
 		controlTaskDetail.setTaskmenutype(operateDTO.getTaskMenuType());
@@ -104,6 +112,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			controlTaskRecord.setTaskcreatetime(new Date());
 			controlTaskRecord.setTaskcreateday(getToday());
 			controlTaskRecord.setTaskId(taskId);
+			controlTaskRecord.setTaskstatus(TrialStatusEnum.TO_FIRST_AUDITED.getId());
 			controlTaskRecord.setTaskmenutype(operateDTO.getTaskMenuType());
 			controlTaskRecord.setTasktype(operateDTO.getTaskType());
 			controlTaskRecord.setTasktitle(operateDTO.getTaskTitle());
@@ -158,6 +167,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			controlTaskRecord.setTaskcreatetime(new Date());
 			controlTaskRecord.setTaskcreateday(getToday());
 			controlTaskRecord.setTaskId(taskId);
+			controlTaskRecord.setTaskstatus(TrialStatusEnum.DRAFTS.getId());
 			controlTaskRecord.setTaskmenutype(operateDTO.getTaskMenuType());
 			controlTaskRecord.setTasktype(operateDTO.getTaskType());
 			controlTaskRecord.setTasktitle(operateDTO.getTaskTitle());
@@ -179,7 +189,9 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 	}
 
 	private Miss_control_task_detailWithBLOBs getTaskLastData(String taskId) {
-		return null;
+		
+		List<Miss_control_task_detailWithBLOBs> taskDetailsByTime = taskDetailMapper.getTaskDetailsByTime(taskId);
+		return taskDetailsByTime.get(0);
 	}
 
 	public abstract BaseService<T> getBaseService(String menuType);

@@ -10,5 +10,7 @@ import com.med.info.service.dto.OperateDTO;
 public interface MissionService {
 	
 	public Object saveMission(OperateDTO operateDTO);
+	
+	public Object getByPage(Integer currentPage, Integer pageSize, String taskStatus);
 
 }

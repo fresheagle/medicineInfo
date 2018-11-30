@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,5 +30,12 @@ public class MissionController {
 		Object saveMission = missionService.saveMission(operateDTO);
 		return new Response().success(saveMission);
 	}
-
+	
+	@RequestMapping(value="/data/page",method = RequestMethod.GET)
+	public Response getByPage(@RequestParam("currentPage") Integer currentPage, @RequestParam(value="pageSize",defaultValue = "10") Integer pageSize, @RequestParam("taskStatus") String taskStatus) {
+		
+		Object byPage = missionService.getByPage(currentPage, pageSize, taskStatus);
+		return new Response().success(byPage);
+	}
+	
 }

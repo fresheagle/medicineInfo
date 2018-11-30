@@ -1,5 +1,7 @@
 package com.med.info.mapper;
 
+import java.util.List;
+
 import com.med.info.domain.Miss_control_task_detail;
 import com.med.info.domain.Miss_control_task_detailWithBLOBs;
 
@@ -61,4 +63,7 @@ public interface Miss_control_task_detailMapper extends BaseMapper<Miss_control_
      * @mbg.generated Thu Nov 22 14:58:41 CST 2018
      */
     int updateByPrimaryKey(Miss_control_task_detail record);
+    
+    List<Miss_control_task_detailWithBLOBs> getTaskDetailsByTime(String taskId);
+    
 }

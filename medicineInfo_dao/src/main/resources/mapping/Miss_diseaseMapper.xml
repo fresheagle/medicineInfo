@@ -798,6 +798,9 @@
 			<if test="otherName != null">
 				and other_name like #{otherName,jdbcType=VARCHAR}
 			</if>
+			<if test="id != null">
+				and id = #{id,jdbcType=BIGINT}
+			</if>
 		</where>
 	</select>
 </mapper>

@@ -38,8 +38,19 @@ public class DiseaseController {
 	 * 分页查询疾病列表
 	 */
 	@RequestMapping(path="/page", method = RequestMethod.GET)
-	public Response selectPage(@RequestParam("currentPage") Integer currentPage, @RequestParam(value="pageSize",defaultValue = "10") Integer pageSize) {
-		PageObject<Miss_diseaseWithBLOBs> selectPage = diseaseService.selectPage(currentPage, pageSize, new Miss_diseaseWithBLOBs());
+	public Response selectPage(@RequestParam("currentPage") Integer currentPage, @RequestParam(value="pageSize",defaultValue = "10") Integer pageSize,@RequestParam("chineseName")String chineseName, @RequestParam("englishName")String englishName,
+			@RequestParam("otherName") String otherName) {
+		Miss_diseaseWithBLOBs disease = new Miss_diseaseWithBLOBs();
+		if(chineseName != null) {
+			disease.setChineseName(chineseName);
+		}
+		if(englishName != null) {
+			disease.setEnglishName(englishName);;
+		}
+		if(otherName != null) {
+			disease.setOtherName(otherName);;
+		}
+		PageObject<Miss_diseaseWithBLOBs> selectPage = diseaseService.selectPage(currentPage, pageSize, disease);
 		return new Response().success(selectPage);
 	}
 	/**

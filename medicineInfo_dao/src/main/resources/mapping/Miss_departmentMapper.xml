@@ -41,6 +41,12 @@
     -->
     task_json
   </sql>
+  
+  <sql id="Param_Column_List">
+    <!-- 用来返回参数列表 -->
+  	id, department_code, department_name
+  </sql>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     <!--
       WARNING - @mbg.generated
@@ -53,6 +59,21 @@
     <include refid="Blob_Column_List" />
     from miss_department
     where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="showDataCondition" parameterType="com.med.info.domain.Miss_department" resultMap="ResultMapWithBLOBs">
+    <!-- 查询部门参数 -->
+  	select
+  	<include refid="Base_Column_List" />
+  	from miss_department
+  	<where>
+  		<if test="id != null">
+  			id = #{id,jdbcType=BIGINT}
+  		</if>
+  		<if test="departmentName != null">
+  			and department_name = #{departmentName,jdbcType=VARCHAR}
+  		</if>
+  	</where>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     <!--

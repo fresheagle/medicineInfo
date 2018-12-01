@@ -615,4 +615,20 @@
       task_status = #{taskStatus,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <select id="showDataCondition" parameterType="com.med.info.domain.Miss_symptom" resultMap="ResultMapWithBLOBs">
+  	select 
+  	<include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from miss_symptom
+    <where>
+    	<if test="id != null">
+    	id = #{id,jdbcType=VARCHAR}
+    	</if>
+    	<if test="chinese_name != null">
+    	and chinese_name = #{chineseName,jdbcType=VARCHAR}
+    	</if>
+    </where>
+  </select>
 </mapper>

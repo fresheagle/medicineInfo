@@ -17,6 +17,8 @@ public interface BaseService<T> {
 	public T selectByPrimaryKey(T t);
 	public int updateByPrimaryKey(T t);
 	public void updateByTaskIdSelective(T t);
+	
+	public T selectByPrimaryId(Long id);
 
-	public PageObject<T> selctPage(Integer currentPage, Integer pageSize, T t);
+	public PageObject<T> selectPage(Integer currentPage, Integer pageSize, T t);
 }

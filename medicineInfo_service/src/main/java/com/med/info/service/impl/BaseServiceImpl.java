@@ -52,12 +52,18 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 	}
 
 	@Override
+	public T selectByPrimaryId(Long id) {
+		// TODO Auto-generated method stub
+		return (T)getMapper().selectByPrimaryKey(id);
+	}
+
+	@Override
 	public void updateByTaskIdSelective(T t) {
 		getMapper().updateByTaskIdSelective(t);
 	}
 	
 	@Override
-	public PageObject<T> selctPage(Integer currentPage, Integer pageSize, T t) {
+	public PageObject<T> selectPage(Integer currentPage, Integer pageSize, T t) {
 		PageHelper.startPage(currentPage, pageSize);
 		Page<T> showDataCondition = (Page<T>) getMapper().showDataCondition(t);
 		PageObject object = new PageObject<T>();

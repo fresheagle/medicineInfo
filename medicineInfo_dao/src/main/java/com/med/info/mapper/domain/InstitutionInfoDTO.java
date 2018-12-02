@@ -1,4 +1,4 @@
-package com.med.info.service.dto;
+package com.med.info.mapper.domain;
 
 import com.med.info.domain.Miss_institutionWithBLOBs;
 

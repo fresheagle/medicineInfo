@@ -4,7 +4,7 @@
 package com.med.info.service;
 
 import com.med.info.domain.Miss_control_user;
-import com.med.info.service.dto.LoginInfoDTO;
+import com.med.info.mapper.domain.LoginInfoDTO;
 
 /**
  * @author jialin.jiang

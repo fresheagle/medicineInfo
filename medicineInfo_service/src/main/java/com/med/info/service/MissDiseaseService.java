@@ -1,7 +1,7 @@
 package com.med.info.service;
 
 import com.med.info.domain.Miss_diseaseWithBLOBs;
-import com.med.info.service.dto.DiseaseDTO;
+import com.med.info.mapper.domain.DiseaseDTO;
 
 public interface MissDiseaseService extends BaseService<Miss_diseaseWithBLOBs>{
 

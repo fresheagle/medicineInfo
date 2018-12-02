@@ -16,10 +16,10 @@ import com.med.info.domain.Miss_control_action;
 import com.med.info.domain.Miss_control_user;
 import com.med.info.mapper.BaseMapper;
 import com.med.info.mapper.Miss_control_userMapper;
+import com.med.info.mapper.domain.LoginInfoDTO;
+import com.med.info.mapper.domain.UserPrivilegeDTO;
 import com.med.info.service.MissControlActionService;
 import com.med.info.service.UserInfoService;
-import com.med.info.service.dto.LoginInfoDTO;
-import com.med.info.service.dto.UserPrivilegeDTO;
 import com.med.info.utils.StringUtil;
 
 /**

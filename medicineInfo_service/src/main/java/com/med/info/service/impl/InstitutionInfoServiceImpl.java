@@ -1,7 +1,8 @@
 package com.med.info.service.impl;
 
+import com.med.info.mapper.domain.InstitutionInfoDTO;
 import com.med.info.service.InstitutionInfoService;
-import com.med.info.service.dto.InstitutionInfoDTO;
+
 import org.springframework.stereotype.Service;
 
 @Service

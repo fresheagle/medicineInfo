@@ -1,6 +1,9 @@
 package com.med.info.mapper;
 
+import java.util.List;
+
 import com.med.info.domain.Miss_department;
+import com.med.info.mapper.domain.DepartmentMapDTO;
 
 public interface Miss_departmentMapper extends BaseMapper<Miss_department>{
     /**
@@ -58,4 +61,6 @@ public interface Miss_departmentMapper extends BaseMapper<Miss_department>{
      * @mbg.generated Sat Nov 17 18:29:49 CST 2018
      */
     int updateByPrimaryKey(Miss_department record);
+    
+    List<DepartmentMapDTO> getDepartmentMapByIds(List<Long> ids);
 }

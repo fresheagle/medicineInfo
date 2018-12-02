@@ -1,9 +1,10 @@
 package com.med.info.rest;
 
+import com.med.info.mapper.domain.InstitutionInfoDTO;
 import com.med.info.response.Response;
 import com.med.info.service.InstitutionInfoService;
 import com.med.info.service.ParamInfoService;
-import com.med.info.service.dto.InstitutionInfoDTO;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

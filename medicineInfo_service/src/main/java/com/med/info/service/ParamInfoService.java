@@ -1,10 +1,10 @@
 package com.med.info.service;
 
-import com.med.info.service.dto.DepartmentMapDTO;
-import com.med.info.service.dto.SymptomMapDTO;
-
 import java.util.List;
 import java.util.Map;
+
+import com.med.info.mapper.domain.DepartmentMapDTO;
+import com.med.info.mapper.domain.SymptomMapDTO;
 
 /**
  * Title: 列表参数查询服务

@@ -1,4 +1,4 @@
-package com.med.info.service.dto;
+package com.med.info.mapper.domain;
 
 import java.io.Serializable;
 

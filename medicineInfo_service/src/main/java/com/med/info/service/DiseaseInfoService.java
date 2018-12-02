@@ -6,9 +6,9 @@ import java.util.Map;
 import com.med.info.domain.Miss_chinese_diseaseWithBLOBs;
 import com.med.info.domain.Miss_combination_diseaseWithBLOBs;
 import com.med.info.domain.Miss_western_diseaseWithBLOBs;
-import com.med.info.service.dto.DiseaseDTO;
-import com.med.info.service.dto.DepartmentMapDTO;
-import com.med.info.service.dto.SymptomMapDTO;
+import com.med.info.mapper.domain.DepartmentMapDTO;
+import com.med.info.mapper.domain.DiseaseDTO;
+import com.med.info.mapper.domain.SymptomMapDTO;
 
 /**
  * Title: 疾病类型信息维护

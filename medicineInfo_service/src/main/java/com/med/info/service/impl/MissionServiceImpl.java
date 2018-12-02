@@ -13,9 +13,9 @@ import com.med.info.domain.Miss_control_task_detailWithBLOBs;
 import com.med.info.domain.Miss_control_task_records;
 import com.med.info.mapper.Miss_control_task_detailMapper;
 import com.med.info.mapper.Miss_control_task_recordsMapper;
+import com.med.info.mapper.domain.OperateDTO;
 import com.med.info.response.PageObject;
 import com.med.info.service.MissionService;
-import com.med.info.service.dto.OperateDTO;
 import com.med.info.service.operate.IOperateService;
 
 @Service

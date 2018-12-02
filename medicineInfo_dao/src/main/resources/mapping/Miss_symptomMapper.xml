@@ -48,6 +48,18 @@
     <result column="symptom_origin" jdbcType="LONGVARCHAR" property="symptomOrigin" />
     <result column="task_json" jdbcType="LONGVARCHAR" property="taskJson" />
   </resultMap>
+  
+  <resultMap type="com.med.info.mapper.domain.SymptomMapDTO" id="SymptomMapResult">
+  	<id column="id" jdbcType="BIGINT" property="id" />
+    <result column="chinese_name" jdbcType="VARCHAR" property="chineseName" />
+    <result column="english_name" jdbcType="VARCHAR" property="englishName" />
+  </resultMap>
+  
+  <sql id="Param_Column_List">
+    <!-- 用来返回参数列表 -->
+  	id, chinese_name, english_name
+  </sql>
+  
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
@@ -630,5 +642,24 @@
     	and chinese_name = #{chineseName,jdbcType=VARCHAR}
     	</if>
     </where>
+  </select>
+  
+  <select id="getDepartmentMapByIds" resultMap="SymptomMapResult">
+  	select 
+  	<include refid="Param_Column_List" />
+  	from miss_symptom
+  	where id in 
+    <foreach collection="ids" item="id" open="(" close=")" separator=",">
+    #{id}
+    </foreach>
+  </select>
+  
+  <select id="getSymptomMapDTOByDiseaseId" resultMap="SymptomMapResult" parameterType="Long">
+  		
+  	select 
+  	b.id as id, chinese_name, english_name
+  	from miss_disease_symptom_mapping a left join miss_symptom b on a.symptom_id = b.id
+  	where a.disease_id = #{id}
+  
   </select>
 </mapper>

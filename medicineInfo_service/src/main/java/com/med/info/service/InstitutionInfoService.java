@@ -1,6 +1,6 @@
 package com.med.info.service;
 
-import com.med.info.service.dto.InstitutionInfoDTO;
+import com.med.info.mapper.domain.InstitutionInfoDTO;
 
 /**
  * Title: 医疗机构信息维护

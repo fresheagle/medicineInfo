@@ -3,8 +3,9 @@ package com.med.info.service.impl;
 import com.med.info.domain.Miss_chinese_diseaseWithBLOBs;
 import com.med.info.domain.Miss_combination_diseaseWithBLOBs;
 import com.med.info.domain.Miss_western_diseaseWithBLOBs;
+import com.med.info.mapper.domain.DiseaseDTO;
 import com.med.info.service.DiseaseInfoService;
-import com.med.info.service.dto.DiseaseDTO;
+
 import org.springframework.stereotype.Service;
 
 

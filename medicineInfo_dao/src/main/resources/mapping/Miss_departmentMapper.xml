@@ -15,6 +15,11 @@
     <result column="task_id" jdbcType="VARCHAR" property="taskId" />
     <result column="task_status" jdbcType="VARCHAR" property="taskStatus" />
   </resultMap>
+  
+  <resultMap type="com.med.info.mapper.domain.DepartmentMapDTO" id="DepartmentMapResult">
+  	<id column="id" jdbcType="BIGINT" property="id" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+  </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.med.info.domain.Miss_department">
     <!--
       WARNING - @mbg.generated
@@ -202,7 +207,7 @@
   
   <sql id="Param_Column_List">
     <!-- 用来返回参数列表 -->
-  	id, department_code, department_name
+  	id, department_name
   </sql>
   
   <select id="showDataCondition" parameterType="com.med.info.domain.Miss_department" resultMap="ResultMapWithBLOBs">
@@ -219,4 +224,15 @@
   		</if>
   	</where>
   </select>
+  
+  <select id="getDepartmentMapByIds" resultMap="DepartmentMapResult">
+  	select 
+  	<include refid="Param_Column_List" />
+  	from miss_department
+  	where id in 
+    <foreach collection="list" item="id" open="(" close=")" separator=",">
+    #{id}
+    </foreach>
+  </select>
+  
 </mapper>

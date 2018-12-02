@@ -1,8 +1,9 @@
 package com.med.info.service.impl;
 
+import com.med.info.mapper.domain.DepartmentMapDTO;
+import com.med.info.mapper.domain.SymptomMapDTO;
 import com.med.info.service.ParamInfoService;
-import com.med.info.service.dto.DepartmentMapDTO;
-import com.med.info.service.dto.SymptomMapDTO;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;

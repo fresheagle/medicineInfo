@@ -32,4 +32,6 @@ public interface MissDiseaseService extends BaseService<Miss_diseaseWithBLOBs>{
 	 * @return 疾病信息id
 	 */
 	Integer deleteDiseaseInfo(Long diseaseId);
+	
+	public Object getByPage(Integer currentPage, Integer pageSize, String chineseName, String englishName, String otherName);
 }

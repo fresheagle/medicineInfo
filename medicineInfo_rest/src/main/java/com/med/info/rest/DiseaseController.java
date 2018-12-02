@@ -45,13 +45,23 @@ public class DiseaseController {
 //			disease.setChineseName(chineseName);
 //		}
 //		if(englishName != null) {
-//			disease.setEnglishName(englishName);;
+//			disease.setEnglishName(englishName);
 //		}
 //		if(otherName != null) {
-//			disease.setOtherName(otherName);;
+//			disease.setOtherName(otherName);
 //		}
 //		PageObject<Miss_diseaseWithBLOBs> selectPage = diseaseService.selectPage(currentPage, pageSize, disease);
 //		return new Response().success(selectPage);
+		String cname=null; String ename=null; String oname=null;
+		if(chineseName != null) {
+			cname = chineseName;
+		}
+		if(englishName != null) {
+			ename = englishName;
+		}
+		if(otherName != null) {
+			oname = otherName;
+		}
 		Object byPage = diseaseService.getByPage(currentPage, pageSize, chineseName, englishName, otherName);
 		return new Response().success(byPage);
 	}

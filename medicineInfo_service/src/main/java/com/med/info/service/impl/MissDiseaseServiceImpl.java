@@ -62,10 +62,10 @@ public class MissDiseaseServiceImpl extends BaseServiceImpl<Miss_diseaseWithBLOB
 			disease.setChineseName(chineseName);
 		}
 		if(englishName != null) {
-			disease.setEnglishName(englishName);;
+			disease.setEnglishName(englishName);
 		}
 		if(otherName != null) {
-			disease.setOtherName(otherName);;
+			disease.setOtherName(otherName);
 		}
 		Page<Miss_diseaseWithBLOBs> showDataCondition = (Page<Miss_diseaseWithBLOBs>) diseaseMapper
 				.showDataCondition(disease);

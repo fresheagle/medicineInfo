@@ -28,13 +28,13 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<table tableName="miss_chinese_disease"
+		<!-- <table tableName="miss_chinese_disease"
 			domainObjectName="Miss_chinese_disease" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 			<generatedKey column="id"
 				sqlStatement="select uuid_short()" identity="false" />
-		</table>
+		</table> -->
 
 		<!--<table tableName="miss_combination_disease"-->
 			<!--domainObjectName="Miss_combination_disease"-->
@@ -44,13 +44,13 @@
 			<!--<generatedKey column="id"-->
 				<!--sqlStatement="select uuid_short()" identity="false" />-->
 		<!--</table>-->
-		<!--<table tableName="miss_department"-->
-			<!--domainObjectName="Miss_department" enableCountByExample="false"-->
-			<!--enableUpdateByExample="false" enableDeleteByExample="false"-->
-			<!--enableSelectByExample="false" selectByExampleQueryId="false">-->
-			<!--<generatedKey column="id"-->
-				<!--sqlStatement="select uuid_short()" identity="false" />-->
-		<!--</table>-->
+		<table tableName="miss_department"
+			domainObjectName="Miss_department" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="select uuid_short()" identity="false" />
+		</table>
 		<!--<table tableName="miss_department_doctor_mapping"-->
 			<!--domainObjectName="Miss_department_doctor_mapping"-->
 			<!--enableCountByExample="false" enableUpdateByExample="false"-->
@@ -59,13 +59,13 @@
 			<!--<generatedKey column="id"-->
 				<!--sqlStatement="select uuid_short()" identity="false" />-->
 		<!--</table>-->
-		<table tableName="miss_disease" domainObjectName="Miss_disease"
+		<!-- <table tableName="miss_disease" domainObjectName="Miss_disease"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 			<generatedKey column="id"
 				sqlStatement="select uuid_short()" identity="false" />
-		</table>
+		</table> -->
 		<!--<table tableName="miss_disease_department_mapping"-->
 			<!--domainObjectName="Miss_disease_department_mapping"-->
 			<!--enableCountByExample="false" enableUpdateByExample="false"-->
@@ -82,13 +82,13 @@
 			<!--<generatedKey column="id"-->
 				<!--sqlStatement="select uuid_short()" identity="false" />-->
 		<!--</table>-->
-		<!--<table tableName="miss_dislocation"-->
-			<!--domainObjectName="Miss_dislocation" enableCountByExample="false"-->
-			<!--enableUpdateByExample="false" enableDeleteByExample="false"-->
-			<!--enableSelectByExample="false" selectByExampleQueryId="false">-->
-			<!--<generatedKey column="id"-->
-				<!--sqlStatement="select uuid_short()" identity="false" />-->
-		<!--</table>-->
+		<table tableName="miss_dislocation"
+			domainObjectName="Miss_dislocation" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="select uuid_short()" identity="false" />
+		</table>
 		<!--<table tableName="miss_district"-->
 			<!--domainObjectName="Miss_district" enableCountByExample="false"-->
 			<!--enableUpdateByExample="false" enableDeleteByExample="false"-->
@@ -96,7 +96,7 @@
 			<!--<generatedKey column="id"-->
 				<!--sqlStatement="select uuid_short()" identity="false" />-->
 		<!--</table>-->
-		<table tableName="miss_doctor" domainObjectName="Miss_doctor"
+		<!-- <table tableName="miss_doctor" domainObjectName="Miss_doctor"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
@@ -109,7 +109,7 @@
 			enableSelectByExample="false" selectByExampleQueryId="false">
 			<generatedKey column="id"
 				sqlStatement="select uuid_short()" identity="false" />
-		</table>
+		</table> -->
 		<!--<table tableName="miss_institution_doctor_mapping"-->
 			<!--domainObjectName="Miss_institution_doctor_mapping"-->
 			<!--enableCountByExample="false" enableUpdateByExample="false"-->
@@ -118,7 +118,7 @@
 			<!--<generatedKey column="id"-->
 				<!--sqlStatement="select uuid_short()" identity="false" />-->
 		<!--</table>-->
-		<table tableName="miss_institution_keypartment_mapping"
+		<!-- <table tableName="miss_institution_keypartment_mapping"
 			domainObjectName="Miss_institution_keypartment_mapping"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
@@ -132,7 +132,7 @@
 			selectByExampleQueryId="false">
 			<generatedKey column="id"
 				sqlStatement="select uuid_short()" identity="false" />
-		</table>
+		</table> -->
 		<!--<table tableName="miss_medical_company"-->
 			<!--domainObjectName="Miss_medical_company" enableCountByExample="false"-->
 			<!--enableUpdateByExample="false" enableDeleteByExample="false"-->
@@ -148,13 +148,13 @@
 			<!--<generatedKey column="id"-->
 				<!--sqlStatement="select uuid_short()" identity="false" />-->
 		<!--</table>-->
-		<table tableName="miss_symptom" domainObjectName="Miss_symptom"
+		<!-- <table tableName="miss_symptom" domainObjectName="Miss_symptom"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 			<generatedKey column="id"
 				sqlStatement="select uuid_short()" identity="false" />
-		</table>
+		</table> -->
 		<!--<table tableName="miss_symptom_dislocation_mapping"-->
 			<!--domainObjectName="Miss_symptom_dislocation_mapping"-->
 			<!--enableCountByExample="false" enableUpdateByExample="false"-->
@@ -219,12 +219,12 @@
 			<!--selectByExampleQueryId="false">-->
 		<!--</table>-->
 
-		<table tableName="miss_control_task_records"
+		<!-- <table tableName="miss_control_task_records"
 			domainObjectName="Miss_control_task_records"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
-		</table>
+		</table> -->
 		
 	</context>
 </generatorConfiguration>

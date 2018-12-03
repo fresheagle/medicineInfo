@@ -6,21 +6,28 @@ public class DislocationMapDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private Long dislocation_id;
-	private String dislocation_code;
+	private Long id;
+	private String level;
 	private String dislocation_name;
+	private Long parent_dislocation_id;
 	
-	public Long getDislocation_id() {
-		return dislocation_id;
+	public Long getParent_dislocation_id() {
+		return parent_dislocation_id;
 	}
-	public void setDislocation_id(Long dislocation_id) {
-		this.dislocation_id = dislocation_id;
+	public void setParent_dislocation_id(Long parent_dislocation_id) {
+		this.parent_dislocation_id = parent_dislocation_id;
 	}
-	public String getDislocation_code() {
-		return dislocation_code;
+	public String getLevel() {
+		return level;
 	}
-	public void setDislocation_code(String dislocation_code) {
-		this.dislocation_code = dislocation_code;
+	public void setLevel(String level) {
+		this.level = level;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public String getDislocation_name() {
 		return dislocation_name;

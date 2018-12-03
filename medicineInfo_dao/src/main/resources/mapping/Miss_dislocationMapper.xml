@@ -199,4 +199,19 @@
       task_status = #{taskStatus,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <select id="queryDislocationParam" parameterType="com.med.info.mapper.domain.DislocationMapDTO" resultMap="ResultMapWithBLOBs">
+  	select id, dislocation_name, level, parent_dislocation_id from miss_dislocation
+  	<where>
+  		<if test="id != null">
+  			id = #{id,jdbcType=BIGINT}
+  		</if>
+  		<if test="parent_dislocation_id != null">
+  			parent_dislocation_id = #{parentDislocationId,jdbcType=BIGINT}
+  		</if>
+  		<if test="dislocation_name != null">
+  			dislocation_name like #{dislocationName,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
 </mapper>

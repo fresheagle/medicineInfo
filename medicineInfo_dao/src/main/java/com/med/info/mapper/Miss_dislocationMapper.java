@@ -62,5 +62,5 @@ public interface Miss_dislocationMapper extends BaseMapper<Miss_dislocation>{
      */
     int updateByPrimaryKey(Miss_dislocation record);
 
-    List<DislocationMapDTO> getDiesaseMapDTOByName(String chineseName);
+    List<DislocationMapDTO> queryDislocationParam(DislocationMapDTO dislocationMapDTO);
 }

@@ -14,6 +14,7 @@ import com.med.info.mapper.BaseMapper;
 import com.med.info.mapper.Miss_diseaseMapper;
 import com.med.info.mapper.domain.DepartmentMapDTO;
 import com.med.info.mapper.domain.DiseaseDTO;
+import com.med.info.mapper.domain.DiseaseMapDTO;
 import com.med.info.response.PageObject;
 import com.med.info.service.MissDepartmentService;
 import com.med.info.service.MissDiseaseService;
@@ -108,8 +109,14 @@ public class MissDiseaseServiceImpl extends BaseServiceImpl<Miss_diseaseWithBLOB
 	 */
 	@Override
 	public Object queryDiseaseInfoName(Integer currentPage, Integer pageSize, String chineseName) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO Auto-generated method stub DiseaseMapDTO
+		PageHelper.startPage(currentPage, pageSize);
+		Page<DiseaseMapDTO> showDataCondition = (Page<DiseaseMapDTO>) diseaseMapper.getDiesaseMapDTOByName(chineseName);
+		PageObject object = new PageObject<DiseaseDTO>();
+		object.setCurrentPage(currentPage);
+		object.setParams(showDataCondition.getResult());
+		object.setTotal(showDataCondition.getTotal());
+		return object;
 	}
 
 }

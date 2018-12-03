@@ -103,4 +103,13 @@ public class MissDiseaseServiceImpl extends BaseServiceImpl<Miss_diseaseWithBLOB
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.med.info.service.MissDiseaseService#queryDiseaseInfoName(java.lang.Integer, java.lang.Integer, java.lang.String)
+	 */
+	@Override
+	public Object queryDiseaseInfoName(Integer currentPage, Integer pageSize, String chineseName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

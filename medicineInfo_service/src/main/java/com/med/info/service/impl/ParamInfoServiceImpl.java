@@ -1,19 +1,20 @@
 package com.med.info.service.impl;
 
-import com.med.info.mapper.domain.DepartmentMapDTO;
-import com.med.info.mapper.domain.SymptomMapDTO;
-import com.med.info.service.ParamInfoService;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
+import com.med.info.mapper.domain.DepartmentMapDTO;
+import com.med.info.mapper.domain.DiseaseMapDTO;
+import com.med.info.mapper.domain.SymptomMapDTO;
+import com.med.info.service.ParamInfoService;
 
 
 @Service
 public class ParamInfoServiceImpl implements ParamInfoService {
     @Override
-    public List<Map<Integer, String>> queryDiseaseInfoName() {
+    public List<DiseaseMapDTO> queryDiseaseInfoName() {
         return null;
     }
 

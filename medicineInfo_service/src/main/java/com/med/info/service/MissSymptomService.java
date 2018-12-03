@@ -8,4 +8,6 @@ import com.med.info.mapper.domain.SymptomMapDTO;
 public interface MissSymptomService extends BaseService<Miss_symptomWithBLOBs>{
 
 	List<SymptomMapDTO> getSymptomMapDTOByDiseaseId(Long id);
+	
+	Object querySymptomMapDTOParam(Integer currentPage, Integer pageSize, String chineseName);
 }

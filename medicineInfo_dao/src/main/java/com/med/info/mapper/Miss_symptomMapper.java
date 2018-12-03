@@ -67,4 +67,6 @@ public interface Miss_symptomMapper extends BaseMapper<Miss_symptomWithBLOBs> {
     List<SymptomMapDTO> getSymptomMapDTOByIds(List<Long> ids);
 
 	List<SymptomMapDTO> getSymptomMapDTOByDiseaseId(Long id);
+	
+	List<SymptomMapDTO> querySymptomMapDTOParam(String chineseName);
 }

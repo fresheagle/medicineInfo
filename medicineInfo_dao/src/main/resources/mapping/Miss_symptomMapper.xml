@@ -662,4 +662,14 @@
   	where a.disease_id = #{id}
   
   </select>
+  
+  <select id="querySymptomMapDTOParam" resultMap="SymptomMapResult" parameterType="String">
+  	select id, chinese_name, english_name
+  	from miss_symptom
+  	<where>
+  		<if test="chineseName != null">
+  			chinese_name like #{chineseName,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </select>
 </mapper>

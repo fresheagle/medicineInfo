@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.med.info.domain.Miss_control_task_detailWithBLOBs;
@@ -67,8 +68,11 @@ public class MissionServiceImpl implements MissionService {
 
 	private OperateDTO converseToOperataDTO(Miss_control_task_records control_task_records) {
 		OperateDTO operateDTO = new OperateDTO();
-		operateDTO.setJsonStr(
-				JSON.parseObject(getTaskLastData(control_task_records.getTaskId()).getTaskchangeafterjson()));
+		JSONObject parseObject = JSON.parseObject(getTaskLastData(control_task_records.getTaskId()).getTaskchangeafterjson());
+		if(!parseObject.containsKey("taskId")) {
+			parseObject.put("taskId", control_task_records.getTaskId());
+		}
+		operateDTO.setJsonStr(parseObject);
 		operateDTO.setTaskType(control_task_records.getTasktype());
 		operateDTO.setTaskTitle(control_task_records.getTasktitle());
 		operateDTO.setTaskStatus(control_task_records.getTaskstatus());

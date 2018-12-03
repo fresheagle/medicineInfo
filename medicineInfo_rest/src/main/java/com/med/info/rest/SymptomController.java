@@ -1,6 +1,7 @@
 package com.med.info.rest;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,7 @@ import com.med.info.service.MissSymptomService;
 public class SymptomController {
 	private static final Logger log = Logger.getLogger(SymptomController.class);
 
+	@Autowired
 	MissSymptomService missSymptomService;
 	
 	@RequestMapping(path = "/param", method = RequestMethod.GET)

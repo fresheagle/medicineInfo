@@ -47,6 +47,13 @@ public class DiseaseController {
 		return new Response().success(byPage);
 	}
 
+	@RequestMapping(path = "/param", method = RequestMethod.GET)
+	public Response selectDiseaseParam(@RequestParam("currentPage") Integer currentPage,
+                                       @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize,
+                                       @RequestParam(value = "chineseName", required = false) String chineseName){
+		return new Response().success(diseaseService.queryDiseaseInfoName(currentPage,pageSize,chineseName));
+	}
+
 	/**
 	 * 添加疾病基础信息
 	 * 

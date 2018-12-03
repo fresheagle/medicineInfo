@@ -2,6 +2,9 @@ package com.med.info.mapper;
 
 import com.med.info.domain.Miss_disease;
 import com.med.info.domain.Miss_diseaseWithBLOBs;
+import com.med.info.mapper.domain.DiseaseMapDTO;
+
+import java.util.List;
 
 public interface Miss_diseaseMapper extends BaseMapper<Miss_diseaseWithBLOBs>{
     /**
@@ -59,4 +62,6 @@ public interface Miss_diseaseMapper extends BaseMapper<Miss_diseaseWithBLOBs>{
      * @mbg.generated Mon Nov 26 11:32:45 CST 2018
      */
     int updateByPrimaryKey(Miss_disease record);
+
+    List<DiseaseMapDTO> getDiesaseMapDTOByName(String chineseName);
 }

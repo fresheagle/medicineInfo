@@ -1,6 +1,9 @@
 package com.med.info.mapper;
 
 import com.med.info.domain.Miss_dislocation;
+import com.med.info.mapper.domain.DislocationMapDTO;
+
+import java.util.List;
 
 public interface Miss_dislocationMapper extends BaseMapper<Miss_dislocation>{
     /**
@@ -58,4 +61,6 @@ public interface Miss_dislocationMapper extends BaseMapper<Miss_dislocation>{
      * @mbg.generated Sat Nov 17 18:29:49 CST 2018
      */
     int updateByPrimaryKey(Miss_dislocation record);
+
+    List<DislocationMapDTO> getDiesaseMapDTOByName(String chineseName);
 }

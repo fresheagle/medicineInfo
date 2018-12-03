@@ -2,6 +2,9 @@ package com.med.info.service;
 
 import com.med.info.domain.Miss_diseaseWithBLOBs;
 import com.med.info.mapper.domain.DiseaseDTO;
+import com.med.info.mapper.domain.DiseaseMapDTO;
+
+import java.util.List;
 
 public interface MissDiseaseService extends BaseService<Miss_diseaseWithBLOBs>{
 
@@ -35,4 +38,6 @@ public interface MissDiseaseService extends BaseService<Miss_diseaseWithBLOBs>{
 	
 	public Object getByPage(Integer currentPage, Integer pageSize, String chineseName, String englishName,
 			String otherName);
+
+    Object queryDiseaseInfoName(Integer currentPage, Integer pageSize,String chineseName);
 }

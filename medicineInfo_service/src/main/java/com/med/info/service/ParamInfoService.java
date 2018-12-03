@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.med.info.mapper.domain.DepartmentMapDTO;
+import com.med.info.mapper.domain.DiseaseMapDTO;
 import com.med.info.mapper.domain.SymptomMapDTO;
 
 /**
@@ -18,7 +19,7 @@ public interface ParamInfoService {
      * @param
      * @return 疾病基础信息的id和名称列表
      */
-    List<Map<Integer,String>> queryDiseaseInfoName();
+    List<DiseaseMapDTO> queryDiseaseInfoName();
 
     /**
      * 查询医疗机构id与名称

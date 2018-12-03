@@ -63,5 +63,5 @@ public interface Miss_diseaseMapper extends BaseMapper<Miss_diseaseWithBLOBs>{
      */
     int updateByPrimaryKey(Miss_disease record);
 
-    List<DiseaseMapDTO> getDiesaseMapDTOByName(String chineseName);
+    List<DiseaseMapDTO> getDiseaseMapDTOByName(String chineseName);
 }

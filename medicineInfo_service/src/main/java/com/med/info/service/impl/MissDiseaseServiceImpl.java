@@ -111,7 +111,7 @@ public class MissDiseaseServiceImpl extends BaseServiceImpl<Miss_diseaseWithBLOB
 	public Object queryDiseaseInfoName(Integer currentPage, Integer pageSize, String chineseName) {
 		// TODO Auto-generated method stub DiseaseMapDTO
 		PageHelper.startPage(currentPage, pageSize);
-		Page<DiseaseMapDTO> showDataCondition = (Page<DiseaseMapDTO>) diseaseMapper.getDiesaseMapDTOByName(chineseName);
+		Page<DiseaseMapDTO> showDataCondition = (Page<DiseaseMapDTO>) diseaseMapper.getDiseaseMapDTOByName(chineseName);
 		PageObject object = new PageObject<DiseaseDTO>();
 		object.setCurrentPage(currentPage);
 		object.setParams(showDataCondition.getResult());

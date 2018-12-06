@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.med.info.domain.Miss_control_user;
+import com.med.info.response.PageObject;
 import com.med.info.response.Response;
 import com.med.info.service.UserInfoService;
 
@@ -53,5 +55,17 @@ public class UserController {
 		Miss_control_user user = new Miss_control_user();
 //		Miss_control_user select = userInfoService.insert(user );
 		return user;
+	}
+	
+	@RequestMapping(path="/page", method = RequestMethod.GET)
+	public Response selectPage(@RequestParam("currentPage") Integer currentPage, 
+			@RequestParam(value="pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value="userName", required = false) String userName) {
+		Miss_control_user miss_control_user = new Miss_control_user();
+		if(userName != null) {
+			miss_control_user.setUserName(userName);
+		}
+		PageObject<Miss_control_user> selectPage = userInfoService.selectPageByOperateDto(currentPage, pageSize, miss_control_user);
+		return new Response().success(selectPage);
 	}
 }

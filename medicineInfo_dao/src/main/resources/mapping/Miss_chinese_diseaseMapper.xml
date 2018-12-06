@@ -635,7 +635,7 @@
     from miss_chinese_disease
     <where>
       <if test="diseaseId != null">
-        disease_id = #{diseaseId,jdbcType="INTEGER"}
+        disease_id = #{diseaseId,jdbcType=INTEGER}
       </if>
     </where>
   </select>

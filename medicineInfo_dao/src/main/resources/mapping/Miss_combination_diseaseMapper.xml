@@ -601,10 +601,10 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from miss_chinese_disease
+    from miss_combination_disease
     <where>
       <if test="diseaseId != null">
-        disease_id = #{diseaseId,jdbcType="INTEGER"}
+        disease_id = #{diseaseId,jdbcType=INTEGER}
       </if>
     </where>
   </select>

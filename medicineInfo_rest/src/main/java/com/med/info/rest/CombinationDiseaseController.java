@@ -29,8 +29,6 @@ public class CombinationDiseaseController {
 	private static final Logger log = Logger.getLogger(WestDiseaseController.class);
 	
 	@Autowired
-	DiseaseInfoService diseaseInfoService;
-	
 	MissCombinationDiseaseService missCombinationDiseaseService;
 
 	/**

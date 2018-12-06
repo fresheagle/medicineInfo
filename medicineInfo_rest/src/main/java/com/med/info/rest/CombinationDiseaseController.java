@@ -37,8 +37,14 @@ public class CombinationDiseaseController {
 	 * 分页查询疾病列表
 	 */
 	@RequestMapping(path="/page", method = RequestMethod.GET)
-	public Response selectPage(@RequestParam("currentPage") Integer currentPage, @RequestParam(value="pageSize",defaultValue = "10") Integer pageSize) {
-		PageObject<Miss_combination_diseaseWithBLOBs> selectPage = missCombinationDiseaseService.selectPage(currentPage, pageSize, new Miss_combination_diseaseWithBLOBs());
+	public Response selectPage(@RequestParam("currentPage") Integer currentPage, 
+			@RequestParam(value="pageSize",defaultValue = "10") Integer pageSize,
+			@RequestParam(value="diseaseId", required = false) Integer diseaseId) {
+		Miss_combination_diseaseWithBLOBs miss_combination_diseaseWithBLOBs = new Miss_combination_diseaseWithBLOBs();
+		if(diseaseId != null) {
+			miss_combination_diseaseWithBLOBs.setDiseaseId(diseaseId);
+		}
+		PageObject<Miss_combination_diseaseWithBLOBs> selectPage = missCombinationDiseaseService.selectPageByOperateDto(currentPage, pageSize, miss_combination_diseaseWithBLOBs);
 		return new Response().success(selectPage);	
 	}
 	

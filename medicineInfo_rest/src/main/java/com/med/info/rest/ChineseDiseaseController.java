@@ -34,9 +34,15 @@ public class ChineseDiseaseController {
 	 * 分页查询疾病列表
 	 */
 	@RequestMapping(path="/page", method = RequestMethod.GET)
-	public Response selectPage(@RequestParam("currentPage") Integer currentPage, @RequestParam(value="pageSize",defaultValue = "10") Integer pageSize) {
+	public Response selectPage(@RequestParam("currentPage") Integer currentPage, 
+			@RequestParam(value="pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value="diseaseId", required = false) Integer diseaseId) {
+		Miss_chinese_diseaseWithBLOBs miss_chinese_diseaseWithBLOBs = new Miss_chinese_diseaseWithBLOBs();
+		if(diseaseId != null) {
+			miss_chinese_diseaseWithBLOBs.setDiseaseId(diseaseId);
+		}
 //		PageObject<Miss_chinese_diseaseWithBLOBs> selectPage = missChineseDiseaseService.selectPage(currentPage, pageSize, new Miss_chinese_diseaseWithBLOBs());
-		PageObject<Miss_chinese_diseaseWithBLOBs> selectPage = missChineseDiseaseService.selectPageByOperateDto(currentPage, pageSize, new Miss_chinese_diseaseWithBLOBs());
+		PageObject<Miss_chinese_diseaseWithBLOBs> selectPage = missChineseDiseaseService.selectPageByOperateDto(currentPage, pageSize, miss_chinese_diseaseWithBLOBs);
 		return new Response().success(selectPage);
 	}
 	

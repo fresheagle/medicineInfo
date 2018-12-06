@@ -35,8 +35,14 @@ public class WestDiseaseController {
 	 * 分页查询疾病列表
 	 */
 	@RequestMapping(path="/page", method = RequestMethod.GET)
-	public Response selectPage(@RequestParam("currentPage") Integer currentPage, @RequestParam(value="pageSize",defaultValue = "10") Integer pageSize) {
-		PageObject<Miss_western_diseaseWithBLOBs> selectPage = missWestDiseaseService.selectPage(currentPage, pageSize, new Miss_western_diseaseWithBLOBs());
+	public Response selectPage(@RequestParam("currentPage") Integer currentPage, 
+			@RequestParam(value="pageSize",defaultValue = "10") Integer pageSize,
+			@RequestParam(value="diseaseId", required = false) Integer diseaseId) {
+		Miss_western_diseaseWithBLOBs miss_western_diseaseWithBLOBs = new Miss_western_diseaseWithBLOBs();
+		if(diseaseId != null) {
+			miss_western_diseaseWithBLOBs.setDiseaseId(diseaseId);
+		}
+		PageObject<Miss_western_diseaseWithBLOBs> selectPage = missWestDiseaseService.selectPageByOperateDto(currentPage, pageSize, miss_western_diseaseWithBLOBs);
 		return new Response().success(selectPage);	
 	}
 	

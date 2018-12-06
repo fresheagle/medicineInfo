@@ -490,4 +490,18 @@
       task_status = #{taskStatus,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <select id="showDataCondition"
+          parameterType="com.med.info.domain.Miss_western_diseaseWithBLOBs"
+          resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from miss_chinese_disease
+    <where>
+      <if test="diseaseId != null">
+        disease_id = #{diseaseId,jdbcType="INTEGER"}
+      </if>
+    </where>
+  </select>
 </mapper>

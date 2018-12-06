@@ -21,4 +21,6 @@ public interface BaseService<T> {
 	public T selectByPrimaryId(Long id);
 
 	public PageObject<T> selectPage(Integer currentPage, Integer pageSize, T t);
+
+	public PageObject<T> selectPageByOperateDto(Integer currentPage, Integer pageSize, T t);
 }

@@ -35,8 +35,9 @@ public class ChineseDiseaseController {
 	 */
 	@RequestMapping(path="/page", method = RequestMethod.GET)
 	public Response selectPage(@RequestParam("currentPage") Integer currentPage, @RequestParam(value="pageSize",defaultValue = "10") Integer pageSize) {
-		PageObject<Miss_chinese_diseaseWithBLOBs> selectPage = missChineseDiseaseService.selectPage(currentPage, pageSize, new Miss_chinese_diseaseWithBLOBs());
-		return new Response().success(selectPage);	
+//		PageObject<Miss_chinese_diseaseWithBLOBs> selectPage = missChineseDiseaseService.selectPage(currentPage, pageSize, new Miss_chinese_diseaseWithBLOBs());
+		PageObject<Miss_chinese_diseaseWithBLOBs> selectPage = missChineseDiseaseService.selectPageByOperateDto(currentPage, pageSize, new Miss_chinese_diseaseWithBLOBs());
+		return new Response().success(selectPage);
 	}
 	
 	/**

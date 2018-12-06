@@ -1,11 +1,14 @@
 package com.med.info.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.med.info.domain.BaseDomain;
 import com.med.info.mapper.BaseMapper;
+import com.med.info.mapper.domain.OperateDTO;
 import com.med.info.response.PageObject;
 import com.med.info.service.BaseService;
 
@@ -72,7 +75,23 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 		object.setTotal(showDataCondition.getTotal());
 		return object;
 	}
-	
+	@Override
+	public PageObject<T> selectPageByOperateDto(Integer currentPage, Integer pageSize, T t){
+		PageHelper.startPage(currentPage, pageSize);
+		Page<T> showDataCondition = (Page<T>) getMapper().showDataCondition(t);
+		List<OperateDTO> listOp = new ArrayList<>();
+		for ( int i=0;i<showDataCondition.size();i++) {
+			OperateDTO operateDTO = new OperateDTO();
+			JSONObject json =  JSONObject.parseObject(JSONObject.toJSONString(showDataCondition.get(i)));
+			operateDTO.setJsonStr(json);
+			listOp.add(operateDTO);
+		}
+		PageObject object = new PageObject<T>();
+		object.setCurrentPage(showDataCondition.getPageNum());
+		object.setParams(listOp);
+		object.setTotal(showDataCondition.getTotal());
+		return object;
+	}
 	
 	public abstract BaseMapper getMapper();
 }

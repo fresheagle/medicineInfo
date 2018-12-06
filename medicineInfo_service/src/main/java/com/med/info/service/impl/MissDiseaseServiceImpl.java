@@ -3,6 +3,9 @@ package com.med.info.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.med.info.mapper.domain.OperateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,7 @@ import com.med.info.service.MissDepartmentService;
 import com.med.info.service.MissDiseaseService;
 import com.med.info.service.MissSymptomService;
 
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Service
 public class MissDiseaseServiceImpl extends BaseServiceImpl<Miss_diseaseWithBLOBs> implements MissDiseaseService {
 
@@ -86,9 +90,13 @@ public class MissDiseaseServiceImpl extends BaseServiceImpl<Miss_diseaseWithBLOB
 					missSymptomService.getSymptomMapDTOByDiseaseId(miss_diseaseWithBLOBs.getId()));
 			list.add(diseaseDTO);
 		}
+		List<OperateDTO> listOp = new ArrayList<>();
+		for (DiseaseDTO diseaseDTO : list) {
+			listOp.add(converseToOperataDTO(diseaseDTO));
+		}
 		PageObject object = new PageObject<DiseaseDTO>();
 		object.setCurrentPage(showDataCondition.getPageNum());
-		object.setParams(list);
+		object.setParams(listOp);
 		object.setTotal(showDataCondition.getTotal());
 		return object;
 	}
@@ -119,4 +127,10 @@ public class MissDiseaseServiceImpl extends BaseServiceImpl<Miss_diseaseWithBLOB
 		return object;
 	}
 
+	private OperateDTO converseToOperataDTO(DiseaseDTO diseaseDTO) {
+		OperateDTO operateDTO = new OperateDTO();
+		JSONObject json =  JSONObject.parseObject(JSONObject.toJSONString(diseaseDTO));
+		operateDTO.setJsonStr(json);
+		return operateDTO;
+	}
 }

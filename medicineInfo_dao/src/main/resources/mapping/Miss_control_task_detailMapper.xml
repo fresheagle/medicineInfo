@@ -284,4 +284,18 @@
     where task_id=#{taskId,jdbcType=VARCHAR} order by taskChangeTime desc
   </select>
   
+  <select id="showDataCondition"
+          parameterType="com.med.info.domain.Miss_control_task_detailWithBLOBs"
+          resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from miss_control_task_detail
+    <where>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
 </mapper>

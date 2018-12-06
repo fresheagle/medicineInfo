@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.med.info.domain.Miss_symptomWithBLOBs;
+import com.med.info.response.PageObject;
 import com.med.info.response.Response;
 import com.med.info.service.MissSymptomService;
 
@@ -29,6 +31,12 @@ public class SymptomController {
 	public Response selectDiseaseParam(@RequestParam("currentPage") Integer currentPage,
                                        @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize,
                                        @RequestParam(value = "chineseName", required = false) String chineseName){
-		return new Response().success(missSymptomService.querySymptomMapDTOParam(currentPage,pageSize,chineseName));
+//		return new Response().success(missSymptomService.querySymptomMapDTOParam(currentPage,pageSize,chineseName));
+		Miss_symptomWithBLOBs miss_symptomWithBLOBs = new Miss_symptomWithBLOBs();
+		if(chineseName != null) {
+			miss_symptomWithBLOBs.setChineseName(chineseName);
+		}
+		PageObject<Miss_symptomWithBLOBs> selectPage = missSymptomService.selectPageByOperateDto(currentPage, pageSize, miss_symptomWithBLOBs);
+		return new Response().success(selectPage);
 	}
 }

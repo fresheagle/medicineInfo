@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.med.info.domain.Miss_dislocation;
+import com.med.info.response.PageObject;
 import com.med.info.response.Response;
 import com.med.info.service.MissDislocationService;
 
@@ -32,6 +34,18 @@ public class DislocationController {
         @RequestParam(value = "id", required = false) Long id,
         @RequestParam(value = "parentDislocationId", required = false) Long parentDislocationId,
         @RequestParam(value = "dislocationName", required = false) String dislocationName) {
-		return new Response().success(missDislocationService.getDislocationMapDTOByName(currentPage, pageSize, id, parentDislocationId, dislocationName));
+		Miss_dislocation miss_dislocation = new Miss_dislocation();
+		if(id != null) {
+			miss_dislocation.setId(id);
+		}
+		if(parentDislocationId != null) {
+			miss_dislocation.setParentDislocationId(parentDislocationId);
+		}
+		if(dislocationName != null) {
+			miss_dislocation.setDislocationName(dislocationName);
+		}
+		//return new Response().success(missDislocationService.getDislocationMapDTOByName(currentPage, pageSize, id, parentDislocationId, dislocationName));
+		PageObject<Miss_dislocation> selectPage = missDislocationService.selectPageByOperateDto(currentPage, pageSize, miss_dislocation);
+		return new Response().success(selectPage);
 	}
 }

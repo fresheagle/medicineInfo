@@ -36,7 +36,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 	
 	@Override
 	public String doOperate(OperateDTO operateDTO) {
-		
+		operateDTO.verify();
 		logger.info("接受到请求参数={}",JSON.toJSONString(operateDTO));
 		T object = (T) JSON.toJavaObject(operateDTO.getJsonStr(), getCurrentClass());
 //		JSON.parseObject(operateDTO.getJsonStr(), getCurrentClass());

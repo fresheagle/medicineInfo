@@ -32,16 +32,17 @@ import com.med.info.response.Response;
 public class FileUploadController {
 
 	private static Logger logger = LoggerFactory.getLogger(FileUploadController.class);
-	public static final String BASE_PATH = "/temp/";
+	public static final String BASE_PATH = "temp/";
 
 	@RequestMapping(path = "/upload", method = RequestMethod.POST)
 	public Response upload(@RequestParam(value = "file", required = false) MultipartFile multipartFile) {
 		try {
 			String originalFilename = multipartFile.getOriginalFilename();
 			String newFileName = getNewFileName(originalFilename);
-			File targetFile = new File(BASE_PATH, newFileName);
-			if (!targetFile.exists()) {
-				targetFile.mkdirs();
+			File targetFile = new File(new File(BASE_PATH).getAbsolutePath(), newFileName);
+			if(!targetFile.getAbsoluteFile().exists()) {
+				targetFile.getParentFile().mkdirs();
+				targetFile.createNewFile();
 			}
 			multipartFile.transferTo(targetFile);
 			return new Response().success(newFileName);
@@ -52,7 +53,7 @@ public class FileUploadController {
 		}
 	}
 
-	@RequestMapping(path = "/download", method = RequestMethod.POST)
+	@RequestMapping(path = "/download", method = RequestMethod.GET)
 	public void download(@RequestParam String fileName, HttpServletResponse httpServletResponse) {
 		httpServletResponse.setHeader("Accept-Ranges", "bytes");
 		httpServletResponse.setHeader("Pragma", "no-cache");
@@ -65,7 +66,7 @@ public class FileUploadController {
 		BufferedInputStream bufferedInputStream = null;
 		FileInputStream fis = null;
 		try (ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();) {
-			File file = new File(BASE_PATH, fileName);
+			File file = new File(new File(BASE_PATH).getAbsolutePath(), fileName);
 			fis = new FileInputStream(file);
 			bufferedInputStream = new BufferedInputStream(fis);
 			int read = bufferedInputStream.read(b);

@@ -3,6 +3,8 @@ package com.med.info.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.spi.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,8 @@ public class MissionServiceImpl implements MissionService {
 	private Miss_control_task_recordsMapper taskRecordsMapper;
 	@Autowired
 	private Miss_control_task_detailMapper taskDetailMapper;
+	
+	private static Logger logger = org.slf4j.LoggerFactory.getLogger(MissionServiceImpl.class);
 
 	@Override
 	public Object saveMission(OperateDTO operateDTO) {
@@ -47,6 +51,7 @@ public class MissionServiceImpl implements MissionService {
 		Miss_control_task_records record = new Miss_control_task_records();
 		record.setTaskStatus(taskStatus);
 		record.setTaskcreaterusercode(DefaultTokenManager.getLocalUserCode());
+		logger.info("查询任务，currentPage={},pageSize={},taskStatus={}",currentPage,pageSize,taskStatus);
 		Page<Miss_control_task_records> showDataCondition = (Page<Miss_control_task_records>) taskRecordsMapper
 				.selectPageBySelective(record);
 		List<OperateDTO> list = new ArrayList<>();

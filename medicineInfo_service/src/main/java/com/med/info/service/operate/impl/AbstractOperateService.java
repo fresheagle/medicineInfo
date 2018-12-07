@@ -1,11 +1,14 @@
 package com.med.info.service.operate.impl;
 
+import java.sql.Timestamp;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.spi.LoggerFactory;
+import org.apache.tomcat.jni.Time;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -108,7 +111,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 		controlTaskDetail.setTaskchangecomments(operateDTO.getTaskChangeComments());
 		controlTaskDetail.setTaskchangevote(operateDTO.getTaskChangeVote());
 		controlTaskDetail.setTaskuuid(UuidUtils.generateUUID());
-		controlTaskDetail.setTaskchangetime(new Date());
+		controlTaskDetail.setTaskchangetime(new Timestamp(System.currentTimeMillis()));
 		controlTaskDetail.setTaskchangeday(getToday());
 		controlTaskDetail.setTaskchangeafterjson(JSON.toJSONString(operateDTO.getJsonStr()));
 		taskDetailMapper.insert(controlTaskDetail);
@@ -125,7 +128,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 
 			Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
 			controlTaskRecord.setTaskcreaterusercode(DefaultTokenManager.getLocalUserCode());
-			controlTaskRecord.setTaskcreatetime(new Date());
+			controlTaskRecord.setTaskcreatetime(new Timestamp(System.currentTimeMillis()));
 			controlTaskRecord.setTaskcreateday(getToday());
 			controlTaskRecord.setTaskId(taskId);
 			controlTaskRecord.setTaskstatus(TrialStatusEnum.TO_FIRST_AUDITED.getId());
@@ -140,7 +143,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			createTaskDetail.setTaskstatuschangeafter(TrialStatusEnum.DRAFTS.getId());
 			createTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode());
 			createTaskDetail.setTaskuuid(UuidUtils.generateUUID());
-			createTaskDetail.setTaskchangetime(new Date());
+			createTaskDetail.setTaskchangetime(new Timestamp(System.currentTimeMillis()));
 			createTaskDetail.setTaskchangeday(getToday());
 			createTaskDetail.setTaskchangeafterjson(JSON.toJSONString(operateDTO.getJsonStr()));
 			taskDetailMapper.insert(createTaskDetail);
@@ -154,7 +157,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			controlTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode());
 			controlTaskDetail.setTaskuuid(UuidUtils.generateUUID());
 			controlTaskDetail.setTaskchangeday(getToday());
-			controlTaskDetail.setTaskchangetime(new Date());
+			controlTaskDetail.setTaskchangetime(new Timestamp(System.currentTimeMillis()));
 			controlTaskDetail.setTaskchangeafterjson(JSON.toJSONString(operateDTO.getJsonStr()));
 			taskDetailMapper.insert(controlTaskDetail);
 		} else {
@@ -180,7 +183,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 
 			Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
 			controlTaskRecord.setTaskcreaterusercode(DefaultTokenManager.getLocalUserCode());
-			controlTaskRecord.setTaskcreatetime(new Date());
+			controlTaskRecord.setTaskcreatetime(new Timestamp(System.currentTimeMillis()));
 			controlTaskRecord.setTaskcreateday(getToday());
 			controlTaskRecord.setTaskId(taskId);
 			controlTaskRecord.setTaskstatus(TrialStatusEnum.DRAFTS.getId());
@@ -195,7 +198,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			controlTaskDetail.setTaskstatuschangeafter(TrialStatusEnum.DRAFTS.getId());
 			controlTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode());
 			controlTaskDetail.setTaskuuid(UuidUtils.generateUUID());
-			controlTaskDetail.setTaskchangetime(new Date());
+			controlTaskDetail.setTaskchangetime(new Timestamp(System.currentTimeMillis()));
 			controlTaskDetail.setTaskchangeday(getToday());
 			controlTaskDetail.setTaskchangeafterjson(JSON.toJSONString(operateDTO.getJsonStr()));
 			taskDetailMapper.insert(controlTaskDetail);
@@ -204,6 +207,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 		}
 	}
 
+	
 	private Miss_control_task_detailWithBLOBs getTaskLastData(String taskId) {
 		
 		List<Miss_control_task_detailWithBLOBs> taskDetailsByTime = taskDetailMapper.getTaskDetailsByTime(taskId);

@@ -116,7 +116,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 
 	private void firstTrialOperate(OperateDTO operateDTO, T object, BaseService<T> baseService) {
 		// 插入数据到
-		if (null == object.getTaskId()) {
+		if (null == operateDTO.getTaskId()) {
 			String taskId = UuidUtils.generateUUID();
 			object.setTaskJson(JSON.toJSONString(operateDTO.getJsonStr()));
 			object.setTaskId(taskId);

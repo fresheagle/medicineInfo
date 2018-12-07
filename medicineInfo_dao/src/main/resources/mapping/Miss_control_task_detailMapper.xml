@@ -17,7 +17,7 @@
     <result column="taskChangeVote" jdbcType="VARCHAR" property="taskchangevote" />
     <result column="taskChangePoints" jdbcType="VARCHAR" property="taskchangepoints" />
     <result column="taskChangeDay" jdbcType="VARCHAR" property="taskchangeday" />
-    <result column="taskChangeTime" jdbcType="DATE" property="taskchangetime" />
+    <result column="taskChangeTime" jdbcType="timestamp" property="taskchangetime" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.med.info.domain.Miss_control_task_detailWithBLOBs">
     <!--
@@ -84,7 +84,7 @@
       #{taskstatuschangebefore,jdbcType=VARCHAR}, #{taskstatuschangeafter,jdbcType=VARCHAR}, 
       #{taskchangeusercode,jdbcType=VARCHAR}, #{taskchangerolecode,jdbcType=VARCHAR}, 
       #{taskchangevote,jdbcType=VARCHAR}, #{taskchangepoints,jdbcType=VARCHAR}, #{taskchangeday,jdbcType=VARCHAR}, 
-      #{taskchangetime,jdbcType=DATE}, #{taskchangecomments,jdbcType=LONGVARCHAR}, #{taskchangebeforejson,jdbcType=LONGVARCHAR}, 
+      #{taskchangetime,jdbcType=timestamp}, #{taskchangecomments,jdbcType=LONGVARCHAR}, #{taskchangebeforejson,jdbcType=LONGVARCHAR}, 
       #{taskchangeafterjson,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.med.info.domain.Miss_control_task_detailWithBLOBs">
@@ -170,7 +170,7 @@
         #{taskchangeday,jdbcType=VARCHAR},
       </if>
       <if test="taskchangetime != null">
-        #{taskchangetime,jdbcType=DATE},
+        #{taskchangetime,jdbcType=timestamp},
       </if>
       <if test="taskchangecomments != null">
         #{taskchangecomments,jdbcType=LONGVARCHAR},
@@ -219,7 +219,7 @@
         taskChangeDay = #{taskchangeday,jdbcType=VARCHAR},
       </if>
       <if test="taskchangetime != null">
-        taskChangeTime = #{taskchangetime,jdbcType=DATE},
+        taskChangeTime = #{taskchangetime,jdbcType=timestamp},
       </if>
       <if test="taskchangecomments != null">
         taskChangeComments = #{taskchangecomments,jdbcType=LONGVARCHAR},
@@ -249,7 +249,7 @@
       taskChangeVote = #{taskchangevote,jdbcType=VARCHAR},
       taskChangePoints = #{taskchangepoints,jdbcType=VARCHAR},
       taskChangeDay = #{taskchangeday,jdbcType=VARCHAR},
-      taskChangeTime = #{taskchangetime,jdbcType=DATE},
+      taskChangeTime = #{taskchangetime,jdbcType=timestamp},
       taskChangeComments = #{taskchangecomments,jdbcType=LONGVARCHAR},
       taskChangeBeforeJson = #{taskchangebeforejson,jdbcType=LONGVARCHAR},
       taskChangeAfterJson = #{taskchangeafterjson,jdbcType=LONGVARCHAR}
@@ -271,7 +271,7 @@
       taskChangeVote = #{taskchangevote,jdbcType=VARCHAR},
       taskChangePoints = #{taskchangepoints,jdbcType=VARCHAR},
       taskChangeDay = #{taskchangeday,jdbcType=VARCHAR},
-      taskChangeTime = #{taskchangetime,jdbcType=DATE}
+      taskChangeTime = #{taskchangetime,jdbcType=timestamp}
     where taskUuid = #{taskuuid,jdbcType=VARCHAR}
   </update>
   

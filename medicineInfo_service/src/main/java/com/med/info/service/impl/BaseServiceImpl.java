@@ -83,7 +83,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 		for ( int i=0;i<showDataCondition.size();i++) {
 			OperateDTO operateDTO = new OperateDTO();
 			JSONObject json =  JSONObject.parseObject(JSONObject.toJSONString(showDataCondition.get(i)));
-			operateDTO.setJsonStr(json);
+			operateDTO.setJsonStr(json );
 			listOp.add(operateDTO);
 		}
 		PageObject object = new PageObject<T>();

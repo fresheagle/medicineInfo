@@ -39,7 +39,6 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 		operateDTO.verify();
 		logger.info("接受到请求参数={}",JSON.toJSONString(operateDTO));
 		T object = (T) JSON.toJavaObject(operateDTO.getJsonStr(), getCurrentClass());
-//		JSON.parseObject(operateDTO.getJsonStr(), getCurrentClass());
 		BaseService<T> baseService = getBaseService(operateDTO.getTaskMenuType());
 		if (operateDTO.getTaskStatus().equals(TrialStatusEnum.DRAFTS.getId())) {
 			creatingOperate(operateDTO, object, baseService);
@@ -60,11 +59,19 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			controlTaskRecord.setTaskpublishfinalcontentjson(JSON.toJSONString(operateDTO.getJsonStr()));
 			controlTaskRecord.setTaskpublishday(getToday());
 			taskRecordsMapper.updateByPrimaryKeySelective(controlTaskRecord);
+			fishDeal(operateDTO);
 			
 		}
 		return null;
 	}
 	
+	/**
+	 * @author jialin.jiang
+	 * Function: 终审发布处理 <br/> 
+	 * @param operateDTO
+	 */
+	public abstract void fishDeal(OperateDTO operateDTO);
+
 	@Override
 	public boolean isFilter(OperateDTO operateDTO) {
 		return operateDTO.getTaskMenuType().equals(getCurrentMenuType());

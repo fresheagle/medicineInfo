@@ -5,6 +5,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.med.info.domain.Miss_district;
+import com.med.info.mapper.domain.OperateDTO;
 import com.med.info.service.BaseService;
 import com.med.info.service.MissDistrictService;
 
@@ -31,6 +32,15 @@ public class MissDistrictOperateService extends AbstractOperateService<Miss_dist
 	public String getCurrentMenuType() {
 		// TODO Auto-generated method stub
 		return "miss_district";
+	}
+
+	/* (non-Javadoc)
+	 * @see com.med.info.service.operate.impl.AbstractOperateService#fishDeal(com.med.info.mapper.domain.OperateDTO)
+	 */
+	@Override
+	public void fishDeal(OperateDTO operateDTO) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

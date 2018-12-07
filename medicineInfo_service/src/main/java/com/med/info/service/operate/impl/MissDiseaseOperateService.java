@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.med.info.domain.Miss_disease;
 import com.med.info.domain.Miss_diseaseWithBLOBs;
+import com.med.info.mapper.domain.OperateDTO;
 import com.med.info.service.BaseService;
 import com.med.info.service.MissDiseaseService;
 
@@ -32,6 +33,15 @@ public class MissDiseaseOperateService extends AbstractOperateService<Miss_disea
 	public Class<?> getCurrentClass() {
 		// TODO Auto-generated method stub
 		return Miss_diseaseWithBLOBs.class;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.med.info.service.operate.impl.AbstractOperateService#fishDeal(com.med.info.mapper.domain.OperateDTO)
+	 */
+	@Override
+	public void fishDeal(OperateDTO operateDTO) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

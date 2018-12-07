@@ -67,7 +67,7 @@ public class AliyunOSSServiceImpl implements AliyunOSSService {
 			if(null != result){
 			    logger.info("==========>OSS文件上传成功,OSS地址："+fileUrl);
 			    ossClient.shutdown();
-			    return fileUrl;
+			    return aliyunOssConfiguration.getBucketName()+"."+aliyunOssConfiguration.getEndpoint()+"/"+fileUrl;
 			}
 			ossClient.shutdown();
 		} catch (Exception e) {

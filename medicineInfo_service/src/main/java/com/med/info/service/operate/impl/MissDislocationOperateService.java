@@ -43,4 +43,10 @@ public class MissDislocationOperateService extends AbstractOperateService<Miss_d
 		
 	}
 
+	@Override
+	public String getJsonParamKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

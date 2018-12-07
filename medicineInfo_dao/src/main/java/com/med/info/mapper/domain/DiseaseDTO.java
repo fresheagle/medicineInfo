@@ -14,26 +14,28 @@ public class DiseaseDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private Miss_diseaseWithBLOBs miss_disease;
-	private List<DepartmentMapDTO> disease_department_mapping_list;
-	private List<SymptomMapDTO> disease_symptom_mapping_list;
+	private Miss_diseaseWithBLOBs missDisease;
+	private List<DepartmentMapDTO> diseaseDepartmentMappingList;
+	private List<SymptomMapDTO> diseaseSymptomMappingList;
+	public Miss_diseaseWithBLOBs getMissDisease() {
+		return missDisease;
+	}
+	public void setMissDisease(Miss_diseaseWithBLOBs missDisease) {
+		this.missDisease = missDisease;
+	}
+	public List<DepartmentMapDTO> getDiseaseDepartmentMappingList() {
+		return diseaseDepartmentMappingList;
+	}
+	public void setDiseaseDepartmentMappingList(List<DepartmentMapDTO> diseaseDepartmentMappingList) {
+		this.diseaseDepartmentMappingList = diseaseDepartmentMappingList;
+	}
+	public List<SymptomMapDTO> getDiseaseSymptomMappingList() {
+		return diseaseSymptomMappingList;
+	}
+	public void setDiseaseSymptomMappingList(List<SymptomMapDTO> diseaseSymptomMappingList) {
+		this.diseaseSymptomMappingList = diseaseSymptomMappingList;
+	}
 	
-	public Miss_diseaseWithBLOBs getMiss_disease() {
-		return miss_disease;
-	}
-	public void setMiss_disease(Miss_diseaseWithBLOBs miss_disease) {
-		this.miss_disease = miss_disease;
-	}
-	public List<DepartmentMapDTO> getDisease_department_mapping_list() {
-		return disease_department_mapping_list;
-	}
-	public void setDisease_department_mapping_list(List<DepartmentMapDTO> disease_department_mapping_list) {
-		this.disease_department_mapping_list = disease_department_mapping_list;
-	}
-	public List<SymptomMapDTO> getDisease_symptom_mapping_list() {
-		return disease_symptom_mapping_list;
-	}
-	public void setDisease_symptom_mapping_list(List<SymptomMapDTO> disease_symptom_mapping_list) {
-		this.disease_symptom_mapping_list = disease_symptom_mapping_list;
-	}
+	
+	
 }

@@ -43,5 +43,11 @@ public class MissCombinationDiseaseOperateService extends AbstractOperateService
 		
 	}
 
+	@Override
+	public String getJsonParamKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

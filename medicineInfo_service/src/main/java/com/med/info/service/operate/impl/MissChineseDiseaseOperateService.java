@@ -43,4 +43,10 @@ public class MissChineseDiseaseOperateService extends AbstractOperateService<Mis
 		
 	}
 
+	@Override
+	public String getJsonParamKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -64,7 +64,7 @@ public class DiseaseController {
 	@RequestMapping(method = RequestMethod.POST)
 	public Response addDisease(@RequestBody DiseaseDTO diseaseDTO) {
 		try {
-			return new Response().success(diseaseService.insert(diseaseDTO.getMiss_disease()));
+			return new Response().success(diseaseService.insert(diseaseDTO.getMissDisease()));
 		} catch (Exception e) {
 			return new Response().failure();
 		}
@@ -80,7 +80,7 @@ public class DiseaseController {
 	@RequestMapping(method = RequestMethod.PUT)
 	public Response updateDisease(@RequestBody DiseaseDTO diseaseDTO) {
 		try {
-			return new Response().success(diseaseService.updateByPrimaryKey(diseaseDTO.getMiss_disease()));
+			return new Response().success(diseaseService.updateByPrimaryKey(diseaseDTO.getMissDisease()));
 		} catch (Exception e) {
 			return new Response().failure();
 		}

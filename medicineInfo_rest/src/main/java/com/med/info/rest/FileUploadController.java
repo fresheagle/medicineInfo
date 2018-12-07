@@ -51,7 +51,6 @@ public class FileUploadController {
 			return new Response().success(upload);
 		} catch (Exception e) {
 			logger.error("文件上传失败，file={}", multipartFile.getOriginalFilename(), e);
-			;
 			return new Response().failure("文件上传失败," + e.getMessage());
 		}
 	}

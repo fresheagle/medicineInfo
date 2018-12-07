@@ -43,4 +43,10 @@ public class MissDepartmentOperateService extends AbstractOperateService<Miss_de
 		
 	}
 
+	@Override
+	public String getJsonParamKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

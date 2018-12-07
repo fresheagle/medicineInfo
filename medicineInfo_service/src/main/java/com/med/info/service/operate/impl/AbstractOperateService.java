@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.med.info.domain.BaseDomain;
 import com.med.info.domain.Miss_control_task_detail;
 import com.med.info.domain.Miss_control_task_detailWithBLOBs;
@@ -38,7 +39,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 	public String doOperate(OperateDTO operateDTO) {
 		operateDTO.verify();
 		logger.info("接受到请求参数={}",JSON.toJSONString(operateDTO));
-		T object = (T) JSON.toJavaObject(operateDTO.getJsonStr(), getCurrentClass());
+		T object = (T) JSON.toJavaObject(getParmJsonObject(operateDTO.getJsonStr()), getCurrentClass());
 		BaseService<T> baseService = getBaseService(operateDTO.getTaskMenuType());
 		if (operateDTO.getTaskStatus().equals(TrialStatusEnum.DRAFTS.getId())) {
 			creatingOperate(operateDTO, object, baseService);
@@ -60,10 +61,17 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			controlTaskRecord.setTaskpublishday(getToday());
 			taskRecordsMapper.updateByPrimaryKeySelective(controlTaskRecord);
 			fishDeal(operateDTO);
-			
 		}
 		return null;
 	}
+	
+	public JSONObject getParmJsonObject(JSONObject object) {
+		
+		return object.getJSONObject(getJsonParamKey());
+		
+	}
+	
+	public abstract String getJsonParamKey();
 	
 	/**
 	 * @author jialin.jiang

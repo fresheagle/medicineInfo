@@ -79,14 +79,14 @@ public class MissDiseaseServiceImpl extends BaseServiceImpl<Miss_diseaseWithBLOB
 		List<DiseaseDTO> list = new ArrayList<>();
 		for (Miss_diseaseWithBLOBs miss_diseaseWithBLOBs : showDataCondition) {
 			DiseaseDTO diseaseDTO = new DiseaseDTO();
-			diseaseDTO.setMiss_disease(miss_diseaseWithBLOBs);
+			diseaseDTO.setMissDisease(miss_diseaseWithBLOBs);
 			List<Long> departMentList = getDepartMentList(miss_diseaseWithBLOBs);
 			if (null != departMentList && departMentList.size() > 0) {
 				List<DepartmentMapDTO> departmentMapByIds = missDepartmentServicece
 						.getDepartmentMapByIds(departMentList);
-				diseaseDTO.setDisease_department_mapping_list(departmentMapByIds);
+				diseaseDTO.setDiseaseDepartmentMappingList(departmentMapByIds);
 			}
-			diseaseDTO.setDisease_symptom_mapping_list(
+			diseaseDTO.setDiseaseSymptomMappingList(
 					missSymptomService.getSymptomMapDTOByDiseaseId(miss_diseaseWithBLOBs.getId()));
 			list.add(diseaseDTO);
 		}

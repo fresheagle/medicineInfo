@@ -43,4 +43,10 @@ public class MissSymptomOperateService extends AbstractOperateService<Miss_sympt
 		
 	}
 
+	@Override
+	public String getJsonParamKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

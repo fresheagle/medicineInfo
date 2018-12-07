@@ -68,10 +68,9 @@ public class MissionServiceImpl implements MissionService {
 
 	private OperateDTO converseToOperataDTO(Miss_control_task_records control_task_records) {
 		OperateDTO operateDTO = new OperateDTO();
-		JSONObject parseObject = JSON.parseObject(getTaskLastData(control_task_records.getTaskId()).getTaskchangeafterjson());
-//		if(!parseObject.containsKey("taskId")) {
-			parseObject.put("taskId", control_task_records.getTaskId());
-//		}
+		JSONObject parseObject = JSON
+				.parseObject(getTaskLastData(control_task_records.getTaskId()).getTaskchangeafterjson());
+		parseObject.put("taskId", control_task_records.getTaskId());
 		operateDTO.setJsonStr(parseObject);
 		operateDTO.setTaskType(control_task_records.getTasktype());
 		operateDTO.setTaskTitle(control_task_records.getTasktitle());

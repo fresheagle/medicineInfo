@@ -206,7 +206,7 @@
   </update>
   
   <sql id="Param_Column_List">
-    用来返回参数列表
+   <!--  用来返回参数列表 -->
   	id, department_name
   </sql>
   <!--  

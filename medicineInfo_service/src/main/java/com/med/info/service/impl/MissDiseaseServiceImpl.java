@@ -84,9 +84,9 @@ public class MissDiseaseServiceImpl extends BaseServiceImpl<Miss_diseaseWithBLOB
 			if (null != departMentList && departMentList.size() > 0) {
 				List<DepartmentMapDTO> departmentMapByIds = missDepartmentServicece
 						.getDepartmentMapByIds(departMentList);
-				diseaseDTO.setDiseaseDepartmentMappingList(departmentMapByIds);
+				diseaseDTO.setDepartmentMapDTO(departmentMapByIds);
 			}
-			diseaseDTO.setDiseaseSymptomMappingList(
+			diseaseDTO.setSymptomMapDTO(
 					missSymptomService.getSymptomMapDTOByDiseaseId(miss_diseaseWithBLOBs.getId()));
 			list.add(diseaseDTO);
 		}

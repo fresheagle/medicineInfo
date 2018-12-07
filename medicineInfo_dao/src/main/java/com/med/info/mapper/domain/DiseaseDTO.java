@@ -15,27 +15,26 @@ public class DiseaseDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Miss_diseaseWithBLOBs missDisease;
-	private List<DepartmentMapDTO> diseaseDepartmentMappingList;
-	private List<SymptomMapDTO> diseaseSymptomMappingList;
+	private List<DepartmentMapDTO> departmentMapDTO;
+	private List<SymptomMapDTO> symptomMapDTO;
 	public Miss_diseaseWithBLOBs getMissDisease() {
 		return missDisease;
 	}
 	public void setMissDisease(Miss_diseaseWithBLOBs missDisease) {
 		this.missDisease = missDisease;
 	}
-	public List<DepartmentMapDTO> getDiseaseDepartmentMappingList() {
-		return diseaseDepartmentMappingList;
+	public List<DepartmentMapDTO> getDepartmentMapDTO() {
+		return departmentMapDTO;
 	}
-	public void setDiseaseDepartmentMappingList(List<DepartmentMapDTO> diseaseDepartmentMappingList) {
-		this.diseaseDepartmentMappingList = diseaseDepartmentMappingList;
+	public void setDepartmentMapDTO(List<DepartmentMapDTO> departmentMapDTO) {
+		this.departmentMapDTO = departmentMapDTO;
 	}
-	public List<SymptomMapDTO> getDiseaseSymptomMappingList() {
-		return diseaseSymptomMappingList;
+	public List<SymptomMapDTO> getSymptomMapDTO() {
+		return symptomMapDTO;
 	}
-	public void setDiseaseSymptomMappingList(List<SymptomMapDTO> diseaseSymptomMappingList) {
-		this.diseaseSymptomMappingList = diseaseSymptomMappingList;
+	public void setSymptomMapDTO(List<SymptomMapDTO> symptomMapDTO) {
+		this.symptomMapDTO = symptomMapDTO;
 	}
-	
 	
 	
 }

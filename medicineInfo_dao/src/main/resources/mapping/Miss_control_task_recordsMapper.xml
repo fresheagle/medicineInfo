@@ -20,13 +20,13 @@
 			property="taskmenutype" />
 		<result column="taskCreateDay" jdbcType="VARCHAR"
 			property="taskcreateday" />
-		<result column="taskCreateTime" jdbcType="Timestamp"
+		<result column="taskCreateTime" jdbcType="TIMESTAMP"
 			property="taskcreatetime" />
 		<result column="taskPublishUserCode" jdbcType="VARCHAR"
 			property="taskpublishusercode" />
 		<result column="taskPublishDay" jdbcType="VARCHAR"
 			property="taskpublishday" />
-		<result column="taskPublishTime" jdbcType="Timestamp"
+		<result column="taskPublishTime" jdbcType="TIMESTAMP"
 			property="taskpublishtime" />
 		<result column="taskFirstTrialCode" jdbcType="VARCHAR"
 			property="taskfirsttrialcode" />
@@ -177,7 +177,7 @@
 				#{taskcreateday,jdbcType=VARCHAR},
 			</if>
 			<if test="taskcreatetime != null">
-				#{taskcreatetime,jdbcType=Timestamp},
+				#{taskcreatetime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="taskpublishusercode != null">
 				#{taskpublishusercode,jdbcType=VARCHAR},
@@ -186,7 +186,7 @@
 				#{taskpublishday,jdbcType=VARCHAR},
 			</if>
 			<if test="taskpublishtime != null">
-				#{taskpublishtime,jdbcType=Timestamp},
+				#{taskpublishtime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="taskfirsttrialcode != null">
 				#{taskfirsttrialcode,jdbcType=VARCHAR},
@@ -228,7 +228,7 @@
 				taskCreateDay = #{taskcreateday,jdbcType=VARCHAR},
 			</if>
 			<if test="taskcreatetime != null">
-				taskCreateTime = #{taskcreatetime,jdbcType=Timestamp},
+				taskCreateTime = #{taskcreatetime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="taskpublishusercode != null">
 				taskPublishUserCode = #{taskpublishusercode,jdbcType=VARCHAR},
@@ -237,7 +237,7 @@
 				taskPublishDay = #{taskpublishday,jdbcType=VARCHAR},
 			</if>
 			<if test="taskpublishtime != null">
-				taskPublishTime = #{taskpublishtime,jdbcType=Timestamp},
+				taskPublishTime = #{taskpublishtime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="taskfirsttrialcode != null">
 				taskFirstTrialCode = #{taskfirsttrialcode,jdbcType=VARCHAR},
@@ -266,10 +266,10 @@
 		taskStatus = #{taskstatus,jdbcType=VARCHAR},
 		taskMenuType = #{taskmenutype,jdbcType=VARCHAR},
 		taskCreateDay = #{taskcreateday,jdbcType=VARCHAR},
-		taskCreateTime = #{taskcreatetime,jdbcType=Timestamp},
+		taskCreateTime = #{taskcreatetime,jdbcType=TIMESTAMP},
 		taskPublishUserCode = #{taskpublishusercode,jdbcType=VARCHAR},
 		taskPublishDay = #{taskpublishday,jdbcType=VARCHAR},
-		taskPublishTime = #{taskpublishtime,jdbcType=Timestamp},
+		taskPublishTime = #{taskpublishtime,jdbcType=TIMESTAMP},
 		taskFirstTrialCode = #{taskfirsttrialcode,jdbcType=VARCHAR},
 		taskSecondTrialCode = #{tasksecondtrialcode,jdbcType=VARCHAR},
 		taskFinalTrialCode = #{taskfinaltrialcode,jdbcType=VARCHAR},
@@ -288,10 +288,10 @@
 		taskStatus = #{taskstatus,jdbcType=VARCHAR},
 		taskMenuType = #{taskmenutype,jdbcType=VARCHAR},
 		taskCreateDay = #{taskcreateday,jdbcType=VARCHAR},
-		taskCreateTime = #{taskcreatetime,jdbcType=Timestamp},
+		taskCreateTime = #{taskcreatetime,jdbcType=TIMESTAMP},
 		taskPublishUserCode = #{taskpublishusercode,jdbcType=VARCHAR},
 		taskPublishDay = #{taskpublishday,jdbcType=VARCHAR},
-		taskPublishTime = #{taskpublishtime,jdbcType=Timestamp},
+		taskPublishTime = #{taskpublishtime,jdbcType=TIMESTAMP},
 		taskFirstTrialCode = #{taskfirsttrialcode,jdbcType=VARCHAR},
 		taskSecondTrialCode = #{tasksecondtrialcode,jdbcType=VARCHAR},
 		taskFinalTrialCode = #{taskfinaltrialcode,jdbcType=VARCHAR}
@@ -320,7 +320,7 @@
 				taskCreateDay = #{taskcreateday,jdbcType=VARCHAR},
 			</if>
 			<if test="taskcreatetime != null">
-				taskCreateTime = #{taskcreatetime,jdbcType=Timestamp},
+				taskCreateTime = #{taskcreatetime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="taskpublishusercode != null">
 				taskPublishUserCode = #{taskpublishusercode,jdbcType=VARCHAR},
@@ -329,7 +329,7 @@
 				taskPublishDay = #{taskpublishday,jdbcType=VARCHAR},
 			</if>
 			<if test="taskpublishtime != null">
-				taskPublishTime = #{taskpublishtime,jdbcType=Timestamp},
+				taskPublishTime = #{taskpublishtime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="taskfirsttrialcode != null">
 				taskFirstTrialCode = #{taskfirsttrialcode,jdbcType=VARCHAR},

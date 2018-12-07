@@ -16,6 +16,7 @@ public class OperateDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String taskTitle;
+	private String taskId;
 	private String taskType;
 	private String taskStatus;
 	private String taskMenuType;
@@ -130,5 +131,13 @@ public class OperateDTO implements Serializable {
 
 	public void setTaskStatus(String taskStatus) {
 		this.taskStatus = taskStatus;
+	}
+
+	public String getTaskId() {
+		return taskId;
+	}
+
+	public void setTaskId(String taskId) {
+		this.taskId = taskId;
 	}
 }

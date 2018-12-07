@@ -88,6 +88,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 	public abstract String getCurrentMenuType();
 
 	private void updateStatus(OperateDTO operateDTO, T object, BaseService<T> baseService) {
+		object.setTaskId(operateDTO.getTaskId());
 		object.setTaskJson(JSON.toJSONString(operateDTO.getJsonStr()));
 		object.setTaskStatus(operateDTO.getTaskStatus());
 		Miss_control_task_detailWithBLOBs taskLastData = getTaskLastData(object.getTaskId());
@@ -170,7 +171,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 	private void creatingOperate(OperateDTO operateDTO, T object, BaseService<T> baseService) {
 		
 		// 插入数据到
-		if (null == object.getTaskId()) {
+		if (null == operateDTO.getTaskId()) {
 			String taskId = UuidUtils.generateUUID();
 			object.setTaskJson(JSON.toJSONString(operateDTO.getJsonStr()));
 			object.setTaskId(taskId);

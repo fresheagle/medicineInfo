@@ -305,40 +305,40 @@
 		from miss_control_task_records
 		<where>
 			<if test="tasktitle != null">
-				taskTitle = #{tasktitle,jdbcType=VARCHAR},
+				taskTitle = #{tasktitle,jdbcType=VARCHAR}
 			</if>
 			<if test="tasktype != null">
-				taskType = #{tasktype,jdbcType=VARCHAR},
+				and taskType = #{tasktype,jdbcType=VARCHAR}
 			</if>
 			<if test="taskstatus != null">
-				taskStatus = #{taskstatus,jdbcType=VARCHAR},
+				and taskStatus = #{taskstatus,jdbcType=VARCHAR}
 			</if>
 			<if test="taskmenutype != null">
-				taskMenuType = #{taskmenutype,jdbcType=VARCHAR},
+				and taskMenuType = #{taskmenutype,jdbcType=VARCHAR}
 			</if>
 			<if test="taskcreateday != null">
-				taskCreateDay = #{taskcreateday,jdbcType=VARCHAR},
+				and taskCreateDay = #{taskcreateday,jdbcType=VARCHAR}
 			</if>
 			<if test="taskcreatetime != null">
-				taskCreateTime = #{taskcreatetime,jdbcType=TIMESTAMP},
+				and taskCreateTime = #{taskcreatetime,jdbcType=TIMESTAMP}
 			</if>
 			<if test="taskpublishusercode != null">
-				taskPublishUserCode = #{taskpublishusercode,jdbcType=VARCHAR},
+				and taskPublishUserCode = #{taskpublishusercode,jdbcType=VARCHAR}
 			</if>
 			<if test="taskpublishday != null">
-				taskPublishDay = #{taskpublishday,jdbcType=VARCHAR},
+				and taskPublishDay = #{taskpublishday,jdbcType=VARCHAR}
 			</if>
 			<if test="taskpublishtime != null">
-				taskPublishTime = #{taskpublishtime,jdbcType=TIMESTAMP},
+				and taskPublishTime = #{taskpublishtime,jdbcType=TIMESTAMP}
 			</if>
 			<if test="taskfirsttrialcode != null">
-				taskFirstTrialCode = #{taskfirsttrialcode,jdbcType=VARCHAR},
+				and taskFirstTrialCode = #{taskfirsttrialcode,jdbcType=VARCHAR}
 			</if>
 			<if test="tasksecondtrialcode != null">
-				taskSecondTrialCode = #{tasksecondtrialcode,jdbcType=VARCHAR},
+				and taskSecondTrialCode = #{tasksecondtrialcode,jdbcType=VARCHAR}
 			</if>
 			<if test="taskfinaltrialcode != null">
-				taskFinalTrialCode = #{taskfinaltrialcode,jdbcType=VARCHAR},
+				and taskFinalTrialCode = #{taskfinaltrialcode,jdbcType=VARCHAR}
 			</if>
 		</where>
 	</select>

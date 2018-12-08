@@ -62,7 +62,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			controlTaskRecord.setTaskpublishtime(new Date());
 			controlTaskRecord.setTaskpublishfinalcontentjson(JSON.toJSONString(operateDTO.getJsonStr()));
 			controlTaskRecord.setTaskpublishday(getToday());
-			taskRecordsMapper.updateByPrimaryKeySelective(controlTaskRecord);
+			taskRecordsMapper.updateByTaskIdSelective(controlTaskRecord);
 			fishDeal(operateDTO);
 		}
 		return null;

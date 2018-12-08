@@ -12,5 +12,7 @@ public interface MissionService {
 	public Object saveMission(OperateDTO operateDTO);
 	
 	public Object getByPage(Integer currentPage, Integer pageSize, String taskStatus);
+	
+	public Object getMissionDetailPage(Integer currentPage, Integer pageSize, String taskId);
 
 }

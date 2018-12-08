@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.spi.LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.med.info.domain.Miss_control_task_detailWithBLOBs;
 import com.med.info.domain.Miss_control_task_records;
+import com.med.info.dto.ControlTaskDetail;
 import com.med.info.mapper.Miss_control_task_detailMapper;
 import com.med.info.mapper.Miss_control_task_recordsMapper;
 import com.med.info.mapper.domain.OperateDTO;
@@ -84,6 +86,32 @@ public class MissionServiceImpl implements MissionService {
 		operateDTO.setTaskStatus(control_task_records.getTaskstatus());
 		operateDTO.setTaskMenuType(control_task_records.getTaskmenutype());
 		return operateDTO;
+	}
+
+	@Override
+	public Object getMissionDetailPage(Integer currentPage, Integer pageSize, String taskId) {
+		Miss_control_task_detailWithBLOBs miss_control_task_detailWithBLOBs = new Miss_control_task_detailWithBLOBs();
+		if(taskId != null) {
+			miss_control_task_detailWithBLOBs.setTaskId(taskId);
+		}
+		PageHelper.startPage(currentPage, pageSize);
+		Page<Miss_control_task_detailWithBLOBs> showDataCondition = (Page<Miss_control_task_detailWithBLOBs>) taskDetailMapper.showDataCondition(miss_control_task_detailWithBLOBs);
+		List<OperateDTO> listOp = new ArrayList<>();
+		for ( int i=0;i<showDataCondition.size();i++) {
+			OperateDTO operateDTO = new OperateDTO();
+			ControlTaskDetail controlTaskDetail = new ControlTaskDetail();
+			Miss_control_task_detailWithBLOBs taskDetail = showDataCondition.get(i);
+			BeanUtils.copyProperties(taskDetail, controlTaskDetail);
+			controlTaskDetail.setTaskchangebeforejson(taskDetail.getTaskchangebeforejson() == null ? null : JSONObject.parseObject(taskDetail.getTaskchangebeforejson()));
+			controlTaskDetail.setTaskchangeafterjson(taskDetail.getTaskchangeafterjson() == null ? null : JSONObject.parseObject(taskDetail.getTaskchangeafterjson()));
+			operateDTO.setJsonStr(JSONObject.parseObject(JSONObject.toJSONString(controlTaskDetail)));
+			listOp.add(operateDTO);
+		}
+		PageObject object = new PageObject<OperateDTO>();
+		object.setCurrentPage(showDataCondition.getPageNum());
+		object.setParams(listOp);
+		object.setTotal(showDataCondition.getTotal());
+		return object;
 	}
 
 }

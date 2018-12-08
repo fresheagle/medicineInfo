@@ -638,7 +638,7 @@
     	<if test="id != null">
     	id = #{id,jdbcType=VARCHAR}
     	</if>
-    	<if test="chinese_name != null">
+    	<if test="chineseName != null">
     	and chinese_name = #{chineseName,jdbcType=VARCHAR}
     	</if>
     </where>

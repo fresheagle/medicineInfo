@@ -63,4 +63,6 @@ public interface Miss_dislocationMapper extends BaseMapper<Miss_dislocation>{
     int updateByPrimaryKey(Miss_dislocation record);
 
     List<DislocationMapDTO> queryDislocationParam(DislocationMapDTO dislocationMapDTO);
+
+	List<DislocationMapDTO> getDislocationMapDTOBySymptomId(Long id);
 }

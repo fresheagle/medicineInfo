@@ -1,5 +1,7 @@
 package com.med.info.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +44,11 @@ public class MissDislocationServiceImpl extends BaseServiceImpl<Miss_dislocation
 		object.setTotal(showDataCondition.getTotal());
 		object.setParams(showDataCondition.getResult());
 		return object;
+	}
+
+	@Override
+	public List<DislocationMapDTO> getDislocationMapDTOBySymptomId(Long id) {
+		return dislocationMapper.getDislocationMapDTOBySymptomId(id);
 	}
 
 }

@@ -77,9 +77,9 @@
 		<result column="task_json" jdbcType="LONGVARCHAR"
 			property="taskJson" />
 	</resultMap>
-
-	<resultMap type="com.med.info.mapper.domain.DepartmentMapDTO"
-		id="DepartmentMapResult">
+	<resultMap
+		type="com.med.info.mapper.domain.InstitutionInfoMapDTO"
+		id="InstitutionInfoMapResult">
 		<id column="id" jdbcType="BIGINT" property="id" />
 		<result column="name" jdbcType="VARCHAR"
 			property="institutionName" />
@@ -779,8 +779,10 @@
 		where id =
 		#{id,jdbcType=BIGINT}
 	</update>
-	
-	<select id="showDataCondition" parameterType="com.med.info.domain.Miss_institution" resultMap="BaseResultMap">
+
+	<select id="showDataCondition"
+		parameterType="com.med.info.domain.Miss_institution"
+		resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		,
@@ -794,16 +796,18 @@
 				and level = #{level,jdbcType=VARCHAR}
 			</if>
 			<if test="address != null">
-				and address like CONCAT('%',#{address,jdbcType=VARCHAR},'%')
+				and address like
+				CONCAT('%',#{address,jdbcType=VARCHAR},'%')
 			</if>
 			<if test="category != null">
-				and category like CONCAT('%',#{category,jdbcType=VARCHAR},'%')
+				and category like
+				CONCAT('%',#{category,jdbcType=VARCHAR},'%')
 			</if>
 		</where>
 	</select>
 
 	<select id="getInstitutionInfoMapDTOByDoctorId"
-		parameterType="Long" resultMap="DepartmentMapResult">
+		parameterType="Long" resultMap="InstitutionInfoMapResult">
 		select b.id as id, b.name as name,
 		b.level as level, b.address as address
 		form

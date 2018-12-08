@@ -89,6 +89,13 @@
     history, drug_introduce, awards, research, monograph, message_from, product_info, 
     indication, dosage, introduction, task_json
   </sql>
+
+ <resultMap id="MedicalMapResult" type="com.med.info.mapper.domain.MedicalMapDTO">
+ 	<id column="id" jdbcType="BIGINT" property="id" />
+ 	<result column="medical_type" jdbcType="INTEGER" property="medicalType" />
+ 	<result column="com_name" jdbcType="VARCHAR" property="medicalName" />
+ </resultMap>
+ 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     <!--
       WARNING - @mbg.generated
@@ -897,4 +904,12 @@
       task_status = #{taskStatus,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <select id="getMedicalMapDTOBySymptomId" resultMap="MedicalMapResult" parameterType="com.med.info.domain.Miss_medical">
+  	select b.id as id, b.medical_type as medical_type, b.com_name as com_name 
+  	form miss_symptom_medical_mapping a left join miss_medical b on a.medical_id  = b.id
+  	where a.symptom_id=#{id}
+  
+  </select>
+  
 </mapper>

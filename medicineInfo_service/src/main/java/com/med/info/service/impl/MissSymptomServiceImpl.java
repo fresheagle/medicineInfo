@@ -18,6 +18,8 @@ import com.med.info.mapper.domain.OperateDTO;
 import com.med.info.mapper.domain.SymptomDTO;
 import com.med.info.mapper.domain.SymptomMapDTO;
 import com.med.info.response.PageObject;
+import com.med.info.service.MissDislocationService;
+import com.med.info.service.MissMedicalService;
 import com.med.info.service.MissSymptomService;
 
 @Service
@@ -25,7 +27,10 @@ public class MissSymptomServiceImpl extends BaseServiceImpl<Miss_symptomWithBLOB
 
 	@Autowired
 	private Miss_symptomMapper symptomMapper;
-	
+	@Autowired
+	private MissDislocationService missDislocationService;
+	@Autowired
+	private MissMedicalService missMedicalService;
 	@Override
 	public BaseMapper getMapper() {
 		// TODO Auto-generated method stub
@@ -76,7 +81,10 @@ public class MissSymptomServiceImpl extends BaseServiceImpl<Miss_symptomWithBLOB
 
 	private SymptomDTO getSymptomDTO(Miss_symptomWithBLOBs miss_symptomWithBLOBs) {
 		SymptomDTO symptomDTO = new SymptomDTO();
-		return null;
+		symptomDTO.setMiss_symptom(miss_symptomWithBLOBs);
+		symptomDTO.setDislocation_list(missDislocationService.getDislocationMapDTOBySymptomId(miss_symptomWithBLOBs.getId()));
+		symptomDTO.setMedical_list(missMedicalService.getMedicalMapDTOBySymptomId(miss_symptomWithBLOBs.getId()));
+		return symptomDTO;
 	}
 
 }

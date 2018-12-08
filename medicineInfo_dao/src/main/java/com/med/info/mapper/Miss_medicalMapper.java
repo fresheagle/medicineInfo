@@ -1,7 +1,10 @@
 package com.med.info.mapper;
 
+import java.util.List;
+
 import com.med.info.domain.Miss_medical;
 import com.med.info.domain.Miss_medicalWithBLOBs;
+import com.med.info.mapper.domain.MedicalMapDTO;
 
 public interface Miss_medicalMapper extends BaseMapper<Miss_medicalWithBLOBs>{
     /**
@@ -59,4 +62,6 @@ public interface Miss_medicalMapper extends BaseMapper<Miss_medicalWithBLOBs>{
      * @mbg.generated Mon Nov 26 11:32:45 CST 2018
      */
     int updateByPrimaryKey(Miss_medical record);
+
+	List<MedicalMapDTO> getMedicalMapDTOBySymptomId(Long id);
 }

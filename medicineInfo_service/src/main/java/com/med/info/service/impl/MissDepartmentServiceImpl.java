@@ -28,4 +28,14 @@ public class MissDepartmentServiceImpl extends BaseServiceImpl<Miss_department> 
 		// TODO Auto-generated method stub
 		return departmentMapper.getDepartmentMapByIds(ids);
 	}
+	
+	@Override
+	public List<DepartmentMapDTO> getDepartmentMapByDoctorId(Long id){
+		return departmentMapper.getDepartmentMapByDoctorId(id);
+	}
+
+	@Override
+	public List<DepartmentMapDTO> getDepartmentMapByInstitutionId(Long id) {
+		return departmentMapper.getDepartmentMapByInstitutionId(id);
+	}
 }

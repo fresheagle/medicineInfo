@@ -8,6 +8,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.med.info.domain.BaseDomain;
 import com.med.info.mapper.BaseMapper;
+import com.med.info.mapper.domain.DiseaseDTO;
 import com.med.info.mapper.domain.OperateDTO;
 import com.med.info.response.PageObject;
 import com.med.info.service.BaseService;
@@ -94,4 +95,12 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 	}
 	
 	public abstract BaseMapper getMapper();
+	
+	
+	public OperateDTO converseToOperataDTO(Object o) {
+		OperateDTO operateDTO = new OperateDTO();
+		JSONObject json =  JSONObject.parseObject(JSONObject.toJSONString(o));
+		operateDTO.setJsonStr(json);
+		return operateDTO;
+	}
 }

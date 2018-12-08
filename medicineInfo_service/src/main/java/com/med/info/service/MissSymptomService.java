@@ -10,4 +10,7 @@ public interface MissSymptomService extends BaseService<Miss_symptomWithBLOBs>{
 	List<SymptomMapDTO> getSymptomMapDTOByDiseaseId(Long id);
 	
 	Object querySymptomMapDTOParam(Integer currentPage, Integer pageSize, String chineseName);
+	
+	Object getByPage(Integer currentPage, Integer pageSize, String chineseName, String englishName, String otherName, String symptom, String commonSymptom);
+	
 }

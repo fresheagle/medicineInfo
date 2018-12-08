@@ -792,13 +792,13 @@
 		from miss_disease
 		<where>
 			<if test="chineseName != null">
-				chinese_name like #{chineseName,jdbcType=VARCHAR}
+				chinese_name like CONCAT('%',#{chineseName,jdbcType=VARCHAR},'%')
 			</if>
 			<if test="englishName != null">
-				and english_name like #{englishName,jdbcType=VARCHAR}
+				and english_name like CONCAT('%',#{englishName,jdbcType=VARCHAR},'%')
 			</if>
 			<if test="otherName != null">
-				and other_name like #{otherName,jdbcType=VARCHAR}
+				and other_name like CONCAT('%',#{otherName,jdbcType=VARCHAR},'%')
 			</if>
 			<if test="id != null">
 				and id = #{id,jdbcType=BIGINT}

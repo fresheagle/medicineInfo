@@ -9,4 +9,8 @@ public interface MissDepartmentService extends BaseService<Miss_department>{
 	
 	 List<DepartmentMapDTO> getDepartmentMapByIds(List<Long> ids);
 
+	List<DepartmentMapDTO> getDepartmentMapByDoctorId(Long id);
+
+	List<DepartmentMapDTO> getDepartmentMapByInstitutionId(Long id);
+
 }

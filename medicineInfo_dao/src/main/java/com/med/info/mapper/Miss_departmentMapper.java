@@ -63,4 +63,8 @@ public interface Miss_departmentMapper extends BaseMapper<Miss_department>{
     int updateByPrimaryKey(Miss_department record);
     
     List<DepartmentMapDTO> getDepartmentMapByIds(List<Long> ids);
+
+	List<DepartmentMapDTO> getDepartmentMapByDoctorId(Long id);
+
+	List<DepartmentMapDTO> getDepartmentMapByInstitutionId(Long id);
 }

@@ -1,7 +1,10 @@
 package com.med.info.mapper;
 
+import java.util.List;
+
 import com.med.info.domain.Miss_institution;
 import com.med.info.domain.Miss_institutionWithBLOBs;
+import com.med.info.mapper.domain.InstitutionInfoMapDTO;
 
 public interface Miss_institutionMapper extends BaseMapper<Miss_institutionWithBLOBs> {
     /**
@@ -59,4 +62,6 @@ public interface Miss_institutionMapper extends BaseMapper<Miss_institutionWithB
      * @mbg.generated Mon Nov 26 11:32:45 CST 2018
      */
     int updateByPrimaryKey(Miss_institution record);
+
+	List<InstitutionInfoMapDTO> getInstitutionInfoMapDTOByDoctorId(Long id);
 }

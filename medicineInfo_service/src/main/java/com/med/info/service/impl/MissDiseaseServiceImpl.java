@@ -127,10 +127,10 @@ public class MissDiseaseServiceImpl extends BaseServiceImpl<Miss_diseaseWithBLOB
 		return object;
 	}
 
-	private OperateDTO converseToOperataDTO(DiseaseDTO diseaseDTO) {
-		OperateDTO operateDTO = new OperateDTO();
-		JSONObject json =  JSONObject.parseObject(JSONObject.toJSONString(diseaseDTO));
-		operateDTO.setJsonStr(json);
-		return operateDTO;
-	}
+//	private OperateDTO converseToOperataDTO(DiseaseDTO diseaseDTO) {
+//		OperateDTO operateDTO = new OperateDTO();
+//		JSONObject json =  JSONObject.parseObject(JSONObject.toJSONString(diseaseDTO));
+//		operateDTO.setJsonStr(json);
+//		return operateDTO;
+//	}
 }

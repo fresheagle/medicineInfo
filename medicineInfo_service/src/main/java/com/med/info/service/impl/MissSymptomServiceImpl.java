@@ -62,7 +62,7 @@ public class MissSymptomServiceImpl extends BaseServiceImpl<Miss_symptomWithBLOB
 		symptomWithBLOBs.setChineseName(chineseName);
 		symptomWithBLOBs.setEnglishName(englishName);
 		symptomWithBLOBs.setOtherName(otherName);
-		symptomWithBLOBs.setSymptom(commonSymptom);
+		symptomWithBLOBs.setSymptom(symptom);
 		symptomWithBLOBs.setCommonSymptom(commonSymptom);
 		
 		PageObject<Miss_symptomWithBLOBs> selectPage = super.selectPage(currentPage, pageSize, symptomWithBLOBs);

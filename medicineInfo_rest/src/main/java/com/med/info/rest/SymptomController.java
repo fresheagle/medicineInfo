@@ -39,4 +39,15 @@ public class SymptomController {
 		PageObject<Miss_symptomWithBLOBs> selectPage = missSymptomService.selectPageByOperateDto(currentPage, pageSize, miss_symptomWithBLOBs);
 		return new Response().success(selectPage);
 	}
+	
+	public Response selectPage(@RequestParam("currentPage") Integer currentPage,
+            @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize,
+            @RequestParam(value = "chineseName", required = false) String chineseName,
+            @RequestParam(value = "englishName", required = false) String englishName,
+            @RequestParam(value = "otherName", required = false) String otherName,
+            @RequestParam(value = "symptom", required = false) String symptom,
+            @RequestParam(value = "commonSymptom", required = false) String commonSymptom) {
+		Object byPage = missSymptomService.getByPage(currentPage, pageSize, chineseName, englishName, otherName, symptom, commonSymptom);
+		return new Response().success(byPage);
+	}
 }

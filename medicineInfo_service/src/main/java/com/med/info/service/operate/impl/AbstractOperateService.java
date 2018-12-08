@@ -11,6 +11,7 @@ import org.apache.log4j.spi.LoggerFactory;
 import org.apache.tomcat.jni.Time;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -39,6 +40,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 	
 	
 	@Override
+	@Transactional
 	public String doOperate(OperateDTO operateDTO) {
 		operateDTO.verify();
 		logger.info("接受到请求参数={}",JSON.toJSONString(operateDTO));
@@ -63,7 +65,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			controlTaskRecord.setTaskpublishfinalcontentjson(JSON.toJSONString(operateDTO.getJsonStr()));
 			controlTaskRecord.setTaskpublishday(getToday());
 			taskRecordsMapper.updateByTaskIdSelective(controlTaskRecord);
-			fishDeal(operateDTO);
+			finishDeal(operateDTO);
 		}
 		return null;
 	}
@@ -81,7 +83,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 	 * Function: 终审发布处理 <br/> 
 	 * @param operateDTO
 	 */
-	public abstract void fishDeal(OperateDTO operateDTO);
+	public abstract void finishDeal(OperateDTO operateDTO);
 
 	@Override
 	public boolean isFilter(OperateDTO operateDTO) {

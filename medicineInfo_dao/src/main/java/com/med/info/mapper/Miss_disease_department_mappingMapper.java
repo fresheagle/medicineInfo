@@ -58,4 +58,6 @@ public interface Miss_disease_department_mappingMapper extends BaseMapper<Miss_d
      * @mbg.generated Sat Nov 17 18:29:49 CST 2018
      */
     int updateByPrimaryKey(Miss_disease_department_mapping record);
+
+	void deleteByDiseaseId(Long id);
 }

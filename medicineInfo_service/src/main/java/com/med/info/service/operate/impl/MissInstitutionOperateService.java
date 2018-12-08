@@ -38,7 +38,7 @@ public class MissInstitutionOperateService extends AbstractOperateService<Miss_i
 	 * @see com.med.info.service.operate.impl.AbstractOperateService#fishDeal(com.med.info.mapper.domain.OperateDTO)
 	 */
 	@Override
-	public void fishDeal(OperateDTO operateDTO) {
+	public void finishDeal(OperateDTO operateDTO) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -60,6 +60,12 @@
     delete from miss_disease_department_mapping
     where id = #{id,jdbcType=BIGINT}
   </delete>
+  
+  <delete id="deleteByDiseaseId" parameterType="Long">
+  	delete from miss_disease_department_mapping
+    where disease_id = #{id,jdbcType=BIGINT}
+  </delete>
+  
   <insert id="insert" parameterType="com.med.info.domain.Miss_disease_department_mapping">
     <!--
       WARNING - @mbg.generated

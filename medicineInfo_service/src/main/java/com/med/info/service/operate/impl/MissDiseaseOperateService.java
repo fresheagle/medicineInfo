@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.med.info.domain.Miss_control_task_detailWithBLOBs;
 import com.med.info.domain.Miss_disease;
 import com.med.info.domain.Miss_diseaseWithBLOBs;
 import com.med.info.domain.Miss_disease_department_mapping;
@@ -64,14 +65,15 @@ public class MissDiseaseOperateService extends AbstractOperateService<Miss_disea
 	@Override
 	public void finishDeal(OperateDTO operateDTO) {
 
+		DiseaseDTO diseaseDTO = JSONObject.toJavaObject(operateDTO.getJsonStr(), DiseaseDTO.class);
+		Long id = diseaseDTO.getMissDisease().getId();
 		if(!operateDTO.getTaskType().equals(OperateEnum.delete.toString())) {
 			logger.info(getCurrentMenuType()+"当前操作为"+operateDTO.getTaskType()+"入库数据");
-			DiseaseDTO diseaseDTO = JSONObject.toJavaObject(operateDTO.getJsonStr(), DiseaseDTO.class);
-			int updateByPrimaryKey = diseaseService.updateByPrimaryKey(diseaseDTO.getMissDisease());
+			Miss_diseaseWithBLOBs missDisease = diseaseDTO.getMissDisease();
+			int updateByPrimaryKey = diseaseService.updateByPrimaryKey(missDisease);
 			List<DepartmentMapDTO> departmentMapDTO = diseaseDTO.getDepartmentMapDTO();
 			List<SymptomMapDTO> symptomMapDTO = diseaseDTO.getSymptomMapDTO();
 			
-			Long id = diseaseDTO.getMissDisease().getId();
 			miss_disease_department_mappingMapper.deleteByDiseaseId(id);
 			miss_disease_symptom_mappingMapper.deleteByDiseaseId(id);
 			
@@ -95,7 +97,15 @@ public class MissDiseaseOperateService extends AbstractOperateService<Miss_disea
 			}
 			
 		}else {
-			logger.info(getCurrentMenuType()+"当前操作为"+operateDTO.getTaskType()+",暂不处理");
+			logger.info(getCurrentMenuType()+"当前操作为"+operateDTO.getTaskType()+",修改状态为回收站");
+			miss_disease_department_mappingMapper.deleteByDiseaseId(id);
+			miss_disease_symptom_mappingMapper.deleteByDiseaseId(id);
+			Miss_diseaseWithBLOBs object = diseaseDTO.getMissDisease();
+			object.setTaskId(operateDTO.getTaskId());
+			object.setTaskJson(JSON.toJSONString(operateDTO.getJsonStr()));
+			object.setTaskStatus(operateDTO.getTaskStatus());
+			object.setDatastatus("-1");
+			diseaseService.updateByTaskIdSelective(object);
 		}
 		
 	}

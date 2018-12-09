@@ -44,7 +44,7 @@ public class MissDiseaseOperateService extends AbstractOperateService<Miss_disea
 	@Override
 	public String getCurrentMenuType() {
 		// TODO Auto-generated method stub
-		return "miss_disease";
+		return "missDisease";
 	}
 
 	@Override

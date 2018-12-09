@@ -37,3 +37,6 @@ pagehelper:
     supportMethodsArguments: true
     params: count=countSql
 
+logging:
+  level:
+     com.med.info.mapper: debug

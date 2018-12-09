@@ -51,9 +51,9 @@ public class MissionServiceImpl implements MissionService {
 	public Object getByPage(Integer currentPage, Integer pageSize, String taskStatus) {
 		PageHelper.startPage(currentPage, pageSize);
 		Miss_control_task_records record = new Miss_control_task_records();
-		record.setTaskStatus(taskStatus);
+		record.setTaskstatus(taskStatus);
 		record.setTaskcreaterusercode(DefaultTokenManager.getLocalUserCode());
-		logger.info("查询任务，currentPage={},pageSize={},taskStatus={}",currentPage,pageSize,taskStatus);
+		logger.info("查询任务，record={}",JSON.toJSONString(record));
 		Page<Miss_control_task_records> showDataCondition = (Page<Miss_control_task_records>) taskRecordsMapper
 				.selectPageBySelective(record);
 		List<OperateDTO> list = new ArrayList<>();

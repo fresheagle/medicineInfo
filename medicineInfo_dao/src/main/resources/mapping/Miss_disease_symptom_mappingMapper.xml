@@ -187,4 +187,9 @@
       task_status = #{taskStatus,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <delete id="deleteByDiseaseId" parameterType="Long">
+  	delete from miss_disease_symptom_mapping
+    where disease_id = #{id,jdbcType=BIGINT}
+  </delete>
 </mapper>

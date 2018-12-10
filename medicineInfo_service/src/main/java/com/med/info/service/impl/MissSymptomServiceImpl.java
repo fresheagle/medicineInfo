@@ -81,9 +81,9 @@ public class MissSymptomServiceImpl extends BaseServiceImpl<Miss_symptomWithBLOB
 
 	private SymptomDTO getSymptomDTO(Miss_symptomWithBLOBs miss_symptomWithBLOBs) {
 		SymptomDTO symptomDTO = new SymptomDTO();
-		symptomDTO.setMiss_symptom(miss_symptomWithBLOBs);
-		symptomDTO.setDislocation_list(missDislocationService.getDislocationMapDTOBySymptomId(miss_symptomWithBLOBs.getId()));
-		symptomDTO.setMedical_list(missMedicalService.getMedicalMapDTOBySymptomId(miss_symptomWithBLOBs.getId()));
+		symptomDTO.setMissSymptom(miss_symptomWithBLOBs);
+		symptomDTO.setDislocationList(missDislocationService.getDislocationMapDTOBySymptomId(miss_symptomWithBLOBs.getId()));
+		symptomDTO.setMedicalList(missMedicalService.getMedicalMapDTOBySymptomId(miss_symptomWithBLOBs.getId()));
 		return symptomDTO;
 	}
 

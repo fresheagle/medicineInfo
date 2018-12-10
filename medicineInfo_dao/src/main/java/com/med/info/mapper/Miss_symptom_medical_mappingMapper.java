@@ -58,4 +58,11 @@ public interface Miss_symptom_medical_mappingMapper extends BaseMapper<Miss_symp
      * @mbg.generated Sat Nov 17 18:29:49 CST 2018
      */
     int updateByPrimaryKey(Miss_symptom_medical_mapping record);
+
+	/**
+	 * @author jialin.jiang
+	 * Function: TODO ADD FUNCTION. <br/> 
+	 * @param id
+	 */
+	void deleteBySymptomId(Long id);
 }

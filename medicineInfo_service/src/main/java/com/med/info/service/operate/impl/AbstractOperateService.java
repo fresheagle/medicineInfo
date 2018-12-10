@@ -25,6 +25,7 @@ import com.med.info.mapper.domain.OperateDTO;
 import com.med.info.service.BaseService;
 import com.med.info.service.impl.DefaultTokenManager;
 import com.med.info.service.operate.IOperateService;
+import com.med.info.utils.OperateEnum;
 import com.med.info.utils.TrialStatusEnum;
 import com.med.info.utils.UuidUtils;
 
@@ -177,10 +178,22 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 		// 插入数据到
 		if (null == operateDTO.getTaskId()) {
 			String taskId = UuidUtils.generateUUID();
-			object.setTaskJson(JSON.toJSONString(operateDTO.getJsonStr()));
-			object.setTaskId(taskId);
-			object.setTaskStatus(TrialStatusEnum.DRAFTS.getId());
-			baseService.insert(object);
+			JSONObject jsonStr = operateDTO.getJsonStr();
+			//如果是创建，就先插入数据，获取数据ID,并放入json中，方便后续处理
+			if(operateDTO.getTaskType().equals(OperateEnum.create.toString())) {
+				object.setTaskJson(JSON.toJSONString(jsonStr));
+				object.setTaskId(taskId);
+				object.setTaskStatus(TrialStatusEnum.DRAFTS.getId());
+				int insertId = baseService.insert(object);
+				jsonStr.put("id", insertId);
+				object.setId(Long.valueOf(insertId));
+			}
+			T selectByPrimaryId = baseService.selectByPrimaryId(object.getId());
+			selectByPrimaryId.setTaskJson(JSON.toJSONString(jsonStr));
+			selectByPrimaryId.setTaskId(taskId);
+			selectByPrimaryId.setTaskStatus(TrialStatusEnum.DRAFTS.getId());
+			baseService.updateByPrimaryKey(selectByPrimaryId);
+			
 
 			Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
 			controlTaskRecord.setTaskcreaterusercode(DefaultTokenManager.getLocalUserCode());
@@ -201,7 +214,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 			controlTaskDetail.setTaskuuid(UuidUtils.generateUUID());
 			controlTaskDetail.setTaskchangetime(new Timestamp(System.currentTimeMillis()));
 			controlTaskDetail.setTaskchangeday(getToday());
-			controlTaskDetail.setTaskchangeafterjson(JSON.toJSONString(operateDTO.getJsonStr()));
+			controlTaskDetail.setTaskchangeafterjson(JSON.toJSONString(jsonStr));
 			taskDetailMapper.insert(controlTaskDetail);
 		} else {
 			updateStatus(operateDTO, object, baseService);

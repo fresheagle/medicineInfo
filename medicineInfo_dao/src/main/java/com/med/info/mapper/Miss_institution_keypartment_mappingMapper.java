@@ -58,4 +58,11 @@ public interface Miss_institution_keypartment_mappingMapper {
      * @mbg.generated Mon Nov 26 11:32:45 CST 2018
      */
     int updateByPrimaryKey(Miss_institution_keypartment_mapping record);
+
+	/**
+	 * @author jialin.jiang
+	 * Function: TODO ADD FUNCTION. <br/> 
+	 * @param id
+	 */
+	void deleteByInstitutionId(Long id);
 }

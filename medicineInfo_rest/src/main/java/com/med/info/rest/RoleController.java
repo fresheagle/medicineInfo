@@ -52,7 +52,7 @@ public class RoleController {
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE)
-	public Response delteRole(String uuid) {
+	public Response deleteRole(String uuid) {
 		try {
 			int insert = controlRoleService.deleteByPrimaryId(uuid);
 			if(insert < 0) {

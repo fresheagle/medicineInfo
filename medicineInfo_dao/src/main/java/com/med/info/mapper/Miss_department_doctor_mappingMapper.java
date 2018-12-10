@@ -58,4 +58,11 @@ public interface Miss_department_doctor_mappingMapper extends BaseMapper<Miss_de
      * @mbg.generated Sat Nov 17 18:29:49 CST 2018
      */
     int updateByPrimaryKey(Miss_department_doctor_mapping record);
+
+	/**
+	 * @author jialin.jiang
+	 * Function: TODO ADD FUNCTION. <br/> 
+	 * @param id
+	 */
+	void deleteByDoctorId(Long id);
 }

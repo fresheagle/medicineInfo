@@ -57,9 +57,9 @@ public class MissDoctorServiceImpl extends BaseServiceImpl<Miss_doctorWithBLOBs>
 	
 	public DoctorDTO getDoctorDTO(Miss_doctorWithBLOBs bloBs) {
 		DoctorDTO doctorDTO = new DoctorDTO();
-		doctorDTO.setMiss_doctor(bloBs);
-		doctorDTO.setDepartment_list(missDepartmentService.getDepartmentMapByDoctorId(bloBs.getId()));
-		doctorDTO.setInstitution_list(missInstitutionService.getInstitutionInfoMapDTOByDoctorId(bloBs.getId()));
+		doctorDTO.setMissDoctor(bloBs);
+		doctorDTO.setDepartmentList(missDepartmentService.getDepartmentMapByDoctorId(bloBs.getId()));
+		doctorDTO.setInstitutionList(missInstitutionService.getInstitutionInfoMapDTOByDoctorId(bloBs.getId()));
 		return doctorDTO;
 	}
 

@@ -4,31 +4,33 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.med.info.domain.Miss_symptom;
+import com.med.info.domain.Miss_symptomWithBLOBs;
 
 public class SymptomDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private Miss_symptom miss_symptom;
-	private List<MedicalMapDTO> medical_list;
-	private List<DislocationMapDTO> dislocation_list;
+	private Miss_symptomWithBLOBs missSymptom;
+	private List<MedicalMapDTO> medicalList;
+	private List<DislocationMapDTO> dislocationList;
+	public Miss_symptomWithBLOBs getMissSymptom() {
+		return missSymptom;
+	}
+	public void setMissSymptom(Miss_symptomWithBLOBs missSymptom) {
+		this.missSymptom = missSymptom;
+	}
+	public List<MedicalMapDTO> getMedicalList() {
+		return medicalList;
+	}
+	public void setMedicalList(List<MedicalMapDTO> medicalList) {
+		this.medicalList = medicalList;
+	}
+	public List<DislocationMapDTO> getDislocationList() {
+		return dislocationList;
+	}
+	public void setDislocationList(List<DislocationMapDTO> dislocationList) {
+		this.dislocationList = dislocationList;
+	}
 	
-	public Miss_symptom getMiss_symptom() {
-		return miss_symptom;
-	}
-	public void setMiss_symptom(Miss_symptom miss_symptom) {
-		this.miss_symptom = miss_symptom;
-	}
-	public List<MedicalMapDTO> getMedical_list() {
-		return medical_list;
-	}
-	public void setMedical_list(List<MedicalMapDTO> medical_list) {
-		this.medical_list = medical_list;
-	}
-	public List<DislocationMapDTO> getDislocation_list() {
-		return dislocation_list;
-	}
-	public void setDislocation_list(List<DislocationMapDTO> dislocation_list) {
-		this.dislocation_list = dislocation_list;
-	}
+	
 }

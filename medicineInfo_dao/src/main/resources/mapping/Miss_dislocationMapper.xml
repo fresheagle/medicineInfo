@@ -236,7 +236,7 @@
 	<select id="getDislocationMapDTOBySymptomId"
 		parameterType="com.med.info.mapper.domain.DislocationMapDTO"
 		resultMap="ResultMapWithBLOBs">
-		select id, dislocation_name, level, parent_dislocation_id
+		select b.id as id, dislocation_name, level, parent_dislocation_id
 		from miss_symptom_dislocation_mapping a left join miss_dislocation b on
 		a.dislocation_id = b.id
 		where a.symptom_id = #{id}

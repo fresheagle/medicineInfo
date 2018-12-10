@@ -907,7 +907,7 @@
   
   <select id="getMedicalMapDTOBySymptomId" resultMap="MedicalMapResult" parameterType="com.med.info.domain.Miss_medical">
   	select b.id as id, b.medical_type as medical_type, b.com_name as com_name 
-  	form miss_symptom_medical_mapping a left join miss_medical b on a.medical_id  = b.id
+  	from miss_symptom_medical_mapping a left join miss_medical b on a.medical_id  = b.id
   	where a.symptom_id=#{id}
   
   </select>

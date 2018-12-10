@@ -782,7 +782,7 @@
 
 	<select id="showDataCondition"
 		parameterType="com.med.info.domain.Miss_institution"
-		resultMap="BaseResultMap">
+		resultMap="ResultMapWithBLOBs">
 		select
 		<include refid="Base_Column_List" />
 		,
@@ -810,9 +810,9 @@
 		parameterType="Long" resultMap="InstitutionInfoMapResult">
 		select b.id as id, b.name as name,
 		b.level as level, b.address as address
-		form
+		from
 		miss_institution_doctor_mapping a left join miss_institution b on
-		a.institution = b.id
+		a.institution_id = b.id
 		where a.doctor_id = #{id}
 	</select>
 

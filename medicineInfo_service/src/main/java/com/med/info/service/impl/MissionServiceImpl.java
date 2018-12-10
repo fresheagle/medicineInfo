@@ -38,6 +38,7 @@ public class MissionServiceImpl implements MissionService {
 
 	@Override
 	public Object saveMission(OperateDTO operateDTO) {
+		operateDTO.verify();
 		for (IOperateService iOperateService : operateServices) {
 			if (iOperateService.isFilter(operateDTO)) {
 				iOperateService.doOperate(operateDTO);

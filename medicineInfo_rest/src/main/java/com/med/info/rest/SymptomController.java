@@ -27,6 +27,22 @@ public class SymptomController {
 	@Autowired
 	MissSymptomService missSymptomService;
 	
+	@RequestMapping(path = "/page", method = RequestMethod.GET)
+	public Response getByPage(@RequestParam("currentPage") Integer currentPage,
+			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "chineseName", required = false) String chineseName,
+			@RequestParam(value = "englishName", required = false) String englishName,
+			@RequestParam(value = "otherName", required = false) String otherName,
+			@RequestParam(value = "symptom", required = false) String symptom,
+			@RequestParam(value = "commonSymptom", required = false) String commonSymptom) {
+		try {
+			Object byPage = missSymptomService.getByPage(currentPage, pageSize, chineseName, englishName, otherName, symptom, commonSymptom);
+			return new Response().success(byPage);
+		} catch (Exception e) {
+			return new Response().failure(e.getMessage());
+		}
+	}
+	
 	@RequestMapping(path = "/param", method = RequestMethod.GET)
 	public Response selectDiseaseParam(@RequestParam("currentPage") Integer currentPage,
                                        @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize,

@@ -42,7 +42,6 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 	@Override
 	@Transactional
 	public String doOperate(OperateDTO operateDTO) {
-		operateDTO.verify();
 		logger.info("接受到请求参数={}",JSON.toJSONString(operateDTO));
 		T object = (T) JSON.toJavaObject(getParmJsonObject(operateDTO.getJsonStr()), getCurrentClass());
 		BaseService<T> baseService = getBaseService(operateDTO.getTaskMenuType());

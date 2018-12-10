@@ -3,6 +3,7 @@ package com.med.info.rest;
 import com.med.info.mapper.domain.InstitutionInfoDTO;
 import com.med.info.response.Response;
 import com.med.info.service.InstitutionInfoService;
+import com.med.info.service.MissInstitutionService;
 import com.med.info.service.ParamInfoService;
 
 import org.apache.log4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,7 +27,25 @@ public class InstitutionController {
 	private static final Logger log = Logger.getLogger(InstitutionController.class);
 	@Autowired
 	InstitutionInfoService institutionInfoService;
-
+	@Autowired MissInstitutionService missInstitutionService;
+	
+	@RequestMapping(path = "/page", method = RequestMethod.GET)
+	public Response getByPage(@RequestParam("currentPage") Integer currentPage,
+			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "name", required = false) String name,
+			@RequestParam(value = "level", required = false) String level,
+			@RequestParam(value = "address", required = false) String address,
+			@RequestParam(value = "category", required = false) String category) {
+		try {
+			Object byPage = missInstitutionService.getByPage(currentPage, pageSize, name, level, address, category);
+			return new Response().success(byPage);
+		} catch (Exception e) {
+			log.error("查询数据错误",e);
+			return new Response().failure(e.getMessage());
+		}
+	}
+	
+	
 	/**
 	 * 添加医疗机构信息
 	 * @param institutionInfoDTO 医疗机构信息

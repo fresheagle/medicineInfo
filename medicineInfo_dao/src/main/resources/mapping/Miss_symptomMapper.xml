@@ -639,7 +639,19 @@
     	id = #{id,jdbcType=VARCHAR}
     	</if>
     	<if test="chineseName != null">
-    	and chinese_name = #{chineseName,jdbcType=VARCHAR}
+    	and chinese_name like CONCAT('%',#{chineseName,jdbcType=VARCHAR},'%')
+    	</if>
+    	<if test="englishName != null">
+    	and english_name like CONCAT('%',#{englishName,jdbcType=VARCHAR},'%')
+    	</if>
+    	<if test="otherName != null">
+    	and other_name like CONCAT('%',#{otherName,jdbcType=VARCHAR},'%')
+    	</if>
+    	<if test="symptom != null">
+    	and symptom like CONCAT('%',#{symptom,jdbcType=VARCHAR},'%')
+    	</if>
+    	<if test="commonSymptom != null">
+    	and common_symptom like CONCAT('%',#{commonSymptom,jdbcType=VARCHAR},'%')
     	</if>
     </where>
   </select>

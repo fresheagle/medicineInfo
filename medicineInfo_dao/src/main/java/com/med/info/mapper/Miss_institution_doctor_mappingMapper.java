@@ -58,4 +58,11 @@ public interface Miss_institution_doctor_mappingMapper extends BaseMapper<Miss_i
      * @mbg.generated Sat Nov 17 18:29:49 CST 2018
      */
     int updateByPrimaryKey(Miss_institution_doctor_mapping record);
+
+	/**
+	 * @author jialin.jiang
+	 * Function: 通过医生ID删除对应医院信息. <br/> 
+	 * @param id
+	 */
+	void deleteByDoctorId(Long id);
 }

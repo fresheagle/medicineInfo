@@ -35,4 +35,11 @@ public interface BaseMapper<T> {
 	 * @return
 	 */
 	public List<T> showDataCondition(T t);
+	/**
+	 * @author jialin.jiang
+	 * Function: TODO ADD FUNCTION. <br/> 
+	 * @param t
+	 * @return
+	 */
+	public int updateByPrimaryKeySelective(T t);
 }

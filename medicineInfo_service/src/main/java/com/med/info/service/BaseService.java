@@ -3,7 +3,6 @@
  */
 package com.med.info.service;
 
-import com.med.info.domain.BaseDomain;
 import com.med.info.response.PageObject;
 
 /**
@@ -16,6 +15,7 @@ public interface BaseService<T> {
 	public int deleteByPrimaryKey(Long id);
 	public T selectByPrimaryKey(T t);
 	public int updateByPrimaryKey(T t);
+	public int updateByPrimaryKeySelective(T t);
 	public void updateByTaskIdSelective(T t);
 	
 	public T selectByPrimaryId(Long id);

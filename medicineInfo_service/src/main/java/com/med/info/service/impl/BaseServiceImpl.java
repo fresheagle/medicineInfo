@@ -61,6 +61,15 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 		return (T)getMapper().selectByPrimaryKey(id);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.med.info.service.BaseService#updateByPrimaryKeySelective(java.lang.Object)
+	 */
+	@Override
+	public int updateByPrimaryKeySelective(T t) {
+		// TODO Auto-generated method stub
+		return getMapper().updateByPrimaryKeySelective(t);
+	}
+	
 	@Override
 	public void updateByTaskIdSelective(T t) {
 		getMapper().updateByTaskIdSelective(t);

@@ -143,4 +143,8 @@
       relationCreateTime = #{relationcreatetime,jdbcType=VARCHAR}
     where URuuid = #{uruuid,jdbcType=VARCHAR}
   </update>
+  <delete id="deleteByUserCode" parameterType="java.lang.String">
+  	delete from miss_control_userAndRole 
+  	where userCode=#{usercode,jdbcType=VARCHAR}
+  </delete>
 </mapper>

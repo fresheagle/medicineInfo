@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.med.info.domain.Miss_control_user;
+import com.med.info.mapper.domain.UserAndRoleDTO;
 import com.med.info.response.PageObject;
 import com.med.info.response.Response;
+import com.med.info.service.MissControlUserAndRoleService;
 import com.med.info.service.UserInfoService;
 
 /**
@@ -28,6 +30,8 @@ public class UserController {
 	
 	@Autowired
 	private UserInfoService userInfoService;
+	@Autowired
+	private MissControlUserAndRoleService missControlUserAndRoleService;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public Response addUser(@RequestBody Miss_control_user missControlUser) {
@@ -35,14 +39,21 @@ public class UserController {
 		return new Response().success();
 	}
 	
+	@RequestMapping(path="/addRole", method = RequestMethod.POST)
+	public Response addUserAndRole(@RequestBody UserAndRoleDTO userAndRoleDTO) {
+		missControlUserAndRoleService.insertUserAndRole(userAndRoleDTO);
+		return new Response().success();
+	}
+	
 	@RequestMapping(method = RequestMethod.DELETE)
-	public Response deleteUser(String uuid) {
+	public Response deleteUser(String usercode) {
 		return new Response().success();
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
 	public Response updateUser(@RequestBody Miss_control_user controlUser) {
-		return null;
+		userInfoService.updateByPrimaryKey(controlUser);
+		return new Response().success();
 	}
 	
 	/**

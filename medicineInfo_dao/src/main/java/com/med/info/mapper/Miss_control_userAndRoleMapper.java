@@ -50,4 +50,6 @@ public interface Miss_control_userAndRoleMapper extends BaseMapper<Miss_control_
      * @mbg.generated Sat Nov 17 18:29:49 CST 2018
      */
     int updateByPrimaryKey(Miss_control_userAndRole record);
+    
+    int deleteByUserCode(String usercode);
 }

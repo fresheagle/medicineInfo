@@ -25,6 +25,7 @@ public class MissControlUserAndRoleServiceImpl extends BaseServiceImpl<Miss_cont
 	@Override
 	public boolean insertUserAndRole(UserAndRoleDTO userAndRoleDTO) {
 		// TODO Auto-generated method stub
+		userAndRoleMapper.deleteByUserCode(userAndRoleDTO.getMissControlUser().getUserCode());
 		if(CollectionUtil.isNotEmpty(userAndRoleDTO.getMissControlRole())) {
 			for(Miss_control_role miss_control_role : userAndRoleDTO.getMissControlRole()) {
 				Miss_control_userAndRole miss_control_userAndRole = new Miss_control_userAndRole();

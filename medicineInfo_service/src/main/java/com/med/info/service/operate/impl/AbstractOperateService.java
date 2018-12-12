@@ -80,6 +80,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
     public void finishDeal(OperateDTO operateDTO, T object, BaseService<T> baseService) {
 
         if (!operateDTO.getTaskType().equals(OperateEnum.delete.toString())) {
+            logger.info(getCurrentMenuType() + "当前操作为" + operateDTO.getTaskType() + ",修改数据入库");
             baseService.updateByPrimaryKey(object);
         } else {
             logger.info(getCurrentMenuType() + "当前操作为" + operateDTO.getTaskType() + ",修改状态为回收站");

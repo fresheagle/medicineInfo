@@ -15,9 +15,14 @@ public class MissDistrictOperateService extends AbstractOperateService<Miss_dist
 
 	@Autowired
 	private MissDistrictService districtService;
-	
+
 	@Override
-	public BaseService<Miss_district> getBaseService(String menuType) {
+	public boolean needDealMapper() {
+		return false;
+	}
+
+	@Override
+	public BaseService<Miss_district> baseService(String menuType) {
 		// TODO Auto-generated method stub
 		return districtService;
 	}
@@ -31,22 +36,13 @@ public class MissDistrictOperateService extends AbstractOperateService<Miss_dist
 	@Override
 	public String getCurrentMenuType() {
 		// TODO Auto-generated method stub
-		return "miss_district";
-	}
-
-	/* (non-Javadoc)
-	 * @see com.med.info.service.operate.impl.AbstractOperateService#fishDeal(com.med.info.mapper.domain.OperateDTO)
-	 */
-	@Override
-	public void finishDeal(OperateDTO operateDTO) {
-		// TODO Auto-generated method stub
-		
+		return "missDistrict";
 	}
 
 	@Override
 	public String getJsonParamKey() {
 		// TODO Auto-generated method stub
-		return null;
+		return "missDistrict";
 	}
 
 	

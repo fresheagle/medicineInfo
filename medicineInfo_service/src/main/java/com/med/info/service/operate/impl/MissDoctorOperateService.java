@@ -40,34 +40,31 @@ public class MissDoctorOperateService extends AbstractOperateService<Miss_doctor
 	private static Logger logger = LoggerFactory.getLogger(MissDoctorOperateService.class);
 	@Override
 	public String getCurrentMenuType() {
-		// TODO Auto-generated method stub
 		return "missDoctor";
 	}
 
 	@Override
-	public BaseService<Miss_doctorWithBLOBs> getBaseService(String menuType) {
-		// TODO Auto-generated method stub
+	public BaseService<Miss_doctorWithBLOBs> baseService(String menuType) {
 		return doctorService;
 	}
 
 	@Override
 	public Class<?> getCurrentClass() {
-		// TODO Auto-generated method stub
 		return Miss_doctorWithBLOBs.class;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.med.info.service.operate.impl.AbstractOperateService#fishDeal(com.med.info.mapper.domain.OperateDTO)
-	 */
 	@Override
-	public void finishDeal(OperateDTO operateDTO) {
+	public boolean needDealMapper() {
+		return true;
+	}
+
+	@Override
+	protected void dealMapperRelashionShip(OperateDTO operateDTO) {
 		DoctorDTO doctorDTO = JSONObject.toJavaObject(operateDTO.getJsonStr(), DoctorDTO.class);
 		Miss_doctorWithBLOBs missDoctor = doctorDTO.getMissDoctor();
 		if(!operateDTO.getTaskType().equals(OperateEnum.delete.toString())) {
-			doctorService.updateByPrimaryKey(missDoctor);
 			institutionDoctorMappingMapper.deleteByDoctorId(missDoctor.getId());
 			departmentDoctorMappingMapper.deleteByDoctorId(missDoctor.getId());
-			
 			List<InstitutionInfoMapDTO> institutionList = doctorDTO.getInstitutionList();
 			if(CollectionUtil.isNotEmpty(institutionList)) {
 				for (InstitutionInfoMapDTO institutionInfoMapDTO : institutionList) {
@@ -91,19 +88,11 @@ public class MissDoctorOperateService extends AbstractOperateService<Miss_doctor
 			logger.info(getCurrentMenuType()+"当前操作为"+operateDTO.getTaskType()+",修改状态为回收站");
 			institutionDoctorMappingMapper.deleteByDoctorId(missDoctor.getId());
 			departmentDoctorMappingMapper.deleteByDoctorId(missDoctor.getId());
-			missDoctor.setTaskId(operateDTO.getTaskId());
-			missDoctor.setTaskJson(JSON.toJSONString(operateDTO.getJsonStr()));
-			missDoctor.setTaskStatus(operateDTO.getTaskStatus());
-			missDoctor.setDatastatus("-1");
-			doctorService.updateByTaskIdSelective(missDoctor);
 		}
-		
-		
 	}
 
 	@Override
 	public String getJsonParamKey() {
-		// TODO Auto-generated method stub
 		return "missDoctor";
 	}
 

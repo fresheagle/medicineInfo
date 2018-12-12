@@ -18,35 +18,28 @@ public class MissMedicalOperateService extends AbstractOperateService<Miss_medic
 	
 	@Override
 	public String getCurrentMenuType() {
-		// TODO Auto-generated method stub
-		return "miss_medical";
+		return "missMedical";
 	}
 
 	@Override
-	public BaseService<Miss_medical> getBaseService(String menuType) {
-		// TODO Auto-generated method stub
+	public BaseService<Miss_medical> baseService(String menuType) {
 		return medicalService;
 	}
 
 	@Override
 	public Class<?> getCurrentClass() {
-		// TODO Auto-generated method stub
 		return Miss_medical.class;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.med.info.service.operate.impl.AbstractOperateService#fishDeal(com.med.info.mapper.domain.OperateDTO)
-	 */
-	@Override
-	public void finishDeal(OperateDTO operateDTO) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public String getJsonParamKey() {
-		// TODO Auto-generated method stub
-		return null;
+		return "missMedical";
 	}
 
+	@Override
+	public boolean needDealMapper() {
+		//TODO 需要修改为true 并实现返回，在家里面电脑实现
+		return false;
+	}
 }

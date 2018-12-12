@@ -1,52 +1,49 @@
 package com.med.info.service.operate.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
-
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.med.info.domain.Miss_medical_companyWithBLOBs;
 import com.med.info.mapper.domain.OperateDTO;
 import com.med.info.service.BaseService;
 import com.med.info.service.MissMedicalCompanyService;
+import com.med.info.utils.OperateEnum;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 @Component
 @Order(9)
-public class MissMedicalCompanyOperateService extends AbstractOperateService<Miss_medical_companyWithBLOBs>{
+public class MissMedicalCompanyOperateService extends AbstractOperateService<Miss_medical_companyWithBLOBs> {
 
-	@Autowired
-	private MissMedicalCompanyService medicalCompanyService;
-	
-	@Override
-	public String getCurrentMenuType() {
-		// TODO Auto-generated method stub
-		return "miss_medical_company";
-	}
+    @Autowired
+    private MissMedicalCompanyService medicalCompanyService;
+    private static Logger logger = LoggerFactory.getLogger(MissMedicalCompanyOperateService.class);
 
-	@Override
-	public BaseService<Miss_medical_companyWithBLOBs> getBaseService(String menuType) {
-		// TODO Auto-generated method stub
-		return medicalCompanyService;
-	}
+    @Override
+    public String getCurrentMenuType() {
+        return "missMedicalCompany";
+    }
 
-	@Override
-	public Class<?> getCurrentClass() {
-		// TODO Auto-generated method stub
-		return Miss_medical_companyWithBLOBs.class;
-	}
+    @Override
+    public BaseService<Miss_medical_companyWithBLOBs> baseService(String menuType) {
+        return medicalCompanyService;
+    }
 
-	/* (non-Javadoc)
-	 * @see com.med.info.service.operate.impl.AbstractOperateService#fishDeal(com.med.info.mapper.domain.OperateDTO)
-	 */
-	@Override
-	public void finishDeal(OperateDTO operateDTO) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public Class<?> getCurrentClass() {
+        return Miss_medical_companyWithBLOBs.class;
+    }
 
-	@Override
-	public String getJsonParamKey() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public boolean needDealMapper() {
+        return false;
+    }
+
+    @Override
+    public String getJsonParamKey() {
+        return "missMedicalCompany";
+    }
 
 }

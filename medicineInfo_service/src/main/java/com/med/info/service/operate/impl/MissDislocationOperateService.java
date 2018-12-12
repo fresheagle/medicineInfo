@@ -18,35 +18,27 @@ public class MissDislocationOperateService extends AbstractOperateService<Miss_d
 	
 	@Override
 	public String getCurrentMenuType() {
-		// TODO Auto-generated method stub
-		return "miss_dislocation";
+		return "missDislocation";
 	}
 
 	@Override
-	public BaseService<Miss_dislocation> getBaseService(String menuType) {
-		// TODO Auto-generated method stub
+	public BaseService<Miss_dislocation> baseService(String menuType) {
 		return dislocationService;
 	}
 
 	@Override
 	public Class<?> getCurrentClass() {
-		// TODO Auto-generated method stub
 		return Miss_dislocation.class;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.med.info.service.operate.impl.AbstractOperateService#fishDeal(com.med.info.mapper.domain.OperateDTO)
-	 */
 	@Override
-	public void finishDeal(OperateDTO operateDTO) {
-		// TODO Auto-generated method stub
-		
+	public boolean needDealMapper() {
+		return false;
 	}
 
 	@Override
 	public String getJsonParamKey() {
-		// TODO Auto-generated method stub
-		return null;
+		return "missDislocation";
 	}
 
 }

@@ -1,52 +1,42 @@
 package com.med.info.service.operate.impl;
 
+import com.med.info.domain.Miss_department;
+import com.med.info.service.BaseService;
+import com.med.info.service.MissDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import com.med.info.domain.Miss_department;
-import com.med.info.mapper.domain.OperateDTO;
-import com.med.info.service.BaseService;
-import com.med.info.service.MissDepartmentService;
 
 @Component
 @Order(4)
 public class MissDepartmentOperateService extends AbstractOperateService<Miss_department> {
 
-	@Autowired
-	private MissDepartmentService departmentService;
-	
-	@Override
-	public String getCurrentMenuType() {
-		// TODO Auto-generated method stub
-		return "miss_department";
-	}
+    @Autowired
+    private MissDepartmentService departmentService;
 
-	@Override
-	public BaseService<Miss_department> getBaseService(String menuType) {
-		// TODO Auto-generated method stub
-		return departmentService;
-	}
+    @Override
+    public String getCurrentMenuType() {
+        return "missDepartment";
+    }
 
-	@Override
-	public Class<?> getCurrentClass() {
-		// TODO Auto-generated method stub
-		return Miss_department.class;
-	}
+    @Override
+    public BaseService<Miss_department> baseService(String menuType) {
+        return departmentService;
+    }
 
-	/* (non-Javadoc)
-	 * @see com.med.info.service.operate.impl.AbstractOperateService#fishDeal(com.med.info.mapper.domain.OperateDTO)
-	 */
-	@Override
-	public void finishDeal(OperateDTO operateDTO) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public Class<?> getCurrentClass() {
+        return Miss_department.class;
+    }
 
-	@Override
-	public String getJsonParamKey() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public boolean needDealMapper() {
+        return false;
+    }
+
+    @Override
+    public String getJsonParamKey() {
+        return "missDepartment";
+    }
 
 }

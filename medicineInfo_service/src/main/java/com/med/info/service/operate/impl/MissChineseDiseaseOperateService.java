@@ -19,19 +19,16 @@ public class MissChineseDiseaseOperateService extends AbstractOperateService<Mis
 
     @Override
     public String getCurrentMenuType() {
-        // TODO Auto-generated method stub
         return "missChineseDisease";
     }
 
     @Override
     public BaseService<Miss_chinese_diseaseWithBLOBs> baseService(String menuType) {
-        // TODO Auto-generated method stub
         return chineseDiseaseService;
     }
 
     @Override
     public Class<?> getCurrentClass() {
-        // TODO Auto-generated method stub
         return Miss_chinese_diseaseWithBLOBs.class;
     }
 
@@ -44,7 +41,6 @@ public class MissChineseDiseaseOperateService extends AbstractOperateService<Mis
 
     @Override
     public String getJsonParamKey() {
-        // TODO Auto-generated method stub
         return "missChineseDisease";
     }
 

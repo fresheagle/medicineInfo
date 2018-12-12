@@ -62,9 +62,9 @@ public class MissDoctorOperateService extends AbstractOperateService<Miss_doctor
 	protected void dealMapperRelashionShip(OperateDTO operateDTO) {
 		DoctorDTO doctorDTO = JSONObject.toJavaObject(operateDTO.getJsonStr(), DoctorDTO.class);
 		Miss_doctorWithBLOBs missDoctor = doctorDTO.getMissDoctor();
+		institutionDoctorMappingMapper.deleteByDoctorId(missDoctor.getId());
+		departmentDoctorMappingMapper.deleteByDoctorId(missDoctor.getId());
 		if(!operateDTO.getTaskType().equals(OperateEnum.delete.toString())) {
-			institutionDoctorMappingMapper.deleteByDoctorId(missDoctor.getId());
-			departmentDoctorMappingMapper.deleteByDoctorId(missDoctor.getId());
 			List<InstitutionInfoMapDTO> institutionList = doctorDTO.getInstitutionList();
 			if(CollectionUtil.isNotEmpty(institutionList)) {
 				for (InstitutionInfoMapDTO institutionInfoMapDTO : institutionList) {
@@ -84,10 +84,6 @@ public class MissDoctorOperateService extends AbstractOperateService<Miss_doctor
 					departmentDoctorMappingMapper.insert(record );
 				}
 			}
-		}else {
-			logger.info(getCurrentMenuType()+"当前操作为"+operateDTO.getTaskType()+",修改状态为回收站");
-			institutionDoctorMappingMapper.deleteByDoctorId(missDoctor.getId());
-			departmentDoctorMappingMapper.deleteByDoctorId(missDoctor.getId());
 		}
 	}
 

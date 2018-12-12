@@ -59,14 +59,12 @@ public class MissDiseaseOperateService extends AbstractOperateService<Miss_disea
     protected void dealMapperRelashionShip(OperateDTO operateDTO) {
         DiseaseDTO diseaseDTO = JSONObject.toJavaObject(operateDTO.getJsonStr(), DiseaseDTO.class);
         Long id = diseaseDTO.getMissDisease().getId();
+        miss_disease_department_mappingMapper.deleteByDiseaseId(id);
+        miss_disease_symptom_mappingMapper.deleteByDiseaseId(id);
         if (!operateDTO.getTaskType().equals(OperateEnum.delete.toString())) {
             logger.info(getCurrentMenuType() + "当前操作为" + operateDTO.getTaskType() + "入库数据");
             List<DepartmentMapDTO> departmentMapDTO = diseaseDTO.getDepartmentMapDTO();
             List<SymptomMapDTO> symptomMapDTO = diseaseDTO.getSymptomMapDTO();
-
-            miss_disease_department_mappingMapper.deleteByDiseaseId(id);
-            miss_disease_symptom_mappingMapper.deleteByDiseaseId(id);
-
             if (CollectionUtil.isNotEmpty(symptomMapDTO)) {
                 for (SymptomMapDTO symptomMapDTO2 : symptomMapDTO) {
                     Miss_disease_symptom_mapping record = new Miss_disease_symptom_mapping();
@@ -85,11 +83,6 @@ public class MissDiseaseOperateService extends AbstractOperateService<Miss_disea
                     miss_disease_department_mappingMapper.insert(record);
                 }
             }
-
-        } else {
-            logger.info(getCurrentMenuType() + "当前操作为" + operateDTO.getTaskType() + ",修改状态为回收站");
-            miss_disease_department_mappingMapper.deleteByDiseaseId(id);
-            miss_disease_symptom_mappingMapper.deleteByDiseaseId(id);
         }
     }
 

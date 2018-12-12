@@ -58,4 +58,6 @@ public interface Miss_medical_medicalcompany_mappingMapper extends BaseMapper<Mi
      * @mbg.generated Sat Nov 17 18:29:49 CST 2018
      */
     int updateByPrimaryKey(Miss_medical_medicalcompany_mapping record);
+
+    void deleteByMedicalId(Long id);
 }

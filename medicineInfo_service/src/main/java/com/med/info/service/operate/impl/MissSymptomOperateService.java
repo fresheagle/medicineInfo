@@ -60,9 +60,9 @@ public class MissSymptomOperateService extends AbstractOperateService<Miss_sympt
         {
             SymptomDTO symptomDTO = JSONObject.toJavaObject(operateDTO.getJsonStr(), SymptomDTO.class);
             Miss_symptomWithBLOBs miss_symptom = symptomDTO.getMissSymptom();
+            symptom_dislocation_mappingMapper.deleteBySymptomId(miss_symptom.getId());
+            symptom_medical_mappingMapper.deleteBySymptomId(miss_symptom.getId());
             if (!operateDTO.getTaskType().equals(OperateEnum.delete.toString())) {
-                symptom_dislocation_mappingMapper.deleteBySymptomId(miss_symptom.getId());
-                symptom_medical_mappingMapper.deleteBySymptomId(miss_symptom.getId());
                 List<DislocationMapDTO> dislocationList = symptomDTO.getDislocationList();
                 if (CollectionUtil.isNotEmpty(dislocationList)) {
                     for (DislocationMapDTO dislocationMapDTO : dislocationList) {
@@ -84,10 +84,6 @@ public class MissSymptomOperateService extends AbstractOperateService<Miss_sympt
                         symptom_medical_mappingMapper.insert(record);
                     }
                 }
-            } else {
-                logger.info(getCurrentMenuType() + "当前操作为" + operateDTO.getTaskType() + ",修改状态为回收站");
-                symptom_dislocation_mappingMapper.deleteBySymptomId(miss_symptom.getId());
-                symptom_medical_mappingMapper.deleteBySymptomId(miss_symptom.getId());
             }
         }
     }

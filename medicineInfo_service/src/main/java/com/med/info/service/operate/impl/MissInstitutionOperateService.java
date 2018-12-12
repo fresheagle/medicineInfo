@@ -50,8 +50,8 @@ public class MissInstitutionOperateService extends AbstractOperateService<Miss_i
     protected void dealMapperRelashionShip(OperateDTO operateDTO) {
         InstitutionInfoDTO javaObject = JSONObject.toJavaObject(operateDTO.getJsonStr(), InstitutionInfoDTO.class);
         Miss_institutionWithBLOBs missInstitutionWithBLOBs = javaObject.getMissInstitutionWithBLOBs();
+        institution_keypartment_mappingMapper.deleteByInstitutionId(missInstitutionWithBLOBs.getId());
         if (!operateDTO.getTaskType().equals(OperateEnum.delete.toString())) {
-            institution_keypartment_mappingMapper.deleteByInstitutionId(missInstitutionWithBLOBs.getId());
             List<DepartmentMapDTO> departmentMapDTO = javaObject.getDepartmentMapDTO();
             if (CollectionUtil.isNotEmpty(departmentMapDTO)) {
                 for (DepartmentMapDTO departmentMapDTO2 : departmentMapDTO) {
@@ -62,10 +62,6 @@ public class MissInstitutionOperateService extends AbstractOperateService<Miss_i
                     institution_keypartment_mappingMapper.insert(record);
                 }
             }
-        } else {
-            logger.info(getCurrentMenuType() + "当前操作为" + operateDTO.getTaskType() + ",修改状态为回收站");
-            institution_keypartment_mappingMapper.deleteByInstitutionId(missInstitutionWithBLOBs.getId());
-
         }
     }
 

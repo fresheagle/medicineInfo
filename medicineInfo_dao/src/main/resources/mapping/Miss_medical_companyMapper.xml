@@ -475,4 +475,27 @@
       task_status = #{taskStatus,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="showDataCondition"
+          parameterType="com.med.info.domain.Miss_medical_companyWithBLOBs"
+          resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from miss_medical_company
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="englishName != null">
+      	english_name = #{englishName,jdbcType=VARCHAR}
+      </if>
+      <if test="chineseName != null">
+      	chinese_name = #{chineseName,jdbcType=VARCHAR}
+      </if>
+      <if test="location != null">
+      	location = #{location,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
 </mapper>

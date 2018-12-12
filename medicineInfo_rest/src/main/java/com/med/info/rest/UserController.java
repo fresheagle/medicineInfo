@@ -30,13 +30,14 @@ public class UserController {
 	private UserInfoService userInfoService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public Response addUser(@RequestBody Miss_control_user controlUser) {
-		return null;
+	public Response addUser(@RequestBody Miss_control_user missControlUser) {
+		userInfoService.insert(missControlUser);
+		return new Response().success();
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE)
 	public Response deleteUser(String uuid) {
-		return null;
+		return new Response().success();
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)

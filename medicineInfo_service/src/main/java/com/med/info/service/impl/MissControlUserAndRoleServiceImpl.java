@@ -10,7 +10,9 @@ import com.med.info.mapper.domain.UserAndRoleDTO;
 import com.med.info.service.MissControlUserAndRoleService;
 import com.med.info.utils.CollectionUtil;
 import com.med.info.utils.UuidUtils;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MissControlUserAndRoleServiceImpl extends BaseServiceImpl<Miss_control_userAndRole> implements MissControlUserAndRoleService {
 
 	@Autowired

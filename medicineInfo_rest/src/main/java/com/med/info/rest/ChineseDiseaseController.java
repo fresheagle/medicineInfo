@@ -41,7 +41,6 @@ public class ChineseDiseaseController {
 		if(diseaseId != null) {
 			miss_chinese_diseaseWithBLOBs.setDiseaseId(diseaseId);
 		}
-//		PageObject<Miss_chinese_diseaseWithBLOBs> selectPage = missChineseDiseaseService.selectPage(currentPage, pageSize, new Miss_chinese_diseaseWithBLOBs());
 		PageObject<Miss_chinese_diseaseWithBLOBs> selectPage = missChineseDiseaseService.selectPageByOperateDto(currentPage, pageSize, miss_chinese_diseaseWithBLOBs);
 		return new Response().success(selectPage);
 	}

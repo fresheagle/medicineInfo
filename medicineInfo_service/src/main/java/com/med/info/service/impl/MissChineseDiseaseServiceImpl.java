@@ -43,4 +43,8 @@ public class MissChineseDiseaseServiceImpl extends BaseServiceImpl<Miss_chinese_
 		return null;
 	}
 
+	@Override
+	public String getKeyName() {
+		return "missChineseDisease";
+	}
 }

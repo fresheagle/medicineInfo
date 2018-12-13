@@ -92,7 +92,8 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 		List<OperateDTO> listOp = new ArrayList<>();
 		for ( int i=0;i<showDataCondition.size();i++) {
 			OperateDTO operateDTO = new OperateDTO();
-			JSONObject json =  JSONObject.parseObject(JSONObject.toJSONString(showDataCondition.get(i)));
+			JSONObject json = new JSONObject();
+			json.put(getKeyName(), JSONObject.parseObject(JSONObject.toJSONString(showDataCondition.get(i))));
 			operateDTO.setJsonStr(json );
 			listOp.add(operateDTO);
 		}
@@ -104,7 +105,11 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 	}
 	
 	public abstract BaseMapper getMapper();
-	
+
+	public String getKeyName(){
+		return "key";
+	}
+
 	
 	public OperateDTO converseToOperataDTO(Object o) {
 		OperateDTO operateDTO = new OperateDTO();

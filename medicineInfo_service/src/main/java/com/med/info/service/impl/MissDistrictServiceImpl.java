@@ -19,4 +19,8 @@ public class MissDistrictServiceImpl extends BaseServiceImpl<Miss_district> impl
 		return districtMapper;
 	}
 
+	@Override
+	public String getKeyName() {
+		return "missDistrict";
+	}
 }

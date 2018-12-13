@@ -20,4 +20,8 @@ public class MissMedicalCompanyServiceImpl extends BaseServiceImpl<Miss_medical_
 		return medicalCompanyMapper;
 	}
 
+	@Override
+	public String getKeyName() {
+		return "missMedicalCompany";
+	}
 }

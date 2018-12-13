@@ -44,4 +44,8 @@ public class MissCombinationDiseaseServiceImpl extends BaseServiceImpl<Miss_comb
 		return null;
 	}
 
+	@Override
+	public String getKeyName() {
+		return "missCombineDisease";
+	}
 }

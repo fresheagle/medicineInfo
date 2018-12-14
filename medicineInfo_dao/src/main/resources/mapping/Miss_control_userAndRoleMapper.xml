@@ -144,7 +144,32 @@
     where URuuid = #{uruuid,jdbcType=VARCHAR}
   </update>
   <delete id="deleteByUserCode" parameterType="java.lang.String">
-  	delete from miss_control_userAndRole 
+  	delete from miss_control_userandrole
   	where userCode=#{usercode,jdbcType=VARCHAR}
   </delete>
+
+  <select id="showDataCondition"
+          parameterType="com.med.info.domain.Miss_control_userAndRole"
+          resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from miss_control_userandrole
+    <where>
+      <if test="usercode != null">
+        userCode = #{usercode,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <select id="selectByCode"
+          parameterType="com.med.info.domain.Miss_control_userAndRole"
+          resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from miss_control_userandrole
+    <where>
+      <if test="usercode != null">
+        userCode = #{usercode,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
 </mapper>

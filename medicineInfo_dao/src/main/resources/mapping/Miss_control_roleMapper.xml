@@ -154,4 +154,21 @@
       roleCreateTime = #{rolecreatetime,jdbcType=VARCHAR}
     where roleUuid = #{roleuuid,jdbcType=VARCHAR}
   </update>
+
+  <select id="showDataCondition"
+          parameterType="com.med.info.domain.Miss_control_role"
+          resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from miss_control_role
+  </select>
+
+  <select id="selectByRoleCode"
+          parameterType="java.lang.String"
+          resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from miss_control_role
+    where roleCode = #{rolecode,jdbcType=VARCHAR}
+  </select>
 </mapper>

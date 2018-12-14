@@ -50,4 +50,6 @@ public interface Miss_control_roleMapper extends BaseMapper<Miss_control_role>{
      * @mbg.generated Sat Nov 17 18:29:49 CST 2018
      */
     int updateByPrimaryKey(Miss_control_role record);
+
+    Miss_control_role selectByRoleCode(String rolecode);
 }

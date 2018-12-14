@@ -12,6 +12,7 @@ import com.med.info.service.BaseService;
 import com.med.info.service.impl.DefaultTokenManager;
 import com.med.info.service.operate.IOperateService;
 import com.med.info.utils.OperateEnum;
+import com.med.info.utils.StringUtil;
 import com.med.info.utils.TrialStatusEnum;
 import com.med.info.utils.UuidUtils;
 import org.slf4j.Logger;
@@ -138,7 +139,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 
     private void firstTrialOperate(OperateDTO operateDTO, T object, BaseService<T> baseService) {
         // 插入数据到
-        if (null == operateDTO.getTaskId()) {
+        if (StringUtil.isEmpty(operateDTO.getTaskId())) {
             String taskId = UuidUtils.generateUUID();
             object.setTaskJson(JSON.toJSONString(operateDTO.getJsonStr()));
             object.setTaskId(taskId);
@@ -193,7 +194,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
     private void creatingOperate(OperateDTO operateDTO, T object, BaseService<T> baseService) {
 
         // 插入数据到
-        if (null == operateDTO.getTaskId()) {
+        if (StringUtil.isEmpty(operateDTO.getTaskId())) {
             String taskId = UuidUtils.generateUUID();
             JSONObject jsonStr = operateDTO.getJsonStr();
             //如果是创建，就先插入数据，获取数据ID,并放入json中，方便后续处理

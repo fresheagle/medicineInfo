@@ -141,10 +141,17 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
         // 插入数据到
         if (StringUtil.isEmpty(operateDTO.getTaskId())) {
             String taskId = UuidUtils.generateUUID();
-            object.setTaskJson(JSON.toJSONString(operateDTO.getJsonStr()));
-            object.setTaskId(taskId);
-            object.setTaskStatus(TrialStatusEnum.TO_FIRST_AUDITED.getId());
-            baseService.insert(object);
+            JSONObject jsonStr = operateDTO.getJsonStr();
+            //如果是创建，就先插入数据，获取数据ID,并放入json中，方便后续处理
+            if (operateDTO.getTaskType().equals(OperateEnum.create.toString())) {
+                object.setTaskJson(JSON.toJSONString(jsonStr));
+                object.setTaskId(taskId);
+                object.setId(null);
+                object.setTaskStatus(TrialStatusEnum.DRAFTS.getId());
+                int insertId = baseService.insert(object);
+                jsonStr.put("id", insertId);
+                object.setId(Long.valueOf(insertId));
+            }
 
             Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
             controlTaskRecord.setTaskcreaterusercode(DefaultTokenManager.getLocalUserCode());
@@ -201,6 +208,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
             if (operateDTO.getTaskType().equals(OperateEnum.create.toString())) {
                 object.setTaskJson(JSON.toJSONString(jsonStr));
                 object.setTaskId(taskId);
+                object.setId(null);
                 object.setTaskStatus(TrialStatusEnum.DRAFTS.getId());
                 int insertId = baseService.insert(object);
                 jsonStr.put("id", insertId);

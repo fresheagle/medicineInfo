@@ -66,4 +66,8 @@ public class MissInstitutionServiceImpl extends BaseServiceImpl<Miss_institution
 		return institutionInfoDTO;
 	}
 
+	@Override
+	public String getKeyName() {
+		return "missInstitution";
+	}
 }

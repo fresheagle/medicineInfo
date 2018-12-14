@@ -6,16 +6,18 @@ public class MedicalCompanyMapDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private Long medicalCompany_id;
+	private Long medicalCompanyId;
 	private String companyChineseName;
 	private String companyEnglishName;
-	
-	public Long getMedicalCompany_id() {
-		return medicalCompany_id;
+
+	public Long getMedicalCompanyId() {
+		return medicalCompanyId;
 	}
-	public void setMedicalCompany_id(Long medicalCompany_id) {
-		this.medicalCompany_id = medicalCompany_id;
+
+	public void setMedicalCompanyId(Long medicalCompanyId) {
+		this.medicalCompanyId = medicalCompanyId;
 	}
+
 	public String getCompanyChineseName() {
 		return companyChineseName;
 	}

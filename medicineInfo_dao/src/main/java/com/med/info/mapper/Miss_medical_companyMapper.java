@@ -2,6 +2,9 @@ package com.med.info.mapper;
 
 import com.med.info.domain.Miss_medical_company;
 import com.med.info.domain.Miss_medical_companyWithBLOBs;
+import com.med.info.mapper.domain.MedicalCompanyMapDTO;
+
+import java.util.List;
 
 public interface Miss_medical_companyMapper extends BaseMapper<Miss_medical_companyWithBLOBs>{
     /**
@@ -59,4 +62,6 @@ public interface Miss_medical_companyMapper extends BaseMapper<Miss_medical_comp
      * @mbg.generated Sat Nov 17 18:29:49 CST 2018
      */
     int updateByPrimaryKey(Miss_medical_company record);
+
+    List<MedicalCompanyMapDTO> getCompanyByMedicalId(Long id);
 }

@@ -22,7 +22,7 @@ import java.util.List;
 
 @Component
 @Order(10)
-public class MissMedicalOperateService extends AbstractOperateService<Miss_medical>{
+public class MissMedicalOperateService extends AbstractOperateService<Miss_medicalWithBLOBs>{
 
 	@Autowired
 	private MissMedicalService medicalService;
@@ -35,26 +35,26 @@ public class MissMedicalOperateService extends AbstractOperateService<Miss_medic
 	}
 
 	@Override
-	public BaseService<Miss_medical> baseService(String menuType) {
+	public BaseService<Miss_medicalWithBLOBs> baseService(String menuType) {
 		return medicalService;
 	}
 
 	@Override
 	public Class<?> getCurrentClass() {
-		return Miss_medical.class;
+		return Miss_medicalWithBLOBs.class;
 	}
 
 	@Override
 	protected void dealMapperRelashionShip(OperateDTO operateDTO) {
 		MedicalDTO medicalDTO = JSONObject.toJavaObject(operateDTO.getJsonStr(), MedicalDTO.class);
-		Miss_medicalWithBLOBs miss_medical = medicalDTO.getMiss_medical();
+		Miss_medicalWithBLOBs miss_medical = medicalDTO.getMissMedical();
 		medicalMedicalcompanyMappingMapper.deleteByMedicalId(miss_medical.getId());
 		if(!operateDTO.getTaskType().equals(OperateEnum.delete.toString())){
 			List<MedicalCompanyMapDTO> medicalCompanyList = medicalDTO.getMedicalCompanyList();
 			if(CollectionUtil.isNotEmpty(medicalCompanyList)){
 				for (MedicalCompanyMapDTO medicalCompanyMapDTO : medicalCompanyList) {
 					Miss_medical_medicalcompany_mapping record = new Miss_medical_medicalcompany_mapping();
-					record.setMedicalCompanyId(medicalCompanyMapDTO.getMedicalCompany_id());
+					record.setMedicalCompanyId(medicalCompanyMapDTO.getMedicalCompanyId());
 					record.setMedicalId(miss_medical.getId());
 					record.setCreateTime(new Date());
 					medicalMedicalcompanyMappingMapper.insert(record);

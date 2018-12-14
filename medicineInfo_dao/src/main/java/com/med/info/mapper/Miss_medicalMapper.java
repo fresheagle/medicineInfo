@@ -63,5 +63,7 @@ public interface Miss_medicalMapper extends BaseMapper<Miss_medicalWithBLOBs>{
      */
     int updateByPrimaryKey(Miss_medical record);
 
+
+
 	List<MedicalMapDTO> getMedicalMapDTOBySymptomId(Long id);
 }

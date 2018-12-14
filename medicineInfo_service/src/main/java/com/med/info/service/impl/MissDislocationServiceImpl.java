@@ -50,5 +50,4 @@ public class MissDislocationServiceImpl extends BaseServiceImpl<Miss_dislocation
 	public List<DislocationMapDTO> getDislocationMapDTOBySymptomId(Long id) {
 		return dislocationMapper.getDislocationMapDTOBySymptomId(id);
 	}
-
 }

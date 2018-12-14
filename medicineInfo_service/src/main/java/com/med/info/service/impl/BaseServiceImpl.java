@@ -95,6 +95,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 			JSONObject json = new JSONObject();
 			json.put(getKeyName(), JSONObject.parseObject(JSONObject.toJSONString(showDataCondition.get(i))));
 			operateDTO.setJsonStr(json );
+			operateDTO.setTaskMenuType(getKeyName());
 			listOp.add(operateDTO);
 		}
 		PageObject object = new PageObject<T>();
@@ -115,6 +116,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
 		OperateDTO operateDTO = new OperateDTO();
 		JSONObject json =  JSONObject.parseObject(JSONObject.toJSONString(o));
 		operateDTO.setJsonStr(json);
+		operateDTO.setTaskMenuType(getKeyName());
 		return operateDTO;
 	}
 }

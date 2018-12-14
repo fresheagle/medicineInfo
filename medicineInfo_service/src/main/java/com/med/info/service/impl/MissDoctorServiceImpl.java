@@ -71,6 +71,8 @@ public class MissDoctorServiceImpl extends BaseServiceImpl<Miss_doctorWithBLOBs>
 		this.doctorMapper = doctorMapper;
 	}
 
-	
-	
+	@Override
+	public String getKeyName() {
+		return "missDoctor";
+	}
 }

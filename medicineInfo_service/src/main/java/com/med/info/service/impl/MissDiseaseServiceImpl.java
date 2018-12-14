@@ -133,4 +133,10 @@ public class MissDiseaseServiceImpl extends BaseServiceImpl<Miss_diseaseWithBLOB
 //		operateDTO.setJsonStr(json);
 //		return operateDTO;
 //	}
+
+
+	@Override
+	public String getKeyName() {
+		return "missDisease";
+	}
 }

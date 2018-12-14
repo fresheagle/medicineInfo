@@ -87,4 +87,8 @@ public class MissSymptomServiceImpl extends BaseServiceImpl<Miss_symptomWithBLOB
 		return symptomDTO;
 	}
 
+	@Override
+	public String getKeyName() {
+		return "missSymptom";
+	}
 }

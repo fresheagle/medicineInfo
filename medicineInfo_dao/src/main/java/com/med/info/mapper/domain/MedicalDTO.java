@@ -14,15 +14,17 @@ public class MedicalDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private Miss_medicalWithBLOBs miss_medical;
+	private Miss_medicalWithBLOBs missMedical;
 	private List<MedicalCompanyMapDTO> medicalCompanyList;
-	
-	public Miss_medicalWithBLOBs getMiss_medical() {
-		return miss_medical;
+
+	public Miss_medicalWithBLOBs getMissMedical() {
+		return missMedical;
 	}
-	public void setMiss_medical(Miss_medicalWithBLOBs miss_medical) {
-		this.miss_medical = miss_medical;
+
+	public void setMissMedical(Miss_medicalWithBLOBs missMedical) {
+		this.missMedical = missMedical;
 	}
+
 	public List<MedicalCompanyMapDTO> getMedicalCompanyList() {
 		return medicalCompanyList;
 	}

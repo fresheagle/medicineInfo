@@ -148,9 +148,10 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
                 object.setTaskId(taskId);
                 object.setId(null);
                 object.setTaskStatus(TrialStatusEnum.DRAFTS.getId());
-                int insertId = baseService.insert(object);
-                jsonStr.put("id", insertId);
-                object.setId(Long.valueOf(insertId));
+                baseService.insert(object);
+                JSONObject parmJsonObject = getParmJsonObject(operateDTO.getJsonStr());
+                parmJsonObject.put("id", object.getId());
+                operateDTO.getJsonStr().put(getJsonParamKey(), parmJsonObject);
             }
 
             Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
@@ -210,12 +211,13 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
                 object.setTaskId(taskId);
                 object.setId(null);
                 object.setTaskStatus(TrialStatusEnum.DRAFTS.getId());
-                int insertId = baseService.insert(object);
-                jsonStr.put("id", insertId);
-                object.setId(Long.valueOf(insertId));
+                baseService.insert(object);
+                JSONObject parmJsonObject = getParmJsonObject(operateDTO.getJsonStr());
+                parmJsonObject.put("id", object.getId());
+                operateDTO.getJsonStr().put(getJsonParamKey(), parmJsonObject);
             }
             T selectByPrimaryId = baseService.selectByPrimaryId(object.getId());
-            selectByPrimaryId.setTaskJson(JSON.toJSONString(jsonStr));
+            selectByPrimaryId.setTaskJson(JSON.toJSONString(operateDTO.getJsonStr()));
             selectByPrimaryId.setTaskId(taskId);
             selectByPrimaryId.setTaskStatus(TrialStatusEnum.DRAFTS.getId());
             baseService.updateByPrimaryKey(selectByPrimaryId);

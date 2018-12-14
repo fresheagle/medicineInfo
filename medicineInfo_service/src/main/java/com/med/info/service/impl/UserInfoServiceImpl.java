@@ -6,6 +6,7 @@ package com.med.info.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.annotation.Resource;
 
@@ -85,8 +86,10 @@ public class UserInfoServiceImpl extends BaseServiceImpl<Miss_control_user> impl
 		if (null != findUserByUnameAndPasswd) {
 			List<Miss_control_action> controlActionsByUserCode = controlActionService
 					.getControlActionsByUserCode(userCode);
-			List<Miss_control_action> firstLevel = controlActionsByUserCode.stream()
-					.filter(action -> StringUtil.isEmpty(action.getActionparentcode())).collect(Collectors.toList());
+
+			Stream<Miss_control_action> miss_control_actionStream = controlActionsByUserCode.stream()
+					.filter(action -> null != action && StringUtil.isEmpty(action.getActionparentcode()));
+			List<Miss_control_action> firstLevel = miss_control_actionStream.collect(Collectors.toList());
 			for (Miss_control_action miss_control_action : firstLevel) {
 				UserPrivilegeDTO firstPrivilege = new UserPrivilegeDTO();
 				firstPrivilege.setName(miss_control_action.getActionname());
@@ -94,7 +97,7 @@ public class UserInfoServiceImpl extends BaseServiceImpl<Miss_control_user> impl
 				List<UserPrivilegeDTO> children = new ArrayList<>();
 				firstPrivilege.setChildren(children );
 				List<Miss_control_action> secondLevel = controlActionsByUserCode.stream()
-						.filter(action -> (null != action.getActionparentcode() && action.getActionparentcode().equals(miss_control_action.getActioncode())))
+						.filter(action -> (null != action && null != action.getActionparentcode() && action.getActionparentcode().equals(miss_control_action.getActioncode())))
 						.collect(Collectors.toList());
 				for (Miss_control_action miss_control_action2 : secondLevel) {
 					UserPrivilegeDTO secondPrivilege = new UserPrivilegeDTO();

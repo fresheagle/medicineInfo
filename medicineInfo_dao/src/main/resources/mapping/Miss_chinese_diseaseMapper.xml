@@ -129,7 +129,7 @@
       #{literatureAbstract,jdbcType=LONGVARCHAR}, #{modernResearch,jdbcType=LONGVARCHAR}, 
       #{textDietaryConditioning,jdbcType=LONGVARCHAR}, #{attentionMatter,jdbcType=LONGVARCHAR}, 
       #{dataReference,jdbcType=LONGVARCHAR}, #{taskJson,jdbcType=LONGVARCHAR})
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       select last_insert_id()
     </selectKey>
   </insert>

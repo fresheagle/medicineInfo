@@ -17,7 +17,7 @@ public class Miss_chinese_disease extends BaseDomain{
      *
      * @mbg.generated Mon Nov 26 11:32:45 CST 2018
      */
-    private Integer diseaseId;
+    private Long diseaseId;
 
     /**
      *
@@ -105,7 +105,7 @@ public class Miss_chinese_disease extends BaseDomain{
      *
      * @mbg.generated Mon Nov 26 11:32:45 CST 2018
      */
-    public Integer getDiseaseId() {
+    public Long getDiseaseId() {
         return diseaseId;
     }
 
@@ -117,7 +117,7 @@ public class Miss_chinese_disease extends BaseDomain{
      *
      * @mbg.generated Mon Nov 26 11:32:45 CST 2018
      */
-    public void setDiseaseId(Integer diseaseId) {
+    public void setDiseaseId(Long diseaseId) {
         this.diseaseId = diseaseId;
     }
 

@@ -37,7 +37,7 @@ public class CombinationDiseaseController {
 	@RequestMapping(path="/page", method = RequestMethod.GET)
 	public Response selectPage(@RequestParam("currentPage") Integer currentPage, 
 			@RequestParam(value="pageSize",defaultValue = "10") Integer pageSize,
-			@RequestParam(value="diseaseId", required = false) Integer diseaseId) {
+			@RequestParam(value="diseaseId", required = false) Long diseaseId) {
 		Miss_combination_diseaseWithBLOBs miss_combination_diseaseWithBLOBs = new Miss_combination_diseaseWithBLOBs();
 		if(diseaseId != null) {
 			miss_combination_diseaseWithBLOBs.setDiseaseId(diseaseId);

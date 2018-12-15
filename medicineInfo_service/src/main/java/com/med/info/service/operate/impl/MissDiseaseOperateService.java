@@ -69,8 +69,8 @@ public class MissDiseaseOperateService extends AbstractOperateService<Miss_disea
                 for (SymptomMapDTO symptomMapDTO2 : symptomMapDTO) {
                     Miss_disease_symptom_mapping record = new Miss_disease_symptom_mapping();
                     record.setCreateTime(new Timestamp(System.currentTimeMillis()));
-                    record.setSymptomId(symptomMapDTO2.getId().intValue());
-                    record.setDiseaseId(id.intValue());
+                    record.setSymptomId(symptomMapDTO2.getId());
+                    record.setDiseaseId(id);
                     miss_disease_symptom_mappingMapper.insert(record);
                 }
             }

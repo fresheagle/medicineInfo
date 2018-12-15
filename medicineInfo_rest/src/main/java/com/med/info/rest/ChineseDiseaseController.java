@@ -36,7 +36,7 @@ public class ChineseDiseaseController {
 	@RequestMapping(path="/page", method = RequestMethod.GET)
 	public Response selectPage(@RequestParam("currentPage") Integer currentPage, 
 			@RequestParam(value="pageSize", defaultValue = "10") Integer pageSize,
-			@RequestParam(value="diseaseId", required = false) Integer diseaseId) {
+			@RequestParam(value="diseaseId", required = false) Long diseaseId) {
 		Miss_chinese_diseaseWithBLOBs miss_chinese_diseaseWithBLOBs = new Miss_chinese_diseaseWithBLOBs();
 		if(diseaseId != null) {
 			miss_chinese_diseaseWithBLOBs.setDiseaseId(diseaseId);

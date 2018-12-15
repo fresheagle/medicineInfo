@@ -82,6 +82,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 
         if (!operateDTO.getTaskType().equals(OperateEnum.delete.toString())) {
             logger.info(getCurrentMenuType() + "当前操作为" + operateDTO.getTaskType() + ",修改数据入库");
+            object.setDatastatus("1");
             baseService.updateByPrimaryKey(object);
         } else {
             logger.info(getCurrentMenuType() + "当前操作为" + operateDTO.getTaskType() + ",修改状态为回收站");
@@ -120,6 +121,10 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
         record.setTaskId(object.getTaskId());
         record.setTaskstatus(operateDTO.getTaskStatus());
         taskRecordsMapper.updateByTaskIdSelective(record);
+        createTaskDetail(operateDTO, object, taskLastData);
+    }
+
+    private void createTaskDetail(OperateDTO operateDTO, T object, Miss_control_task_detailWithBLOBs taskLastData) {
         Miss_control_task_detailWithBLOBs controlTaskDetail = new Miss_control_task_detailWithBLOBs();
         controlTaskDetail.setTaskId(object.getTaskId());
         controlTaskDetail.setTaskmenutype(operateDTO.getTaskMenuType());
@@ -143,39 +148,9 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
             String taskId = UuidUtils.generateUUID();
             JSONObject jsonStr = operateDTO.getJsonStr();
             //如果是创建，就先插入数据，获取数据ID,并放入json中，方便后续处理
-            if (operateDTO.getTaskType().equals(OperateEnum.create.toString())) {
-                object.setTaskJson(JSON.toJSONString(jsonStr));
-                object.setTaskId(taskId);
-                object.setId(null);
-                object.setTaskStatus(TrialStatusEnum.DRAFTS.getId());
-                baseService.insert(object);
-                JSONObject parmJsonObject = getParmJsonObject(operateDTO.getJsonStr());
-                parmJsonObject.put("id", object.getId());
-                operateDTO.getJsonStr().put(getJsonParamKey(), parmJsonObject);
-            }
-
-            Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
-            controlTaskRecord.setTaskcreaterusercode(DefaultTokenManager.getLocalUserCode());
-            controlTaskRecord.setTaskcreatetime(new Timestamp(System.currentTimeMillis()));
-            controlTaskRecord.setTaskcreateday(getToday());
-            controlTaskRecord.setTaskId(taskId);
-            controlTaskRecord.setTaskstatus(TrialStatusEnum.TO_FIRST_AUDITED.getId());
-            controlTaskRecord.setTaskmenutype(operateDTO.getTaskMenuType());
-            controlTaskRecord.setTasktype(operateDTO.getTaskType());
-            controlTaskRecord.setTasktitle(operateDTO.getTaskTitle());
-            taskRecordsMapper.insert(controlTaskRecord);
-
-            Miss_control_task_detailWithBLOBs createTaskDetail = new Miss_control_task_detailWithBLOBs();
-            createTaskDetail.setTaskId(taskId);
-            createTaskDetail.setTaskmenutype(operateDTO.getTaskMenuType());
-            createTaskDetail.setTaskstatuschangeafter(TrialStatusEnum.DRAFTS.getId());
-            createTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode());
-            createTaskDetail.setTaskuuid(UuidUtils.generateUUID());
-            createTaskDetail.setTaskchangetime(new Timestamp(System.currentTimeMillis()));
-            createTaskDetail.setTaskchangeday(getToday());
-            createTaskDetail.setTaskchangeafterjson(JSON.toJSONString(operateDTO.getJsonStr()));
-            taskDetailMapper.insert(createTaskDetail);
-
+            createObject(operateDTO, object, baseService, taskId, jsonStr, TrialStatusEnum.TO_FIRST_AUDITED.getId());
+            createTaskRecord(operateDTO, taskId, TrialStatusEnum.TO_FIRST_AUDITED);
+            createDraftsTaskDetail(operateDTO, taskId, operateDTO.getJsonStr());
             Miss_control_task_detailWithBLOBs controlTaskDetail = new Miss_control_task_detailWithBLOBs();
             controlTaskDetail.setTaskId(taskId);
             controlTaskDetail.setTaskmenutype(operateDTO.getTaskMenuType());
@@ -193,6 +168,32 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
         }
     }
 
+    private void createDraftsTaskDetail(OperateDTO operateDTO, String taskId, JSONObject jsonStr2) {
+        Miss_control_task_detailWithBLOBs createTaskDetail = new Miss_control_task_detailWithBLOBs();
+        createTaskDetail.setTaskId(taskId);
+        createTaskDetail.setTaskmenutype(operateDTO.getTaskMenuType());
+        createTaskDetail.setTaskstatuschangeafter(TrialStatusEnum.DRAFTS.getId());
+        createTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode());
+        createTaskDetail.setTaskuuid(UuidUtils.generateUUID());
+        createTaskDetail.setTaskchangetime(new Timestamp(System.currentTimeMillis()));
+        createTaskDetail.setTaskchangeday(getToday());
+        createTaskDetail.setTaskchangeafterjson(JSON.toJSONString(jsonStr2));
+        taskDetailMapper.insert(createTaskDetail);
+    }
+
+    private void createObject(OperateDTO operateDTO, T object, BaseService<T> baseService, String taskId, JSONObject jsonStr, String taskStatus) {
+        if (operateDTO.getTaskType().equals(OperateEnum.create.toString())) {
+            object.setTaskJson(JSON.toJSONString(jsonStr));
+            object.setTaskId(taskId);
+            object.setId(null);
+            object.setTaskStatus(taskStatus);
+            baseService.insert(object);
+            JSONObject parmJsonObject = getParmJsonObject(operateDTO.getJsonStr());
+            parmJsonObject.put("id", object.getId());
+            operateDTO.getJsonStr().put(getJsonParamKey(), parmJsonObject);
+        }
+    }
+
     private String getToday() {
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();
@@ -206,47 +207,31 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
             String taskId = UuidUtils.generateUUID();
             JSONObject jsonStr = operateDTO.getJsonStr();
             //如果是创建，就先插入数据，获取数据ID,并放入json中，方便后续处理
-            if (operateDTO.getTaskType().equals(OperateEnum.create.toString())) {
-                object.setTaskJson(JSON.toJSONString(jsonStr));
-                object.setTaskId(taskId);
-                object.setId(null);
-                object.setTaskStatus(TrialStatusEnum.DRAFTS.getId());
-                baseService.insert(object);
-                JSONObject parmJsonObject = getParmJsonObject(operateDTO.getJsonStr());
-                parmJsonObject.put("id", object.getId());
-                operateDTO.getJsonStr().put(getJsonParamKey(), parmJsonObject);
-            }
+            createObject(operateDTO, object, baseService, taskId, jsonStr, TrialStatusEnum.DRAFTS.getId());
             T selectByPrimaryId = baseService.selectByPrimaryId(object.getId());
             selectByPrimaryId.setTaskJson(JSON.toJSONString(operateDTO.getJsonStr()));
             selectByPrimaryId.setTaskId(taskId);
+            selectByPrimaryId.setDatastatus("0");
             selectByPrimaryId.setTaskStatus(TrialStatusEnum.DRAFTS.getId());
             baseService.updateByPrimaryKey(selectByPrimaryId);
-
-
-            Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
-            controlTaskRecord.setTaskcreaterusercode(DefaultTokenManager.getLocalUserCode());
-            controlTaskRecord.setTaskcreatetime(new Timestamp(System.currentTimeMillis()));
-            controlTaskRecord.setTaskcreateday(getToday());
-            controlTaskRecord.setTaskId(taskId);
-            controlTaskRecord.setTaskstatus(TrialStatusEnum.DRAFTS.getId());
-            controlTaskRecord.setTaskmenutype(operateDTO.getTaskMenuType());
-            controlTaskRecord.setTasktype(operateDTO.getTaskType());
-            controlTaskRecord.setTasktitle(operateDTO.getTaskTitle());
-            taskRecordsMapper.insert(controlTaskRecord);
-
-            Miss_control_task_detailWithBLOBs controlTaskDetail = new Miss_control_task_detailWithBLOBs();
-            controlTaskDetail.setTaskId(taskId);
-            controlTaskDetail.setTaskmenutype(operateDTO.getTaskMenuType());
-            controlTaskDetail.setTaskstatuschangeafter(TrialStatusEnum.DRAFTS.getId());
-            controlTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode());
-            controlTaskDetail.setTaskuuid(UuidUtils.generateUUID());
-            controlTaskDetail.setTaskchangetime(new Timestamp(System.currentTimeMillis()));
-            controlTaskDetail.setTaskchangeday(getToday());
-            controlTaskDetail.setTaskchangeafterjson(JSON.toJSONString(jsonStr));
-            taskDetailMapper.insert(controlTaskDetail);
+            createTaskRecord(operateDTO, taskId, TrialStatusEnum.DRAFTS);
+            createDraftsTaskDetail(operateDTO, taskId, jsonStr);
         } else {
             updateStatus(operateDTO, object, baseService);
         }
+    }
+
+    private void createTaskRecord(OperateDTO operateDTO, String taskId, TrialStatusEnum drafts) {
+        Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
+        controlTaskRecord.setTaskcreaterusercode(DefaultTokenManager.getLocalUserCode());
+        controlTaskRecord.setTaskcreatetime(new Timestamp(System.currentTimeMillis()));
+        controlTaskRecord.setTaskcreateday(getToday());
+        controlTaskRecord.setTaskId(taskId);
+        controlTaskRecord.setTaskstatus(drafts.getId());
+        controlTaskRecord.setTaskmenutype(operateDTO.getTaskMenuType());
+        controlTaskRecord.setTasktype(operateDTO.getTaskType());
+        controlTaskRecord.setTasktitle(operateDTO.getTaskTitle());
+        taskRecordsMapper.insert(controlTaskRecord);
     }
 
 

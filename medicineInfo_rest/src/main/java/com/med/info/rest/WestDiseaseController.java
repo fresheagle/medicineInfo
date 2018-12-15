@@ -37,7 +37,7 @@ public class WestDiseaseController {
 	@RequestMapping(path="/page", method = RequestMethod.GET)
 	public Response selectPage(@RequestParam("currentPage") Integer currentPage, 
 			@RequestParam(value="pageSize",defaultValue = "10") Integer pageSize,
-			@RequestParam(value="diseaseId", required = false) Integer diseaseId) {
+			@RequestParam(value="diseaseId", required = false) Long diseaseId) {
 		Miss_western_diseaseWithBLOBs miss_western_diseaseWithBLOBs = new Miss_western_diseaseWithBLOBs();
 		if(diseaseId != null) {
 			miss_western_diseaseWithBLOBs.setDiseaseId(diseaseId);

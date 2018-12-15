@@ -633,7 +633,7 @@
     <include refid="Blob_Column_List" />
     from miss_chinese_disease
     <where>
-		dataStatus = '1';
+		(dataStatus = '1' or dataStatus is null)
       <if test="diseaseId != null">
         and disease_id = #{diseaseId,jdbcType=BIGINT} 
       </if>

@@ -120,6 +120,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
         Miss_control_task_records record = new Miss_control_task_records();
         record.setTaskId(object.getTaskId());
         record.setTaskstatus(operateDTO.getTaskStatus());
+        record.setTasktitle(operateDTO.getTaskTitle());
         taskRecordsMapper.updateByTaskIdSelective(record);
         createTaskDetail(operateDTO, object, taskLastData);
     }

@@ -633,8 +633,9 @@
     <include refid="Blob_Column_List" />
     from miss_chinese_disease
     <where>
+		dataStatus = '1';
       <if test="diseaseId != null">
-        disease_id = #{diseaseId,jdbcType=BIGINT}
+        and disease_id = #{diseaseId,jdbcType=BIGINT} 
       </if>
     </where>
   </select>

@@ -82,14 +82,14 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 
         if (!operateDTO.getTaskType().equals(OperateEnum.delete.toString())) {
             logger.info(getCurrentMenuType() + "当前操作为" + operateDTO.getTaskType() + ",修改数据入库");
-            object.setDatastatus("published");
+            object.setDatastatus("1");
             baseService.updateByPrimaryKey(object);
         } else {
             logger.info(getCurrentMenuType() + "当前操作为" + operateDTO.getTaskType() + ",修改状态为回收站");
             object.setTaskId(operateDTO.getTaskId());
             object.setTaskJson(JSON.toJSONString(operateDTO.getJsonStr()));
             object.setTaskStatus(operateDTO.getTaskStatus());
-            object.setDatastatus("dustbin");
+            object.setDatastatus("-1");
             baseService.updateByTaskIdSelective(object);
         }
 
@@ -211,7 +211,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
             T selectByPrimaryId = baseService.selectByPrimaryId(object.getId());
             selectByPrimaryId.setTaskJson(JSON.toJSONString(operateDTO.getJsonStr()));
             selectByPrimaryId.setTaskId(taskId);
-            selectByPrimaryId.setDatastatus("unpublished");
+            selectByPrimaryId.setDatastatus("0");
             selectByPrimaryId.setTaskStatus(TrialStatusEnum.DRAFTS.getId());
             baseService.updateByPrimaryKey(selectByPrimaryId);
             createTaskRecord(operateDTO, taskId, TrialStatusEnum.DRAFTS);

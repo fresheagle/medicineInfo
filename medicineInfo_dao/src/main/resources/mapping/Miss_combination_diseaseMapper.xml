@@ -109,7 +109,7 @@
       drug_resistance, dietary_conditioning, 
       attention_matter, data_reference, 
       task_json)
-    values (#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR}, #{datastatus,jdbcType=VARCHAR},
+    values (#{diseaseId,jdbcType=BIGINT}, #{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR}, #{datastatus,jdbcType=VARCHAR},
       #{taskId,jdbcType=VARCHAR}, #{taskStatus,jdbcType=VARCHAR}, #{epidemiology,jdbcType=LONGVARCHAR}, 
       #{tRelatedDiseases,jdbcType=LONGVARCHAR}, #{etiologyPathogenesis,jdbcType=LONGVARCHAR}, 
       #{pathology,jdbcType=LONGVARCHAR}, #{clinicalTypesClass,jdbcType=LONGVARCHAR}, 

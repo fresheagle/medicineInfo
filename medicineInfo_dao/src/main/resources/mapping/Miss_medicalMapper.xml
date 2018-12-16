@@ -137,7 +137,7 @@
         adverse_reactions, taboo, notice,
         identify, pharmacy_check, content_pic,
         medic_format, notes, component,
-        main_meffect, analyze, interactions,
+        main_meffect, `analyze`, interactions,
         history, drug_introduce, awards,
         research, monograph, message_from,
         product_info, indication, dosage,
@@ -287,7 +287,7 @@
                 main_meffect,
             </if>
             <if test="analyze != null">
-                analyze,
+                `analyze`,
             </if>
             <if test="interactions != null">
                 interactions,

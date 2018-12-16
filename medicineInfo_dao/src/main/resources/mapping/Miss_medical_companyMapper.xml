@@ -488,17 +488,18 @@
     <include refid="Blob_Column_List" />
     from miss_medical_company
     <where>
+      (dataStatus = '1' or dataStatus is null)
       <if test="id != null">
-        id = #{id,jdbcType=BIGINT}
+        and id = #{id,jdbcType=BIGINT}
       </if>
       <if test="englishName != null">
-      	english_name = #{englishName,jdbcType=VARCHAR}
+        and english_name = #{englishName,jdbcType=VARCHAR}
       </if>
       <if test="chineseName != null">
-      	chinese_name = #{chineseName,jdbcType=VARCHAR}
+        and chinese_name = #{chineseName,jdbcType=VARCHAR}
       </if>
       <if test="location != null">
-      	location = #{location,jdbcType=VARCHAR}
+        and location = #{location,jdbcType=VARCHAR}
       </if>
     </where>
   </select>

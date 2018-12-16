@@ -214,6 +214,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.med.info.domain.Miss_district">
     <!--
       WARNING - @mbg.generated

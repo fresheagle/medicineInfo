@@ -33,23 +33,40 @@ public class UserController {
 	@Autowired
 	private MissControlUserAndRoleService missControlUserAndRoleService;
 
+	/**
+	 * 添加用户
+	 * @param missControlUser
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public Response addUser(@RequestBody Miss_control_user missControlUser) {
 		userInfoService.insert(missControlUser);
 		return new Response().success();
 	}
-	
+	/**
+	 * 为用户添加权限
+	 * @param userAndRoleDTO
+	 * @return
+	 */
 	@RequestMapping(path="/addRole", method = RequestMethod.POST)
 	public Response addUserAndRole(@RequestBody UserAndRoleDTO userAndRoleDTO) {
 		missControlUserAndRoleService.insertUserAndRole(userAndRoleDTO);
 		return new Response().success();
 	}
-	
+	/**
+	 * 删除用户
+	 * @param usercode
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.DELETE)
 	public Response deleteUser(String usercode) {
 		return new Response().success();
 	}
-	
+	/**
+	 * 修改用户
+	 * @param controlUser
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.PUT)
 	public Response updateUser(@RequestBody Miss_control_user controlUser) {
 		userInfoService.updateByPrimaryKey(controlUser);

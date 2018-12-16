@@ -130,4 +130,16 @@
       relationCreateDate = #{relationcreatedate,jdbcType=VARCHAR}
     where RAuuid = #{rauuid,jdbcType=VARCHAR}
   </update>
+  
+  <delete id="deleteByRoleCode" parameterType="java.lang.String">
+  	delete from miss_control_roleandaction
+    where roleCode = #{rolecode, jdbcType=VARCHAR}
+  </delete>
+  
+  <select id="selectByRoleCode" parameterType="com.med.info.domain.Miss_control_roleAndAction" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+    from miss_control_roleandaction
+    where roleCode = #{rolecode, jdbcType=VARCHAR}
+  </select>
 </mapper>

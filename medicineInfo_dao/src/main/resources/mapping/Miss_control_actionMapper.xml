@@ -173,4 +173,10 @@
   	where a.userCode = #{userCode}
   </select>
   
+  <select id="selectByActionCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from miss_control_action
+    where actionCode = #{actioncode,jdbcType=VARCHAR}
+  </select>
 </mapper>

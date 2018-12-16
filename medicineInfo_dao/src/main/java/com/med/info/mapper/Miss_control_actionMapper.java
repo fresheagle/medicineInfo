@@ -54,4 +54,6 @@ public interface Miss_control_actionMapper extends BaseMapper<Miss_control_actio
     int updateByPrimaryKey(Miss_control_action record);
 
 	List<Miss_control_action> getControlActionsByUserCode(String userCode);
+	
+	List<Miss_control_action> selectByActionCode(String actionCode);
 }

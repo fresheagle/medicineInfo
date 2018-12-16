@@ -1,12 +1,15 @@
 package com.med.info.mapper.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.med.info.domain.Miss_control_role;
 import com.med.info.domain.Miss_control_user;
 
-public class UserAndRoleDTO {
+public class UserAndRoleDTO implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	Miss_control_user missControlUser;
 	List<Miss_control_role> missControlRole;
 	public Miss_control_user getMissControlUser() {

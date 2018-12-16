@@ -479,6 +479,101 @@
       task_status = #{taskStatus,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <update id="updateByTaskIdSelective" parameterType="com.med.info.domain.Miss_medical_companyWithBLOBs">
+    update miss_medical_company
+    <set>
+      <if test="chineseName != null">
+        chinese_name = #{chineseName,jdbcType=VARCHAR},
+      </if>
+      <if test="englishName != null">
+        english_name = #{englishName,jdbcType=VARCHAR},
+      </if>
+      <if test="foundedTime != null">
+        founded_time = #{foundedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="sile != null">
+        sile = #{sile,jdbcType=VARCHAR},
+      </if>
+      <if test="range != null">
+        `range` = #{range,jdbcType=VARCHAR},
+      </if>
+      <if test="marketValue != null">
+        market_value = #{marketValue,jdbcType=DECIMAL},
+      </if>
+      <if test="timeMarket != null">
+        time_market = #{timeMarket,jdbcType=VARCHAR},
+      </if>
+      <if test="registerMoney != null">
+        register_Money = #{registerMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="registrationNumber != null">
+        registration_number = #{registrationNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="domicile != null">
+        domicile = #{domicile,jdbcType=VARCHAR},
+      </if>
+      <if test="staffNumber != null">
+        staff_number = #{staffNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null">
+        Legal_person = #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="chairman != null">
+        chairman = #{chairman,jdbcType=VARCHAR},
+      </if>
+      <if test="companyIdea != null">
+        company_idea = #{companyIdea,jdbcType=VARCHAR},
+      </if>
+      <if test="creditCode != null">
+        credit_code = #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null">
+        website = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null">
+        leader = #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="datastatus != null">
+        dataStatus = #{datastatus,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskStatus != null">
+        task_status = #{taskStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="businessScope != null">
+        business_scope = #{businessScope,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="history != null">
+        history = #{history,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="companyIntroduction != null">
+        company_introduction = #{companyIntroduction,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="brandProduct != null">
+        brand_product = #{brandProduct,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="honor != null">
+        honor = #{honor,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="achievements != null">
+        achievements = #{achievements,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="news != null">
+        news = #{news,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="taskJson != null">
+        task_json = #{taskJson,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </update>
+
   <select id="showDataCondition"
           parameterType="com.med.info.domain.Miss_medical_companyWithBLOBs"
           resultMap="ResultMapWithBLOBs">

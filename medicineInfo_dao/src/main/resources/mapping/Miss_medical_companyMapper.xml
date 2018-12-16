@@ -337,7 +337,7 @@
         sile = #{sile,jdbcType=VARCHAR},
       </if>
       <if test="range != null">
-        range = #{range,jdbcType=VARCHAR},
+        `range` = #{range,jdbcType=VARCHAR},
       </if>
       <if test="marketValue != null">
         market_value = #{marketValue,jdbcType=DECIMAL},
@@ -423,7 +423,7 @@
       founded_time = #{foundedTime,jdbcType=VARCHAR},
       location = #{location,jdbcType=VARCHAR},
       sile = #{sile,jdbcType=VARCHAR},
-      range = #{range,jdbcType=VARCHAR},
+      `range` = #{range,jdbcType=VARCHAR},
       market_value = #{marketValue,jdbcType=DECIMAL},
       time_market = #{timeMarket,jdbcType=VARCHAR},
       register_Money = #{registerMoney,jdbcType=DECIMAL},
@@ -461,7 +461,7 @@
       founded_time = #{foundedTime,jdbcType=VARCHAR},
       location = #{location,jdbcType=VARCHAR},
       sile = #{sile,jdbcType=VARCHAR},
-      range = #{range,jdbcType=VARCHAR},
+      `range` = #{range,jdbcType=VARCHAR},
       market_value = #{marketValue,jdbcType=DECIMAL},
       time_market = #{timeMarket,jdbcType=VARCHAR},
       register_Money = #{registerMoney,jdbcType=DECIMAL},

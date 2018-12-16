@@ -802,7 +802,7 @@
 		</where>
 	</select>
 	
-	<select id="getDiseaseMapDTOByName" resultMap="ResultMapWithBLOBs" parameterType="String">
+	<select id="getDiseaseMapDTOByName" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
 		select id, chinese_name, english_name from miss_disease
 		<where>
 			<if test="chineseName != null">

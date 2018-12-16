@@ -186,7 +186,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   
-  <delete id="deleteByDiseaseId" parameterType="Long">
+  <delete id="deleteByDiseaseId" parameterType="java.lang.Long">
   	delete from miss_disease_symptom_mapping
     where disease_id = #{id,jdbcType=BIGINT}
   </delete>

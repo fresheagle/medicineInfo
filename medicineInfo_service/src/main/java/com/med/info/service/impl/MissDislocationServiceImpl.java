@@ -34,9 +34,9 @@ public class MissDislocationServiceImpl extends BaseServiceImpl<Miss_dislocation
 		if(id != null) {
 			dislocationMapDTO.setId(id);
 		}if(parentDislocationId != null) {
-			dislocationMapDTO.setParent_dislocation_id(parentDislocationId);
+			dislocationMapDTO.setParentDislocationId(parentDislocationId);
 		}if(dislocationName != null) {
-			dislocationMapDTO.setDislocation_name(dislocationName);
+			dislocationMapDTO.setDislocationName(dislocationName);
 		}
 		Page<DislocationMapDTO> showDataCondition = (Page<DislocationMapDTO>)dislocationMapper.queryDislocationParam(dislocationMapDTO);
 		PageObject object = new PageObject<DislocationMapDTO>();

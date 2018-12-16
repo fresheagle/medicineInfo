@@ -207,7 +207,7 @@
 		task_status = #{taskStatus,jdbcType=VARCHAR}
 		where id = #{id,jdbcType=BIGINT}
 	</update>
-	<delete id="deleteByInstitutionId" parameterType="Long">
+	<delete id="deleteByInstitutionId" parameterType="java.lang.Long">
 		delete from miss_institution_keypartment_mapping
 		where institution_id = #{id,jdbcType=BIGINT}
 	</delete>

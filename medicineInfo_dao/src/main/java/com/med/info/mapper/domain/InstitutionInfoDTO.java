@@ -12,14 +12,17 @@ import java.util.List;
 public class InstitutionInfoDTO implements Serializable{
     private static final long serialVersionUID = 1L;
 
-    private Miss_institutionWithBLOBs missInstitutionWithBLOBs;
+    private Miss_institutionWithBLOBs missInstitution;
     private List<DepartmentMapDTO> departmentMapDTO;
-	public Miss_institutionWithBLOBs getMissInstitutionWithBLOBs() {
-		return missInstitutionWithBLOBs;
+
+	public Miss_institutionWithBLOBs getMissInstitution() {
+		return missInstitution;
 	}
-	public void setMissInstitutionWithBLOBs(Miss_institutionWithBLOBs missInstitutionWithBLOBs) {
-		this.missInstitutionWithBLOBs = missInstitutionWithBLOBs;
+
+	public void setMissInstitution(Miss_institutionWithBLOBs missInstitution) {
+		this.missInstitution = missInstitution;
 	}
+
 	public List<DepartmentMapDTO> getDepartmentMapDTO() {
 		return departmentMapDTO;
 	}

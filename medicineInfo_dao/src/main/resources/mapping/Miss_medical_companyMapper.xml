@@ -503,7 +503,7 @@
     </where>
   </select>
 
-    <select id="getCompanyByMedicalId" parameterType="Long" resultMap="MedicalCompanyMap">
+    <select id="getCompanyByMedicalId" parameterType="java.lang.Long" resultMap="MedicalCompanyMap">
       select b.id as id, b.english_name as english_name, b.chinese_name as chinese_name
       from  miss_medical_medicalcompany_mapping a left join miss_medical_company b on a.medical_company_id = b.id
       where a.medical_id=#{id}

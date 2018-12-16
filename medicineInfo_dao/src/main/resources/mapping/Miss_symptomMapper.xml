@@ -664,7 +664,7 @@
     </foreach>
   </select>
   
-  <select id="getSymptomMapDTOByDiseaseId" resultMap="SymptomMapResult" parameterType="Long">
+  <select id="getSymptomMapDTOByDiseaseId" resultMap="SymptomMapResult" parameterType="java.lang.Long">
   		
   	select 
   	b.id as id, chinese_name, english_name
@@ -673,7 +673,7 @@
   
   </select>
   
-  <select id="querySymptomMapDTOParam" resultMap="SymptomMapResult" parameterType="String">
+  <select id="querySymptomMapDTOParam" resultMap="SymptomMapResult" parameterType="java.lang.String">
   	select id, chinese_name, english_name
   	from miss_symptom
   	<where>

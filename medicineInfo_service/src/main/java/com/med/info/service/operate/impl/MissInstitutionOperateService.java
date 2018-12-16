@@ -49,7 +49,7 @@ public class MissInstitutionOperateService extends AbstractOperateService<Miss_i
     @Override
     protected void dealMapperRelashionShip(OperateDTO operateDTO) {
         InstitutionInfoDTO javaObject = JSONObject.toJavaObject(operateDTO.getJsonStr(), InstitutionInfoDTO.class);
-        Miss_institutionWithBLOBs missInstitutionWithBLOBs = javaObject.getMissInstitutionWithBLOBs();
+        Miss_institutionWithBLOBs missInstitutionWithBLOBs = javaObject.getMissInstitution();
         institution_keypartment_mappingMapper.deleteByInstitutionId(missInstitutionWithBLOBs.getId());
         if (!operateDTO.getTaskType().equals(OperateEnum.delete.toString())) {
             List<DepartmentMapDTO> departmentMapDTO = javaObject.getDepartmentMapDTO();

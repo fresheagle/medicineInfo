@@ -62,7 +62,7 @@ public class MissInstitutionServiceImpl extends BaseServiceImpl<Miss_institution
 	private InstitutionInfoDTO getInstitutionInfoDTO(Miss_institutionWithBLOBs miss_institutionWithBLOBs) {
 		InstitutionInfoDTO institutionInfoDTO = new InstitutionInfoDTO();
 		institutionInfoDTO.setDepartmentMapDTO(missDepartmentService.getDepartmentMapByInstitutionId(miss_institutionWithBLOBs.getId()));
-		institutionInfoDTO.setMissInstitutionWithBLOBs(miss_institutionWithBLOBs);
+		institutionInfoDTO.setMissInstitution(miss_institutionWithBLOBs);
 		return institutionInfoDTO;
 	}
 

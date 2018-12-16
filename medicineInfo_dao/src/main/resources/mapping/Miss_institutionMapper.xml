@@ -803,7 +803,7 @@
 	</select>
 
 	<select id="getInstitutionInfoMapDTOByDoctorId"
-		parameterType="Long" resultMap="InstitutionInfoMapResult">
+		parameterType="java.lang.Long" resultMap="InstitutionInfoMapResult">
 		select b.id as id, b.name as name,
 		b.level as level, b.address as address
 		from

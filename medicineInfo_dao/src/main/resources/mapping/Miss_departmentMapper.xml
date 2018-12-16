@@ -242,14 +242,14 @@
 			</if>
 		</where>
 	</select>
-	<select id="getDepartmentMapByDoctorId" parameterType="Long"
+	<select id="getDepartmentMapByDoctorId" parameterType="java.lang.Long"
 		resultMap="DepartmentMapResult">
 		select
 		b.id as id, b.department_name as department_name 
 		from miss_department_doctor_mapping a left join miss_department b on a.department_id = b.id where a.doctor_id = #{id}
 	</select>
 	
-	<select id="getDepartmentMapByInstitutionId" parameterType="Long"
+	<select id="getDepartmentMapByInstitutionId" parameterType="java.lang.Long"
 		resultMap="DepartmentMapResult">
 		select
 		b.id as id, b.department_name as department_name 

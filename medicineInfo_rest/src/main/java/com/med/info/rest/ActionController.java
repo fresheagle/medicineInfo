@@ -1,16 +1,21 @@
 package com.med.info.rest;
 
+import com.med.info.response.PageObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.med.info.domain.Miss_control_action;
+import com.med.info.domain.Miss_control_role;
+import com.med.info.mapper.domain.RoleAndActionDTO;
 import com.med.info.response.Response;
 import com.med.info.service.MissControlActionService;
+import com.med.info.service.MissControlRoleAndActionService;
 
 @RestController
 @RequestMapping("/api/action")
@@ -18,8 +23,20 @@ public class ActionController {
 
 	@Autowired
 	private MissControlActionService controlActionService;
+	@Autowired
+	private MissControlRoleAndActionService missControlRoleAndActionService;
 	
 	private static Logger logger = LoggerFactory.getLogger(ActionController.class);
+	
+	@RequestMapping(path="/roleAndAction", method = RequestMethod.GET)
+	public Response showActionByRoleCode(@RequestParam(value="roleCode", required = false) String roleCode){
+		Miss_control_role miss_control_role = new Miss_control_role();
+		miss_control_role.setRolecode(roleCode);
+		RoleAndActionDTO roleAndActionDTO = missControlRoleAndActionService.showRoelAndAction(miss_control_role);
+		PageObject pageObject = new PageObject<Miss_control_action>();
+		pageObject.setParams(roleAndActionDTO.getMissControlAction());
+		return new Response().success(pageObject);
+	}
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public Response addAction(@RequestBody Miss_control_action controlAction) {

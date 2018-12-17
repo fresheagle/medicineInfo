@@ -59,7 +59,7 @@ public class MissControlUserAndRoleServiceImpl extends BaseServiceImpl<Miss_cont
 		List<Miss_control_userAndRole> selectPage = userAndRoleMapper.selectByCode(miss_control_userAndRole);
 		List<Miss_control_role> missControlRole = new ArrayList<>();
 		for(int i=0;i<selectPage.size();i++){
-			missControlRole.add(i,missControlRoleMapper.selectByRoleCode(selectPage.get(i).getRolecode()));
+			missControlRole.add(missControlRoleMapper.selectByRoleCode(selectPage.get(i).getRolecode()));
 		}
 		userAndRoleDTO.setMissControlRole(missControlRole);
 		userAndRoleDTO.setMissControlUser(miss_control_user);

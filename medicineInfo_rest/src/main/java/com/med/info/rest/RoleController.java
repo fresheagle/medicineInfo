@@ -73,7 +73,7 @@ public class RoleController {
 	@RequestMapping(path="/userAndRole", method = RequestMethod.GET)
 	public Response showRoleByUser(@RequestParam(value="userCode", required = false) String userCode){
 		Miss_control_user missControlUser = new Miss_control_user();
-		List<OperateDTO> listOp = new ArrayList<>();
+//		List<OperateDTO> listOp = new ArrayList<>();
 		missControlUser.setUserCode(userCode);
 		UserAndRoleDTO userAndRoleDTO = missControlUserAndRoleService.showUserAndRole(missControlUser);
 //		for(int i=0;i<userAndRoleDTO.getMissControlRole().size();i++){
@@ -86,7 +86,7 @@ public class RoleController {
 //		PageObject pageObject = new PageObject();
 //		pageObject.setParams(listOp);
 //		return new Response().success(pageObject);
-		PageObject pageObject = new PageObject();
+		PageObject pageObject = new PageObject<Miss_control_role>();
 		pageObject.setParams(userAndRoleDTO.getMissControlRole());
 		return new Response().success(pageObject);
 	}

@@ -106,6 +106,7 @@ public class MissionServiceImpl implements MissionService {
 			controlTaskDetail.setTaskchangebeforejson(taskDetail.getTaskchangebeforejson() == null ? null : JSONObject.parseObject(taskDetail.getTaskchangebeforejson()));
 			controlTaskDetail.setTaskchangeafterjson(taskDetail.getTaskchangeafterjson() == null ? null : JSONObject.parseObject(taskDetail.getTaskchangeafterjson()));
 			operateDTO.setJsonStr(JSONObject.parseObject(JSONObject.toJSONString(controlTaskDetail)));
+			operateDTO.setTaskMenuType(taskDetail.getTaskmenutype());
 			listOp.add(operateDTO);
 		}
 		PageObject object = new PageObject<OperateDTO>();

@@ -43,7 +43,7 @@ public class RoleController {
 	public Response showRole(@RequestParam("currentPage") Integer currentPage,
 							 @RequestParam(value="pageSize", defaultValue = "10") Integer pageSize){
 		Miss_control_role miss_control_role = new Miss_control_role();
-		PageObject<Miss_control_role> selectPage = controlRoleService.selectPageByOperateDto(currentPage,pageSize,miss_control_role);
+		PageObject<Miss_control_role> selectPage = controlRoleService.selectPage(currentPage,pageSize,miss_control_role);
 		return new Response().success(selectPage);
 	}
 	/**

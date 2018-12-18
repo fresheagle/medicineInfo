@@ -37,7 +37,15 @@ public class ActionController {
 		pageObject.setParams(roleAndActionDTO.getMissControlAction());
 		return new Response().success(pageObject);
 	}
-	
+
+	@RequestMapping(path="/page", method = RequestMethod.GET)
+	public Response showAction(@RequestParam("currentPage") Integer currentPage,
+							   @RequestParam(value="pageSize", defaultValue = "10") Integer pageSize){
+		Miss_control_action missControlAction = new Miss_control_action();
+		PageObject<Miss_control_action> selectPage = controlActionService.selectPage(currentPage, pageSize, missControlAction);
+		return new Response().success(selectPage);
+	}
+
 	@RequestMapping(method = RequestMethod.POST)
 	public Response addAction(@RequestBody Miss_control_action controlAction) {
 		

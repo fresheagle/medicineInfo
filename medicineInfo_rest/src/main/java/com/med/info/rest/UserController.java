@@ -94,7 +94,7 @@ public class UserController {
 		if(userName != null) {
 			miss_control_user.setUserName(userName);
 		}
-		PageObject<Miss_control_user> selectPage = userInfoService.selectPageByOperateDto(currentPage, pageSize, miss_control_user);
+		PageObject<Miss_control_user> selectPage = userInfoService.selectPage(currentPage, pageSize, miss_control_user);
 		return new Response().success(selectPage);
 	}
 }

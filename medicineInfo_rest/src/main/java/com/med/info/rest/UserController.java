@@ -14,6 +14,7 @@ import com.med.info.response.PageObject;
 import com.med.info.response.Response;
 import com.med.info.service.MissControlUserAndRoleService;
 import com.med.info.service.UserInfoService;
+import com.med.info.utils.UuidUtils;
 
 /**
  * Title: 用户管理 
@@ -40,6 +41,7 @@ public class UserController {
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public Response addUser(@RequestBody Miss_control_user missControlUser) {
+		missControlUser.setUserUuid(UuidUtils.generateUUID());
 		userInfoService.insert(missControlUser);
 		return new Response().success();
 	}

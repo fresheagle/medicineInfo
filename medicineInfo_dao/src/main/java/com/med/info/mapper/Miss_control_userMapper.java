@@ -14,4 +14,6 @@ import com.med.info.domain.Miss_control_user;
 public interface Miss_control_userMapper extends BaseMapper<Miss_control_user>{
 
 	public Miss_control_user findUserByUnameAndPasswd(@Param("userCode")String userCode, @Param("userPassWord")String userPassWord);
+
+	public int deleteUserByCode(String userCode);
 }

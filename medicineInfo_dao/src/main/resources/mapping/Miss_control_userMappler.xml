@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.med.info.mapper.Miss_control_userMapper">
 	<resultMap type="com.med.info.domain.Miss_control_user" id="Miss_control_user">
-		<result column="userUuid" property="userUuid"/>
+		<result column="userUuid" property="userUuid" jdbcType="VARCHAR"/>
 		<result column="userName" property="userName" jdbcType="VARCHAR" />
     	<result column="userCode" property="userCode" jdbcType="VARCHAR" />
     	<result column="userPassWord" property="userPassWord" jdbcType="VARCHAR" />
@@ -27,7 +27,7 @@
     </trim>
   </sql>
 	
-	<insert id="save" parameterType="com.med.info.domain.Miss_control_user">
+	<insert id="insert" parameterType="com.med.info.domain.Miss_control_user">
 		insert into miss_control_user(userUuid, userName, userCode, userPassWord, userPhoneNo, userEmail, userStatus, userCreateTime, userCreateDate) values (#{userUuid},#{userName},#{userCode},#{userPassWord},#{userPhoneNo},#{userEmail},#{userStatus},#{userCreateTime},#{userCreateDate});
 	</insert>
 	
@@ -43,7 +43,27 @@
 		select * from miss_control_user <include refid="Select_Where_Clause" />
 	</select>
 	
-	<update id="update" parameterType="com.med.info.domain.Miss_control_user"></update>
+	<update id="updateByPrimaryKey" parameterType="com.med.info.domain.Miss_control_user">
+		update miss_control_user
+		<set>
+			<if test="userName != null">
+				userName=#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userCode != null">
+				userCode=#{userCode,jdbcType=VARCHAR},
+			</if>
+			<if test="userPassWord != null">
+				userPassWord=#{userPassWord,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhoneNo != null">
+				userPhoneNo=#{userPhoneNo,jdbcType=VARCHAR},
+			</if>
+			<if test="userEmail != null">
+				userEmail=#{userEmail,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where userUuid = #{userUuid,jdbcType=VARCHAR}
+	</update>
 	
 	<select id="findUserByUnameAndPasswd" parameterType="java.lang.String" resultMap="Miss_control_user">
 		select * from miss_control_user where userCode = #{userCode} and userPassWord = #{userPassWord}
@@ -59,4 +79,8 @@
       </if>
     </where>
   </select>
+
+	<delete id="deleteUserByCode" parameterType="java.lang.String">
+		delete from miss_control_user where userCode = #{userCode,jdbcType=VARCHAR}
+	</delete>
 </mapper>

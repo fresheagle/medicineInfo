@@ -1,6 +1,7 @@
 package com.med.info.rest;
 
 import com.med.info.response.PageObject;
+import com.med.info.utils.UuidUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,12 @@ public class ActionController {
 
 	@RequestMapping(path="/page", method = RequestMethod.GET)
 	public Response showAction(@RequestParam("currentPage") Integer currentPage,
-							   @RequestParam(value="pageSize", defaultValue = "10") Integer pageSize){
+							   @RequestParam(value="pageSize", defaultValue = "10") Integer pageSize,
+							   @RequestParam(value="actionName", required = false) String actionName){
 		Miss_control_action missControlAction = new Miss_control_action();
+		if(actionName != null){
+			missControlAction.setActionname(actionName);
+		}
 		PageObject<Miss_control_action> selectPage = controlActionService.selectPage(currentPage, pageSize, missControlAction);
 		return new Response().success(selectPage);
 	}
@@ -50,6 +55,7 @@ public class ActionController {
 	public Response addAction(@RequestBody Miss_control_action controlAction) {
 		
 		try {
+			controlAction.setActionuuid(UuidUtils.generateUUID());
 			int insert = controlActionService.insert(controlAction);
 			if(insert < 0) {
 				return new Response().failure("插入错误，请重试");
@@ -85,9 +91,9 @@ public class ActionController {
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE)
-	public Response deleteAction(String[] uuids) {
+	public Response deleteAction(@RequestBody Miss_control_action controlAction) {
 		try {
-			controlActionService.deleteByActions(uuids);
+			controlActionService.deleteByActionUuid(controlAction);
 			return new Response().success();
 		} catch (Exception e) {
 			logger.error("删除数据错误；",e);

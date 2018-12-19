@@ -25,4 +25,6 @@ public interface UserInfoService extends BaseService<Miss_control_user>{
 	 * @return     
 	 */
 	public boolean login(String userCode, String userPassWord);
+
+	public int deleteUserByCode(String userCode);
 }

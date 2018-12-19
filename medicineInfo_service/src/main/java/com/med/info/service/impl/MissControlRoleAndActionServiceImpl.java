@@ -17,6 +17,7 @@ import com.med.info.service.MissControlRoleAndActionService;
 import com.med.info.utils.CollectionUtil;
 import com.med.info.utils.UuidUtils;
 
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Service
 public class MissControlRoleAndActionServiceImpl extends BaseServiceImpl<Miss_control_roleAndAction> implements MissControlRoleAndActionService {
 
@@ -61,5 +62,10 @@ public class MissControlRoleAndActionServiceImpl extends BaseServiceImpl<Miss_co
 		roleAndActionDTO.setMissControlRole(miss_control_role);
 		roleAndActionDTO.setMissControlAction(missControlAction);
 		return roleAndActionDTO;
+	}
+
+	@Override
+	public int deleteByRoleCode(String roleCode) {
+		return roleAndActionMapper.deleteByRoleCode(roleCode);
 	}
 }

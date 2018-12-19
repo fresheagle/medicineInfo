@@ -66,5 +66,10 @@ public class MissControlUserAndRoleServiceImpl extends BaseServiceImpl<Miss_cont
 		return userAndRoleDTO;
 	}
 
+	@Override
+	public int deleteByUserCode(String userCode) {
+		return userAndRoleMapper.deleteByUserCode(userCode);
+	}
+
 
 }

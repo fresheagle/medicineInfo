@@ -9,4 +9,6 @@ public interface MissControlUserAndRoleService extends BaseService<Miss_control_
 	public boolean insertUserAndRole(UserAndRoleDTO userAndRoleDTO);
 
 	public UserAndRoleDTO showUserAndRole(Miss_control_user miss_control_user);
+
+	public int deleteByUserCode(String userCode);
 }

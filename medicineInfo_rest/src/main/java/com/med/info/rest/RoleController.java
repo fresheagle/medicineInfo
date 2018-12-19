@@ -7,6 +7,7 @@ import com.med.info.mapper.domain.RoleAndActionDTO;
 import com.med.info.mapper.domain.UserAndRoleDTO;
 import com.med.info.response.PageObject;
 import com.med.info.service.MissControlUserAndRoleService;
+import com.med.info.utils.UuidUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +42,12 @@ public class RoleController {
 	 */
 	@RequestMapping(path="/page", method = RequestMethod.GET)
 	public Response showRole(@RequestParam("currentPage") Integer currentPage,
-							 @RequestParam(value="pageSize", defaultValue = "10") Integer pageSize){
+							 @RequestParam(value="pageSize", defaultValue = "10") Integer pageSize,
+							 @RequestParam(value="roleName", required = false) String roleName){
 		Miss_control_role miss_control_role = new Miss_control_role();
+		if(roleName != null){
+			miss_control_role.setRolename(roleName);
+		}
 		PageObject<Miss_control_role> selectPage = controlRoleService.selectPage(currentPage,pageSize,miss_control_role);
 		return new Response().success(selectPage);
 	}
@@ -94,6 +99,7 @@ public class RoleController {
 	@RequestMapping(method = RequestMethod.POST)
 	public Response addRole(@RequestBody Miss_control_role controlRole) {
 		try {
+			controlRole.setRoleuuid(UuidUtils.generateUUID());
 			int insert = controlRoleService.insert(controlRole);
 			if(insert < 0) {
 				return new Response().failure("插入角色数据错误");
@@ -122,9 +128,10 @@ public class RoleController {
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE)
-	public Response deleteRole(String uuid) {
+	public Response deleteRole(@RequestBody Miss_control_role controlRole) {
 		try {
-			int insert = controlRoleService.deleteByPrimaryId(uuid);
+			int insert = controlRoleService.deleteByPrimaryId(controlRole.getRoleuuid());
+			missControlRoleAndActionService.deleteByRoleCode(controlRole.getRolecode());
 			if(insert < 0) {
 				return new Response().failure("删除数据错误");
 			}else {

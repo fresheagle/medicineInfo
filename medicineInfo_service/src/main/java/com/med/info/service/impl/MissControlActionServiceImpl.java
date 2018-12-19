@@ -11,6 +11,7 @@ import com.med.info.mapper.BaseMapper;
 import com.med.info.mapper.Miss_control_actionMapper;
 import com.med.info.service.MissControlActionService;
 
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Service
 public class MissControlActionServiceImpl extends BaseServiceImpl<Miss_control_action> implements MissControlActionService {
 
@@ -32,6 +33,11 @@ public class MissControlActionServiceImpl extends BaseServiceImpl<Miss_control_a
 				throw new Exception("ɾ������"+string+"����");
 			}
 		}
+	}
+
+	@Override
+	public int deleteByActionUuid(Miss_control_action controlAction) {
+		return actionMapper.deleteByActionUuid(controlAction);
 	}
 
 	@Override

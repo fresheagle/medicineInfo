@@ -75,6 +75,11 @@ public class UserInfoServiceImpl extends BaseServiceImpl<Miss_control_user> impl
 	}
 
 	@Override
+	public int deleteUserByCode(String userCode) {
+		return miss_control_userMapper.deleteUserByCode(userCode);
+	}
+
+	@Override
 	public LoginInfoDTO getLoginInfo(String userCode, String userPassWord) throws Exception {
 		LoginInfoDTO result = new LoginInfoDTO();
 		Miss_control_user findUserByUnameAndPasswd = this.findUserByUnameAndPasswd(userCode, userPassWord);

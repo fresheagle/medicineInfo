@@ -56,4 +56,6 @@ public interface Miss_control_actionMapper extends BaseMapper<Miss_control_actio
 	List<Miss_control_action> getControlActionsByUserCode(String userCode);
 	
 	List<Miss_control_action> selectByActionCode(String actionCode);
+
+	int deleteByActionUuid(Miss_control_action controlAction);
 }

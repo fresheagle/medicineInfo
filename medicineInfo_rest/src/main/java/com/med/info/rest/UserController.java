@@ -57,11 +57,13 @@ public class UserController {
 	}
 	/**
 	 * 删除用户
-	 * @param usercode
+	 * @param missControlUser
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.DELETE)
-	public Response deleteUser(String usercode) {
+	public Response deleteUser(@RequestBody Miss_control_user missControlUser) {
+		userInfoService.deleteUserByCode(missControlUser.getUserCode());
+		missControlUserAndRoleService.deleteByUserCode(missControlUser.getUserCode());
 		return new Response().success();
 	}
 	/**
@@ -78,7 +80,7 @@ public class UserController {
 	/**
 	 * @description 添加指定Id的用户
 	 * @author DELETE
-	 * @param id
+	 * @param
 	 * @return
 	 */
 	@RequestMapping(value = "/all", method = RequestMethod.GET)

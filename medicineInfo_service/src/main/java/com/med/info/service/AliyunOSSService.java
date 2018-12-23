@@ -3,7 +3,10 @@
  */
 package com.med.info.service;
 
+import com.med.info.dto.ImageResponseDTO;
+
 import java.io.File;
+import java.util.List;
 
 /**
  * @author jialin.jiang
@@ -17,7 +20,7 @@ public interface AliyunOSSService {
 	 * @param file
 	 * @return
 	 */
-	public String upload(File file);
+	public List<ImageResponseDTO> upload(File file);
 	
 	/**
 	 * 

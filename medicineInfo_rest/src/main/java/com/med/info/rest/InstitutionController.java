@@ -44,8 +44,7 @@ public class InstitutionController {
 			return new Response().failure(e.getMessage());
 		}
 	}
-	
-	
+
 	/**
 	 * 添加医疗机构信息
 	 * @param institutionInfoDTO 医疗机构信息

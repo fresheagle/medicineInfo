@@ -1,8 +1,12 @@
 package com.med.info.service.impl;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.med.info.dto.ClaimTaskDTO;
 import org.apache.log4j.spi.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.BeanUtils;
@@ -28,13 +32,20 @@ public class MissionServiceImpl implements MissionService {
 
 	@Autowired
 	private List<IOperateService> operateServices;
-
 	@Autowired
 	private Miss_control_task_recordsMapper taskRecordsMapper;
 	@Autowired
 	private Miss_control_task_detailMapper taskDetailMapper;
 	
 	private static Logger logger = org.slf4j.LoggerFactory.getLogger(MissionServiceImpl.class);
+
+	private static Map<String, String> taskStatusToRecordField = new HashMap<>();
+
+	static {
+		taskStatusToRecordField.put("toFirAudited", "taskfirsttrialcode");
+		taskStatusToRecordField.put("toSecAudited", "tasksecondtrialcode");
+		taskStatusToRecordField.put("toFinalAudited", "taskfinaltrialcode");
+	}
 
 	@Override
 	public Object saveMission(OperateDTO operateDTO) {
@@ -49,10 +60,11 @@ public class MissionServiceImpl implements MissionService {
 	}
 
 	@Override
-	public Object getByPage(Integer currentPage, Integer pageSize, String taskStatus) {
+	public Object getByPage(Integer currentPage, Integer pageSize, String taskStatus, String taskType) {
 		PageHelper.startPage(currentPage, pageSize);
 		Miss_control_task_records record = new Miss_control_task_records();
 		record.setTaskstatus(taskStatus);
+		record.setTasktype(taskType);
 		record.setTaskcreaterusercode(DefaultTokenManager.getLocalUserCode());
 		logger.info("查询任务，record={}",JSON.toJSONString(record));
 		Page<Miss_control_task_records> showDataCondition = (Page<Miss_control_task_records>) taskRecordsMapper
@@ -116,4 +128,32 @@ public class MissionServiceImpl implements MissionService {
 		return object;
 	}
 
+
+	@Override
+	public Object claimTask(ClaimTaskDTO claimTaskDTO) throws Exception {
+		String taskFeild = taskStatusToRecordField.get(claimTaskDTO.getTaskStatus());
+		Miss_control_task_records miss_control_task_records = taskRecordsMapper.selectByPrimaryKey(claimTaskDTO.getTaskId());
+		if(claimTaskDTO.getStatus() == 1){
+			Field field = Miss_control_task_records.class.getField(taskFeild);
+			field.setAccessible(true);
+			Object o = field.get(miss_control_task_records);
+			if(null == o || o.toString().equals("") || o.toString().equals(DefaultTokenManager.getLocalUserCode())){
+				field.set(miss_control_task_records, DefaultTokenManager.getLocalUserCode());
+				taskRecordsMapper.updateByTaskIdSelective(miss_control_task_records);
+			}else{
+				throw new Exception("当前任务已经被标记，请选择其他任务！");
+			}
+		}else{
+			Field field = Miss_control_task_records.class.getField(taskFeild);
+			field.setAccessible(true);
+			Object o = field.get(miss_control_task_records);
+			if(null != o && !o.toString().equals("") && o.toString().equals(DefaultTokenManager.getLocalUserCode())){
+				field.set(miss_control_task_records, null);
+				taskRecordsMapper.updateByPrimaryKey(miss_control_task_records);
+			}else{
+				throw new Exception("当前任务已经被其他操作者标记，请选择其他任务！");
+			}
+		}
+		return null;
+	}
 }

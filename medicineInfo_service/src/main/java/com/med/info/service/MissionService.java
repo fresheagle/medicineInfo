@@ -1,5 +1,6 @@
 package com.med.info.service;
 
+import com.med.info.dto.ClaimTaskDTO;
 import com.med.info.mapper.domain.OperateDTO;
 
 /**
@@ -11,8 +12,10 @@ public interface MissionService {
 	
 	public Object saveMission(OperateDTO operateDTO);
 	
-	public Object getByPage(Integer currentPage, Integer pageSize, String taskStatus);
+	public Object getByPage(Integer currentPage, Integer pageSize, String taskStatus, String taskType);
 	
 	public Object getMissionDetailPage(Integer currentPage, Integer pageSize, String taskId);
+
+	public Object claimTask(ClaimTaskDTO claimTaskDTO) throws Exception;
 
 }

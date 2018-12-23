@@ -8,11 +8,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
+import com.med.info.dto.ImageResponseDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,12 +50,17 @@ public class FileUploadController {
 				targetFile.createNewFile();
 			}
 			multipartFile.transferTo(targetFile);
-			String upload = aliyunOSSService.upload(targetFile);
-			return new Response().success(upload);
+			List<ImageResponseDTO> imageResponseDTOList = aliyunOSSService.upload(targetFile);
+			if(null != imageResponseDTOList){
+				return new Response().success(imageResponseDTOList);
+			}else {
+				logger.error("文件上传失败，file={}", multipartFile.getOriginalFilename());
+			}
 		} catch (Exception e) {
 			logger.error("文件上传失败，file={}", multipartFile.getOriginalFilename(), e);
-			return new Response().failure("文件上传失败," + e.getMessage());
 		}
+		return new Response().failure("文件上传失败,请重试");
+
 	}
 
 	@RequestMapping(path = "/download", method = RequestMethod.GET)

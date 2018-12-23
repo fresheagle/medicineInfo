@@ -7,8 +7,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import com.med.info.dto.ImageResponseDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,8 @@ public class AliyunOSSServiceImpl implements AliyunOSSService {
 	private AliyunOssConfiguration aliyunOssConfiguration;
 
 	private static String fileHost = "picture";
+
+	private static String resize_value = "x-oss-process=image/resize,w_100";
 	
 	private static Long imangeExpireTime = 24*60*60*1000l;
 	
@@ -48,8 +53,9 @@ public class AliyunOSSServiceImpl implements AliyunOSSService {
 	 * @see com.med.info.service.AliyunOSSService#upload(java.io.File)
 	 */
 	@Override
-	public String upload(File file) {
+	public List<ImageResponseDTO> upload(File file) {
 		try {
+			List<ImageResponseDTO> result = new ArrayList<>();
 			OSSClient ossClient = getOSSClient();
 			if (!ossClient.doesBucketExist(aliyunOssConfiguration.getBucketName())) {
 				ossClient.createBucket(aliyunOssConfiguration.getBucketName());
@@ -60,14 +66,18 @@ public class AliyunOSSServiceImpl implements AliyunOSSService {
 			// 创建文件路径
 			String fileUrl = getFileKey(file.getName());
 			// 上传文件
-			PutObjectResult result = ossClient
+			PutObjectResult objectResult = ossClient
 					.putObject(new PutObjectRequest(aliyunOssConfiguration.getBucketName(), fileUrl, file));
 			// 设置权限 这里是公开读
 			ossClient.setBucketAcl(aliyunOssConfiguration.getBucketName(), CannedAccessControlList.PublicReadWrite);
-			if(null != result){
+			if(null != objectResult){
 			    logger.info("==========>OSS文件上传成功,OSS地址："+fileUrl);
 			    ossClient.shutdown();
-			    return aliyunOssConfiguration.getBucketName()+"."+aliyunOssConfiguration.getEndpoint()+"/"+fileUrl;
+				String picturepath = aliyunOssConfiguration.getBucketName() + "." + aliyunOssConfiguration.getEndpoint() + "/" + fileUrl;
+				String thumbnail = picturepath+"?"+resize_value;
+				result.add(new ImageResponseDTO("picturepath", picturepath));
+				result.add(new ImageResponseDTO("thumbnail", thumbnail));
+				return result;
 			}
 			ossClient.shutdown();
 		} catch (Exception e) {

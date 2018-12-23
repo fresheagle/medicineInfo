@@ -1,5 +1,6 @@
 package com.med.info.rest;
 
+import com.med.info.dto.ClaimTaskDTO;
 import org.apache.log4j.spi.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,7 @@ public class MissionController {
 	
 	@Autowired
 	private MissionService missionService;
-	@Autowired
-	private MissionDetailService missionDetailService;
+
 	private static Logger logger = org.slf4j.LoggerFactory.getLogger(MissionController.class);
 	@RequestMapping(value="/saveMission",method = RequestMethod.POST)
 	@ResponseBody
@@ -42,11 +42,23 @@ public class MissionController {
 			return new Response().failure(e.getMessage());
 		}
 	}
+
+	@RequestMapping(value="/claimTask",method = RequestMethod.POST)
+	@ResponseBody
+	public Response claimTask(ClaimTaskDTO claimTask){
+		try {
+			missionService.claimTask(claimTask);
+			return new Response().success("操作成功");
+		} catch (Exception e) {
+			logger.error("认定任务状态失败；",e);
+			return new Response().failure(e.getMessage());
+		}
+	}
 	
 	@RequestMapping(value="/data/page",method = RequestMethod.GET)
-	public Response getByPage(@RequestParam("currentPage") Integer currentPage, @RequestParam(value="pageSize",defaultValue = "10") Integer pageSize, @RequestParam("taskStatus") String taskStatus) {
+	public Response getByPage(@RequestParam("currentPage") Integer currentPage, @RequestParam(value="pageSize",defaultValue = "10") Integer pageSize, @RequestParam("taskStatus") String taskStatus, @RequestParam("taskType") String taskType) {
 		
-		Object byPage = missionService.getByPage(currentPage, pageSize, taskStatus);
+		Object byPage = missionService.getByPage(currentPage, pageSize, taskStatus, taskType);
 		return new Response().success(byPage);
 	}
 	
@@ -54,12 +66,6 @@ public class MissionController {
 	public Response getMissionDetailList(@RequestParam("currentPage") Integer currentPage, 
 			@RequestParam(value="pageSize",defaultValue = "5") Integer pageSize, 
 			@RequestParam("taskId") String taskId) {
-//		Miss_control_task_detailWithBLOBs miss_control_task_detailWithBLOBs = new Miss_control_task_detailWithBLOBs();
-//		if(taskId != null) {
-//			miss_control_task_detailWithBLOBs.setTaskId(taskId);
-//		}
-//		
-//		PageObject<Miss_control_task_detailWithBLOBs> byPage = missionDetailService.selectPageByOperateDto(currentPage, pageSize, miss_control_task_detailWithBLOBs);
 		Object missionDetailPage = missionService.getMissionDetailPage(currentPage, pageSize, taskId);
 		return new Response().success(missionDetailPage);
 	}

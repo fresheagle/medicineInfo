@@ -12,6 +12,7 @@ import com.med.info.domain.Miss_control_roleAndAction;
 import com.med.info.mapper.BaseMapper;
 import com.med.info.mapper.Miss_control_actionMapper;
 import com.med.info.mapper.Miss_control_roleAndActionMapper;
+import com.med.info.mapper.Miss_control_roleMapper;
 import com.med.info.mapper.domain.RoleAndActionDTO;
 import com.med.info.service.MissControlRoleAndActionService;
 import com.med.info.utils.CollectionUtil;
@@ -25,6 +26,8 @@ public class MissControlRoleAndActionServiceImpl extends BaseServiceImpl<Miss_co
 	private Miss_control_roleAndActionMapper roleAndActionMapper;
 	@Autowired
 	private Miss_control_actionMapper missControlActionMapper;
+	@Autowired
+	private Miss_control_roleMapper missControlRoleMapper;
 	
 	@Override
 	public BaseMapper getMapper() {
@@ -59,7 +62,17 @@ public class MissControlRoleAndActionServiceImpl extends BaseServiceImpl<Miss_co
 		for(int i=0;i<selectPage.size();i++){
 			missControlAction.add(missControlActionMapper.selectByActionCode(selectPage.get(i).getActioncode()).get(0));
 		}
-		roleAndActionDTO.setMissControlRole(miss_control_role);
+		List<Miss_control_action> missControlActionElse = new ArrayList<>();
+		missControlActionElse=missControlActionMapper.selectAll(new Miss_control_action());
+		for(int i=0;i<missControlAction.size();i++) {
+			for(int j=0;j<missControlActionElse.size();j++) {
+				if(missControlAction.get(i).getActionuuid().equals(missControlActionElse.get(j).getActionuuid())) {
+					missControlActionElse.remove(j);
+				}
+			}
+		}
+		roleAndActionDTO.setMissControlActionElse(missControlActionElse);
+		roleAndActionDTO.setMissControlRole(missControlRoleMapper.selectByRoleCode(miss_control_role.getRolecode()));
 		roleAndActionDTO.setMissControlAction(missControlAction);
 		return roleAndActionDTO;
 	}

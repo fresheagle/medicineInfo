@@ -202,4 +202,34 @@
     delete from miss_control_action
     where actionUuid = #{actionuuid,jdbcType=VARCHAR}
   </delete>
+  
+  <select id="selectAll" parameterType="com.med.info.domain.Miss_control_action" resultMap="BaseResultMap">
+  	select
+    <include refid="Base_Column_List" />
+    from miss_control_action 
+    <where>
+      <if test="actioncode != null">
+        actionCode = #{actioncode,jdbcType=VARCHAR}
+      </if>
+      <if test="actionparentcode != null">
+        and actionParentCode = #{actionparentcode,jdbcType=VARCHAR}
+      </if>
+      <if test="actionname != null">
+        and actionName = #{actionname,jdbcType=VARCHAR}
+      </if>
+      <if test="actionurl != null">
+        and actionUrl = #{actionurl,jdbcType=VARCHAR}
+      </if>
+      <if test="actionstatus != null">
+        and actionStatus = #{actionstatus,jdbcType=VARCHAR}
+      </if>
+      <if test="actioncreatedate != null">
+        and actionCreateDate = #{actioncreatedate,jdbcType=VARCHAR}
+      </if>
+      <if test="actioncreatetime != null">
+        and actionCreateTime = #{actioncreatetime,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  
 </mapper>

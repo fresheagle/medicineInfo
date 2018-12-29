@@ -12,6 +12,13 @@ public class RoleAndActionDTO implements Serializable{
 	
 	private Miss_control_role missControlRole;
 	private List<Miss_control_action> missControlAction;
+	private List<Miss_control_action> missControlActionElse;
+	public List<Miss_control_action> getMissControlActionElse() {
+		return missControlActionElse;
+	}
+	public void setMissControlActionElse(List<Miss_control_action> missControlActionElse) {
+		this.missControlActionElse = missControlActionElse;
+	}
 	public Miss_control_role getMissControlRole() {
 		return missControlRole;
 	}

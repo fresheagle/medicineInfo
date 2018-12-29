@@ -34,9 +34,9 @@ public class ActionController {
 		Miss_control_role miss_control_role = new Miss_control_role();
 		miss_control_role.setRolecode(roleCode);
 		RoleAndActionDTO roleAndActionDTO = missControlRoleAndActionService.showRoelAndAction(miss_control_role);
-		PageObject pageObject = new PageObject<Miss_control_action>();
-		pageObject.setParams(roleAndActionDTO.getMissControlAction());
-		return new Response().success(pageObject);
+//		PageObject pageObject = new PageObject<Miss_control_action>();
+//		pageObject.setParams(roleAndActionDTO.getMissControlAction());
+		return new Response().success(roleAndActionDTO);
 	}
 
 	@RequestMapping(path="/page", method = RequestMethod.GET)

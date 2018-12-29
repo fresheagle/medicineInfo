@@ -15,6 +15,8 @@ import com.med.info.utils.CollectionUtil;
 import com.med.info.utils.UuidUtils;
 import org.springframework.stereotype.Service;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,9 @@ public class MissControlUserAndRoleServiceImpl extends BaseServiceImpl<Miss_cont
 
 	@Autowired
 	private Miss_control_roleMapper missControlRoleMapper;
+	
+	@Autowired
+	private Miss_control_userMapper miss_control_userMapper;
 	@Override
 	public BaseMapper getMapper() {
 		// TODO Auto-generated method stub
@@ -61,8 +66,20 @@ public class MissControlUserAndRoleServiceImpl extends BaseServiceImpl<Miss_cont
 		for(int i=0;i<selectPage.size();i++){
 			missControlRole.add(missControlRoleMapper.selectByRoleCode(selectPage.get(i).getRolecode()));
 		}
+		List<Miss_control_role> missControlRoleAll = new ArrayList<>();
+		missControlRoleAll=missControlRoleMapper.selectAll(new Miss_control_role());
+		for(int i=0;i<missControlRole.size();i++) {
+			for(int j=0;j<missControlRoleAll.size();j++) {
+				if(missControlRole.get(i).getRoleuuid().equals(missControlRoleAll.get(j).getRoleuuid())) {
+					missControlRoleAll.remove(j);
+					break;
+				}
+			}
+		}
+//		List<Miss_control_role> missControlRoleElse = missControlRoleAll.stream().filter(item->!missControlRole.contains(item)).collect(toList());
+		userAndRoleDTO.setMissControlRoleElse(missControlRoleAll);
 		userAndRoleDTO.setMissControlRole(missControlRole);
-		userAndRoleDTO.setMissControlUser(miss_control_user);
+		userAndRoleDTO.setMissControlUser(miss_control_userMapper.selectByCode(miss_control_user.getUserCode()));
 		return userAndRoleDTO;
 	}
 

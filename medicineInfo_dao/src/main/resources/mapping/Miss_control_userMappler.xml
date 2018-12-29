@@ -83,4 +83,8 @@
 	<delete id="deleteUserByCode" parameterType="java.lang.String">
 		delete from miss_control_user where userCode = #{userCode,jdbcType=VARCHAR}
 	</delete>
+	
+	<select id="selectByCode" parameterType="java.lang.String" resultMap="Miss_control_user">
+		select  userUuid, userName, userCode, userPhoneNo, userEmail from miss_control_user where userCode = #{userCode,jdbcType=VARCHAR}
+	</select>
 </mapper>

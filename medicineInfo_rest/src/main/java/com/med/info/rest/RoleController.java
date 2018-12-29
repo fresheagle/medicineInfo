@@ -91,9 +91,11 @@ public class RoleController {
 //		PageObject pageObject = new PageObject();
 //		pageObject.setParams(listOp);
 //		return new Response().success(pageObject);
-		PageObject pageObject = new PageObject<Miss_control_role>();
-		pageObject.setParams(userAndRoleDTO.getMissControlRole());
-		return new Response().success(pageObject);
+		
+//		PageObject pageObject = new PageObject<Miss_control_role>();
+//		pageObject.setParams(userAndRoleDTO.getMissControlRole());
+//		return new Response().success(pageObject);
+		return new Response().success(userAndRoleDTO);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)

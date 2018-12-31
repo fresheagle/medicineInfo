@@ -56,7 +56,7 @@ public class MissionController {
 	}
 	
 	@RequestMapping(value="/data/page",method = RequestMethod.GET)
-	public Response getByPage(@RequestParam("currentPage") Integer currentPage, @RequestParam(value="pageSize",defaultValue = "10") Integer pageSize, @RequestParam("taskStatus") String taskStatus, @RequestParam("taskType") String taskType) {
+	public Response getByPage(@RequestParam("currentPage") Integer currentPage, @RequestParam(value="pageSize",defaultValue = "10") Integer pageSize, @RequestParam("taskStatus") String taskStatus, @RequestParam(value = "taskType", required = false) String taskType) {
 		
 		Object byPage = missionService.getByPage(currentPage, pageSize, taskStatus, taskType);
 		return new Response().success(byPage);

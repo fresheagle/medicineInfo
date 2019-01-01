@@ -29,7 +29,7 @@ public class MissControlUserServiceImpl extends BaseServiceImpl<Miss_control_use
 
 	@Override
 	public List<String> selectUserCodeByNames(List<String> names) {
-		if(null == names){
+		if(null == names || names.size() == 0){
 			return null;
 		}
 		return userMapper.selectUserCodeByNames(names);

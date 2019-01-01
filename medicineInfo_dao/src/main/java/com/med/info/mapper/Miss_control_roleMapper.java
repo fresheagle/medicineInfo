@@ -3,6 +3,7 @@ package com.med.info.mapper;
 import java.util.List;
 
 import com.med.info.domain.Miss_control_role;
+import org.apache.ibatis.annotations.Param;
 
 public interface Miss_control_roleMapper extends BaseMapper<Miss_control_role>{
     /**
@@ -53,7 +54,7 @@ public interface Miss_control_roleMapper extends BaseMapper<Miss_control_role>{
      */
     int updateByPrimaryKey(Miss_control_role record);
 
-    Miss_control_role selectByRoleCode(String rolecode);
+    Miss_control_role selectByRoleCode(@Param("rolecode") String rolecode);
     
     List<Miss_control_role> selectAll(Miss_control_role miss_control_role);
 }

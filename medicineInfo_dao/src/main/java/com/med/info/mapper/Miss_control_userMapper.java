@@ -21,7 +21,7 @@ public interface Miss_control_userMapper extends BaseMapper<Miss_control_user>{
 	
 	public Miss_control_user selectByCode(String userCode);
 
-    List<String> selectUserCodeByNames(List<String> names);
+    List<String> selectUserCodeByNames(@Param("names") List<String> names);
 
-    public String getUserRoleCode(String userCode);
+    public String getUserRoleCode(@Param("userCode") String userCode);
 }

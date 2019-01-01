@@ -22,6 +22,9 @@ public class SelectMapUtil {
                 Object fieldValue = field.get(o);
                 if(field.getName().endsWith("Time") && null != fieldValue){
                     List<Date> dates = (List<Date>) fieldValue;
+                    if(dates.size() == 0){
+                        continue;
+                    }
                     map.put(field.getName()+"Begin",dates.get(0));
                     map.put(field.getName()+"End",dates.get(1));
                 }else if (null != fieldValue) {

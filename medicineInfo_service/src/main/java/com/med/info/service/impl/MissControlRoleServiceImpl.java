@@ -24,4 +24,8 @@ public class MissControlRoleServiceImpl extends BaseServiceImpl<Miss_control_rol
 		return roleMapper.deleteByPrimaryKey(uuid);
 	}
 
+	@Override
+	public Miss_control_role selectByRoleCode(String rolecode) {
+		return roleMapper.selectByRoleCode(rolecode);
+	}
 }

@@ -44,7 +44,7 @@
 	</select>
 	
 	<update id="updateByPrimaryKey" parameterType="com.med.info.domain.Miss_control_user">
-		update miss_control_user
+		update miss_control_userselectByPrimaryKey
 		<set>
 			<if test="userName != null">
 				userName=#{userName,jdbcType=VARCHAR},
@@ -86,5 +86,12 @@
 	
 	<select id="selectByCode" parameterType="java.lang.String" resultMap="Miss_control_user">
 		select  userUuid, userName, userCode, userPhoneNo, userEmail from miss_control_user where userCode = #{userCode,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectUserCodeByNames" parameterType="java.util.List" resultType="java.lang.String">
+		select userCode from miss_control_user where userName in
+		<foreach collection="names" item="name" separator="," open="(" close=")">
+			#{name}
+		</foreach>
 	</select>
 </mapper>

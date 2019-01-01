@@ -6,7 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.med.info.domain.Miss_control_role;
+import com.med.info.domain.Miss_control_user;
 import com.med.info.dto.ClaimTaskDTO;
+import com.med.info.dto.SelectTaskDTO;
+import com.med.info.mapper.domain.UserInfoDTO;
+import com.med.info.mapper.domain.UserRoleDTO;
+import com.med.info.service.MissControlRoleService;
+import com.med.info.service.MissControlUserService;
+import com.med.info.utils.SelectMapUtil;
 import org.apache.log4j.spi.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.BeanUtils;
@@ -36,6 +44,10 @@ public class MissionServiceImpl implements MissionService {
 	private Miss_control_task_recordsMapper taskRecordsMapper;
 	@Autowired
 	private Miss_control_task_detailMapper taskDetailMapper;
+	@Autowired
+	private MissControlUserService missControlUserService;
+	@Autowired
+	private MissControlRoleService missControlRoleService;
 	
 	private static Logger logger = org.slf4j.LoggerFactory.getLogger(MissionServiceImpl.class);
 
@@ -60,14 +72,16 @@ public class MissionServiceImpl implements MissionService {
 	}
 
 	@Override
-	public Object getByPage(Integer currentPage, Integer pageSize, String taskStatus, String taskType) {
-		PageHelper.startPage(currentPage, pageSize);
-		Miss_control_task_records record = new Miss_control_task_records();
-		record.setTaskstatus(taskStatus);
-		record.setTasktype(taskType);
-		record.setTaskcreaterusercode(DefaultTokenManager.getLocalUserCode());
+	public Object getByPage(SelectTaskDTO selectTaskDTO) {
+
+		selectTaskDTO.setCreateUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getCreateUser()));
+		selectTaskDTO.setFinalTrialUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getFinalTrialUser()));
+		selectTaskDTO.setFirstTrialUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getFirstTrialUser()));
+		selectTaskDTO.setSecondTrialUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getSecondTrialUser()));
+		Map<String, Object> record = SelectMapUtil.converseObjectToMap(selectTaskDTO);
 		logger.info("查询任务，record={}",JSON.toJSONString(record));
-		Page<Miss_control_task_records> showDataCondition = (Page<Miss_control_task_records>) taskRecordsMapper
+        PageHelper.startPage(selectTaskDTO.getCurrentPage(), selectTaskDTO.getPageSize() == null ? 10 : selectTaskDTO.getPageSize());
+        Page<Miss_control_task_records> showDataCondition = (Page<Miss_control_task_records>) taskRecordsMapper
 				.selectPageBySelective(record);
 		List<OperateDTO> list = new ArrayList<>();
 		for (Miss_control_task_records miss_control_task_records : showDataCondition) {
@@ -88,16 +102,52 @@ public class MissionServiceImpl implements MissionService {
 
 	private OperateDTO converseToOperataDTO(Miss_control_task_records control_task_records) {
 		OperateDTO operateDTO = new OperateDTO();
-		String taskchangeafterjson = getTaskLastData(control_task_records.getTaskId()).getTaskchangeafterjson();
-		JSONObject parseObject = JSON
-				.parseObject(taskchangeafterjson);
-//		parseObject.put("taskId", control_task_records.getTaskId());
-		operateDTO.setJsonStr(parseObject);
 		operateDTO.setTaskId(control_task_records.getTaskId());
 		operateDTO.setTaskType(control_task_records.getTasktype());
 		operateDTO.setTaskTitle(control_task_records.getTasktitle());
 		operateDTO.setTaskStatus(control_task_records.getTaskstatus());
 		operateDTO.setTaskMenuType(control_task_records.getTaskmenutype());
+		Miss_control_user createUser = missControlUserService.selectByCode(control_task_records.getTaskcreaterusercode());
+		if(null == createUser){
+			operateDTO.setCreateUser(new UserInfoDTO(control_task_records.getTaskcreaterusercode(), ""));
+		}else{
+			operateDTO.setCreateUser(new UserInfoDTO(control_task_records.getTaskcreaterusercode(), createUser.getUserName()));
+		}
+		operateDTO.setTaskCreateTime(control_task_records.getTaskcreatetime());
+		Miss_control_role createRole = missControlRoleService.selectByRoleCode(control_task_records.getTaskCreateRoleCode());
+		if(null == createRole){
+			operateDTO.setCreateUserRole(new UserRoleDTO(control_task_records.getTaskCreateRoleCode(), ""));
+		}else{
+			operateDTO.setCreateUserRole(new UserRoleDTO(control_task_records.getTaskCreateRoleCode(), createRole.getRolename()));
+		}
+		Miss_control_user firstTrialUser = missControlUserService.selectByCode(control_task_records.getTaskfirsttrialcode());
+		if(null == firstTrialUser){
+			operateDTO.setFirstTrialUser(new UserInfoDTO(control_task_records.getTaskfirsttrialcode(), ""));
+		}else{
+			operateDTO.setFirstTrialUser(new UserInfoDTO(control_task_records.getTaskfirsttrialcode(), firstTrialUser.getUserName()));
+		}
+		operateDTO.setTaskFirstTrialPoint(control_task_records.getTaskFirstTrialPoint());
+		operateDTO.setTaskFirstTrialTime(control_task_records.getTaskFirstTrialTime());
+
+		Miss_control_user secondTrialUser = missControlUserService.selectByCode(control_task_records.getTasksecondtrialcode());
+		if(null == secondTrialUser){
+			operateDTO.setSecondTrialUser(new UserInfoDTO(control_task_records.getTasksecondtrialcode(), ""));
+		}else{
+			operateDTO.setSecondTrialUser(new UserInfoDTO(control_task_records.getTasksecondtrialcode(), secondTrialUser.getUserName()));
+		}
+		operateDTO.setTaskSecondTrialPoint(control_task_records.getTaskSecondTrialPoint());
+		operateDTO.setTaskSecondTrialTime(control_task_records.getTaskSecondTrialTime());
+
+		Miss_control_user finalTrialUser = missControlUserService.selectByCode(control_task_records.getTaskfinaltrialcode());
+		if(null == finalTrialUser){
+			operateDTO.setFinalTrialUser(new UserInfoDTO(control_task_records.getTaskfinaltrialcode(), ""));
+		}else{
+			operateDTO.setFinalTrialUser(new UserInfoDTO(control_task_records.getTaskfinaltrialcode(), finalTrialUser.getUserName()));
+		}
+		operateDTO.setTaskFinalTrialTime(control_task_records.getTaskFinalTrialTime());
+
+		operateDTO.setUpdateTime(control_task_records.getUpdateTime());
+
 		return operateDTO;
 	}
 

@@ -6,7 +6,11 @@ import com.med.info.domain.Miss_control_user;
 import com.med.info.mapper.BaseMapper;
 import com.med.info.mapper.Miss_control_userMapper;
 import com.med.info.service.MissControlUserService;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+@Service
 public class MissControlUserServiceImpl extends BaseServiceImpl<Miss_control_user> implements MissControlUserService{
 
 	@Autowired
@@ -18,4 +22,16 @@ public class MissControlUserServiceImpl extends BaseServiceImpl<Miss_control_use
 		return userMapper;
 	}
 
+	@Override
+	public Miss_control_user selectByCode(String userCode) {
+		return userMapper.selectByCode(userCode);
+	}
+
+	@Override
+	public List<String> selectUserCodeByNames(List<String> names) {
+		if(null == names){
+			return null;
+		}
+		return userMapper.selectUserCodeByNames(names);
+	}
 }

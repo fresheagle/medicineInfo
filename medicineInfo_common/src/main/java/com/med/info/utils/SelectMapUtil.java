@@ -25,6 +25,12 @@ public class SelectMapUtil {
                     map.put(field.getName()+"Begin",dates.get(0));
                     map.put(field.getName()+"End",dates.get(1));
                 }else if (null != fieldValue) {
+                    if(fieldValue.toString().equals("")){
+                        continue;
+                    }
+                    if(fieldValue != null && fieldValue.toString().equals("all")){
+                        continue;
+                    }
                     map.put(field.getName(), fieldValue);
                 }
             } catch (IllegalAccessException e) {

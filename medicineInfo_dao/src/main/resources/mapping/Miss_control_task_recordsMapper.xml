@@ -470,7 +470,10 @@
 				and taskType = #{taskType,jdbcType=VARCHAR}
 			</if>
 			<if test="taskStatus != null">
-				and taskStatus = #{taskStatus,jdbcType=VARCHAR}
+				and taskStatus in
+				<foreach collection="taskStatus" item="status" separator="," open="(" close=")">
+					#{status}
+				</foreach>
 			</if>
 			<if test="taskMenuType != null">
 				and taskMenuType = #{taskMenuType,jdbcType=VARCHAR}

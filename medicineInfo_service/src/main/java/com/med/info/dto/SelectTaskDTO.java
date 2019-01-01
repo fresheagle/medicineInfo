@@ -8,7 +8,7 @@ public class SelectTaskDTO {
     private Integer pageSize;
     private String taskTitle;
     private String taskType;
-    private String taskStatus;
+    private List<String> taskStatus;
     private String taskMenuType;
     private List<String> createUser;
     private List<String> firstTrialUser;
@@ -65,11 +65,11 @@ public class SelectTaskDTO {
         this.taskType = taskType;
     }
 
-    public String getTaskStatus() {
+    public List<String> getTaskStatus() {
         return taskStatus;
     }
 
-    public void setTaskStatus(String taskStatus) {
+    public void setTaskStatus(List<String> taskStatus) {
         this.taskStatus = taskStatus;
     }
 

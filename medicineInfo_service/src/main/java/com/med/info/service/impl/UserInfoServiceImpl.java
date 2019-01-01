@@ -112,6 +112,7 @@ public class UserInfoServiceImpl extends BaseServiceImpl<Miss_control_user> impl
 				}
 				userPrivilege.add(firstPrivilege);
 			}
+			result.setRoleCode(miss_control_userMapper.getUserRoleCode(result.getUserCode() == null ? "":result.getUserCode()));
 			return result;
 		}
 		throw new Exception("登录失败，获取用户为空");

@@ -46,7 +46,7 @@ public class TokenController {
 		
 		try {
 			LoginInfoDTO loginInfo = userService.getLoginInfo(userCode, userPassWord);
-			String token = tokenManager.createToken(userCode);
+			String token = tokenManager.createToken(loginInfo);
 			log.debug("**** Generate Token **** : " + token);
 			Cookie cookie = new Cookie(Constants.DEFAULT_TOKEN_NAME, token);
 			log.debug("Write Token to Cookie and return to the Client : " + cookie.toString());

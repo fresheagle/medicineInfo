@@ -94,4 +94,8 @@
 			#{name}
 		</foreach>
 	</select>
+
+	<select id="getUserRoleCode" parameterType="java.lang.String" resultType="java.lang.String">
+		select roleCode from miss_control_userandrole where userCode=#{userCode}
+	</select>
 </mapper>

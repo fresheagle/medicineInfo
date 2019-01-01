@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.med.info.mapper.domain.LoginInfoDTO;
 import org.apache.tomcat.jni.Local;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,7 @@ public class DefaultTokenManager implements TokenManager, CommandLineRunner {
 	private static Integer token_expire_time = 10;
 	
 	/** 将token存储到JVM内存(ConcurrentHashMap)中   (@author: DELETE) */      
-	private static Map<String, String> tokenMap = new ConcurrentHashMap<>();
+	private static Map<LoginInfoDTO, String> tokenMap = new ConcurrentHashMap<>();
 	
 	private static Map<String, Long> tokenExpire = new ConcurrentHashMap<>();
 	
@@ -42,19 +43,18 @@ public class DefaultTokenManager implements TokenManager, CommandLineRunner {
 	
 	private static Logger logger = LoggerFactory.getLogger(DefaultTokenManager.class);
 	
-	private static ThreadLocal<String> local = new ThreadLocal<>();
+	private static ThreadLocal<LoginInfoDTO> local = new ThreadLocal<>();
 	
 
 	/** 
 	 * @description 利用UUID创建Token(用户登录时，创建Token)
 	 * @author DELETE       
-	 * @param username
+	 * @param loginInfo
 	 * @return     
-	 * @see cn.com.med.info.authorization.TokenManager#createToken(java.lang.String)     
-	 */  
-	public String createToken(String userCode) {
+	 */
+	public String createToken(LoginInfoDTO loginInfo) {
 		String token = CodecUtil.createUUID();
-		tokenMap.put(userCode, token);
+		tokenMap.put(loginInfo, token);
 		tokenExpire.put(token, System.currentTimeMillis() + token_expire_time * 60 * 1000);
 		return token;
 	}
@@ -64,28 +64,48 @@ public class DefaultTokenManager implements TokenManager, CommandLineRunner {
 	 * @author DELETE        
 	 * @param token
 	 * @return     
-	 * @see cn.com.med.info.authorization.TokenManager#checkToken(java.lang.String)     
-	 */  
+	 */
 	public boolean checkToken(String token) {
-		if(!StringUtil.isEmpty(token) && tokenMap.containsValue(token)) {
-			if(!isTokenExpire(token)) {
-				tokenExpire.put(token, System.currentTimeMillis() + token_expire_time * 60 * 1000);
-				local.set(getTokenUserCode(token));
-				return true;
-			}
+		if(!StringUtil.isEmpty(token) && token.equals("test_token")){
+			LoginInfoDTO loginInfoDTO = new LoginInfoDTO();
+			loginInfoDTO.setRoleCode("001");
+			loginInfoDTO.setUserCode("test1");
+			local.set(loginInfoDTO);
+			return true;
 		}
 		return false;
+
+//		先注释掉使用上面写死的token
+//		if(!StringUtil.isEmpty(token) && tokenMap.containsValue(token)) {
+//			if(!isTokenExpire(token)) {
+//				tokenExpire.put(token, System.currentTimeMillis() + token_expire_time * 60 * 1000);
+//				local.set(getTokenLoginInfo(token));
+//				return true;
+//			}
+//		}
+//		return false;
 	}
 	
 	private String getTokenUserCode(String token) {
-		Set<Entry<String, String>> entrySet = tokenMap.entrySet();
-		for (Entry<String, String> entry : entrySet) {
+		Set<Entry<LoginInfoDTO, String>> entrySet = tokenMap.entrySet();
+		for (Entry<LoginInfoDTO, String> entry : entrySet) {
+			if(entry.getValue().equals(token)) {
+				return entry.getKey().getUserName();
+			}
+		}
+		return null;
+	}
+
+	private LoginInfoDTO getTokenLoginInfo(String token){
+		Set<Entry<LoginInfoDTO, String>> entrySet = tokenMap.entrySet();
+		for (Entry<LoginInfoDTO, String> entry : entrySet) {
 			if(entry.getValue().equals(token)) {
 				return entry.getKey();
 			}
 		}
 		return null;
 	}
+
 
 	@Override
 	public boolean isTokenExpire(String token) {
@@ -100,8 +120,7 @@ public class DefaultTokenManager implements TokenManager, CommandLineRunner {
 	 * @description Token删除(用户登出时，删除Token)
 	 * @author DELETE           
 	 * @param token     
-	 * @see cn.com.med.info.authorization.TokenManager#deleteToken(java.lang.String)     
-	 */  
+	 */
 	@Override
 	public void deleteToken(String token) {
 		Collection<String> col = tokenMap.values();
@@ -137,7 +156,7 @@ public class DefaultTokenManager implements TokenManager, CommandLineRunner {
 		}, 0, token_expire_time, TimeUnit.MINUTES);
 	}
 
-	public static String getLocalUserCode() {
+	public static LoginInfoDTO getLocalUserCode() {
 		return local.get();
 	}
 	
@@ -149,11 +168,11 @@ public class DefaultTokenManager implements TokenManager, CommandLineRunner {
 		DefaultTokenManager.token_expire_time = token_expire_time;
 	}
 
-	public static Map<String, String> getTokenMap() {
+	public static Map<LoginInfoDTO, String> getTokenMap() {
 		return tokenMap;
 	}
 
-	public static void setTokenMap(Map<String, String> tokenMap) {
+	public static void setTokenMap(Map<LoginInfoDTO, String> tokenMap) {
 		DefaultTokenManager.tokenMap = tokenMap;
 	}
 

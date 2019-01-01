@@ -13,7 +13,7 @@ public class LoginInfoDTO implements Serializable{
 	private String userName;
 	private String userCode;
 	private String token;
-	
+	private String roleCode;
 	private List<UserPrivilegeDTO> userPrivilege;
 
 	public String getUserUuid() {
@@ -56,4 +56,20 @@ public class LoginInfoDTO implements Serializable{
 		this.token = token;
 	}
 
+	public String getRoleCode() {
+		return roleCode;
+	}
+
+	public void setRoleCode(String roleCode) {
+		this.roleCode = roleCode;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		LoginInfoDTO loginInfo  = (LoginInfoDTO) obj;
+		if(this.userUuid != null && loginInfo.getUserUuid() != null){
+			return this.userUuid.equals(loginInfo.getUserUuid());
+		}
+		return false;
+	}
 }

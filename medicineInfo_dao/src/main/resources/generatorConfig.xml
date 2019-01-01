@@ -226,13 +226,13 @@
 			selectByExampleQueryId="false">
 		</table> -->
 		
-		<table tableName="miss_control_reference"
+		<!-- <table tableName="miss_control_reference"
 			domainObjectName="Miss_control_reference" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 			<generatedKey column="id"
 				sqlStatement="select uuid_short()" identity="false" />
-		</table>
+		</table> -->
 		<table tableName="miss_control_approval"
 			domainObjectName="Miss_control_approval" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"

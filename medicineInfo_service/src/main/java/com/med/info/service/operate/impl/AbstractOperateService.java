@@ -51,7 +51,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
         } else if (operateDTO.getTaskStatus().equals(TrialStatusEnum.FINISHED.getId())) {
             updateStatus(operateDTO, object, baseService);
             Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
-            controlTaskRecord.setTaskpublishusercode(DefaultTokenManager.getLocalUserCode());
+            controlTaskRecord.setTaskpublishusercode(DefaultTokenManager.getLocalUserCode().getUserCode());
             controlTaskRecord.setTaskId(object.getTaskId());
             controlTaskRecord.setTaskmenutype(operateDTO.getTaskMenuType());
             controlTaskRecord.setTasktype(operateDTO.getTaskType());
@@ -132,7 +132,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
         controlTaskDetail.setTaskstatuschangebefore(taskLastData.getTaskstatuschangeafter());
         controlTaskDetail.setTaskchangebeforejson(taskLastData.getTaskchangeafterjson());
         controlTaskDetail.setTaskstatuschangeafter(operateDTO.getTaskStatus());
-        controlTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode());
+        controlTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode().getUserCode());
         controlTaskDetail.setTaskchangepoints(operateDTO.getTaskChangePoints());
         controlTaskDetail.setTaskchangecomments(operateDTO.getTaskChangeComments());
         controlTaskDetail.setTaskchangevote(operateDTO.getTaskChangeVote());
@@ -158,7 +158,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
             controlTaskDetail.setTaskstatuschangebefore(TrialStatusEnum.DRAFTS.getId());
             controlTaskDetail.setTaskchangebeforejson(JSON.toJSONString(operateDTO.getJsonStr()));
             controlTaskDetail.setTaskstatuschangeafter(TrialStatusEnum.TO_FIRST_AUDITED.getId());
-            controlTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode());
+            controlTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode().getUserCode());
             controlTaskDetail.setTaskuuid(UuidUtils.generateUUID());
             controlTaskDetail.setTaskchangeday(getToday());
             controlTaskDetail.setTaskchangetime(new Timestamp(System.currentTimeMillis()));
@@ -174,7 +174,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
         createTaskDetail.setTaskId(taskId);
         createTaskDetail.setTaskmenutype(operateDTO.getTaskMenuType());
         createTaskDetail.setTaskstatuschangeafter(TrialStatusEnum.DRAFTS.getId());
-        createTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode());
+        createTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode().getUserCode());
         createTaskDetail.setTaskuuid(UuidUtils.generateUUID());
         createTaskDetail.setTaskchangetime(new Timestamp(System.currentTimeMillis()));
         createTaskDetail.setTaskchangeday(getToday());
@@ -224,7 +224,7 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 
     private void createTaskRecord(OperateDTO operateDTO, String taskId, TrialStatusEnum drafts) {
         Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
-        controlTaskRecord.setTaskcreaterusercode(DefaultTokenManager.getLocalUserCode());
+        controlTaskRecord.setTaskcreaterusercode(DefaultTokenManager.getLocalUserCode().getUserCode());
         controlTaskRecord.setTaskcreatetime(new Timestamp(System.currentTimeMillis()));
         controlTaskRecord.setTaskcreateday(getToday());
         controlTaskRecord.setTaskId(taskId);

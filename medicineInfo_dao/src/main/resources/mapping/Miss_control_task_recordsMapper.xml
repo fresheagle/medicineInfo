@@ -527,7 +527,7 @@
 				and taskFinalTrialTime &lt;= #{taskFinalTrialTimeEnd,jdbcType=TIMESTAMP}
 			</if>
 			<if test="updateTimeBegin != null">
-				and updateTime >= #{updateTimeBegin,jdbcType=TIMESTAMP}
+				and updateTime &gt;= #{updateTimeBegin,jdbcType=TIMESTAMP}
 			</if>
 			<if test="updateTimeEnd != null">
 				and updateTime &lt;= #{updateTimeEnd,jdbcType=TIMESTAMP}

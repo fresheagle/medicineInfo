@@ -31,7 +31,19 @@ public class SelectMapUtil {
                     if(fieldValue.toString().equals("")){
                         continue;
                     }
-                    if(fieldValue != null && fieldValue.toString().equals("all")){
+                    if(fieldValue instanceof List){
+                        List listValue = (List) fieldValue;
+                        if(listValue.size() == 0){
+                            continue;
+                        }
+                        if(listValue.get(0) instanceof String){
+                            List<String> listStrValue = (List<String>) fieldValue;
+                            if(listStrValue.contains("all")){
+                                continue;
+                            }
+                        }
+                    }
+                    if(fieldValue.toString().equals("all")){
                         continue;
                     }
                     map.put(field.getName(), fieldValue);

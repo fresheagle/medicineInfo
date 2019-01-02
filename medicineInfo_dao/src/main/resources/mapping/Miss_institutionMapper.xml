@@ -207,14 +207,14 @@
 		#{honor,jdbcType=LONGVARCHAR}, #{reference,jdbcType=LONGVARCHAR},
 		#{license,jdbcType=LONGVARCHAR},
 		#{advertiseReviewCertify,jdbcType=LONGVARCHAR},
-		#{taskJson,jdbcType=LONGVARCHAR}
-		#{leadteamInfo,jdbcType=LONGVARCHAR}
-		#{affgroup,jdbcType=LONGVARCHAR}
-		#{special,jdbcType=LONGVARCHAR}
-		#{equipment,jdbcType=LONGVARCHAR}
-		#{emergencyRoom,jdbcType=LONGVARCHAR}
-		#{appointmentConsultation,jdbcType=LONGVARCHAR}
-		#{busLines,jdbcType=LONGVARCHAR}
+		#{taskJson,jdbcType=LONGVARCHAR},
+		#{leadteamInfo,jdbcType=LONGVARCHAR},
+		#{affgroup,jdbcType=LONGVARCHAR},
+		#{special,jdbcType=LONGVARCHAR},
+		#{equipment,jdbcType=LONGVARCHAR},
+		#{emergencyRoom,jdbcType=LONGVARCHAR},
+		#{appointmentConsultation,jdbcType=LONGVARCHAR},
+		#{busLines,jdbcType=LONGVARCHAR},
 		#{clinicalTeaching,jdbcType=LONGVARCHAR}
 		)
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -242,6 +242,15 @@
 			</if>
 			<if test="thumbnail != null">
 				thumbnail,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="provinceCode != null">
+				province_code,
+			</if>
+			<if test="cityCode != null">
+				city_code,
 			</if>
 			<if test="nature != null">
 				nature,
@@ -336,6 +345,30 @@
 			<if test="taskJson != null">
 				task_json,
 			</if>
+			<if test="leadteamInfo != null">
+				leadteam_info,
+			</if>
+			<if test="affgroup != null">
+				affgroup,
+			</if>
+			<if test="special != null">
+				special,
+			</if>
+			<if test="equipment != null">
+				equipment,
+			</if>
+			<if test="emergencyRoom != null">
+				emergency_room,
+			</if>
+			<if test="appointmentConsultation != null">
+				appointment_consultation,
+			</if>
+			<if test="busLines != null">
+				bus_lines,
+			</if>
+			<if test="clinicalTeaching != null">
+				clinical_teaching
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="name != null">
@@ -352,6 +385,15 @@
 			</if>
 			<if test="thumbnail != null">
 				#{thumbnail,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceCode != null">
+				#{provinceCode,jdbcType=VARCHAR},
+			</if>
+			<if test="cityCode != null">
+				#{cityCode,jdbcType=VARCHAR},
 			</if>
 			<if test="nature != null">
 				#{nature,jdbcType=VARCHAR},
@@ -446,6 +488,30 @@
 			<if test="taskJson != null">
 				#{taskJson,jdbcType=LONGVARCHAR},
 			</if>
+			<if test="leadteamInfo != null">
+				#{leadteamInfo,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="affgroup != null">
+				#{affgroup,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="special != null">
+				#{special,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="equipment != null">
+				#{equipment,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="emergencyRoom != null">
+				#{emergencyRoom,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="appointmentConsultation != null">
+				#{appointmentConsultation,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="busLines != null">
+				#{busLines,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="clinicalTeaching != null">
+				#{clinicalTeaching,jdbcType=LONGVARCHAR}
+			</if>
 		</trim>
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select last_insert_id()
@@ -473,6 +539,15 @@
 			<if test="thumbnail != null">
 				thumbnail = #{thumbnail,jdbcType=VARCHAR},
 			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceCode != null">
+				province_code = #{provinceCode,jdbcType=VARCHAR},
+			</if>
+			<if test="cityCode != null">
+				city_code = #{cityCode,jdbcType=VARCHAR},
+			</if>
 			<if test="nature != null">
 				nature = #{nature,jdbcType=VARCHAR},
 			</if>
@@ -568,6 +643,30 @@
 			</if>
 			<if test="taskJson != null">
 				task_json = #{taskJson,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="leadteamInfo != null">
+				leadteam_info = #{leadteamInfo,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="affgroup != null">
+				affgroup = #{affgroup,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="special != null">
+				special = #{special,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="equipment != null">
+				equipment = #{equipment,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="emergencyRoom != null">
+				emergency_room = #{emergencyRoom,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="appointmentConsultation != null">
+				appointment_consultation = #{appointmentConsultation,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="busLines != null">
+				bus_lines = #{busLines,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="clinicalTeaching != null">
+				clinical_teaching = #{clinicalTeaching,jdbcType=LONGVARCHAR}
 			</if>
 		</set>
 		where task_id = #{taskId,jdbcType=VARCHAR}
@@ -594,6 +693,15 @@
 			<if test="thumbnail != null">
 				thumbnail = #{thumbnail,jdbcType=VARCHAR},
 			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceCode != null">
+				province_code = #{provinceCode,jdbcType=VARCHAR},
+			</if>
+			<if test="cityCode != null">
+				city_code = #{cityCode,jdbcType=VARCHAR},
+			</if>
 			<if test="nature != null">
 				nature = #{nature,jdbcType=VARCHAR},
 			</if>
@@ -690,6 +798,30 @@
 			<if test="taskJson != null">
 				task_json = #{taskJson,jdbcType=LONGVARCHAR},
 			</if>
+			<if test="leadteamInfo != null">
+				leadteam_info = #{leadteamInfo,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="affgroup != null">
+				affgroup = #{affgroup,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="special != null">
+				special = #{special,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="equipment != null">
+				equipment = #{equipment,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="emergencyRoom != null">
+				emergency_room = #{emergencyRoom,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="appointmentConsultation != null">
+				appointment_consultation = #{appointmentConsultation,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="busLines != null">
+				bus_lines = #{busLines,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="clinicalTeaching != null">
+				clinical_teaching = #{clinicalTeaching,jdbcType=LONGVARCHAR}
+			</if>
 		</set>
 		where id = #{id,jdbcType=BIGINT}
 	</update>
@@ -707,6 +839,9 @@
 		address =
 		#{address,jdbcType=VARCHAR},
 		thumbnail = #{thumbnail,jdbcType=VARCHAR},
+		type = #{type,jdbcType=VARCHAR},
+		province_code = #{provinceCode,jdbcType=VARCHAR},
+		city_code = #{cityCode,jdbcType=VARCHAR},
 		nature = #{nature,jdbcType=VARCHAR},
 		category =
 		#{category,jdbcType=VARCHAR},
@@ -761,7 +896,15 @@
 		advertise_review_certify =
 		#{advertiseReviewCertify,jdbcType=LONGVARCHAR},
 		task_json =
-		#{taskJson,jdbcType=LONGVARCHAR}
+		#{taskJson,jdbcType=LONGVARCHAR},
+		leadteam_info = #{leadteamInfo,jdbcType=LONGVARCHAR},
+			affgroup = #{affgroup,jdbcType=LONGVARCHAR},
+			special = #{special,jdbcType=LONGVARCHAR},
+			equipment = #{equipment,jdbcType=LONGVARCHAR},
+			emergency_room = #{emergencyRoom,jdbcType=LONGVARCHAR},
+			appointment_consultation = #{appointmentConsultation,jdbcType=LONGVARCHAR},
+			bus_lines = #{busLines,jdbcType=LONGVARCHAR},
+			clinical_teaching = #{clinicalTeaching,jdbcType=LONGVARCHAR}
 		where id = #{id,jdbcType=BIGINT}
 	</update>
 	<update id="updateByPrimaryKey"
@@ -778,6 +921,9 @@
 		address =
 		#{address,jdbcType=VARCHAR},
 		thumbnail = #{thumbnail,jdbcType=VARCHAR},
+		type = #{type,jdbcType=VARCHAR},
+		province_code = #{provinceCode,jdbcType=VARCHAR},
+		city_code = #{cityCode,jdbcType=VARCHAR},
 		nature = #{nature,jdbcType=VARCHAR},
 		category =
 		#{category,jdbcType=VARCHAR},
@@ -802,7 +948,15 @@
 		dataStatus =
 		#{datastatus,jdbcType=VARCHAR},
 		task_id = #{taskId,jdbcType=VARCHAR},
-		task_status = #{taskStatus,jdbcType=VARCHAR}
+		task_status = #{taskStatus,jdbcType=VARCHAR},
+		leadteam_info = #{leadteamInfo,jdbcType=LONGVARCHAR},
+		affgroup = #{affgroup,jdbcType=LONGVARCHAR},
+		special = #{special,jdbcType=LONGVARCHAR},
+		equipment = #{equipment,jdbcType=LONGVARCHAR},
+		emergency_room = #{emergencyRoom,jdbcType=LONGVARCHAR},
+		appointment_consultation = #{appointmentConsultation,jdbcType=LONGVARCHAR},
+		bus_lines = #{busLines,jdbcType=LONGVARCHAR},
+		clinical_teaching = #{clinicalTeaching,jdbcType=LONGVARCHAR}
 		where id =
 		#{id,jdbcType=BIGINT}
 	</update>

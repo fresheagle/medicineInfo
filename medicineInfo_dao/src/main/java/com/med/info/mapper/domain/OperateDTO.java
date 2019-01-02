@@ -1,7 +1,7 @@
 package com.med.info.mapper.domain;
 
 import com.alibaba.fastjson.JSONObject;
-import com.med.info.utils.OperateEnum;
+import com.med.info.utils.TaskType;
 import com.med.info.utils.TrialStatusEnum;
 import junit.framework.Assert;
 
@@ -19,6 +19,7 @@ public class OperateDTO implements Serializable {
     private String taskId;
     private String taskType;
     private String taskStatus;
+    private String operateCode;
     private String taskMenuType;
     private String taskChangeVote;
     private String taskChangePoints;
@@ -75,8 +76,8 @@ public class OperateDTO implements Serializable {
         }
         Assert.assertTrue("任务状态与已有状态不一致", flag);
         flag = false;
-        OperateEnum[] values2 = OperateEnum.values();
-        for (OperateEnum operateEnum : values2) {
+        TaskType[] values2 = TaskType.values();
+        for (TaskType operateEnum : values2) {
             if (this.taskType.equals(operateEnum.toString())) {
                 flag = true;
                 break;
@@ -267,5 +268,13 @@ public class OperateDTO implements Serializable {
 
     public void setFinalTrialUser(UserInfoDTO finalTrialUser) {
         this.finalTrialUser = finalTrialUser;
+    }
+
+    public String getOperateCode() {
+        return operateCode;
+    }
+
+    public void setOperateCode(String operateCode) {
+        this.operateCode = operateCode;
     }
 }

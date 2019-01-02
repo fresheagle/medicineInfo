@@ -45,7 +45,5 @@ public class MissDistrictOperateService extends AbstractOperateService<Miss_dist
 		return "missDistrict";
 	}
 
-	
-	
-	
+
 }

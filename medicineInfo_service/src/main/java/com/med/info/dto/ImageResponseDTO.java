@@ -5,14 +5,16 @@ import java.io.Serializable;
 public class ImageResponseDTO implements Serializable {
 
     private String name;
-    private String url;
+    private String originalUrl;
+    private String thumbnailUrl;
 
-    public ImageResponseDTO() {
+    public ImageResponseDTO(String name, String originalUrl, String thumbnailUrl) {
+        this.name = name;
+        this.originalUrl = originalUrl;
+        this.thumbnailUrl = thumbnailUrl;
     }
 
-    public ImageResponseDTO(String name, String url) {
-        this.name = name;
-        this.url = url;
+    public ImageResponseDTO() {
     }
 
     public String getName() {
@@ -23,11 +25,19 @@ public class ImageResponseDTO implements Serializable {
         this.name = name;
     }
 
-    public String getUrl() {
-        return url;
+    public String getOriginalUrl() {
+        return originalUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setOriginalUrl(String originalUrl) {
+        this.originalUrl = originalUrl;
+    }
+
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 }

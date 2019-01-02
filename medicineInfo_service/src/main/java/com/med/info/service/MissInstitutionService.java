@@ -11,5 +11,6 @@ public interface MissInstitutionService extends BaseService<Miss_institutionWith
 	List<InstitutionInfoMapDTO> getInstitutionInfoMapDTOByDoctorId(Long id);
 
 	Object getByPage(Integer currentPage, Integer pageSize, String name, String level, String address, String category);
-	
+
+    String checkInstitutionInfo(String name, String website);
 }

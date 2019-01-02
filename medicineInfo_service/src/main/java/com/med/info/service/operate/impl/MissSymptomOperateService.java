@@ -13,7 +13,6 @@ import com.med.info.mapper.domain.SymptomDTO;
 import com.med.info.service.BaseService;
 import com.med.info.service.MissSymptomService;
 import com.med.info.utils.CollectionUtil;
-import com.med.info.utils.OperateEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,27 +61,25 @@ public class MissSymptomOperateService extends AbstractOperateService<Miss_sympt
             Miss_symptomWithBLOBs miss_symptom = symptomDTO.getMissSymptom();
             symptom_dislocation_mappingMapper.deleteBySymptomId(miss_symptom.getId());
             symptom_medical_mappingMapper.deleteBySymptomId(miss_symptom.getId());
-            if (!operateDTO.getTaskType().equals(OperateEnum.delete.toString())) {
-                List<DislocationMapDTO> dislocationList = symptomDTO.getDislocationList();
-                if (CollectionUtil.isNotEmpty(dislocationList)) {
-                    for (DislocationMapDTO dislocationMapDTO : dislocationList) {
-                        Miss_symptom_dislocation_mapping record = new Miss_symptom_dislocation_mapping();
-                        record.setCreateTime(new Date());
-                        record.setDislocationId(dislocationMapDTO.getId());
-                        record.setSymptomId(miss_symptom.getId());
-                        symptom_dislocation_mappingMapper.insert(record);
-                    }
+            List<DislocationMapDTO> dislocationList = symptomDTO.getDislocationList();
+            if (CollectionUtil.isNotEmpty(dislocationList)) {
+                for (DislocationMapDTO dislocationMapDTO : dislocationList) {
+                    Miss_symptom_dislocation_mapping record = new Miss_symptom_dislocation_mapping();
+                    record.setCreateTime(new Date());
+                    record.setDislocationId(dislocationMapDTO.getId());
+                    record.setSymptomId(miss_symptom.getId());
+                    symptom_dislocation_mappingMapper.insert(record);
                 }
+            }
 
-                List<MedicalMapDTO> medicalList = symptomDTO.getMedicalList();
-                if (CollectionUtil.isNotEmpty(medicalList)) {
-                    for (MedicalMapDTO medicalMapDTO : medicalList) {
-                        Miss_symptom_medical_mapping record = new Miss_symptom_medical_mapping();
-                        record.setCreateTime(new Date());
-                        record.setMedicalId(medicalMapDTO.getId());
-                        record.setSymptomId(miss_symptom.getId());
-                        symptom_medical_mappingMapper.insert(record);
-                    }
+            List<MedicalMapDTO> medicalList = symptomDTO.getMedicalList();
+            if (CollectionUtil.isNotEmpty(medicalList)) {
+                for (MedicalMapDTO medicalMapDTO : medicalList) {
+                    Miss_symptom_medical_mapping record = new Miss_symptom_medical_mapping();
+                    record.setCreateTime(new Date());
+                    record.setMedicalId(medicalMapDTO.getId());
+                    record.setSymptomId(miss_symptom.getId());
+                    symptom_medical_mappingMapper.insert(record);
                 }
             }
         }

@@ -20,7 +20,7 @@ public interface AliyunOSSService {
 	 * @param file
 	 * @return
 	 */
-	public List<ImageResponseDTO> upload(File file);
+	public ImageResponseDTO upload(File file);
 	
 	/**
 	 * 

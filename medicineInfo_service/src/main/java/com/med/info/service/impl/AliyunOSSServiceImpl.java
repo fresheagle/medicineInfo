@@ -53,9 +53,8 @@ public class AliyunOSSServiceImpl implements AliyunOSSService {
 	 * @see com.med.info.service.AliyunOSSService#upload(java.io.File)
 	 */
 	@Override
-	public List<ImageResponseDTO> upload(File file) {
+	public ImageResponseDTO upload(File file) {
 		try {
-			List<ImageResponseDTO> result = new ArrayList<>();
 			OSSClient ossClient = getOSSClient();
 			if (!ossClient.doesBucketExist(aliyunOssConfiguration.getBucketName())) {
 				ossClient.createBucket(aliyunOssConfiguration.getBucketName());
@@ -75,9 +74,7 @@ public class AliyunOSSServiceImpl implements AliyunOSSService {
 			    ossClient.shutdown();
 				String picturepath = aliyunOssConfiguration.getBucketName() + "." + aliyunOssConfiguration.getEndpoint() + "/" + fileUrl;
 				String thumbnail = picturepath+"?"+resize_value;
-				result.add(new ImageResponseDTO("picturepath", picturepath));
-				result.add(new ImageResponseDTO("thumbnail", thumbnail));
-				return result;
+				return new ImageResponseDTO(file.getName(),picturepath,thumbnail);
 			}
 			ossClient.shutdown();
 		} catch (Exception e) {

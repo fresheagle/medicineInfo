@@ -40,24 +40,32 @@ public class FileUploadController {
 	public static final String BASE_PATH = "temp/";
 	@Autowired private AliyunOSSService aliyunOSSService;
 	@RequestMapping(path = "/upload", method = RequestMethod.POST)
-	public Response upload(@RequestParam(value = "file", required = false) MultipartFile multipartFile) {
+	public Response upload(@RequestParam(value = "files", required = false) MultipartFile[] multipartFile) {
 		try {
-			String originalFilename = multipartFile.getOriginalFilename();
-			String newFileName = getNewFileName(originalFilename);
-			File targetFile = new File(new File(BASE_PATH).getAbsolutePath(), newFileName);
-			if(!targetFile.getAbsoluteFile().exists()) {
-				targetFile.getParentFile().mkdirs();
-				targetFile.createNewFile();
+			List<ImageResponseDTO> imageResponseDTOS = new ArrayList<>();
+			if(null != multipartFile && multipartFile.length > 0){
+				for (MultipartFile file : multipartFile) {
+					String originalFilename = file.getOriginalFilename();
+					String newFileName = getNewFileName(originalFilename);
+					File targetFile = new File(new File(BASE_PATH).getAbsolutePath(), newFileName);
+					if(!targetFile.getAbsoluteFile().exists()) {
+						targetFile.getParentFile().mkdirs();
+						targetFile.createNewFile();
+					}
+					file.transferTo(targetFile);
+					ImageResponseDTO imageResponseDTOList = aliyunOSSService.upload(targetFile);
+					if(null != imageResponseDTOList){
+						imageResponseDTOS.add(imageResponseDTOList);
+					}else {
+						logger.error("文件上传失败，file={}", file.getOriginalFilename());
+						throw new Exception("file="+file.getOriginalFilename());
+					}
+				}
+				return new Response().success(imageResponseDTOS);
 			}
-			multipartFile.transferTo(targetFile);
-			List<ImageResponseDTO> imageResponseDTOList = aliyunOSSService.upload(targetFile);
-			if(null != imageResponseDTOList){
-				return new Response().success(imageResponseDTOList);
-			}else {
-				logger.error("文件上传失败，file={}", multipartFile.getOriginalFilename());
-			}
+
 		} catch (Exception e) {
-			logger.error("文件上传失败，file={}", multipartFile.getOriginalFilename(), e);
+			logger.error("文件上传失败", e);
 		}
 		return new Response().failure("文件上传失败,请重试");
 

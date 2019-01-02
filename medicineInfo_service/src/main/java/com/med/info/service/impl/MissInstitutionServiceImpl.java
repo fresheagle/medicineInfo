@@ -2,6 +2,7 @@ package com.med.info.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,6 +65,11 @@ public class MissInstitutionServiceImpl extends BaseServiceImpl<Miss_institution
 		institutionInfoDTO.setDepartmentMapDTO(missDepartmentService.getDepartmentMapByInstitutionId(miss_institutionWithBLOBs.getId()));
 		institutionInfoDTO.setMissInstitution(miss_institutionWithBLOBs);
 		return institutionInfoDTO;
+	}
+
+	@Override
+	public String checkInstitutionInfo(String name, String website) {
+		return UUID.randomUUID().toString();
 	}
 
 	@Override

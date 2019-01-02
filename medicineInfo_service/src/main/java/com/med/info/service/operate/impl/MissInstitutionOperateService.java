@@ -10,7 +10,6 @@ import com.med.info.mapper.domain.OperateDTO;
 import com.med.info.service.BaseService;
 import com.med.info.service.MissInstitutionService;
 import com.med.info.utils.CollectionUtil;
-import com.med.info.utils.OperateEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,16 +50,14 @@ public class MissInstitutionOperateService extends AbstractOperateService<Miss_i
         InstitutionInfoDTO javaObject = JSONObject.toJavaObject(operateDTO.getJsonStr(), InstitutionInfoDTO.class);
         Miss_institutionWithBLOBs missInstitutionWithBLOBs = javaObject.getMissInstitution();
         institution_keypartment_mappingMapper.deleteByInstitutionId(missInstitutionWithBLOBs.getId());
-        if (!operateDTO.getTaskType().equals(OperateEnum.delete.toString())) {
-            List<DepartmentMapDTO> departmentMapDTO = javaObject.getDepartmentMapDTO();
-            if (CollectionUtil.isNotEmpty(departmentMapDTO)) {
-                for (DepartmentMapDTO departmentMapDTO2 : departmentMapDTO) {
-                    Miss_institution_keypartment_mapping record = new Miss_institution_keypartment_mapping();
-                    record.setCreateTime(new Date());
-                    record.setInstitutionId(missInstitutionWithBLOBs.getId());
-                    record.setDepartmentId(departmentMapDTO2.getId());
-                    institution_keypartment_mappingMapper.insert(record);
-                }
+        List<DepartmentMapDTO> departmentMapDTO = javaObject.getDepartmentMapDTO();
+        if (CollectionUtil.isNotEmpty(departmentMapDTO)) {
+            for (DepartmentMapDTO departmentMapDTO2 : departmentMapDTO) {
+                Miss_institution_keypartment_mapping record = new Miss_institution_keypartment_mapping();
+                record.setCreateTime(new Date());
+                record.setInstitutionId(missInstitutionWithBLOBs.getId());
+                record.setDepartmentId(departmentMapDTO2.getId());
+                institution_keypartment_mappingMapper.insert(record);
             }
         }
     }

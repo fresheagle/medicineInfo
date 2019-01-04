@@ -1,5 +1,6 @@
 package com.med.info.dto;
 
+import com.med.info.mapper.domain.DepartmentMapDTO;
 import com.med.info.mapper.domain.PictureInfoDTO;
 
 import java.io.Serializable;
@@ -102,6 +103,8 @@ public class MissInstitutionDTO implements Serializable {
     private String busLines;
 
     private String clinicalTeaching;
+
+    private List<DepartmentMapDTO> departmentMapDTO;
 
     public Long getId() {
         return id;
@@ -485,5 +488,13 @@ public class MissInstitutionDTO implements Serializable {
 
     public void setClinicalTeaching(String clinicalTeaching) {
         this.clinicalTeaching = clinicalTeaching;
+    }
+
+    public List<DepartmentMapDTO> getDepartmentMapDTO() {
+        return departmentMapDTO;
+    }
+
+    public void setDepartmentMapDTO(List<DepartmentMapDTO> departmentMapDTO) {
+        this.departmentMapDTO = departmentMapDTO;
     }
 }

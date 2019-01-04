@@ -13,6 +13,7 @@ public class DepartmentMapDTO implements Serializable{
 	private Long id;
 	private String departmentCode;
 	private String departmentName;
+	private String departmentLevel;
 	public Long getId() {
 		return id;
 	}
@@ -30,5 +31,13 @@ public class DepartmentMapDTO implements Serializable{
 	}
 	public void setDepartmentName(String departmentName) {
 		this.departmentName = departmentName;
+	}
+
+	public String getDepartmentLevel() {
+		return departmentLevel;
+	}
+
+	public void setDepartmentLevel(String departmentLevel) {
+		this.departmentLevel = departmentLevel;
 	}
 }

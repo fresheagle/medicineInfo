@@ -8,7 +8,9 @@ import com.med.info.domain.Miss_control_reference;
 import com.med.info.mapper.BaseMapper;
 import com.med.info.mapper.Miss_control_referenceMapper;
 import com.med.info.service.MissControlReferenceService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MissControlReferenceServiceImpl extends BaseServiceImpl<Miss_control_reference> implements MissControlReferenceService{
 
 	@Autowired
@@ -28,4 +30,8 @@ public class MissControlReferenceServiceImpl extends BaseServiceImpl<Miss_contro
 		return miss_control_referenceMapper.showByTaskId(missControlReference);
 	}
 
+	@Override
+	public void deleteByTaskId(String taskId) {
+		miss_control_referenceMapper.deleteByTaskId(taskId);
+	}
 }

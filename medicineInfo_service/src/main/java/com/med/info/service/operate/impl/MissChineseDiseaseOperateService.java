@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Order(2)
-public class MissChineseDiseaseOperateService extends AbstractOperateService<Miss_chinese_diseaseWithBLOBs> {
+public class MissChineseDiseaseOperateService extends AbstractOperateService<Miss_chinese_diseaseWithBLOBs, Miss_chinese_diseaseWithBLOBs> {
 
     @Autowired
     private MissChineseDiseaseService chineseDiseaseService;
@@ -28,10 +28,14 @@ public class MissChineseDiseaseOperateService extends AbstractOperateService<Mis
     }
 
     @Override
-    public Class<?> getCurrentClass() {
+    public Class<?> getCurrentObjectClass() {
         return Miss_chinese_diseaseWithBLOBs.class;
     }
 
+    @Override
+    public Miss_chinese_diseaseWithBLOBs converseObject(Miss_chinese_diseaseWithBLOBs o) {
+        return null;
+    }
 
     @Override
     public boolean needDealMapper() {

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Order(9)
-public class MissMedicalCompanyOperateService extends AbstractOperateService<Miss_medical_companyWithBLOBs> {
+public class MissMedicalCompanyOperateService extends AbstractOperateService<Miss_medical_companyWithBLOBs, Miss_medical_companyWithBLOBs> {
 
     @Autowired
     private MissMedicalCompanyService medicalCompanyService;
@@ -28,7 +28,7 @@ public class MissMedicalCompanyOperateService extends AbstractOperateService<Mis
     }
 
     @Override
-    public Class<?> getCurrentClass() {
+    public Class<?> getCurrentObjectClass() {
         return Miss_medical_companyWithBLOBs.class;
     }
 

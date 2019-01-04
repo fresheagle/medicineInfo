@@ -198,4 +198,10 @@
     from miss_control_reference
     where task_id = #{taskId,jdbcType=VARCHAR}
   </select>
+  <delete id="deleteByTaskId" parameterType="java.lang.String">
+    delete
+    from  miss_control_reference
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </delete>
+
 </mapper>

@@ -1,14 +1,15 @@
 package com.med.info.service.operate.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.med.info.domain.BaseDomain;
-import com.med.info.domain.Miss_control_task_detailWithBLOBs;
-import com.med.info.domain.Miss_control_task_records;
+import com.med.info.domain.*;
 import com.med.info.mapper.Miss_control_task_detailMapper;
 import com.med.info.mapper.Miss_control_task_recordsMapper;
 import com.med.info.mapper.domain.OperateDTO;
 import com.med.info.service.BaseService;
+import com.med.info.service.MissControlApprovalService;
+import com.med.info.service.MissControlReferenceService;
 import com.med.info.service.impl.DefaultTokenManager;
 import com.med.info.service.operate.IOperateService;
 import com.med.info.utils.*;
@@ -19,15 +20,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-public abstract class AbstractOperateService<T extends BaseDomain> implements IOperateService {
+public abstract class AbstractOperateService<T extends BaseDomain, F> implements IOperateService {
 
     @Autowired
     private Miss_control_task_recordsMapper taskRecordsMapper;
     @Autowired
     private Miss_control_task_detailMapper taskDetailMapper;
+    @Autowired
+    private MissControlReferenceService missControlReferenceService;
+
+    @Autowired
+    private MissControlApprovalService missControlApprovalService;
 
     private static Logger logger = org.slf4j.LoggerFactory.getLogger(AbstractOperateService.class);
 
@@ -36,7 +44,8 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
     @Transactional
     public String doOperate(OperateDTO operateDTO) {
         logger.info("接受到请求参数={}", JSON.toJSONString(operateDTO));
-        T object = (T) JSON.toJavaObject(getParmJsonObject(operateDTO.getJsonStr()), getCurrentClass());
+        F objectF =  (F) JSON.toJavaObject(getParmJsonObject(operateDTO.getJsonStr()), getCurrentObjectClass());
+        T object = converseObject(objectF);
         BaseService<T> baseService = baseService(operateDTO.getTaskMenuType());
         TrialStatusEnum trialStatusEnum = TrialStatusEnum.getTrialStatusEnum(operateDTO.getTaskStatus());
         Assert.assertNotNull("任务状态异常，不能为:"+operateDTO.getTaskStatus()+"，请确认",trialStatusEnum);
@@ -55,14 +64,14 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 
 
 
-    public void createTaskDetail(OperateDTO operateDTO, T object, String taskId, TrialStatusEnum trialStatusEnum) {
-        Miss_control_task_detailWithBLOBs taskLastData = getTaskLastData(taskId);
+    public void createTaskDetail(OperateDTO operateDTO,  TrialStatusEnum trialStatusEnum) {
+        Miss_control_task_detailWithBLOBs taskLastData = getTaskLastData(operateDTO.getTaskId());
         Miss_control_task_detailWithBLOBs controlTaskDetail = new Miss_control_task_detailWithBLOBs();
         if (null == taskLastData) {
             controlTaskDetail.setTaskstatuschangebefore(taskLastData.getTaskstatuschangeafter());
             controlTaskDetail.setTaskchangebeforejson(taskLastData.getTaskchangeafterjson());
         }
-        controlTaskDetail.setTaskId(object.getTaskId());
+        controlTaskDetail.setTaskId(operateDTO.getTaskId());
         controlTaskDetail.setTaskmenutype(operateDTO.getTaskMenuType());
         controlTaskDetail.setTaskstatuschangeafter(trialStatusEnum.toString());
         controlTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode().getUserCode());
@@ -106,28 +115,38 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
     }
 
     private void doOperate(OperateDTO operateDTO, T object, BaseService<T> baseService, TrialStatusEnum trialStatusEnum) {
-        Miss_control_task_records taskRecordByTaskId = getTaskRecordByTaskId(operateDTO.getTaskId());
+        String taskId = operateDTO.getTaskId();
+        Miss_control_task_records taskRecordByTaskId = getTaskRecordByTaskId(taskId);
         //如果为空表示新建的task数据需要创建taskRecord
         if (null == taskRecordByTaskId) {
-            taskRecordByTaskId = createTaskRecord(operateDTO, operateDTO.getTaskId(), trialStatusEnum);
+            taskRecordByTaskId = createTaskRecord(operateDTO, taskId, trialStatusEnum);
         }
         JSONObject jsonStr = operateDTO.getJsonStr();
         //判断是否需要创建数据到实际表中
-        createObject(operateDTO, object, baseService, operateDTO.getTaskId(), jsonStr, trialStatusEnum.getId());
+        createObject(operateDTO, object, baseService, taskId, jsonStr, trialStatusEnum.getId());
         T selectByPrimaryId = baseService.selectByPrimaryId(object.getId());
         selectByPrimaryId.setTaskJson(JSON.toJSONString(operateDTO.getJsonStr()));
-        selectByPrimaryId.setTaskId(operateDTO.getTaskId());
+        selectByPrimaryId.setTaskId(taskId);
         selectByPrimaryId.setDatastatus("0");
-        selectByPrimaryId.setTaskStatus(getNextStatus(operateDTO.getOperateCode(), trialStatusEnum, taskRecordByTaskId).toString());
+        TrialStatusEnum nextTrialStatusEnum1 = getNextStatus(operateDTO.getOperateCode(), trialStatusEnum, taskRecordByTaskId);
+        logger.info("taskId={} 当前taskStatus={},操作为 {}, 下一流程为：{}",taskId,trialStatusEnum.getDesc(),operateDTO.getOperateCode(),nextTrialStatusEnum1.getDesc());
+        selectByPrimaryId.setTaskStatus(nextTrialStatusEnum1.toString());
         baseService.updateByPrimaryKey(selectByPrimaryId);
         //如果为空表示新建的task数据需要创建taskRecord
         Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
-        controlTaskRecord.setTaskId(operateDTO.getTaskId());
-        controlTaskRecord.setTaskstatus(getNextStatus(operateDTO.getOperateCode(), trialStatusEnum, taskRecordByTaskId).toString());
+        controlTaskRecord.setTaskId(taskId);
+        controlTaskRecord.setTaskstatus(nextTrialStatusEnum1.toString());
         controlTaskRecord.setTasktitle(operateDTO.getTaskTitle());
         controlTaskRecord.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         taskRecordsMapper.updateByTaskIdSelective(controlTaskRecord);
-        createTaskDetail(operateDTO, object, operateDTO.getTaskId(), getNextStatus(operateDTO.getOperateCode(), trialStatusEnum, taskRecordByTaskId));
+        createTaskDetail(operateDTO, nextTrialStatusEnum1);
+
+        //保存参考资料
+        List<Miss_control_reference> references = getReferences(operateDTO);
+        saveRefrences(references, taskId);
+        //保存模块审核结果
+        List<Miss_control_approvalWithBLOBs> approves = getApproves(operateDTO);
+        saveApproves(approves, taskId, trialStatusEnum);
 
 
     }
@@ -242,6 +261,64 @@ public abstract class AbstractOperateService<T extends BaseDomain> implements IO
 
     }
 
-    public abstract Class<?> getCurrentClass();
+    public List<Miss_control_reference> getReferences(OperateDTO operateDTO){
+        List<Miss_control_reference> result = new ArrayList<>();
+        JSONArray refrences = operateDTO.getJsonStr().getJSONArray("refrences");
+        logger.info("taskId={}, 参考资料为={}",operateDTO.getTaskId(), refrences.toString());
+        if(null != refrences && refrences.size() > 0){
+            for (Object refrence : refrences) {
+                Miss_control_reference controlReference = JSONObject.parseObject(refrence.toString(), Miss_control_reference.class);
+                result.add(controlReference);
+            }
+        }
+        return result;
+    }
+
+    private void saveRefrences(List<Miss_control_reference> missControlReferences, String taskId){
+        missControlReferenceService.deleteByTaskId(taskId);
+        if(CollectionUtil.isNotEmpty(missControlReferences)){
+            for (Miss_control_reference missControlReference : missControlReferences) {
+                missControlReferenceService.insert(missControlReference);
+            }
+        }
+    }
+
+    public List<Miss_control_approvalWithBLOBs> getApproves(OperateDTO operateDTO){
+        List<Miss_control_approvalWithBLOBs> result = new ArrayList<>();
+        JSONArray approves = operateDTO.getJsonStr().getJSONArray("approves");
+        logger.info("taskId={}, 模块评审结果={}",operateDTO.getTaskId(), approves.toString());
+        if(null != approves && approves.size() > 0){
+            for (Object approve : approves) {
+                Miss_control_approvalWithBLOBs controlApprovalWithBLOBs = JSONObject.parseObject(approve.toString(), Miss_control_approvalWithBLOBs.class);
+                result.add(controlApprovalWithBLOBs);
+            }
+        }
+        return result;
+    }
+
+    public void saveApproves(List<Miss_control_approvalWithBLOBs> missControlReferences, String taskId, TrialStatusEnum trialStatusEnum){
+
+        if(CollectionUtil.isNotEmpty(missControlReferences)){
+            for (Miss_control_approvalWithBLOBs missControlReference : missControlReferences) {
+                if(trialStatusEnum == TrialStatusEnum.FIRST_AUDITEDING){
+                    missControlReference.setFirstTrailSuggestTime(new Date());
+                }else if (trialStatusEnum == TrialStatusEnum.SECOND_AUDITEDING){
+                    missControlReference.setSecondTrailSuggestTime(new Date());
+                }else if (trialStatusEnum == TrialStatusEnum.FINAL_AUDITEDING){
+                    missControlReference.setFinalTrailSuggestTime(new Date());
+                }
+                if(missControlApprovalService.updateByTaskIdAndModel(missControlReference) <= 0){
+                    missControlApprovalService.insert(missControlReference);
+                }
+            }
+        }
+
+    }
+
+    public abstract Class<?> getCurrentObjectClass();
+
+    public T converseObject(F f){
+        return (T) f;
+    }
 
 }

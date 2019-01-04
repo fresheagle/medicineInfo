@@ -133,7 +133,7 @@
 		academic_monograph, academic_activity, honor,
 		reference, license,
 		advertise_review_certify,
-		task_json,leadteam_info,affgroup,special,equipment,emergenc_room,appointment_consultation,bus_lines,clinical_teaching
+		task_json,leadteam_info,affgroup,special,equipment,emergency_room,appointment_consultation,bus_lines,clinical_teaching
 	</sql>
 	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
 		resultMap="ResultMapWithBLOBs">
@@ -995,6 +995,22 @@
 		miss_institution_doctor_mapping a left join miss_institution b on
 		a.institution_id = b.id
 		where a.doctor_id = #{id}
+	</select>
+
+	<select id="check" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from miss_institution
+		<where>
+			<if test="name != null">
+				name = #{name }
+			</if>
+			<if test="website != null">
+				or website = #{website,jdbcType=VARCHAR}
+			</if>
+		</where>
 	</select>
 
 </mapper>

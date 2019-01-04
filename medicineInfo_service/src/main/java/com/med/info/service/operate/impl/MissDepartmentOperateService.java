@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Order(4)
-public class MissDepartmentOperateService extends AbstractOperateService<Miss_department> {
+public class MissDepartmentOperateService extends AbstractOperateService<Miss_department, Miss_department> {
 
     @Autowired
     private MissDepartmentService departmentService;
@@ -25,7 +25,7 @@ public class MissDepartmentOperateService extends AbstractOperateService<Miss_de
     }
 
     @Override
-    public Class<?> getCurrentClass() {
+    public Class<?> getCurrentObjectClass() {
         return Miss_department.class;
     }
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.med.info.utils.CollectionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,8 +69,13 @@ public class MissInstitutionServiceImpl extends BaseServiceImpl<Miss_institution
 	}
 
 	@Override
-	public String checkInstitutionInfo(String name, String website) {
-		return UUID.randomUUID().toString();
+	public String checkInstitutionInfo(String name, String website) throws Exception {
+
+		List<Miss_institutionWithBLOBs> institutionWithBLOBs = institutionMapper.check(name, website);
+		if(!CollectionUtil.isNotEmpty(institutionWithBLOBs)){
+			return UUID.randomUUID().toString();
+		}
+		throw new Exception("该医院信息已经存在！");
 	}
 
 	@Override

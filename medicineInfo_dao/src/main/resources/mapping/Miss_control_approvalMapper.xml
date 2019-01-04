@@ -315,4 +315,50 @@
     from miss_control_approval
     where task_id = #{taskId,jdbcType=VARCHAR}
   </select>
+
+  <update id="updateByTaskIdAndModel" parameterType="com.med.info.domain.Miss_control_approvalWithBLOBs">
+    update miss_control_approval
+    <set>
+      <if test="referModelChineseName != null">
+        refer_model_chinese_name = #{referModelChineseName,jdbcType=VARCHAR},
+      </if>
+      <if test="fisrtTrailApprovalResult != null">
+        fisrt_trail_approval_result = #{fisrtTrailApprovalResult,jdbcType=VARCHAR},
+      </if>
+      <if test="secondTrailApprovalResult != null">
+        second_trail_approval_result = #{secondTrailApprovalResult,jdbcType=VARCHAR},
+      </if>
+      <if test="finalTrailApprovalResult != null">
+        final_trail_approval_result = #{finalTrailApprovalResult,jdbcType=VARCHAR},
+      </if>
+      <if test="firstApprovalPoint != null">
+        first_approval_point = #{firstApprovalPoint,jdbcType=INTEGER},
+      </if>
+      <if test="secondApprovalPoint != null">
+        second_approval_point = #{secondApprovalPoint,jdbcType=INTEGER},
+      </if>
+      <if test="finalApprovalPoint != null">
+        final_approval_point = #{finalApprovalPoint,jdbcType=INTEGER},
+      </if>
+      <if test="firstTrailSuggestTime != null">
+        first_trail_suggest_time = #{firstTrailSuggestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="secondTrailSuggestTime != null">
+        second_trail_suggest_time = #{secondTrailSuggestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finalTrailSuggestTime != null">
+        final_trail_suggest_time = #{finalTrailSuggestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstSuggestion != null">
+        first_suggestion = #{firstSuggestion,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="secondSuggestion != null">
+        second_suggestion = #{secondSuggestion,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="finalSuggestion != null">
+        final_suggestion = #{finalSuggestion,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=VARCHAR} and refer_model = #{referModel,jdbcType=VARCHAR}
+  </update>
 </mapper>

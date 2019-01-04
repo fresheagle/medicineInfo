@@ -11,4 +11,6 @@ public interface MissControlReferenceService extends BaseService<Miss_control_re
 	 * @return
 	 */
 	List<Miss_control_reference> showByTaskId(String taskId);
+
+	void deleteByTaskId(String taskId);
 }

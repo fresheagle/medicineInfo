@@ -11,4 +11,6 @@ public interface MissControlApprovalService extends BaseService<Miss_control_app
 	 * @return
 	 */
 	List<Miss_control_approvalWithBLOBs> showByTaskId(String taskId);
+
+    int updateByTaskIdAndModel(Miss_control_approvalWithBLOBs approvalWithBLOBs);
 }

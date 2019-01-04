@@ -65,6 +65,8 @@ public class OperateDTO implements Serializable {
         Assert.assertNotNull("任务操作数据需要填写", this.taskMenuType);
         Assert.assertNotNull("任务状态需要填写", this.taskStatus);
         Assert.assertNotNull("任务标题需要填写", this.taskTitle);
+        Assert.assertNotNull("任务惟一ID需要填写", this.taskId);
+        Assert.assertNotNull("任务操作结果需要填写", this.operateCode);
         Assert.assertNotNull("任务操作对应值不能为空", this.jsonStr);
         boolean flag = false;
         TrialStatusEnum[] values = TrialStatusEnum.values();

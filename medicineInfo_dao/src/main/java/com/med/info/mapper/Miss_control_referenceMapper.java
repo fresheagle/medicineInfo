@@ -3,6 +3,7 @@ package com.med.info.mapper;
 import java.util.List;
 
 import com.med.info.domain.Miss_control_reference;
+import org.apache.ibatis.annotations.Param;
 
 public interface Miss_control_referenceMapper {
     /**
@@ -59,4 +60,6 @@ public interface Miss_control_referenceMapper {
      * @return
      */
     List<Miss_control_reference> showByTaskId(Miss_control_reference record);
+
+    void deleteByTaskId(@Param("taskId") String taskId);
 }

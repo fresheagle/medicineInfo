@@ -68,4 +68,6 @@ public interface Miss_control_approvalMapper extends BaseMapper<Miss_control_app
      * @return Miss_control_approvalWithBLOBs
      */
     List<Miss_control_approvalWithBLOBs> showByTaskId(Miss_control_approvalWithBLOBs record);
+
+    int updateByTaskIdAndModel(Miss_control_approvalWithBLOBs approvalWithBLOBs);
 }

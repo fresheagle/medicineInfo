@@ -44,8 +44,12 @@ public class InstitutionController {
         if (null == name && null == website) {
             return new Response().failure("校验条件至少传递一个");
         }
-       String taskId = missInstitutionService.checkInstitutionInfo(name , website);
-        return new Response().success(taskId);
+        try {
+            String taskId = missInstitutionService.checkInstitutionInfo(name , website);
+            return new Response().success(taskId);
+        } catch (Exception e) {
+            return new Response().failure(e.getMessage());
+        }
     }
 
     /**

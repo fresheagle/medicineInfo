@@ -12,5 +12,5 @@ public interface MissInstitutionService extends BaseService<Miss_institutionWith
 
 	Object getByPage(Integer currentPage, Integer pageSize, String name, String level, String address, String category);
 
-    String checkInstitutionInfo(String name, String website);
+    String checkInstitutionInfo(String name, String website) throws Exception;
 }

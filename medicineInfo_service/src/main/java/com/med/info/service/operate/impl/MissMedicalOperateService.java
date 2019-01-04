@@ -19,7 +19,7 @@ import java.util.List;
 
 @Component
 @Order(10)
-public class MissMedicalOperateService extends AbstractOperateService<Miss_medicalWithBLOBs> {
+public class MissMedicalOperateService extends AbstractOperateService<Miss_medicalWithBLOBs, Miss_medicalWithBLOBs> {
 
     @Autowired
     private MissMedicalService medicalService;
@@ -37,7 +37,7 @@ public class MissMedicalOperateService extends AbstractOperateService<Miss_medic
     }
 
     @Override
-    public Class<?> getCurrentClass() {
+    public Class<?> getCurrentObjectClass() {
         return Miss_medicalWithBLOBs.class;
     }
 

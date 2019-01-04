@@ -11,7 +11,7 @@ import com.med.info.service.MissDislocationService;
 
 @Component
 @Order(6)
-public class MissDislocationOperateService extends AbstractOperateService<Miss_dislocation>{
+public class MissDislocationOperateService extends AbstractOperateService<Miss_dislocation, Miss_dislocation>{
 
 	@Autowired
 	private MissDislocationService dislocationService;
@@ -27,7 +27,7 @@ public class MissDislocationOperateService extends AbstractOperateService<Miss_d
 	}
 
 	@Override
-	public Class<?> getCurrentClass() {
+	public Class<?> getCurrentObjectClass() {
 		return Miss_dislocation.class;
 	}
 

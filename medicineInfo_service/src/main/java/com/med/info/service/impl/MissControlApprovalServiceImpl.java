@@ -8,7 +8,9 @@ import com.med.info.domain.Miss_control_approvalWithBLOBs;
 import com.med.info.mapper.BaseMapper;
 import com.med.info.mapper.Miss_control_approvalMapper;
 import com.med.info.service.MissControlApprovalService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MissControlApprovalServiceImpl extends BaseServiceImpl<Miss_control_approvalWithBLOBs> implements MissControlApprovalService{
 
 	@Autowired
@@ -28,4 +30,8 @@ public class MissControlApprovalServiceImpl extends BaseServiceImpl<Miss_control
 		return miss_control_approvalMapper.showByTaskId(missControlApproval);
 	}
 
+	@Override
+	public int updateByTaskIdAndModel(Miss_control_approvalWithBLOBs approvalWithBLOBs) {
+		return miss_control_approvalMapper.updateByTaskIdAndModel(approvalWithBLOBs);
+	}
 }

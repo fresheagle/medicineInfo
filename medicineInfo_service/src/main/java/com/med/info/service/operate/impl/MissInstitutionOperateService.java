@@ -1,8 +1,10 @@
 package com.med.info.service.operate.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.med.info.domain.Miss_institutionWithBLOBs;
 import com.med.info.domain.Miss_institution_keypartment_mapping;
+import com.med.info.dto.MissInstitutionDTO;
 import com.med.info.mapper.Miss_institution_keypartment_mappingMapper;
 import com.med.info.mapper.domain.DepartmentMapDTO;
 import com.med.info.mapper.domain.InstitutionInfoDTO;
@@ -12,6 +14,7 @@ import com.med.info.service.MissInstitutionService;
 import com.med.info.utils.CollectionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -21,7 +24,7 @@ import java.util.List;
 
 @Component
 @Order(8)
-public class MissInstitutionOperateService extends AbstractOperateService<Miss_institutionWithBLOBs> {
+public class MissInstitutionOperateService extends AbstractOperateService<Miss_institutionWithBLOBs, MissInstitutionDTO> {
 
     @Autowired
     private MissInstitutionService institutionService;
@@ -41,8 +44,17 @@ public class MissInstitutionOperateService extends AbstractOperateService<Miss_i
     }
 
     @Override
-    public Class<?> getCurrentClass() {
-        return Miss_institutionWithBLOBs.class;
+    public Class<?> getCurrentObjectClass() {
+        return MissInstitutionDTO.class;
+    }
+
+    @Override
+    public Miss_institutionWithBLOBs converseObject(MissInstitutionDTO missInstitutionDTO) {
+        Miss_institutionWithBLOBs institutionWithBLOBs = new Miss_institutionWithBLOBs();
+        BeanUtils.copyProperties(missInstitutionDTO, institutionWithBLOBs);
+        institutionWithBLOBs.setLeadteamInfo(JSON.toJSONString(missInstitutionDTO.getLeadteamInfo()));
+        institutionWithBLOBs.setEnvironment(JSON.toJSONString(missInstitutionDTO.getEnvironment()));
+        return institutionWithBLOBs;
     }
 
     @Override

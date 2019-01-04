@@ -11,7 +11,7 @@ import com.med.info.service.MissDistrictService;
 
 @Component
 @Order(1)
-public class MissDistrictOperateService extends AbstractOperateService<Miss_district>{
+public class MissDistrictOperateService extends AbstractOperateService<Miss_district, Miss_district>{
 
 	@Autowired
 	private MissDistrictService districtService;
@@ -28,7 +28,7 @@ public class MissDistrictOperateService extends AbstractOperateService<Miss_dist
 	}
 
 	@Override
-	public Class<?> getCurrentClass() {
+	public Class<?> getCurrentObjectClass() {
 		// TODO Auto-generated method stub
 		return Miss_district.class;
 	}

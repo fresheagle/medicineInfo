@@ -24,7 +24,7 @@ import java.util.List;
 
 @Component
 @Order(11)
-public class MissSymptomOperateService extends AbstractOperateService<Miss_symptomWithBLOBs> {
+public class MissSymptomOperateService extends AbstractOperateService<Miss_symptomWithBLOBs, Miss_symptomWithBLOBs> {
 
     @Autowired
     private MissSymptomService symptomService;
@@ -50,7 +50,7 @@ public class MissSymptomOperateService extends AbstractOperateService<Miss_sympt
     }
 
     @Override
-    public Class<?> getCurrentClass() {
+    public Class<?> getCurrentObjectClass() {
         return Miss_symptomWithBLOBs.class;
     }
 

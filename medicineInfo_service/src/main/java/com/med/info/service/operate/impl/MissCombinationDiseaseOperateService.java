@@ -11,7 +11,7 @@ import com.med.info.service.MissCombinationDiseaseService;
 
 @Component
 @Order(3)
-public class MissCombinationDiseaseOperateService extends AbstractOperateService<Miss_combination_diseaseWithBLOBs>{
+public class MissCombinationDiseaseOperateService extends AbstractOperateService<Miss_combination_diseaseWithBLOBs, Miss_combination_diseaseWithBLOBs>{
 
 	@Autowired
 	private MissCombinationDiseaseService combinationDiseaseService;
@@ -27,7 +27,7 @@ public class MissCombinationDiseaseOperateService extends AbstractOperateService
 	}
 
 	@Override
-	public Class<?> getCurrentClass() {
+	public Class<?> getCurrentObjectClass() {
 		return Miss_combination_diseaseWithBLOBs.class;
 	}
 

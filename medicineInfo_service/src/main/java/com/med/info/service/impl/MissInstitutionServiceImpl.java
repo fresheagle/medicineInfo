@@ -73,7 +73,7 @@ public class MissInstitutionServiceImpl extends BaseServiceImpl<Miss_institution
 
 		List<Miss_institutionWithBLOBs> institutionWithBLOBs = institutionMapper.check(name, website);
 		if(!CollectionUtil.isNotEmpty(institutionWithBLOBs)){
-			return UUID.randomUUID().toString();
+			return UUID.randomUUID().toString().replace("-", "");
 		}
 		throw new Exception("该医院信息已经存在！");
 	}

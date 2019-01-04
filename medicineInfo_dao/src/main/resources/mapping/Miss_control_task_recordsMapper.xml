@@ -45,8 +45,6 @@
 			property="firstTrialRoleCode" />
 		<result column="secondTrialRoleCode" jdbcType="VARCHAR"
 			property="secondTrialRoleCode" />
-		<result column="taskFinalTrialCode" jdbcType="VARCHAR"
-			property="taskFinalTrialCode" />
 		<result column="taskCreateRoleCode" jdbcType="VARCHAR"
 				property="taskCreateRoleCode" />
 		<result column="taskFirstTrialTime" jdbcType="TIMESTAMP"
@@ -76,7 +74,7 @@
 		taskCreateTime, taskPublishUserCode, taskPublishDay, taskPublishTime,
 		taskFirstTrialCode,
 		taskSecondTrialCode, taskFinalTrialCode, taskFirstTrialPoint, taskSecondTrialPoint, taskFinalTrialPint,
-		firstTrialRoleCode, secondTrialRoleCode, taskFinalTrialCode, taskCreateRoleCode, taskFirstTrialTime,
+		firstTrialRoleCode, secondTrialRoleCode, taskCreateRoleCode, taskFirstTrialTime,
 		taskSecondTrialTime, taskFinalTrialTime
 	</sql>
 	<sql id="Blob_Column_List">
@@ -201,9 +199,6 @@
 			<if test="secondTrialRoleCode != null">
 				secondTrialRoleCode,
 			</if>
-			<if test="taskFinalTrialCode != null">
-				taskFinalTrialCode,
-			</if>
 			<if test="taskCreateRoleCode != null">
 				taskCreateRoleCode,
 			</if>
@@ -284,9 +279,6 @@
 			</if>
 			<if test="secondTrialRoleCode != null">
 				#{secondTrialRoleCode},
-			</if>
-			<if test="taskFinalTrialCode != null">
-				#{taskFinalTrialCode},
 			</if>
 			<if test="taskCreateRoleCode != null">
 				#{taskCreateRoleCode},
@@ -370,9 +362,6 @@
 			<if test="secondTrialRoleCode != null">
 				secondTrialRoleCode = #{secondTrialRoleCode},
 			</if>
-			<if test="taskFinalTrialCode != null">
-				taskFinalTrialCode = #{taskFinalTrialCode},
-			</if>
 			<if test="taskCreateRoleCode != null">
 				taskCreateRoleCode = #{taskCreateRoleCode},
 			</if>
@@ -416,7 +405,6 @@
 		taskFinalTrialPint = #{taskFinalTrialPint},
 		firstTrialRoleCode = #{firstTrialRoleCode},
 		secondTrialRoleCode = #{secondTrialRoleCode},
-		taskFinalTrialCode = #{taskFinalTrialCode},
 		taskCreateRoleCode = #{taskCreateRoleCode},
 		taskFirstTrialTime = #{taskFirstTrialTime},
 		taskSecondTrialTime = #{taskSecondTrialTime},
@@ -448,7 +436,6 @@
 		taskFinalTrialPint = #{taskFinalTrialPint},
 		firstTrialRoleCode = #{firstTrialRoleCode},
 		secondTrialRoleCode = #{secondTrialRoleCode},
-		taskFinalTrialCode = #{taskFinalTrialCode},
 		taskCreateRoleCode = #{taskCreateRoleCode},
 		taskFirstTrialTime = #{taskFirstTrialTime},
 		taskSecondTrialTime = #{taskSecondTrialTime},

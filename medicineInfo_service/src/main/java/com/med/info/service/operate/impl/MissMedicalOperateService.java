@@ -41,22 +41,22 @@ public class MissMedicalOperateService extends AbstractOperateService<Miss_medic
         return Miss_medicalWithBLOBs.class;
     }
 
-    @Override
-    protected void dealMapperRelashionShip(OperateDTO operateDTO) {
-        MedicalDTO medicalDTO = JSONObject.toJavaObject(operateDTO.getJsonStr(), MedicalDTO.class);
-        Miss_medicalWithBLOBs miss_medical = medicalDTO.getMissMedical();
-        medicalMedicalcompanyMappingMapper.deleteByMedicalId(miss_medical.getId());
-        List<MedicalCompanyMapDTO> medicalCompanyList = medicalDTO.getMedicalCompanyList();
-        if (CollectionUtil.isNotEmpty(medicalCompanyList)) {
-            for (MedicalCompanyMapDTO medicalCompanyMapDTO : medicalCompanyList) {
-                Miss_medical_medicalcompany_mapping record = new Miss_medical_medicalcompany_mapping();
-                record.setMedicalCompanyId(medicalCompanyMapDTO.getMedicalCompanyId());
-                record.setMedicalId(miss_medical.getId());
-                record.setCreateTime(new Date());
-                medicalMedicalcompanyMappingMapper.insert(record);
-            }
-        }
-    }
+//    @Override
+//    protected void dealMapperRelashionShip(OperateDTO operateDTO) {
+//        MedicalDTO medicalDTO = JSONObject.toJavaObject(operateDTO.getJsonStr(), MedicalDTO.class);
+//        Miss_medicalWithBLOBs miss_medical = medicalDTO.getMissMedical();
+//        medicalMedicalcompanyMappingMapper.deleteByMedicalId(miss_medical.getId());
+//        List<MedicalCompanyMapDTO> medicalCompanyList = medicalDTO.getMedicalCompanyList();
+//        if (CollectionUtil.isNotEmpty(medicalCompanyList)) {
+//            for (MedicalCompanyMapDTO medicalCompanyMapDTO : medicalCompanyList) {
+//                Miss_medical_medicalcompany_mapping record = new Miss_medical_medicalcompany_mapping();
+//                record.setMedicalCompanyId(medicalCompanyMapDTO.getMedicalCompanyId());
+//                record.setMedicalId(miss_medical.getId());
+//                record.setCreateTime(new Date());
+//                medicalMedicalcompanyMappingMapper.insert(record);
+//            }
+//        }
+//    }
 
     @Override
     public String getJsonParamKey() {

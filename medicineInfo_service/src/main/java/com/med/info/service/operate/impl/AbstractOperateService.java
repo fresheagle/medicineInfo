@@ -44,12 +44,50 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
     @Transactional
     public String doOperate(OperateDTO operateDTO) {
         logger.info("接受到请求参数={}", JSON.toJSONString(operateDTO));
-        F objectF =  (F) JSON.toJavaObject(getParmJsonObject(operateDTO.getJsonStr()), getCurrentObjectClass());
+        F objectF = (F) JSON.toJavaObject(getParmJsonObject(operateDTO.getJsonStr()), getCurrentObjectClass());
         T object = converseObject(objectF);
         BaseService<T> baseService = baseService(operateDTO.getTaskMenuType());
         TrialStatusEnum trialStatusEnum = TrialStatusEnum.getTrialStatusEnum(operateDTO.getTaskStatus());
-        Assert.assertNotNull("任务状态异常，不能为:"+operateDTO.getTaskStatus()+"，请确认",trialStatusEnum);
+        Assert.assertNotNull("任务状态异常，不能为:" + operateDTO.getTaskStatus() + "，请确认", trialStatusEnum);
         doOperate(operateDTO, object, baseService, trialStatusEnum);
+        return null;
+    }
+
+
+    @Override
+    public String doBatchOperate(Miss_control_task_records miss_control_task_records, String operateCode) {
+        OperateDTO operateDTO = new OperateDTO();
+        operateDTO.setTaskTitle(miss_control_task_records.getTasktitle());
+        operateDTO.setTaskId(miss_control_task_records.getTaskId());
+        operateDTO.setTaskType(miss_control_task_records.getTasktype());
+        operateDTO.setTaskStatus(miss_control_task_records.getTaskStatus());
+        operateDTO.setOperateCode(operateCode);
+        operateDTO.setTaskMenuType(miss_control_task_records.getTaskmenutype());
+        Miss_control_task_detailWithBLOBs taskLastData = getTaskLastData(operateDTO.getTaskId());
+        operateDTO.setJsonStr(JSONObject.parseObject(taskLastData.getTaskchangeafterjson()));
+        doOperate(operateDTO);
+        return null;
+    }
+
+    @Override
+    public String doOnline(Miss_control_task_records miss_control_task_records) {
+        logger.info("上线taskId={}", miss_control_task_records.getTaskId());
+        BaseService<T> baseService = baseService(miss_control_task_records.getTaskmenutype());
+        String recordJson = miss_control_task_records.getTaskpublishfinalcontentjson();
+        F objectF = (F) JSON.parseObject(recordJson, getCurrentObjectClass());
+        T object = converseObject(objectF);
+        object.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        object.setDatastatus("1");
+        baseService.updateByTaskIdSelective(object);
+        if(needDealMapper()){
+            dealMapperRelashionShip(objectF);
+        }
+        missControlApprovalService.deleteByTaskId(miss_control_task_records.getTaskId());
+        return null;
+    }
+
+    @Override
+    public String doOffline(Miss_control_task_records miss_control_task_record) {
         return null;
     }
 
@@ -62,9 +100,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
     public abstract String getJsonParamKey();
 
 
-
-
-    public void createTaskDetail(OperateDTO operateDTO,  TrialStatusEnum trialStatusEnum) {
+    public void createTaskDetail(OperateDTO operateDTO, TrialStatusEnum trialStatusEnum) {
         Miss_control_task_detailWithBLOBs taskLastData = getTaskLastData(operateDTO.getTaskId());
         Miss_control_task_detailWithBLOBs controlTaskDetail = new Miss_control_task_detailWithBLOBs();
         if (null != taskLastData) {
@@ -88,8 +124,8 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
     public abstract boolean needDealMapper();
 
     @Override
-    public boolean isFilter(OperateDTO operateDTO) {
-        return operateDTO.getTaskMenuType().equals(getCurrentMenuType());
+    public boolean isFilter(String taskMenuType) {
+        return taskMenuType.equals(getCurrentMenuType());
     }
 
     public abstract String getCurrentMenuType();
@@ -129,7 +165,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         selectByPrimaryId.setTaskId(taskId);
         selectByPrimaryId.setDatastatus("0");
         TrialStatusEnum nextTrialStatusEnum1 = getNextStatus(operateDTO.getOperateCode(), trialStatusEnum, taskRecordByTaskId);
-        logger.info("taskId={} 当前taskStatus={},操作为 {}, 下一流程为：{}",taskId,trialStatusEnum.getDesc(),operateDTO.getOperateCode(),nextTrialStatusEnum1.getDesc());
+        logger.info("taskId={} 当前taskStatus={},操作为 {}, 下一流程为：{}", taskId, trialStatusEnum.getDesc(), operateDTO.getOperateCode(), nextTrialStatusEnum1.getDesc());
         selectByPrimaryId.setTaskStatus(nextTrialStatusEnum1.toString());
         baseService.updateByPrimaryKey(selectByPrimaryId);
         //如果为空表示新建的task数据需要创建taskRecord
@@ -163,10 +199,10 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
             return TrialStatusEnum.TO_FIRST_AUDITED;
         }
         //处理 初审未通过 任务
-        if(trialStatusEnum == TrialStatusEnum.FIRST_AUDITED_FAILED && operateCode.equals(OperateEnum.save.toString()) ){
+        if (trialStatusEnum == TrialStatusEnum.FIRST_AUDITED_FAILED && operateCode.equals(OperateEnum.save.toString())) {
             return TrialStatusEnum.DRAFTS;
         }
-        if(trialStatusEnum == TrialStatusEnum.FIRST_AUDITED_FAILED && operateCode.equals(OperateEnum.approveSuccess.toString()) ){
+        if (trialStatusEnum == TrialStatusEnum.FIRST_AUDITED_FAILED && operateCode.equals(OperateEnum.approveSuccess.toString())) {
             if (controlTaskRecords.getFirstTrialRoleCode() != null) {
                 return TrialStatusEnum.FIRST_AUDITEDING;
             }
@@ -174,10 +210,10 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         }
 
         //处理 一审中 任务
-        if(trialStatusEnum == TrialStatusEnum.FIRST_AUDITEDING && operateCode.equals(OperateEnum.approveFail.toString()) ){
+        if (trialStatusEnum == TrialStatusEnum.FIRST_AUDITEDING && operateCode.equals(OperateEnum.approveFail.toString())) {
             return TrialStatusEnum.FIRST_AUDITED_FAILED;
         }
-        if(trialStatusEnum == TrialStatusEnum.FIRST_AUDITEDING && operateCode.equals(OperateEnum.approveSuccess.toString()) ){
+        if (trialStatusEnum == TrialStatusEnum.FIRST_AUDITEDING && operateCode.equals(OperateEnum.approveSuccess.toString())) {
             if (controlTaskRecords.getSecondTrialRoleCode() != null) {
                 return TrialStatusEnum.SECOND_AUDITEDING;
             }
@@ -185,10 +221,10 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         }
 
         //处理 二审未通过 任务
-        if(trialStatusEnum == TrialStatusEnum.SECOND_AUDITED_FAILED && operateCode.equals(OperateEnum.approveFail.toString()) ){
+        if (trialStatusEnum == TrialStatusEnum.SECOND_AUDITED_FAILED && operateCode.equals(OperateEnum.approveFail.toString())) {
             return TrialStatusEnum.FIRST_AUDITED_FAILED;
         }
-        if(trialStatusEnum == TrialStatusEnum.SECOND_AUDITED_FAILED && operateCode.equals(OperateEnum.approveSuccess.toString()) ){
+        if (trialStatusEnum == TrialStatusEnum.SECOND_AUDITED_FAILED && operateCode.equals(OperateEnum.approveSuccess.toString())) {
             if (controlTaskRecords.getSecondTrialRoleCode() != null) {
                 return TrialStatusEnum.SECOND_AUDITEDING;
             }
@@ -196,10 +232,10 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         }
 
         //处理 二审中 任务
-        if(trialStatusEnum == TrialStatusEnum.SECOND_AUDITEDING && operateCode.equals(OperateEnum.approveFail.toString()) ){
+        if (trialStatusEnum == TrialStatusEnum.SECOND_AUDITEDING && operateCode.equals(OperateEnum.approveFail.toString())) {
             return TrialStatusEnum.SECOND_AUDITED_FAILED;
         }
-        if(trialStatusEnum == TrialStatusEnum.SECOND_AUDITEDING && operateCode.equals(OperateEnum.approveSuccess.toString()) ){
+        if (trialStatusEnum == TrialStatusEnum.SECOND_AUDITEDING && operateCode.equals(OperateEnum.approveSuccess.toString())) {
             if (controlTaskRecords.getFinalTrialRoleCode() != null) {
                 return TrialStatusEnum.FINAL_AUDITEDING;
             }
@@ -207,10 +243,10 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         }
 
         //处理 终审未通过 任务
-        if(trialStatusEnum == TrialStatusEnum.FINAL_AUDITED_FAILED && operateCode.equals(OperateEnum.approveFail.toString()) ){
+        if (trialStatusEnum == TrialStatusEnum.FINAL_AUDITED_FAILED && operateCode.equals(OperateEnum.approveFail.toString())) {
             return TrialStatusEnum.SECOND_AUDITED_FAILED;
         }
-        if(trialStatusEnum == TrialStatusEnum.FINAL_AUDITED_FAILED && operateCode.equals(OperateEnum.approveSuccess.toString()) ){
+        if (trialStatusEnum == TrialStatusEnum.FINAL_AUDITED_FAILED && operateCode.equals(OperateEnum.approveSuccess.toString())) {
             if (controlTaskRecords.getSecondTrialRoleCode() != null) {
                 return TrialStatusEnum.FINAL_AUDITEDING;
             }
@@ -218,10 +254,10 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         }
 
         //处理 终审中 任务
-        if(trialStatusEnum == TrialStatusEnum.FINAL_AUDITEDING && operateCode.equals(OperateEnum.approveFail.toString()) ){
+        if (trialStatusEnum == TrialStatusEnum.FINAL_AUDITEDING && operateCode.equals(OperateEnum.approveFail.toString())) {
             return TrialStatusEnum.FINAL_AUDITED_FAILED;
         }
-        if(trialStatusEnum == TrialStatusEnum.FINAL_AUDITEDING && operateCode.equals(OperateEnum.approveSuccess.toString()) ){
+        if (trialStatusEnum == TrialStatusEnum.FINAL_AUDITEDING && operateCode.equals(OperateEnum.approveSuccess.toString())) {
             return TrialStatusEnum.FINAL_AUDITED_SUCCESS;
         }
 
@@ -247,7 +283,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
     private Miss_control_task_detailWithBLOBs getTaskLastData(String taskId) {
 
         List<Miss_control_task_detailWithBLOBs> taskDetailsByTime = taskDetailMapper.getTaskDetailsByTime(taskId);
-        if(CollectionUtil.isNotEmpty(taskDetailsByTime)){
+        if (CollectionUtil.isNotEmpty(taskDetailsByTime)) {
             return taskDetailsByTime.get(0);
         }
         return null;
@@ -260,15 +296,15 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
 
     public abstract BaseService<T> baseService(String menuType);
 
-    protected void dealMapperRelashionShip(OperateDTO operateDTO){
+    protected void dealMapperRelashionShip(F objectF) {
 
     }
 
-    public List<Miss_control_reference> getReferences(OperateDTO operateDTO){
+    public List<Miss_control_reference> getReferences(OperateDTO operateDTO) {
         List<Miss_control_reference> result = new ArrayList<>();
         JSONArray refrences = operateDTO.getJsonStr().getJSONArray("refrences");
-        logger.info("taskId={}, 参考资料为={}",operateDTO.getTaskId(), refrences.toString());
-        if(null != refrences && refrences.size() > 0){
+        logger.info("taskId={}, 参考资料为={}", operateDTO.getTaskId(), refrences.toString());
+        if (null != refrences && refrences.size() > 0) {
             for (Object refrence : refrences) {
                 Miss_control_reference controlReference = JSONObject.parseObject(refrence.toString(), Miss_control_reference.class);
                 result.add(controlReference);
@@ -277,20 +313,20 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         return result;
     }
 
-    private void saveRefrences(List<Miss_control_reference> missControlReferences, String taskId){
+    private void saveRefrences(List<Miss_control_reference> missControlReferences, String taskId) {
         missControlReferenceService.deleteByTaskId(taskId);
-        if(CollectionUtil.isNotEmpty(missControlReferences)){
+        if (CollectionUtil.isNotEmpty(missControlReferences)) {
             for (Miss_control_reference missControlReference : missControlReferences) {
                 missControlReferenceService.insert(missControlReference);
             }
         }
     }
 
-    public List<Miss_control_approvalWithBLOBs> getApproves(OperateDTO operateDTO){
+    public List<Miss_control_approvalWithBLOBs> getApproves(OperateDTO operateDTO) {
         List<Miss_control_approvalWithBLOBs> result = new ArrayList<>();
         JSONArray approves = operateDTO.getJsonStr().getJSONArray("approves");
-        logger.info("taskId={}, 模块评审结果={}",operateDTO.getTaskId(), null == approves? null : approves.toString());
-        if(null != approves && approves.size() > 0){
+        logger.info("taskId={}, 模块评审结果={}", operateDTO.getTaskId(), null == approves ? null : approves.toString());
+        if (null != approves && approves.size() > 0) {
             for (Object approve : approves) {
                 Miss_control_approvalWithBLOBs controlApprovalWithBLOBs = JSONObject.parseObject(approve.toString(), Miss_control_approvalWithBLOBs.class);
                 result.add(controlApprovalWithBLOBs);
@@ -299,18 +335,18 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         return result;
     }
 
-    public void saveApproves(List<Miss_control_approvalWithBLOBs> missControlReferences, String taskId, TrialStatusEnum trialStatusEnum){
+    public void saveApproves(List<Miss_control_approvalWithBLOBs> missControlReferences, String taskId, TrialStatusEnum trialStatusEnum) {
 
-        if(CollectionUtil.isNotEmpty(missControlReferences)){
+        if (CollectionUtil.isNotEmpty(missControlReferences)) {
             for (Miss_control_approvalWithBLOBs missControlReference : missControlReferences) {
-                if(trialStatusEnum == TrialStatusEnum.FIRST_AUDITEDING){
+                if (trialStatusEnum == TrialStatusEnum.FIRST_AUDITEDING) {
                     missControlReference.setFirstTrailSuggestTime(new Date());
-                }else if (trialStatusEnum == TrialStatusEnum.SECOND_AUDITEDING){
+                } else if (trialStatusEnum == TrialStatusEnum.SECOND_AUDITEDING) {
                     missControlReference.setSecondTrailSuggestTime(new Date());
-                }else if (trialStatusEnum == TrialStatusEnum.FINAL_AUDITEDING){
+                } else if (trialStatusEnum == TrialStatusEnum.FINAL_AUDITEDING) {
                     missControlReference.setFinalTrailSuggestTime(new Date());
                 }
-                if(missControlApprovalService.updateByTaskIdAndModel(missControlReference) <= 0){
+                if (missControlApprovalService.updateByTaskIdAndModel(missControlReference) <= 0) {
                     missControlApprovalService.insert(missControlReference);
                 }
             }
@@ -320,7 +356,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
 
     public abstract Class<?> getCurrentObjectClass();
 
-    public T converseObject(F f){
+    public T converseObject(F f) {
         return (T) f;
     }
 

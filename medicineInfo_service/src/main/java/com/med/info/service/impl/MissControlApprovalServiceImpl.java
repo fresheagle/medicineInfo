@@ -34,4 +34,9 @@ public class MissControlApprovalServiceImpl extends BaseServiceImpl<Miss_control
 	public int updateByTaskIdAndModel(Miss_control_approvalWithBLOBs approvalWithBLOBs) {
 		return miss_control_approvalMapper.updateByTaskIdAndModel(approvalWithBLOBs);
 	}
+
+	@Override
+	public void deleteByTaskId(String taskId) {
+		miss_control_approvalMapper.deleteByTaskId(taskId);
+	}
 }

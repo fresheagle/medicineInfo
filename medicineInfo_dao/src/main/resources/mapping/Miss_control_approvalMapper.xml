@@ -361,4 +361,8 @@
     </set>
     where task_id = #{taskId,jdbcType=VARCHAR} and refer_model = #{referModel,jdbcType=VARCHAR}
   </update>
+
+  <delete id="deleteByTaskId" parameterType="java.lang.String">
+    delete from  miss_control_approval where task_id = #{taskId,jdbcType=VARCHAR}
+  </delete>
 </mapper>

@@ -54,36 +54,36 @@ public class MissSymptomOperateService extends AbstractOperateService<Miss_sympt
         return Miss_symptomWithBLOBs.class;
     }
 
-    @Override
-    protected void dealMapperRelashionShip(OperateDTO operateDTO) {
-        {
-            SymptomDTO symptomDTO = JSONObject.toJavaObject(operateDTO.getJsonStr(), SymptomDTO.class);
-            Miss_symptomWithBLOBs miss_symptom = symptomDTO.getMissSymptom();
-            symptom_dislocation_mappingMapper.deleteBySymptomId(miss_symptom.getId());
-            symptom_medical_mappingMapper.deleteBySymptomId(miss_symptom.getId());
-            List<DislocationMapDTO> dislocationList = symptomDTO.getDislocationList();
-            if (CollectionUtil.isNotEmpty(dislocationList)) {
-                for (DislocationMapDTO dislocationMapDTO : dislocationList) {
-                    Miss_symptom_dislocation_mapping record = new Miss_symptom_dislocation_mapping();
-                    record.setCreateTime(new Date());
-                    record.setDislocationId(dislocationMapDTO.getId());
-                    record.setSymptomId(miss_symptom.getId());
-                    symptom_dislocation_mappingMapper.insert(record);
-                }
-            }
-
-            List<MedicalMapDTO> medicalList = symptomDTO.getMedicalList();
-            if (CollectionUtil.isNotEmpty(medicalList)) {
-                for (MedicalMapDTO medicalMapDTO : medicalList) {
-                    Miss_symptom_medical_mapping record = new Miss_symptom_medical_mapping();
-                    record.setCreateTime(new Date());
-                    record.setMedicalId(medicalMapDTO.getId());
-                    record.setSymptomId(miss_symptom.getId());
-                    symptom_medical_mappingMapper.insert(record);
-                }
-            }
-        }
-    }
+//    @Override
+//    protected void dealMapperRelashionShip(OperateDTO operateDTO) {
+//        {
+//            SymptomDTO symptomDTO = JSONObject.toJavaObject(operateDTO.getJsonStr(), SymptomDTO.class);
+//            Miss_symptomWithBLOBs miss_symptom = symptomDTO.getMissSymptom();
+//            symptom_dislocation_mappingMapper.deleteBySymptomId(miss_symptom.getId());
+//            symptom_medical_mappingMapper.deleteBySymptomId(miss_symptom.getId());
+//            List<DislocationMapDTO> dislocationList = symptomDTO.getDislocationList();
+//            if (CollectionUtil.isNotEmpty(dislocationList)) {
+//                for (DislocationMapDTO dislocationMapDTO : dislocationList) {
+//                    Miss_symptom_dislocation_mapping record = new Miss_symptom_dislocation_mapping();
+//                    record.setCreateTime(new Date());
+//                    record.setDislocationId(dislocationMapDTO.getId());
+//                    record.setSymptomId(miss_symptom.getId());
+//                    symptom_dislocation_mappingMapper.insert(record);
+//                }
+//            }
+//
+//            List<MedicalMapDTO> medicalList = symptomDTO.getMedicalList();
+//            if (CollectionUtil.isNotEmpty(medicalList)) {
+//                for (MedicalMapDTO medicalMapDTO : medicalList) {
+//                    Miss_symptom_medical_mapping record = new Miss_symptom_medical_mapping();
+//                    record.setCreateTime(new Date());
+//                    record.setMedicalId(medicalMapDTO.getId());
+//                    record.setSymptomId(miss_symptom.getId());
+//                    symptom_medical_mappingMapper.insert(record);
+//                }
+//            }
+//        }
+//    }
 
     @Override
     public String getJsonParamKey() {

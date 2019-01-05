@@ -54,33 +54,33 @@ public class MissDoctorOperateService extends AbstractOperateService<Miss_doctor
         return true;
     }
 
-    @Override
-    protected void dealMapperRelashionShip(OperateDTO operateDTO) {
-        DoctorDTO doctorDTO = JSONObject.toJavaObject(operateDTO.getJsonStr(), DoctorDTO.class);
-        Miss_doctorWithBLOBs missDoctor = doctorDTO.getMissDoctor();
-        institutionDoctorMappingMapper.deleteByDoctorId(missDoctor.getId());
-        departmentDoctorMappingMapper.deleteByDoctorId(missDoctor.getId());
-        List<InstitutionInfoMapDTO> institutionList = doctorDTO.getInstitutionList();
-        if (CollectionUtil.isNotEmpty(institutionList)) {
-            for (InstitutionInfoMapDTO institutionInfoMapDTO : institutionList) {
-                Miss_institution_doctor_mapping record = new Miss_institution_doctor_mapping();
-                record.setCreateTime(new Date());
-                record.setDoctorId(missDoctor.getId());
-                record.setInstitutionId(institutionInfoMapDTO.getId());
-                institutionDoctorMappingMapper.insert(record);
-            }
-        }
-        List<DepartmentMapDTO> departmentList = doctorDTO.getDepartmentList();
-        if (CollectionUtil.isNotEmpty(departmentList)) {
-            for (DepartmentMapDTO departmentMapDTO : departmentList) {
-                Miss_department_doctor_mapping record = new Miss_department_doctor_mapping();
-                record.setCreateTime(new Date());
-                record.setDoctorId(missDoctor.getId());
-                record.setDepartmentId(departmentMapDTO.getId());
-                departmentDoctorMappingMapper.insert(record);
-            }
-        }
-    }
+//    @Override
+//    protected void dealMapperRelashionShip(OperateDTO operateDTO) {
+//        DoctorDTO doctorDTO = JSONObject.toJavaObject(operateDTO.getJsonStr(), DoctorDTO.class);
+//        Miss_doctorWithBLOBs missDoctor = doctorDTO.getMissDoctor();
+//        institutionDoctorMappingMapper.deleteByDoctorId(missDoctor.getId());
+//        departmentDoctorMappingMapper.deleteByDoctorId(missDoctor.getId());
+//        List<InstitutionInfoMapDTO> institutionList = doctorDTO.getInstitutionList();
+//        if (CollectionUtil.isNotEmpty(institutionList)) {
+//            for (InstitutionInfoMapDTO institutionInfoMapDTO : institutionList) {
+//                Miss_institution_doctor_mapping record = new Miss_institution_doctor_mapping();
+//                record.setCreateTime(new Date());
+//                record.setDoctorId(missDoctor.getId());
+//                record.setInstitutionId(institutionInfoMapDTO.getId());
+//                institutionDoctorMappingMapper.insert(record);
+//            }
+//        }
+//        List<DepartmentMapDTO> departmentList = doctorDTO.getDepartmentList();
+//        if (CollectionUtil.isNotEmpty(departmentList)) {
+//            for (DepartmentMapDTO departmentMapDTO : departmentList) {
+//                Miss_department_doctor_mapping record = new Miss_department_doctor_mapping();
+//                record.setCreateTime(new Date());
+//                record.setDoctorId(missDoctor.getId());
+//                record.setDepartmentId(departmentMapDTO.getId());
+//                departmentDoctorMappingMapper.insert(record);
+//            }
+//        }
+//    }
 
     @Override
     public String getJsonParamKey() {

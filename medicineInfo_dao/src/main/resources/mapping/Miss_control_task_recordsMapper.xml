@@ -522,4 +522,10 @@
 		</where>
 	</select>
 
+	<select id="getCurrentTrialStatusByTaskids" parameterType="java.awt.List" resultType="java.lang.String">
+		select taskStatus from  miss_control_task_records where task_id in
+		<foreach collection="taskIds" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</select>
 </mapper>

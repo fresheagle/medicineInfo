@@ -54,34 +54,34 @@ public class MissDiseaseOperateService extends AbstractOperateService<Miss_disea
         return true;
     }
 
-    @Override
-    protected void dealMapperRelashionShip(OperateDTO operateDTO) {
-        DiseaseDTO diseaseDTO = JSONObject.toJavaObject(operateDTO.getJsonStr(), DiseaseDTO.class);
-        Long id = diseaseDTO.getMissDisease().getId();
-        miss_disease_department_mappingMapper.deleteByDiseaseId(id);
-        miss_disease_symptom_mappingMapper.deleteByDiseaseId(id);
-        logger.info(getCurrentMenuType() + "当前操作为" + operateDTO.getTaskType() + "入库数据");
-        List<DepartmentMapDTO> departmentMapDTO = diseaseDTO.getDepartmentMapDTO();
-        List<SymptomMapDTO> symptomMapDTO = diseaseDTO.getSymptomMapDTO();
-        if (CollectionUtil.isNotEmpty(symptomMapDTO)) {
-            for (SymptomMapDTO symptomMapDTO2 : symptomMapDTO) {
-                Miss_disease_symptom_mapping record = new Miss_disease_symptom_mapping();
-                record.setCreateTime(new Timestamp(System.currentTimeMillis()));
-                record.setSymptomId(symptomMapDTO2.getId());
-                record.setDiseaseId(id);
-                miss_disease_symptom_mappingMapper.insert(record);
-            }
-        }
-        if (CollectionUtil.isNotEmpty(departmentMapDTO)) {
-            for (DepartmentMapDTO departmentMapDTO2 : departmentMapDTO) {
-                Miss_disease_department_mapping record = new Miss_disease_department_mapping();
-                record.setCreateTime(new Timestamp(System.currentTimeMillis()));
-                record.setDepartmentId(departmentMapDTO2.getId());
-                record.setDiseaseId(id);
-                miss_disease_department_mappingMapper.insert(record);
-            }
-        }
-    }
+//    @Override
+//    protected void dealMapperRelashionShip(OperateDTO operateDTO) {
+//        DiseaseDTO diseaseDTO = JSONObject.toJavaObject(operateDTO.getJsonStr(), DiseaseDTO.class);
+//        Long id = diseaseDTO.getMissDisease().getId();
+//        miss_disease_department_mappingMapper.deleteByDiseaseId(id);
+//        miss_disease_symptom_mappingMapper.deleteByDiseaseId(id);
+//        logger.info(getCurrentMenuType() + "当前操作为" + operateDTO.getTaskType() + "入库数据");
+//        List<DepartmentMapDTO> departmentMapDTO = diseaseDTO.getDepartmentMapDTO();
+//        List<SymptomMapDTO> symptomMapDTO = diseaseDTO.getSymptomMapDTO();
+//        if (CollectionUtil.isNotEmpty(symptomMapDTO)) {
+//            for (SymptomMapDTO symptomMapDTO2 : symptomMapDTO) {
+//                Miss_disease_symptom_mapping record = new Miss_disease_symptom_mapping();
+//                record.setCreateTime(new Timestamp(System.currentTimeMillis()));
+//                record.setSymptomId(symptomMapDTO2.getId());
+//                record.setDiseaseId(id);
+//                miss_disease_symptom_mappingMapper.insert(record);
+//            }
+//        }
+//        if (CollectionUtil.isNotEmpty(departmentMapDTO)) {
+//            for (DepartmentMapDTO departmentMapDTO2 : departmentMapDTO) {
+//                Miss_disease_department_mapping record = new Miss_disease_department_mapping();
+//                record.setCreateTime(new Timestamp(System.currentTimeMillis()));
+//                record.setDepartmentId(departmentMapDTO2.getId());
+//                record.setDiseaseId(id);
+//                miss_disease_department_mappingMapper.insert(record);
+//            }
+//        }
+//    }
 
     @Override
     public String getJsonParamKey() {

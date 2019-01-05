@@ -65,4 +65,6 @@ public interface Miss_control_task_recordsMapper {
     void updateByTaskIdSelective(Miss_control_task_records record);
     
     List<Miss_control_task_records> selectPageBySelective(Map map);
+
+    List<Miss_control_task_records> getCurrentTrialStatusByTaskids(List<String> taskIds);
 }

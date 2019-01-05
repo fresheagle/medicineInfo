@@ -6,13 +6,19 @@ public enum TrialStatusEnum {
 	TO_FIRST_AUDITED("toFirAudited","待初审"),
 	FIRST_AUDITEDING("firAuditeding","初审中"),
 	FIRST_AUDITED_FAILED("firAuditedFailed","初审未通过"),
+	FIRST_AUDITED_SUCCESS("firAuditedSuccess","初审通过"),
+
 	TO_SECOND_AUDITED("toSecAudited","待二审"),
 	SECOND_AUDITEDING("secAuditeding","二审中"),
 	SECOND_AUDITED_FAILED("secAuditedFailed","二审未通过"),
+	SECOND_AUDITED_SUCCESS("secAuditedSuccess","二审通过"),
+
 	TO_FINAL_AUDITED("toFinalAudited","待终审"),
 	FINAL_AUDITEDING("finalAuditeding","终审中"),
 	FINAL_AUDITED_FAILED("finalAuditedFailed","终审未通过"),
-	FINAL_AUDITED_SUCCESS("finished","终审未通过");
+	FINAL_AUDITED_SUCCESS("finished","终审通过"),
+	OFFLINE("offline","下线"),
+	ONLINE("online","上线");
 
 	
 	private String id;

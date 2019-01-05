@@ -1,6 +1,7 @@
 package com.med.info.rest;
 
 import com.med.info.dto.BatchApproveTaskDTO;
+import com.med.info.dto.BatchOperateDTO;
 import com.med.info.dto.ClaimTaskDTO;
 import com.med.info.dto.SelectTaskDTO;
 import com.med.info.mapper.domain.OperateDTO;
@@ -34,6 +35,12 @@ public class MissionController {
             logger.error("保存任务状态失败；", e);
             return new Response().failure(e.getMessage());
         }
+    }
+
+    @RequestMapping(value = "batch/saveMission", method = RequestMethod.PUT)
+    public Response batchSave(@RequestBody BatchOperateDTO batchOperateDTO){
+
+        return null;
     }
 
     @RequestMapping(value = "/claimTask", method = RequestMethod.POST)

@@ -1,5 +1,6 @@
 package com.med.info.service;
 
+import com.med.info.dto.BatchOperateDTO;
 import com.med.info.dto.ClaimTaskDTO;
 import com.med.info.dto.SelectTaskDTO;
 import com.med.info.mapper.domain.OperateDTO;
@@ -12,6 +13,8 @@ import com.med.info.mapper.domain.OperateDTO;
 public interface MissionService {
 	
 	public Object saveMission(OperateDTO operateDTO);
+
+	public Object BatchSaveMission(BatchOperateDTO batchOperateDTO) throws Exception;
 	
 	public Object getByPage(SelectTaskDTO selectTaskDTO);
 	

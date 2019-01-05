@@ -28,7 +28,6 @@ public class MissInstitutionOperateService extends AbstractOperateService<Miss_i
 
     @Autowired
     private MissInstitutionService institutionService;
-
     @Autowired
     private Miss_institution_keypartment_mappingMapper institution_keypartment_mappingMapper;
     private static Logger logger = LoggerFactory.getLogger(MissInstitutionOperateService.class);
@@ -58,16 +57,14 @@ public class MissInstitutionOperateService extends AbstractOperateService<Miss_i
     }
 
     @Override
-    protected void dealMapperRelashionShip(OperateDTO operateDTO) {
-        InstitutionInfoDTO javaObject = JSONObject.toJavaObject(operateDTO.getJsonStr(), InstitutionInfoDTO.class);
-        Miss_institutionWithBLOBs missInstitutionWithBLOBs = javaObject.getMissInstitution();
-        institution_keypartment_mappingMapper.deleteByInstitutionId(missInstitutionWithBLOBs.getId());
-        List<DepartmentMapDTO> departmentMapDTO = javaObject.getDepartmentMapDTO();
+    protected void dealMapperRelashionShip(MissInstitutionDTO objectF) {
+        institution_keypartment_mappingMapper.deleteByInstitutionId(objectF.getId());
+        List<DepartmentMapDTO> departmentMapDTO = objectF.getDepartmentMapDTO();
         if (CollectionUtil.isNotEmpty(departmentMapDTO)) {
             for (DepartmentMapDTO departmentMapDTO2 : departmentMapDTO) {
                 Miss_institution_keypartment_mapping record = new Miss_institution_keypartment_mapping();
                 record.setCreateTime(new Date());
-                record.setInstitutionId(missInstitutionWithBLOBs.getId());
+                record.setInstitutionId(objectF.getId());
                 record.setDepartmentId(departmentMapDTO2.getId());
                 institution_keypartment_mappingMapper.insert(record);
             }

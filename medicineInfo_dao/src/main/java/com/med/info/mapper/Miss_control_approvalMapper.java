@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.med.info.domain.Miss_control_approval;
 import com.med.info.domain.Miss_control_approvalWithBLOBs;
+import org.apache.ibatis.annotations.Param;
 
 public interface Miss_control_approvalMapper extends BaseMapper<Miss_control_approvalWithBLOBs>{
     /**
@@ -70,4 +71,6 @@ public interface Miss_control_approvalMapper extends BaseMapper<Miss_control_app
     List<Miss_control_approvalWithBLOBs> showByTaskId(Miss_control_approvalWithBLOBs record);
 
     int updateByTaskIdAndModel(Miss_control_approvalWithBLOBs approvalWithBLOBs);
+
+    void deleteByTaskId(@Param("taskId") String taskId);
 }

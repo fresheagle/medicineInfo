@@ -166,15 +166,9 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         selectByPrimaryId.setDatastatus("0");
         TrialStatusEnum nextTrialStatusEnum1 = getNextStatus(operateDTO.getOperateCode(), trialStatusEnum, taskRecordByTaskId);
         logger.info("taskId={} 当前taskStatus={},操作为 {}, 下一流程为：{}", taskId, trialStatusEnum.getDesc(), operateDTO.getOperateCode(), nextTrialStatusEnum1.getDesc());
-        selectByPrimaryId.setTaskStatus(nextTrialStatusEnum1.toString());
+        selectByPrimaryId.setTaskStatus(nextTrialStatusEnum1.getId());
         baseService.updateByPrimaryKey(selectByPrimaryId);
-        //如果为空表示新建的task数据需要创建taskRecord
-        Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
-        controlTaskRecord.setTaskId(taskId);
-        controlTaskRecord.setTaskstatus(nextTrialStatusEnum1.toString());
-        controlTaskRecord.setTasktitle(operateDTO.getTaskTitle());
-        controlTaskRecord.setUpdateTime(new Timestamp(System.currentTimeMillis()));
-        taskRecordsMapper.updateByTaskIdSelective(controlTaskRecord);
+
         createTaskDetail(operateDTO, nextTrialStatusEnum1);
 
         //保存参考资料
@@ -184,6 +178,25 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         List<Miss_control_approvalWithBLOBs> approves = getApproves(operateDTO);
         saveApproves(approves, taskId, trialStatusEnum);
 
+        //更新taskReconrd 更新其对应数据
+        Miss_control_task_records controlTaskRecord = new Miss_control_task_records();
+        controlTaskRecord.setTaskId(taskId);
+        controlTaskRecord.setTaskstatus(nextTrialStatusEnum1.getId());
+        controlTaskRecord.setTasktitle(operateDTO.getTaskTitle());
+        if(trialStatusEnum == TrialStatusEnum.TO_FIRST_AUDITED){
+            controlTaskRecord.setTaskfirsttrialcode(DefaultTokenManager.getLocalUserCode().getUserCode());
+            controlTaskRecord.setTaskFirstTrialTime(new Timestamp(System.currentTimeMillis()));
+        }
+        if(trialStatusEnum == TrialStatusEnum.TO_SECOND_AUDITED){
+            controlTaskRecord.setTasksecondtrialcode(DefaultTokenManager.getLocalUserCode().getUserCode());
+            controlTaskRecord.setTaskSecondTrialTime(new Timestamp(System.currentTimeMillis()));
+        }
+        if(trialStatusEnum == TrialStatusEnum.TO_FINAL_AUDITED){
+            controlTaskRecord.setTaskfinaltrialcode(DefaultTokenManager.getLocalUserCode().getUserCode());
+            controlTaskRecord.setTaskFinalTrialTime(new Timestamp(System.currentTimeMillis()));
+        }
+        controlTaskRecord.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        taskRecordsMapper.updateByTaskIdSelective(controlTaskRecord);
 
     }
 
@@ -314,9 +327,11 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
     }
 
     private void saveRefrences(List<Miss_control_reference> missControlReferences, String taskId) {
-        missControlReferenceService.deleteByTaskId(taskId);
         if (CollectionUtil.isNotEmpty(missControlReferences)) {
+            missControlReferenceService.deleteByTaskId(taskId);
+            int i = 1;
             for (Miss_control_reference missControlReference : missControlReferences) {
+                missControlReference.setSequenc(i++);
                 missControlReferenceService.insert(missControlReference);
             }
         }

@@ -39,8 +39,13 @@ public class MissionController {
 
     @RequestMapping(value = "batch/saveMission", method = RequestMethod.PUT)
     public Response batchSave(@RequestBody BatchOperateDTO batchOperateDTO){
-
-        return null;
+        try {
+            missionService.BatchSaveMission(batchOperateDTO);
+            return new Response().success("操作成功");
+        } catch (Exception e) {
+            logger.error("批量保存任务状态失败；", e);
+            return new Response().failure(e.getMessage());
+        }
     }
 
     @RequestMapping(value = "/claimTask", method = RequestMethod.POST)

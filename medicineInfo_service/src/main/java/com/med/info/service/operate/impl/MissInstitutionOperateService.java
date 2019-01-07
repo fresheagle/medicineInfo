@@ -73,7 +73,7 @@ public class MissInstitutionOperateService extends AbstractOperateService<Miss_i
 
     @Override
     public String getJsonParamKey() {
-        return "missInstitution";
+        return "publicInstitution";
     }
 
     @Override

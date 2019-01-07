@@ -110,7 +110,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         }
         controlTaskDetail.setTaskId(operateDTO.getTaskId());
         controlTaskDetail.setTaskmenutype(operateDTO.getTaskMenuType());
-        controlTaskDetail.setTaskstatuschangeafter(trialStatusEnum.toString());
+        controlTaskDetail.setTaskstatuschangeafter(trialStatusEnum.getId());
         controlTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode().getUserCode());
         controlTaskDetail.setTaskchangepoints(operateDTO.getTaskChangePoints());
         controlTaskDetail.setTaskchangecomments(operateDTO.getTaskChangeComments());

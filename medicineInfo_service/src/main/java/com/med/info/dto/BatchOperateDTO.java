@@ -15,6 +15,8 @@ public class BatchOperateDTO implements Serializable {
 
     private String trailStatus;
 
+    private String approveMessage;
+
     public List<String> getTasks() {
         return tasks;
     }
@@ -29,5 +31,13 @@ public class BatchOperateDTO implements Serializable {
 
     public void setTrailStatus(String trailStatus) {
         this.trailStatus = trailStatus;
+    }
+
+    public String getApproveMessage() {
+        return approveMessage;
+    }
+
+    public void setApproveMessage(String approveMessage) {
+        this.approveMessage = approveMessage;
     }
 }

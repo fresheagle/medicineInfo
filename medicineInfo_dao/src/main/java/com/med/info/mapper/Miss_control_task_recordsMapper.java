@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.med.info.domain.Miss_control_task_records;
+import org.apache.ibatis.annotations.Param;
 
 public interface Miss_control_task_recordsMapper {
     /**
@@ -66,5 +67,5 @@ public interface Miss_control_task_recordsMapper {
     
     List<Miss_control_task_records> selectPageBySelective(Map map);
 
-    List<Miss_control_task_records> getCurrentTrialStatusByTaskids(List<String> taskIds);
+    List<Miss_control_task_records> getCurrentTrialStatusByTaskids(@Param("taskIds") List<String> taskIds);
 }

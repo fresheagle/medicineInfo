@@ -156,7 +156,7 @@ public class MissionServiceImpl implements MissionService {
 
 
 		}
-		return false;
+		throw new Exception("批量操作任务状态不正确，请检查！");
 
 	}
 

@@ -7,7 +7,7 @@ public interface IOperateService {
 	
 	public String doOperate(OperateDTO operateDTO);
 
-	public String doBatchOperate(Miss_control_task_records miss_control_task_records, String operateCode);
+	public String doBatchOperate(Miss_control_task_records miss_control_task_records, String operateCode, String approveMessage);
 
 	public String doOnline(Miss_control_task_records miss_control_task_records);
 

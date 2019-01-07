@@ -103,9 +103,9 @@ public class MissionServiceImpl implements MissionService {
 							if(batchOperateDTO.getTrailStatus().equals(TrialStatusEnum.FIRST_AUDITED_SUCCESS.getId()) ||
 									batchOperateDTO.getTrailStatus().equals(TrialStatusEnum.SECOND_AUDITED_SUCCESS.getId()) ||
 									batchOperateDTO.getTrailStatus().equals(TrialStatusEnum.FINAL_AUDITED_SUCCESS.getId())){
-								operateService.doBatchOperate(taskRecord, OperateEnum.approveSuccess.toString());
+								operateService.doBatchOperate(taskRecord, OperateEnum.approveSuccess.toString(), batchOperateDTO.getApproveMessage());
 							}else{
-								operateService.doBatchOperate(taskRecord, OperateEnum.approveFail.toString());
+								operateService.doBatchOperate(taskRecord, OperateEnum.approveFail.toString(), batchOperateDTO.getApproveMessage());
 							}
 						}
 					}

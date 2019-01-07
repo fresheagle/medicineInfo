@@ -55,7 +55,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
 
 
     @Override
-    public String doBatchOperate(Miss_control_task_records miss_control_task_records, String operateCode) {
+    public String doBatchOperate(Miss_control_task_records miss_control_task_records, String operateCode, String approveMessage) {
         OperateDTO operateDTO = new OperateDTO();
         operateDTO.setTaskTitle(miss_control_task_records.getTasktitle());
         operateDTO.setTaskId(miss_control_task_records.getTaskId());
@@ -63,6 +63,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         operateDTO.setTaskStatus(miss_control_task_records.getTaskStatus());
         operateDTO.setOperateCode(operateCode);
         operateDTO.setTaskMenuType(miss_control_task_records.getTaskmenutype());
+        operateDTO.setTaskChangeComments(approveMessage);
         Miss_control_task_detailWithBLOBs taskLastData = getTaskLastData(operateDTO.getTaskId());
         operateDTO.setJsonStr(JSONObject.parseObject(taskLastData.getTaskchangeafterjson()));
         doOperate(operateDTO);

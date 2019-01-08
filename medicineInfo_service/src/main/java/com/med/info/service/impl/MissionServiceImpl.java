@@ -123,7 +123,7 @@ public class MissionServiceImpl implements MissionService {
 			//初审状态
 			if(nextTrailStatus.equals(TrialStatusEnum.FIRST_AUDITED_FAILED.getId()) || nextTrailStatus.equals(TrialStatusEnum.FIRST_AUDITED_SUCCESS.getId())){
 				for (Miss_control_task_records records : missControlTaskRecords) {
-					if(!records.getTaskstatus().equals(TrialStatusEnum.TO_FIRST_AUDITED.getId())){
+					if(!records.getTaskstatus().equals(TrialStatusEnum.FINAL_AUDITEDING.getId())){
 						throw new Exception("当前任务不是都为一审中，请检查！");
 					}
 				}
@@ -131,7 +131,7 @@ public class MissionServiceImpl implements MissionService {
 			//二审状态
 			if(nextTrailStatus.equals(TrialStatusEnum.SECOND_AUDITED_FAILED.getId()) || nextTrailStatus.equals(TrialStatusEnum.SECOND_AUDITED_SUCCESS.getId())){
 				for (Miss_control_task_records records : missControlTaskRecords) {
-					if(!records.getTaskstatus().equals(TrialStatusEnum.TO_SECOND_AUDITED.getId())){
+					if(!records.getTaskstatus().equals(TrialStatusEnum.SECOND_AUDITEDING.getId())){
 						throw new Exception("当前任务不是都为二审中，请检查！");
 					}
 				}
@@ -139,7 +139,7 @@ public class MissionServiceImpl implements MissionService {
 			//终审状态
 			if(nextTrailStatus.equals(TrialStatusEnum.FINAL_AUDITED_FAILED.getId()) || nextTrailStatus.equals(TrialStatusEnum.FINAL_AUDITED_SUCCESS.getId())){
 				for (Miss_control_task_records records : missControlTaskRecords) {
-					if(!records.getTaskstatus().equals(TrialStatusEnum.TO_FINAL_AUDITED.getId())){
+					if(!records.getTaskstatus().equals(TrialStatusEnum.FINAL_AUDITEDING.getId())){
 						throw new Exception("当前任务不是都为终审中，请检查！");
 					}
 				}

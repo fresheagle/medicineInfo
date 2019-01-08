@@ -522,7 +522,7 @@
 		</where>
 	</select>
 
-	<select id="getCurrentTrialStatusByTaskids" parameterType="java.awt.List" resultType="java.lang.String">
+	<select id="getCurrentTrialStatusByTaskids" parameterType="java.awt.List" resultMap="ResultMapWithBLOBs">
 		select
 		<include refid="Base_Column_List" />
 		from miss_control_task_records where task_id in

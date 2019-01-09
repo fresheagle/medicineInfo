@@ -1,6 +1,9 @@
 package com.med.info.mapper;
 
 import com.med.info.domain.Miss_district;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface Miss_districtMapper extends BaseMapper<Miss_district>{
     /**
@@ -59,4 +62,6 @@ public interface Miss_districtMapper extends BaseMapper<Miss_district>{
      * @mbg.generated Sat Nov 17 18:29:49 CST 2018
      */
     int updateByPrimaryKey(Miss_district record);
+
+    List<Miss_district> selectDistrict(@Param("parentId") Long parentId, @Param("level") String level);
 }

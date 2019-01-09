@@ -1,6 +1,7 @@
 package com.med.info.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 认领任务请求
@@ -14,7 +15,7 @@ public class ClaimTaskDTO implements Serializable {
     /**
      * 任务ID
      */
-    private String taskId;
+    private List<String> taskIds;
     /**
      * 当前任务状态 （用于判断应该设置当前用户到那个字段）
      */
@@ -36,11 +37,11 @@ public class ClaimTaskDTO implements Serializable {
         this.status = status;
     }
 
-    public String getTaskId() {
-        return taskId;
+    public List<String> getTaskIds() {
+        return taskIds;
     }
 
-    public void setTaskId(String taskId) {
-        this.taskId = taskId;
+    public void setTaskIds(List<String> taskIds) {
+        this.taskIds = taskIds;
     }
 }

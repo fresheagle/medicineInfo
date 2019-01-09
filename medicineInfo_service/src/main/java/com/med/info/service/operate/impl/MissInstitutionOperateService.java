@@ -65,6 +65,7 @@ public class MissInstitutionOperateService extends AbstractOperateService<Miss_i
                 Miss_institution_keypartment_mapping record = new Miss_institution_keypartment_mapping();
                 record.setCreateTime(new Date());
                 record.setInstitutionId(objectF.getId());
+                record.setLevel(departmentMapDTO2.getDepartmentLevel());
                 record.setDepartmentId(departmentMapDTO2.getId());
                 institution_keypartment_mappingMapper.insert(record);
             }

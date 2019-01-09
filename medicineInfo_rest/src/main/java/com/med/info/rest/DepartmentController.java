@@ -45,7 +45,7 @@ public class DepartmentController {
 		if(departmentName != null) {
 			miss_department.setDepartmentName(departmentName);
 		}
-		PageObject<Miss_department> selectPage = missDepartmentService.selectPageByOperateDto(currentPage, pageSize, miss_department);
+		PageObject<Miss_department> selectPage = missDepartmentService.selectPage(currentPage, pageSize, miss_department);
 		return new Response().success(selectPage);
 	}
 }

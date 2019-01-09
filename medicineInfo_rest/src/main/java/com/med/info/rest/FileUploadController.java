@@ -40,9 +40,10 @@ public class FileUploadController {
 	public static final String BASE_PATH = "temp/";
 	@Autowired private AliyunOSSService aliyunOSSService;
 	@RequestMapping(path = "/upload", method = RequestMethod.POST)
-	public Response upload(@RequestParam(value = "files", required = false) MultipartFile[] multipartFile) {
+	public Response upload(@RequestParam(value = "file", required = false) MultipartFile[] multipartFile) {
 		try {
 			List<ImageResponseDTO> imageResponseDTOS = new ArrayList<>();
+			logger.info("上传文件数量为：{}", null == multipartFile ? null : multipartFile.length);
 			if(null != multipartFile && multipartFile.length > 0){
 				for (MultipartFile file : multipartFile) {
 					String originalFilename = file.getOriginalFilename();

@@ -19,7 +19,6 @@ import com.med.info.utils.CollectionUtil;
 import com.med.info.utils.OperateEnum;
 import com.med.info.utils.SelectMapUtil;
 import com.med.info.utils.TrialStatusEnum;
-import org.apache.log4j.spi.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -161,13 +160,16 @@ public class MissionServiceImpl implements MissionService {
 	}
 
 	@Override
-	public Object getByPage(SelectTaskDTO selectTaskDTO) {
+	public Object getByPage(SelectTaskDTO selectTaskDTO, boolean useCurrentUser) {
 
 		selectTaskDTO.setCreateUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getCreateUser()));
 		selectTaskDTO.setFinalTrialUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getFinalTrialUser()));
 		selectTaskDTO.setFirstTrialUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getFirstTrialUser()));
 		selectTaskDTO.setSecondTrialUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getSecondTrialUser()));
 		Map<String, Object> record = SelectMapUtil.converseObjectToMap(selectTaskDTO);
+		if(useCurrentUser){
+			record.put("currentUser", DefaultTokenManager.getLocalUserCode().getUserCode());
+		}
 		logger.info("查询任务，record={}",JSON.toJSONString(record));
         PageHelper.startPage(selectTaskDTO.getCurrentPage(), selectTaskDTO.getPageSize() == null ? 10 : selectTaskDTO.getPageSize());
         Page<Miss_control_task_records> showDataCondition = (Page<Miss_control_task_records>) taskRecordsMapper

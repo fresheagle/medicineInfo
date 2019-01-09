@@ -8,6 +8,7 @@ public class SelectTaskDTO {
     private Integer pageSize;
     private String taskTitle;
     private String taskType;
+    private Integer poolId;
     private List<String> taskStatus;
     private String taskMenuType;
     private List<String> createUser;
@@ -175,5 +176,13 @@ public class SelectTaskDTO {
 
     public void setFinalTrialUserCode(List<String> finalTrialUserCode) {
         this.finalTrialUserCode = finalTrialUserCode;
+    }
+
+    public Integer getPoolId() {
+        return poolId;
+    }
+
+    public void setPoolId(Integer poolId) {
+        this.poolId = poolId;
     }
 }

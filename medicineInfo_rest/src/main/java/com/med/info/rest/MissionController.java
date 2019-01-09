@@ -7,9 +7,13 @@ import com.med.info.dto.SelectTaskDTO;
 import com.med.info.mapper.domain.OperateDTO;
 import com.med.info.response.Response;
 import com.med.info.service.MissionService;
+import com.med.info.utils.TrialStatusEnum;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 操作业务流程数据
@@ -63,9 +67,31 @@ public class MissionController {
     @RequestMapping(value = "/data/page", method = RequestMethod.POST)
     public Response getByPage(@RequestBody SelectTaskDTO selectTaskDTO) {
 
-        Object byPage = missionService.getByPage(selectTaskDTO);
+        Object byPage = missionService.getByPage(selectTaskDTO, true);
         return new Response().success(byPage);
     }
+
+    @RequestMapping(value = "/data/pool/page", method = RequestMethod.POST)
+    public Response getByPoolPage(@RequestBody SelectTaskDTO selectTaskDTO) {
+        if(selectTaskDTO.getPoolId() == 1){
+            List<String> status = new ArrayList<>();
+            status.add(TrialStatusEnum.TO_FIRST_AUDITED.getId());
+            selectTaskDTO.setTaskStatus(status);
+        }
+        if(selectTaskDTO.getPoolId() == 2){
+            List<String> status = new ArrayList<>();
+            status.add(TrialStatusEnum.TO_SECOND_AUDITED.getId());
+            selectTaskDTO.setTaskStatus(status);
+        }
+        if(selectTaskDTO.getPoolId() == 3){
+            List<String> status = new ArrayList<>();
+            status.add(TrialStatusEnum.TO_FINAL_AUDITED.getId());
+            selectTaskDTO.setTaskStatus(status);
+        }
+        Object byPage = missionService.getByPage(selectTaskDTO, false);
+        return new Response().success(byPage);
+    }
+
 
     @RequestMapping(value = "/missionDetails/page", method = RequestMethod.GET)
     public Response getMissionDetailList(@RequestParam("currentPage") Integer currentPage,

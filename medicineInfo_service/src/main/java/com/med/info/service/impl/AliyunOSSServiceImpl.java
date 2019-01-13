@@ -72,7 +72,7 @@ public class AliyunOSSServiceImpl implements AliyunOSSService {
 			if(null != objectResult){
 			    logger.info("==========>OSS文件上传成功,OSS地址："+fileUrl);
 			    ossClient.shutdown();
-				String picturepath = aliyunOssConfiguration.getBucketName() + "." + aliyunOssConfiguration.getEndpoint() + "/" + fileUrl;
+				String picturepath = "http://"+aliyunOssConfiguration.getBucketName() + "." + aliyunOssConfiguration.getEndpoint() + "/" + fileUrl;
 				String thumbnail = picturepath+"?"+resize_value;
 				return new ImageResponseDTO(file.getName(),picturepath,thumbnail);
 			}

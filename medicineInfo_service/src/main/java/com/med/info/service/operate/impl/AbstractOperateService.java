@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.med.info.domain.*;
+import com.med.info.dto.RefrenceDTO;
 import com.med.info.mapper.Miss_control_task_detailMapper;
 import com.med.info.mapper.Miss_control_task_recordsMapper;
 import com.med.info.mapper.domain.OperateDTO;
@@ -80,7 +81,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         object.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         object.setDatastatus("1");
         baseService.updateByTaskIdSelective(object);
-        if(needDealMapper()){
+        if (needDealMapper()) {
             dealMapperRelashionShip(objectF);
         }
         missControlApprovalService.deleteByTaskId(miss_control_task_records.getTaskId());
@@ -184,15 +185,15 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         controlTaskRecord.setTaskId(taskId);
         controlTaskRecord.setTaskstatus(nextTrialStatusEnum1.getId());
         controlTaskRecord.setTasktitle(operateDTO.getTaskTitle());
-        if(trialStatusEnum == TrialStatusEnum.TO_FIRST_AUDITED){
+        if (trialStatusEnum == TrialStatusEnum.TO_FIRST_AUDITED) {
             controlTaskRecord.setTaskfirsttrialcode(DefaultTokenManager.getLocalUserCode().getUserCode());
             controlTaskRecord.setTaskFirstTrialTime(new Timestamp(System.currentTimeMillis()));
         }
-        if(trialStatusEnum == TrialStatusEnum.TO_SECOND_AUDITED){
+        if (trialStatusEnum == TrialStatusEnum.TO_SECOND_AUDITED) {
             controlTaskRecord.setTasksecondtrialcode(DefaultTokenManager.getLocalUserCode().getUserCode());
             controlTaskRecord.setTaskSecondTrialTime(new Timestamp(System.currentTimeMillis()));
         }
-        if(trialStatusEnum == TrialStatusEnum.TO_FINAL_AUDITED){
+        if (trialStatusEnum == TrialStatusEnum.TO_FINAL_AUDITED) {
             controlTaskRecord.setTaskfinaltrialcode(DefaultTokenManager.getLocalUserCode().getUserCode());
             controlTaskRecord.setTaskFinalTrialTime(new Timestamp(System.currentTimeMillis()));
         }
@@ -316,14 +317,33 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
 
     public List<Miss_control_reference> getReferences(OperateDTO operateDTO) {
         List<Miss_control_reference> result = new ArrayList<>();
-        JSONArray refrences = operateDTO.getJsonStr().getJSONArray("refrences");
+        JSONObject refrences = operateDTO.getJsonStr().getJSONObject("refrences");
         logger.info("taskId={}, 参考资料为={}", operateDTO.getTaskId(), refrences.toString());
-        if (null != refrences && refrences.size() > 0) {
-            for (Object refrence : refrences) {
-                Miss_control_reference controlReference = JSONObject.parseObject(refrence.toString(), Miss_control_reference.class);
-                result.add(controlReference);
+        if(null != refrences){
+            RefrenceDTO refrenceDTO = JSONObject.toJavaObject(refrences, RefrenceDTO.class);
+            if(null != refrenceDTO.getImage()){
+                for (Miss_control_reference miss_control_reference : refrenceDTO.getImage()) {
+                    miss_control_reference.setReferenceType("image");
+                    result.add(miss_control_reference);
+                }
             }
+            if(null != refrenceDTO.getTextcontent()){
+                for (Miss_control_reference miss_control_reference : refrenceDTO.getTextcontent()) {
+                    miss_control_reference.setReferenceType("text");
+                    result.add(miss_control_reference);
+                }
+            }
+
         }
+//        JSONArray textcontent = refrences.getJSONArray("textcontent");
+//        JSONArray images = refrences.getJSONArray("image");
+//        JSONArray refrences = operateDTO.getJsonStr().getJSONArray("refrences");
+//        if (null != refrences && refrences.size() > 0) {
+//            for (Object refrence : refrences) {
+//                Miss_control_reference controlReference = JSONObject.parseObject(refrence.toString(), Miss_control_reference.class);
+//                result.add(controlReference);
+//            }
+//        }
         return result;
     }
 

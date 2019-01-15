@@ -10,15 +10,16 @@ public class DepartmentMapDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
+	private Long departmentId;
+	private Long parentDepartmentId;
 	private String departmentCode;
 	private String departmentName;
 	private String departmentLevel;
 	public Long getId() {
-		return id;
+		return departmentId;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long departmentId) {
+		this.departmentId = departmentId;
 	}
 	public String getDepartmentCode() {
 		return departmentCode;
@@ -39,5 +40,11 @@ public class DepartmentMapDTO implements Serializable{
 
 	public void setDepartmentLevel(String departmentLevel) {
 		this.departmentLevel = departmentLevel;
+	}
+	public Long getParentDepartmentId() {
+		return parentDepartmentId;
+	}
+	public void setParentDepartmentId(Long parentDepartmentId) {
+		this.parentDepartmentId = parentDepartmentId;
 	}
 }

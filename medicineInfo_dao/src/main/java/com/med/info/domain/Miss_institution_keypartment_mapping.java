@@ -27,6 +27,8 @@ public class Miss_institution_keypartment_mapping extends BaseDomain{
      * @mbg.generated Mon Nov 26 11:32:45 CST 2018
      */
     private Long departmentId;
+    
+    private Long parentDepartmentId;
 
     /**
      *
@@ -297,4 +299,12 @@ public class Miss_institution_keypartment_mapping extends BaseDomain{
     public void setTaskJson(String taskJson) {
         this.taskJson = taskJson == null ? null : taskJson.trim();
     }
+
+	public Long getParentDepartmentId() {
+		return parentDepartmentId;
+	}
+
+	public void setParentDepartmentId(Long parentDepartmentId) {
+		this.parentDepartmentId = parentDepartmentId;
+	}
 }

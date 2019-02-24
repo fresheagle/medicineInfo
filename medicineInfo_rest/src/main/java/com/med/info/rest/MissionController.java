@@ -54,7 +54,7 @@ public class MissionController {
 
     @RequestMapping(value = "/claimTask", method = RequestMethod.POST)
     @ResponseBody
-    public Response claimTask(ClaimTaskDTO claimTask) {
+    public Response claimTask(@RequestBody ClaimTaskDTO claimTask) {
         try {
             missionService.claimTask(claimTask);
             return new Response().success("操作成功");

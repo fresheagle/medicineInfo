@@ -219,7 +219,7 @@ public class MissionServiceImpl implements MissionService {
 		for (String taskId : claimTaskDTO.getTaskIds()) {
 			Miss_control_task_records miss_control_task_records = taskRecordsMapper.selectByPrimaryKey(taskId);
 			if(claimTaskDTO.getStatus() == 1){
-				Field field = Miss_control_task_records.class.getField(taskFeild);
+				Field field = Miss_control_task_records.class.getDeclaredField(taskFeild);
 				field.setAccessible(true);
 				Object o = field.get(miss_control_task_records);
 				if(null == o || o.toString().equals("") || o.toString().equals(DefaultTokenManager.getLocalUserCode())){
@@ -229,7 +229,7 @@ public class MissionServiceImpl implements MissionService {
 					throw new Exception("当前任务已经被标记，请选择其他任务！");
 				}
 			}else{
-				Field field = Miss_control_task_records.class.getField(taskFeild);
+				Field field = Miss_control_task_records.class.getDeclaredField(taskFeild);
 				field.setAccessible(true);
 				Object o = field.get(miss_control_task_records);
 				if(null != o && !o.toString().equals("") && o.toString().equals(DefaultTokenManager.getLocalUserCode())){

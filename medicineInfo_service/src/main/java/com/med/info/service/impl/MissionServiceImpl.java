@@ -223,7 +223,7 @@ public class MissionServiceImpl implements MissionService {
 				field.setAccessible(true);
 				Object o = field.get(miss_control_task_records);
 				if(null == o || o.toString().equals("") || o.toString().equals(DefaultTokenManager.getLocalUserCode())){
-					field.set(miss_control_task_records, DefaultTokenManager.getLocalUserCode());
+					field.set(miss_control_task_records, DefaultTokenManager.getLocalUserCode().getUserCode());
 					taskRecordsMapper.updateByTaskIdSelective(miss_control_task_records);
 				}else{
 					throw new Exception("当前任务已经被标记，请选择其他任务！");

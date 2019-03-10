@@ -18,6 +18,8 @@
 			property="taskstatus" />
 		<result column="taskMenuType" jdbcType="VARCHAR"
 			property="taskmenutype" />
+		<result column="task" jdbcType="VARCHAR"
+				property="taskmenutype" />
 		<result column="taskCreateDay" jdbcType="VARCHAR"
 			property="taskcreateday" />
 		<result column="taskCreateTime" jdbcType="TIMESTAMP"

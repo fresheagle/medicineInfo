@@ -328,8 +328,8 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
                     Miss_control_reference miss_control_reference = new Miss_control_reference();
                     BeanUtils.copyProperties(missReferenceDTO, miss_control_reference);
                     miss_control_reference.setReferenceType("image");
-                    miss_control_reference.setReferColumnschinese(missReferenceDTO.getReferColumnschineses().toString());
-                    miss_control_reference.setReferColumnscode(missReferenceDTO.getReferColumnscodes().toString());
+                    miss_control_reference.setReferColumnschinese(null == missReferenceDTO.getReferColumnschineses() ? null : missReferenceDTO.getReferColumnschineses().toString());
+                    miss_control_reference.setReferColumnscode(null == missReferenceDTO.getReferColumnscodes() ? null : missReferenceDTO.getReferColumnscodes().toString());
                     miss_control_reference.setTaskId(operateDTO.getTaskId());
                     result.add(miss_control_reference);
                 }

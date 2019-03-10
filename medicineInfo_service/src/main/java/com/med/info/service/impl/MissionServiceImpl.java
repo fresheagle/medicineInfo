@@ -296,7 +296,7 @@ public class MissionServiceImpl implements MissionService {
 		operateDTO.setTaskFinalTrialTime(control_task_records.getTaskFinalTrialTime());
 
 		operateDTO.setUpdateTime(control_task_records.getUpdateTime());
-		operateDTO.setJsonStr(JSONObject.parseObject(control_task_records.getTaskJson()));
+		operateDTO.setJsonStr(JSONObject.parseObject(taskDetailMapper.getTaskDetailsByTime(control_task_records.getTaskId()).get(0).getTaskchangeafterjson()));
 
 		return operateDTO;
 	}

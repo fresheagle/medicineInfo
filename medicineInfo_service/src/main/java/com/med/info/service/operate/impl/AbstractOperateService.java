@@ -325,29 +325,34 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
             RefrenceDTO refrenceDTO = JSONObject.toJavaObject(refrences, RefrenceDTO.class);
             if(null != refrenceDTO.getImage()){
                 for (MissReferenceDTO missReferenceDTO : refrenceDTO.getImage()) {
-                    Miss_control_reference miss_control_reference = new Miss_control_reference();
-                    BeanUtils.copyProperties(missReferenceDTO, miss_control_reference);
-                    miss_control_reference.setReferenceType("image");
-                    miss_control_reference.setReferColumnschinese(null == missReferenceDTO.getReferColumnschineses() ? null : missReferenceDTO.getReferColumnschineses().toString());
-                    miss_control_reference.setReferColumnscode(null == missReferenceDTO.getReferColumnscodes() ? null : missReferenceDTO.getReferColumnscodes().toString());
-                    miss_control_reference.setTaskId(operateDTO.getTaskId());
-                    result.add(miss_control_reference);
+                    createReference(operateDTO, result, missReferenceDTO, "image");
                 }
             }
             if(null != refrenceDTO.getTextcontent()){
                 for (MissReferenceDTO missReferenceDTO : refrenceDTO.getTextcontent()) {
-                    Miss_control_reference miss_control_reference = new Miss_control_reference();
-                    BeanUtils.copyProperties(missReferenceDTO, miss_control_reference);
-                    miss_control_reference.setReferenceType("text");
-                    miss_control_reference.setReferColumnschinese(missReferenceDTO.getReferColumnschineses().toString());
-                    miss_control_reference.setReferColumnscode(missReferenceDTO.getReferColumnscodes().toString());
-                    miss_control_reference.setTaskId(operateDTO.getTaskId());
-                    result.add(miss_control_reference);
+//                    Miss_control_reference miss_control_reference = new Miss_control_reference();
+//                    BeanUtils.copyProperties(missReferenceDTO, miss_control_reference);
+//                    miss_control_reference.setReferenceType("text");
+//                    miss_control_reference.setReferColumnschinese(missReferenceDTO.getReferColumnschineses().toString());
+//                    miss_control_reference.setReferColumnscode(missReferenceDTO.getReferColumnscodes().toString());
+//                    miss_control_reference.setTaskId(operateDTO.getTaskId());
+//                    result.add(miss_control_reference);
+                    createReference(operateDTO, result, missReferenceDTO, "text");
                 }
             }
 
         }
         return result;
+    }
+
+    private void createReference(OperateDTO operateDTO, List<Miss_control_reference> result, MissReferenceDTO missReferenceDTO, String type) {
+        Miss_control_reference miss_control_reference = new Miss_control_reference();
+        BeanUtils.copyProperties(missReferenceDTO, miss_control_reference);
+        miss_control_reference.setReferenceType(type);
+        miss_control_reference.setReferColumnschinese(null == missReferenceDTO.getReferColumnschineses() ? null : missReferenceDTO.getReferColumnschineses().toString());
+        miss_control_reference.setReferColumnscode(null == missReferenceDTO.getReferColumnscodes() ? null : missReferenceDTO.getReferColumnscodes().toString());
+        miss_control_reference.setTaskId(operateDTO.getTaskId());
+        result.add(miss_control_reference);
     }
 
     private void saveRefrences(List<Miss_control_reference> missControlReferences, String taskId) {

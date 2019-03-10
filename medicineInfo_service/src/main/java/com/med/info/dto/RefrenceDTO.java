@@ -6,22 +6,23 @@ import java.util.List;
 
 public class RefrenceDTO {
 
-    private List<Miss_control_reference> textcontent;
-    private List<Miss_control_reference> image;
 
-    public List<Miss_control_reference> getTextcontent() {
+    private List<MissReferenceDTO> textcontent;
+    private List<MissReferenceDTO> image;
+
+    public List<MissReferenceDTO> getTextcontent() {
         return textcontent;
     }
 
-    public void setTextcontent(List<Miss_control_reference> textcontent) {
+    public void setTextcontent(List<MissReferenceDTO> textcontent) {
         this.textcontent = textcontent;
     }
 
-    public List<Miss_control_reference> getImage() {
+    public List<MissReferenceDTO> getImage() {
         return image;
     }
 
-    public void setImage(List<Miss_control_reference> image) {
+    public void setImage(List<MissReferenceDTO> image) {
         this.image = image;
     }
 }

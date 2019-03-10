@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.med.info.domain.*;
+import com.med.info.dto.MissReferenceDTO;
 import com.med.info.dto.RefrenceDTO;
 import com.med.info.mapper.Miss_control_task_detailMapper;
 import com.med.info.mapper.Miss_control_task_recordsMapper;
@@ -16,6 +17,7 @@ import com.med.info.service.operate.IOperateService;
 import com.med.info.utils.*;
 import org.junit.Assert;
 import org.slf4j.Logger;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -322,28 +324,29 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         if(null != refrences){
             RefrenceDTO refrenceDTO = JSONObject.toJavaObject(refrences, RefrenceDTO.class);
             if(null != refrenceDTO.getImage()){
-                for (Miss_control_reference miss_control_reference : refrenceDTO.getImage()) {
+                for (MissReferenceDTO missReferenceDTO : refrenceDTO.getImage()) {
+                    Miss_control_reference miss_control_reference = new Miss_control_reference();
+                    BeanUtils.copyProperties(missReferenceDTO, miss_control_reference);
                     miss_control_reference.setReferenceType("image");
+                    miss_control_reference.setReferColumnschinese(missReferenceDTO.getReferColumnschineses().toString());
+                    miss_control_reference.setReferColumnscode(missReferenceDTO.getReferColumnscodes().toString());
+                    miss_control_reference.setTaskId(operateDTO.getTaskId());
                     result.add(miss_control_reference);
                 }
             }
             if(null != refrenceDTO.getTextcontent()){
-                for (Miss_control_reference miss_control_reference : refrenceDTO.getTextcontent()) {
+                for (MissReferenceDTO missReferenceDTO : refrenceDTO.getTextcontent()) {
+                    Miss_control_reference miss_control_reference = new Miss_control_reference();
+                    BeanUtils.copyProperties(missReferenceDTO, miss_control_reference);
                     miss_control_reference.setReferenceType("text");
+                    miss_control_reference.setReferColumnschinese(missReferenceDTO.getReferColumnschineses().toString());
+                    miss_control_reference.setReferColumnscode(missReferenceDTO.getReferColumnscodes().toString());
+                    miss_control_reference.setTaskId(operateDTO.getTaskId());
                     result.add(miss_control_reference);
                 }
             }
 
         }
-//        JSONArray textcontent = refrences.getJSONArray("textcontent");
-//        JSONArray images = refrences.getJSONArray("image");
-//        JSONArray refrences = operateDTO.getJsonStr().getJSONArray("refrences");
-//        if (null != refrences && refrences.size() > 0) {
-//            for (Object refrence : refrences) {
-//                Miss_control_reference controlReference = JSONObject.parseObject(refrence.toString(), Miss_control_reference.class);
-//                result.add(controlReference);
-//            }
-//        }
         return result;
     }
 

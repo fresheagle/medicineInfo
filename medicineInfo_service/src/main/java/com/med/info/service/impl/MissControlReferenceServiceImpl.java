@@ -19,7 +19,7 @@ public class MissControlReferenceServiceImpl extends BaseServiceImpl<Miss_contro
 	@Override
 	public BaseMapper getMapper() {
 		// TODO Auto-generated method stub
-		return null;
+		return miss_control_referenceMapper;
 	}
 
 	@Override

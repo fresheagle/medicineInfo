@@ -38,6 +38,10 @@ public class OperateDTO implements Serializable {
     private Date taskFinalTrialTime;
     private Date updateTime;
     private Integer detailCount;
+    private String pageNo;
+    private String contentNo;
+    private JSONObject jsonStr;
+
 
 
     public Integer getDetailCount() {
@@ -55,10 +59,6 @@ public class OperateDTO implements Serializable {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
-
-    private String pageNo;
-    private String contentNo;
-    private JSONObject jsonStr;
 
     public void verify() {
         Assert.assertNotNull("任务类型需要填写", this.taskType);

@@ -222,7 +222,7 @@ public class MissionServiceImpl implements MissionService {
 				Field field = Miss_control_task_records.class.getDeclaredField(taskFeild);
 				field.setAccessible(true);
 				Object o = field.get(miss_control_task_records);
-				if(null == o || o.toString().equals("") || o.toString().equals(DefaultTokenManager.getLocalUserCode())){
+				if(null == o || o.toString().equals("") || o.toString().equals(DefaultTokenManager.getLocalUserCode().getUserCode())){
 					field.set(miss_control_task_records, DefaultTokenManager.getLocalUserCode().getUserCode());
 					taskRecordsMapper.updateByTaskIdSelective(miss_control_task_records);
 				}else{
@@ -232,7 +232,7 @@ public class MissionServiceImpl implements MissionService {
 				Field field = Miss_control_task_records.class.getDeclaredField(taskFeild);
 				field.setAccessible(true);
 				Object o = field.get(miss_control_task_records);
-				if(null != o && !o.toString().equals("") && o.toString().equals(DefaultTokenManager.getLocalUserCode())){
+				if(null != o && !o.toString().equals("") && o.toString().equals(DefaultTokenManager.getLocalUserCode().getUserCode())){
 					field.set(miss_control_task_records, null);
 					taskRecordsMapper.updateByPrimaryKey(miss_control_task_records);
 				}else{
@@ -296,6 +296,7 @@ public class MissionServiceImpl implements MissionService {
 		operateDTO.setTaskFinalTrialTime(control_task_records.getTaskFinalTrialTime());
 
 		operateDTO.setUpdateTime(control_task_records.getUpdateTime());
+		operateDTO.setJsonStr(JSONObject.parseObject(control_task_records.getTaskJson()));
 
 		return operateDTO;
 	}

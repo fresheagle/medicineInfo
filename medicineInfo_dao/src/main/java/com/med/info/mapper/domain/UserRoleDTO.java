@@ -16,7 +16,7 @@ public class UserRoleDTO {
         this.roleCode = roleCode;
         this.roleName = roleName;
     }
-
+    任务操作结果需要填写
     public String getRoleCode() {
         return roleCode;
     }

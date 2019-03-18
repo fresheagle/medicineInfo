@@ -278,6 +278,10 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
             return TrialStatusEnum.FINAL_AUDITED_SUCCESS;
         }
 
+        if(operateCode.equals(OperateEnum.save.toString())){
+            return trialStatusEnum;
+        }
+
         return null;
     }
 

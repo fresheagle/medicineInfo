@@ -168,8 +168,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         selectByPrimaryId.setTaskJson(JSON.toJSONString(operateDTO.getJsonStr()));
         selectByPrimaryId.setTaskId(taskId);
         selectByPrimaryId.setDatastatus("0");
-        TrialStatusEnum nextTrialStatusEnum1 = getNextStatus(operateDTO.getOperateCode(), trialStatusEnum, taskRecordByTaskId);
-        logger.info("taskId={} 当前taskStatus={},操作为 {}, 下一流程为：{}", taskId, trialStatusEnum.getDesc(), operateDTO.getOperateCode(), nextTrialStatusEnum1.getDesc());
+        TrialStatusEnum nextTrialStatusEnum1 = getNextStatus(operateDTO.getOperateCode(), trialStatusEnum, taskRecordByTaskId);logger.info("taskId={} 当前taskStatus={},操作为 {}, 下一流程为：{}", taskId, trialStatusEnum.getDesc(), operateDTO.getOperateCode(), nextTrialStatusEnum1.getDesc());
         selectByPrimaryId.setTaskStatus(nextTrialStatusEnum1.getId());
         baseService.updateByPrimaryKey(selectByPrimaryId);
 

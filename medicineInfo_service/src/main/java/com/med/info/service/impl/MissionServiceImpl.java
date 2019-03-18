@@ -57,10 +57,18 @@ public class MissionServiceImpl implements MissionService {
 
 	private static Map<String, String> taskStatusToRecordField = new HashMap<>();
 
+	private static Map<String, String> taskStatusToNextStatus = new HashMap<>();
+
 	static {
 		taskStatusToRecordField.put("toFirAudited", "taskfirsttrialcode");
 		taskStatusToRecordField.put("toSecAudited", "tasksecondtrialcode");
 		taskStatusToRecordField.put("toFinalAudited", "taskfinaltrialcode");
+	}
+
+	static {
+		taskStatusToNextStatus.put("toFirAudited", "firAuditeding");
+		taskStatusToNextStatus.put("toSecAudited", "secAuditeding");
+		taskStatusToNextStatus.put("toFinalAudited", "finalAuditeding");
 	}
 
 	@Override
@@ -235,6 +243,7 @@ public class MissionServiceImpl implements MissionService {
 				Object o = field.get(miss_control_task_records);
 				if(null == o || o.toString().equals("") || o.toString().equals(DefaultTokenManager.getLocalUserCode().getUserCode())){
 					field.set(miss_control_task_records, DefaultTokenManager.getLocalUserCode().getUserCode());
+					miss_control_task_records.setTaskStatus(taskStatusToNextStatus.get(claimTaskDTO.getTaskStatus()));
 					taskRecordsMapper.updateByTaskIdSelective(miss_control_task_records);
 				}else{
 					throw new Exception("当前任务已经被标记，请选择其他任务！");

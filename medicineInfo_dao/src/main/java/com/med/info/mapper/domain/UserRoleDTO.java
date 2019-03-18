@@ -5,6 +5,9 @@ public class UserRoleDTO {
     private String roleCode;
     private String roleName;
 
+    public UserRoleDTO() {
+    }
+
     public UserRoleDTO(String roleCode) {
         this.roleCode = roleCode;
     }

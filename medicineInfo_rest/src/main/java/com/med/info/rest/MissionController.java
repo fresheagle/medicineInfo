@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -39,6 +40,14 @@ public class MissionController {
             logger.error("保存任务状态失败；", e);
             return new Response().failure(e.getMessage());
         }
+    }
+
+    @RequestMapping(value = "deleteMission", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Response delete(@RequestParam String taskId){
+
+        missionService.deleteMission(Arrays.asList(taskId.split(",")));
+        return new Response().success("删除数据成功");
     }
 
     @RequestMapping(value = "batch/saveMission", method = RequestMethod.PUT)

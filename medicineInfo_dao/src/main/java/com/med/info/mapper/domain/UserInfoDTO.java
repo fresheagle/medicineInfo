@@ -8,6 +8,9 @@ public class UserInfoDTO implements Serializable {
     private String userCode;
     private String userName;
 
+    public UserInfoDTO() {
+    }
+
     public UserInfoDTO(String userCode) {
         this.userCode = userCode;
     }

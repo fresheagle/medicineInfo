@@ -37,6 +37,7 @@ import com.med.info.mapper.domain.OperateDTO;
 import com.med.info.response.PageObject;
 import com.med.info.service.MissionService;
 import com.med.info.service.operate.IOperateService;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MissionServiceImpl implements MissionService {
@@ -185,7 +186,17 @@ public class MissionServiceImpl implements MissionService {
 		return object;
 	}
 
-	@Override
+    @Override
+	@Transactional
+    public void deleteMission(List<String> taskIds) {
+		taskIds.forEach(s -> {
+			Miss_control_task_records taskRecord = taskRecordsMapper.selectByPrimaryKey(s);
+			taskRecord.setTaskStatus(TrialStatusEnum.DRAFTS.getId());
+			taskRecordsMapper.updateByTaskIdSelective(taskRecord);
+		});
+    }
+
+    @Override
 	public Object getMissionDetailPage(Integer currentPage, Integer pageSize, String taskId) {
 		Miss_control_task_detailWithBLOBs miss_control_task_detailWithBLOBs = new Miss_control_task_detailWithBLOBs();
 		if(taskId != null) {

@@ -5,6 +5,8 @@ import com.med.info.dto.ClaimTaskDTO;
 import com.med.info.dto.SelectTaskDTO;
 import com.med.info.mapper.domain.OperateDTO;
 
+import java.util.List;
+
 /**
  * 任务保存入口，草稿箱，待一审等状态变更
  * @author jiangjialin
@@ -17,6 +19,8 @@ public interface MissionService {
 	public Object BatchSaveMission(BatchOperateDTO batchOperateDTO) throws Exception;
 	
 	public Object getByPage(SelectTaskDTO selectTaskDTO, boolean useCurrentUser);
+
+	public void deleteMission(List<String> taskIds);
 	
 	public Object getMissionDetailPage(Integer currentPage, Integer pageSize, String taskId);
 

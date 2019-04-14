@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import com.med.info.config.TokenPrivilegesConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +38,9 @@ import com.med.info.utils.Constants;
 public class UserPrivilegeFilter implements Filter{
 
 	private Logger logger = LoggerFactory.getLogger(UserPrivilegeFilter.class);
-	
+
 	@Autowired
-	private HashMap uriPrivileges;
-	@Value("${web.filter.no.token.urls}")
-	private List<String> noTokenUrls;
+	TokenPrivilegesConfig tokenPrivilegesConfig;
 	@Autowired
 	private TokenManager tokenManager;
 	
@@ -61,10 +60,10 @@ public class UserPrivilegeFilter implements Filter{
 		HttpServletRequest servletRequest = (HttpServletRequest) request;
 		String uri = servletRequest.getRequestURI();
 		//先注释 调试时不校验token
-		if(!noTokenUrls.contains(uri)) {
+		if(!tokenPrivilegesConfig.getNoTokenUrls().contains(uri)) {
 			String token = null;
-			if(null != uriPrivileges && !uriPrivileges.isEmpty()) {
-				String string = (String) uriPrivileges.get(uri);
+			if(null != tokenPrivilegesConfig.getUriPrivileges() && !tokenPrivilegesConfig.getUriPrivileges().isEmpty()) {
+				String string = (String) tokenPrivilegesConfig.getUriPrivileges().get(uri);
 				HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 				Cookie[] cookies = httpServletRequest.getCookies();
 				for (Cookie cookie : cookies) {

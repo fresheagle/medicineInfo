@@ -27,5 +27,5 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
-	</dependencies>
+    </dependencies>
 </project>

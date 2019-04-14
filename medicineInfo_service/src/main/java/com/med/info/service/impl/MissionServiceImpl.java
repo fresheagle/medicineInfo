@@ -57,12 +57,19 @@ public class MissionServiceImpl implements MissionService {
 
 	private static Map<String, String> taskStatusToRecordField = new HashMap<>();
 
+	private static Map<String, String> taskStatusToRoleCode = new HashMap<>();
+
 	private static Map<String, String> taskStatusToNextStatus = new HashMap<>();
 
 	static {
 		taskStatusToRecordField.put("toFirAudited", "taskfirsttrialcode");
 		taskStatusToRecordField.put("toSecAudited", "tasksecondtrialcode");
 		taskStatusToRecordField.put("toFinalAudited", "taskfinaltrialcode");
+
+
+		taskStatusToRoleCode.put("taskfirsttrialcode", "001");
+		taskStatusToRoleCode.put("tasksecondtrialcode", "001");
+		taskStatusToRoleCode.put("taskfinaltrialcode", "001");
 	}
 
 	static {
@@ -235,6 +242,10 @@ public class MissionServiceImpl implements MissionService {
 	@Override
 	public Object claimTask(ClaimTaskDTO claimTaskDTO) throws Exception {
 		String taskFeild = taskStatusToRecordField.get(claimTaskDTO.getTaskStatus());
+		String s = taskStatusToRoleCode.get(taskFeild);
+		logger.info("当前认领任务状态需要设置{}， 需要对应角色权限为：{}", taskFeild, s);
+		//TODO 添加权限匹配
+
 		for (String taskId : claimTaskDTO.getTaskIds()) {
 			Miss_control_task_records miss_control_task_records = taskRecordsMapper.selectByPrimaryKey(taskId);
 			if(claimTaskDTO.getStatus() == 1){

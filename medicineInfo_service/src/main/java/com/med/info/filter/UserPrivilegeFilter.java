@@ -62,23 +62,23 @@ public class UserPrivilegeFilter implements Filter{
 		String uri = servletRequest.getRequestURI();
 		//先注释 调试时不校验token
 		if(!noTokenUrls.contains(uri)) {
-			/*if(null != uriPrivileges && !uriPrivileges.isEmpty()) {
+			String token = null;
+			if(null != uriPrivileges && !uriPrivileges.isEmpty()) {
 				String string = (String) uriPrivileges.get(uri);
 				HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 				Cookie[] cookies = httpServletRequest.getCookies();
-				String token = null;
 				for (Cookie cookie : cookies) {
 					if(cookie.getName().equals(Constants.DEFAULT_TOKEN_NAME)) {
 						token = cookie.getValue();
 					}
 				}
-				if(null == token || !tokenManager.checkToken(token)) {
-					response.getWriter().write(JSON.toJSONString(new Response().failure("未登录或登录已过期，请重新登录")));
-					return;
-				}
 				logger.info("uri={},对应需要的权限码为 {}",uri,string);
-			}*/
-		tokenManager.checkToken("test_token");
+			}
+			if(null == token || !tokenManager.checkToken(token)) {
+				response.getWriter().write(JSON.toJSONString(new Response().failure("未登录或登录已过期，请重新登录")));
+				return;
+			}
+			tokenManager.checkToken(token);
 		}else {
 			logger.info("当前请求为{}，跳过token认证",uri);
 		}

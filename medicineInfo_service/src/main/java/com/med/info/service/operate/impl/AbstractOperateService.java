@@ -168,7 +168,8 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         selectByPrimaryId.setTaskJson(JSON.toJSONString(operateDTO.getJsonStr()));
         selectByPrimaryId.setTaskId(taskId);
         selectByPrimaryId.setDatastatus("0");
-        TrialStatusEnum nextTrialStatusEnum1 = getNextStatus(operateDTO.getOperateCode(), trialStatusEnum, taskRecordByTaskId);logger.info("taskId={} 当前taskStatus={},操作为 {}, 下一流程为：{}", taskId, trialStatusEnum.getDesc(), operateDTO.getOperateCode(), nextTrialStatusEnum1.getDesc());
+        TrialStatusEnum nextTrialStatusEnum1 = getNextStatus(operateDTO.getOperateCode(), trialStatusEnum, taskRecordByTaskId);
+        logger.info("taskId={} 当前taskStatus={},操作为 {}, 下一流程为：{}", taskId, trialStatusEnum.getDesc(), operateDTO.getOperateCode(), nextTrialStatusEnum1.getDesc());
         selectByPrimaryId.setTaskStatus(nextTrialStatusEnum1.getId());
         baseService.updateByPrimaryKey(selectByPrimaryId);
 
@@ -186,16 +187,17 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         controlTaskRecord.setTaskId(taskId);
         controlTaskRecord.setTaskstatus(nextTrialStatusEnum1.getId());
         controlTaskRecord.setTasktitle(operateDTO.getTaskTitle());
-        if (trialStatusEnum == TrialStatusEnum.TO_FIRST_AUDITED) {
-            controlTaskRecord.setTaskfirsttrialcode(DefaultTokenManager.getLocalUserCode().getUserCode());
+        if (trialStatusEnum == TrialStatusEnum.FIRST_AUDITEDING) {
+            // 添加用户角色权限校验，一审中只能对应相同用户才能操作
+            Assert.assertEquals("初审用户与当前用户不一致，无审批权限", taskRecordByTaskId.getFirstTrialRoleCode(), DefaultTokenManager.getLocalUserCode().getUserCode());
             controlTaskRecord.setTaskFirstTrialTime(new Timestamp(System.currentTimeMillis()));
         }
-        if (trialStatusEnum == TrialStatusEnum.TO_SECOND_AUDITED) {
-            controlTaskRecord.setTasksecondtrialcode(DefaultTokenManager.getLocalUserCode().getUserCode());
+        if (trialStatusEnum == TrialStatusEnum.SECOND_AUDITEDING) {
+            Assert.assertEquals("二审用户与当前用户不一致，无审批权限", taskRecordByTaskId.getSecondTrialRoleCode(), DefaultTokenManager.getLocalUserCode().getUserCode());
             controlTaskRecord.setTaskSecondTrialTime(new Timestamp(System.currentTimeMillis()));
         }
-        if (trialStatusEnum == TrialStatusEnum.TO_FINAL_AUDITED) {
-            controlTaskRecord.setTaskfinaltrialcode(DefaultTokenManager.getLocalUserCode().getUserCode());
+        if (trialStatusEnum == TrialStatusEnum.FINAL_AUDITEDING) {
+            Assert.assertEquals("终审用户与当前用户不一致，无审批权限", taskRecordByTaskId.getFinalTrialRoleCode(), DefaultTokenManager.getLocalUserCode().getUserCode());
             controlTaskRecord.setTaskFinalTrialTime(new Timestamp(System.currentTimeMillis()));
         }
         controlTaskRecord.setUpdateTime(new Timestamp(System.currentTimeMillis()));

@@ -66,24 +66,24 @@ public class DefaultTokenManager implements TokenManager, CommandLineRunner {
 	 * @return     
 	 */
 	public boolean checkToken(String token) {
-		if(!StringUtil.isEmpty(token) && token.equals("test_token")){
-			LoginInfoDTO loginInfoDTO = new LoginInfoDTO();
-			loginInfoDTO.setRoleCode("001");
-			loginInfoDTO.setUserCode("test1");
-			local.set(loginInfoDTO);
-			return true;
-		}
-		return false;
-
-//		先注释掉使用上面写死的token
-//		if(!StringUtil.isEmpty(token) && tokenMap.containsValue(token)) {
-//			if(!isTokenExpire(token)) {
-//				tokenExpire.put(token, System.currentTimeMillis() + token_expire_time * 60 * 1000);
-//				local.set(getTokenLoginInfo(token));
-//				return true;
-//			}
+//		if(!StringUtil.isEmpty(token) && token.equals("test_token")){
+//			LoginInfoDTO loginInfoDTO = new LoginInfoDTO();
+//			loginInfoDTO.setRoleCode("001");
+//			loginInfoDTO.setUserCode("test1");
+//			local.set(loginInfoDTO);
+//			return true;
 //		}
 //		return false;
+//
+//		先注释掉使用上面写死的token
+		if(!StringUtil.isEmpty(token) && tokenMap.containsValue(token)) {
+			if(!isTokenExpire(token)) {
+				tokenExpire.put(token, System.currentTimeMillis() + token_expire_time * 60 * 1000);
+				local.set(getTokenLoginInfo(token));
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	private String getTokenUserCode(String token) {

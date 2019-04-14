@@ -13,7 +13,7 @@ public class LoginInfoDTO implements Serializable{
 	private String userName;
 	private String userCode;
 	private String token;
-	private String roleCode;
+	private List<String> roleCodes;
 	private List<UserPrivilegeDTO> userPrivilege;
 
 	public String getUserUuid() {
@@ -56,12 +56,12 @@ public class LoginInfoDTO implements Serializable{
 		this.token = token;
 	}
 
-	public String getRoleCode() {
-		return roleCode;
+	public List<String> getRoleCodes() {
+		return roleCodes;
 	}
 
-	public void setRoleCode(String roleCode) {
-		this.roleCode = roleCode;
+	public void setRoleCodes(List<String> roleCodes) {
+		this.roleCodes = roleCodes;
 	}
 
 	@Override

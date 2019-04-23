@@ -56,6 +56,9 @@ public class Miss_institution_keypartment_mapping extends BaseDomain{
      * @mbg.generated Mon Nov 26 11:32:45 CST 2018
      */
     private String datastatus;
+    
+    
+    private String office;
 
     /**
      *
@@ -306,5 +309,13 @@ public class Miss_institution_keypartment_mapping extends BaseDomain{
 
 	public void setParentDepartmentId(Long parentDepartmentId) {
 		this.parentDepartmentId = parentDepartmentId;
+	}
+
+	public String getOffice() {
+		return office;
+	}
+
+	public void setOffice(String office) {
+		this.office = office;
 	}
 }

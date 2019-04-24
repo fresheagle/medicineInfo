@@ -59,25 +59,24 @@ public class UserPrivilegeFilter implements Filter{
 		
 		HttpServletRequest servletRequest = (HttpServletRequest) request;
 		String uri = servletRequest.getRequestURI();
-		//先注释 调试时不校验token
 		if(!tokenPrivilegesConfig.getNoTokenUrls().contains(uri)) {
 			String token = null;
-			if(null != tokenPrivilegesConfig.getUriPrivileges() && !tokenPrivilegesConfig.getUriPrivileges().isEmpty()) {
-				String string = (String) tokenPrivilegesConfig.getUriPrivileges().get(uri);
-				HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-				Cookie[] cookies = httpServletRequest.getCookies();
-				for (Cookie cookie : cookies) {
-					if(cookie.getName().equals(Constants.DEFAULT_TOKEN_NAME)) {
-						token = cookie.getValue();
-					}
+			HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+			Cookie[] cookies = httpServletRequest.getCookies();
+			for (Cookie cookie : cookies) {
+				if(cookie.getName().equals(Constants.DEFAULT_TOKEN_NAME)) {
+					token = cookie.getValue();
 				}
-				logger.info("uri={},对应需要的权限码为 {}",uri,string);
 			}
 			if(null == token || !tokenManager.checkToken(token)) {
 				response.getWriter().write(JSON.toJSONString(new Response().failure("未登录或登录已过期，请重新登录")));
 				return;
 			}
 			tokenManager.checkToken(token);
+			if(null != tokenPrivilegesConfig.getUriPrivileges() && !tokenPrivilegesConfig.getUriPrivileges().isEmpty()) {
+				String string = (String) tokenPrivilegesConfig.getUriPrivileges().get(uri);
+				logger.info("uri={},对应需要的权限码为 {}",uri,string);
+			}
 		}else {
 			logger.info("当前请求为{}，跳过token认证",uri);
 		}

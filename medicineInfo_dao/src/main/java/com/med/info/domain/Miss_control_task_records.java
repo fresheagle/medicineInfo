@@ -151,6 +151,8 @@ public class Miss_control_task_records extends BaseDomain{
     private Date taskFinalTrialTime;
     private Date updateTime;
 
+    private String accounts;
+    
     @Override
     public Date getUpdateTime() {
         return updateTime;
@@ -600,4 +602,12 @@ public class Miss_control_task_records extends BaseDomain{
     public void setTaskpublishfinalcontentjson(String taskpublishfinalcontentjson) {
         this.taskpublishfinalcontentjson = taskpublishfinalcontentjson == null ? null : taskpublishfinalcontentjson.trim();
     }
+
+	public String getAccounts() {
+		return accounts;
+	}
+
+	public void setAccounts(String accounts) {
+		this.accounts = accounts;
+	}
 }

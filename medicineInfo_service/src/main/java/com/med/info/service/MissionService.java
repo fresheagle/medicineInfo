@@ -1,5 +1,6 @@
 package com.med.info.service;
 
+import com.med.info.dto.BatchAcountsDTO;
 import com.med.info.dto.BatchOperateDTO;
 import com.med.info.dto.ClaimTaskDTO;
 import com.med.info.dto.SelectTaskDTO;
@@ -26,4 +27,5 @@ public interface MissionService {
 
 	public Object claimTask(ClaimTaskDTO claimTaskDTO) throws Exception;
 
+	public Object BatchAcounts(BatchAcountsDTO accounts);
 }

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.med.info.domain.Miss_control_role;
 import com.med.info.domain.Miss_control_user;
+import com.med.info.dto.BatchAcountsDTO;
 import com.med.info.dto.BatchOperateDTO;
 import com.med.info.dto.ClaimTaskDTO;
 import com.med.info.dto.SelectTaskDTO;
@@ -44,6 +45,8 @@ public class MissionServiceImpl implements MissionService {
 
 	@Autowired
 	private List<IOperateService> operateServices;
+	@Autowired
+	private IOperateService iOperateService;
 	@Autowired
 	private Miss_control_task_recordsMapper taskRecordsMapper;
 	@Autowired
@@ -330,5 +333,28 @@ public class MissionServiceImpl implements MissionService {
 		operateDTO.setJsonStr(JSONObject.parseObject(taskDetailMapper.getTaskDetailsByTime(control_task_records.getTaskId()).get(0).getTaskchangeafterjson()));
 
 		return operateDTO;
+	}
+
+	@Override
+	public Object BatchAcounts(BatchAcountsDTO accounts) {
+		// TODO Auto-generated method stub
+		if(CollectionUtil.isNotEmpty(accounts.getTasks())) {
+			List<Miss_control_task_records> missControlTaskRecords = taskRecordsMapper.getCurrentTrialStatusByTaskids(accounts.getTasks());
+			if(accounts.getAccounts().equals("account")){
+				for (Miss_control_task_records taskRecord : missControlTaskRecords) {
+					taskRecord.setAccounts("account");
+					iOperateService.accounts(taskRecord);
+				}
+			}
+		}else if(CollectionUtil.isNotEmpty(accounts.getTasks())) {
+			List<Miss_control_task_records> missControlTaskRecords = taskRecordsMapper.getCurrentTrialStatusByTaskids(accounts.getTasks());
+			if(accounts.getAccounts().equals("unaccount")){
+				for (Miss_control_task_records taskRecord : missControlTaskRecords) {
+					taskRecord.setAccounts("unaccount");
+					iOperateService.unaccounts(taskRecord);
+				}
+			}
+		}
+		return null;
 	}
 }

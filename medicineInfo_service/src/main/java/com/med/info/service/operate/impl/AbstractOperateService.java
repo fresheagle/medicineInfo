@@ -89,9 +89,21 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         missControlApprovalService.deleteByTaskId(miss_control_task_records.getTaskId());
         return null;
     }
-
+    
     @Override
-    public String doOffline(Miss_control_task_records miss_control_task_record) {
+    public String doOffline(Miss_control_task_records miss_control_task_records) {
+    	logger.info("下线taskId={}", miss_control_task_records.getTaskId());
+        BaseService<T> baseService = baseService(miss_control_task_records.getTaskmenutype());
+        String recordJson = miss_control_task_records.getTaskpublishfinalcontentjson();
+        F objectF = (F) JSON.parseObject(recordJson, getCurrentObjectClass());
+        T object = converseObject(objectF);
+        object.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        object.setDatastatus("0");
+        baseService.updateByTaskIdSelective(object);
+        if (needDealMapper()) {
+            dealMapperRelashionShip(objectF);
+        }
+        missControlApprovalService.deleteByTaskId(miss_control_task_records.getTaskId());
         return null;
     }
 
@@ -411,4 +423,15 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         return (T) f;
     }
 
+    @Override
+    public String accounts(Miss_control_task_records miss_control_task_records) {
+    	taskRecordsMapper.updateByPrimaryKey(miss_control_task_records);
+    	return null;
+    }
+
+    @Override
+	public String unaccounts(Miss_control_task_records miss_control_task_records) {
+    	taskRecordsMapper.updateByPrimaryKey(miss_control_task_records);
+    	return null;
+	}
 }

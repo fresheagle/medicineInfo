@@ -1,5 +1,6 @@
 package com.med.info.rest;
 
+import com.med.info.dto.BatchAcountsDTO;
 import com.med.info.dto.BatchApproveTaskDTO;
 import com.med.info.dto.BatchOperateDTO;
 import com.med.info.dto.ClaimTaskDTO;
@@ -113,5 +114,16 @@ public class MissionController {
     @RequestMapping(value = "batch/approve", method = RequestMethod.PUT)
     public Response batchApproveTask(@RequestBody BatchApproveTaskDTO approveTaskDTO) {
         return null;
+    }
+    
+    @RequestMapping(value = "batch/acounts", method = RequestMethod.PUT)
+    public Response batchAcountsTask(@RequestBody BatchAcountsDTO accounts) {
+    	try {
+    		missionService.BatchAcounts(accounts);
+    		return new Response().success("操作成功");
+    	}catch (Exception e) {
+            logger.error("批量结算任务状态失败；", e);
+            return new Response().failure(e.getMessage());
+        }
     }
 }

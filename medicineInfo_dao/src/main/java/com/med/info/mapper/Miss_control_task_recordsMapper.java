@@ -68,4 +68,6 @@ public interface Miss_control_task_recordsMapper {
     List<Miss_control_task_records> selectPageBySelective(Map map);
 
     List<Miss_control_task_records> getCurrentTrialStatusByTaskids(@Param("taskIds") List<String> taskIds);
+
+    void resetCreateUserByTaskids(@Param("taskIds") List<String> taskIds, @Param("userCode") String userCode);
 }

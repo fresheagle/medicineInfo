@@ -1,10 +1,6 @@
 package com.med.info.rest;
 
-import com.med.info.dto.BatchAcountsDTO;
-import com.med.info.dto.BatchApproveTaskDTO;
-import com.med.info.dto.BatchOperateDTO;
-import com.med.info.dto.ClaimTaskDTO;
-import com.med.info.dto.SelectTaskDTO;
+import com.med.info.dto.*;
 import com.med.info.mapper.domain.OperateDTO;
 import com.med.info.response.Response;
 import com.med.info.service.MissionService;
@@ -126,4 +122,27 @@ public class MissionController {
             return new Response().failure(e.getMessage());
         }
     }
+
+    @RequestMapping(value = "batch/reset", method = RequestMethod.PUT)
+    public Response batchReset(BatchResetTaskDTO batchResetTaskDTO){
+        try {
+            missionService.resetTask(batchResetTaskDTO);
+            return new Response().success("操作成功");
+        } catch (Exception e) {
+            logger.error("重置状态失败；", e);
+            return new Response().failure(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "batch/new/createuser", method = RequestMethod.PUT)
+    public Response batchNewuser(BatchResetTaskDTO batchResetTaskDTO){
+        try {
+            missionService.resetCreateUser(batchResetTaskDTO);
+            return new Response().success("操作成功");
+        } catch (Exception e) {
+            logger.error("指派新作者失败；", e);
+            return new Response().failure(e.getMessage());
+        }
+    }
+
 }

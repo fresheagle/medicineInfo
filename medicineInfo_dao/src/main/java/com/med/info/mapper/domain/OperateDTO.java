@@ -40,9 +40,17 @@ public class OperateDTO implements Serializable {
     private Integer detailCount;
     private String pageNo;
     private String contentNo;
+    private String accounts;
     private JSONObject jsonStr;
 
 
+    public String getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(String accounts) {
+        this.accounts = accounts;
+    }
 
     public Integer getDetailCount() {
         return detailCount;

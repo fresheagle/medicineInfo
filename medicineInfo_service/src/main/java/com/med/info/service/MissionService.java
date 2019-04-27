@@ -1,9 +1,6 @@
 package com.med.info.service;
 
-import com.med.info.dto.BatchAcountsDTO;
-import com.med.info.dto.BatchOperateDTO;
-import com.med.info.dto.ClaimTaskDTO;
-import com.med.info.dto.SelectTaskDTO;
+import com.med.info.dto.*;
 import com.med.info.mapper.domain.OperateDTO;
 
 import java.util.List;
@@ -28,4 +25,8 @@ public interface MissionService {
 	public Object claimTask(ClaimTaskDTO claimTaskDTO) throws Exception;
 
 	public Object BatchAcounts(BatchAcountsDTO accounts);
+
+	void resetTask(BatchResetTaskDTO batchResetTaskDTO);
+
+	void resetCreateUser(BatchResetTaskDTO batchResetTaskDTO);
 }

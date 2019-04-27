@@ -1,17 +1,11 @@
 package com.med.info.service.impl;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.med.info.domain.Miss_control_role;
 import com.med.info.domain.Miss_control_user;
-import com.med.info.dto.BatchAcountsDTO;
-import com.med.info.dto.BatchOperateDTO;
-import com.med.info.dto.ClaimTaskDTO;
-import com.med.info.dto.SelectTaskDTO;
+import com.med.info.dto.*;
 import com.med.info.mapper.domain.UserInfoDTO;
 import com.med.info.mapper.domain.UserRoleDTO;
 import com.med.info.service.MissControlRoleService;
@@ -31,7 +25,6 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.med.info.domain.Miss_control_task_detailWithBLOBs;
 import com.med.info.domain.Miss_control_task_records;
-import com.med.info.dto.ControlTaskDetail;
 import com.med.info.mapper.Miss_control_task_detailMapper;
 import com.med.info.mapper.Miss_control_task_recordsMapper;
 import com.med.info.mapper.domain.OperateDTO;
@@ -330,31 +323,58 @@ public class MissionServiceImpl implements MissionService {
 		operateDTO.setTaskFinalTrialTime(control_task_records.getTaskFinalTrialTime());
 
 		operateDTO.setUpdateTime(control_task_records.getUpdateTime());
-		operateDTO.setJsonStr(JSONObject.parseObject(taskDetailMapper.getTaskDetailsByTime(control_task_records.getTaskId()).get(0).getTaskchangeafterjson()));
-
+		List<Miss_control_task_detailWithBLOBs> taskDetailsByTime = taskDetailMapper.getTaskDetailsByTime(control_task_records.getTaskId());
+		operateDTO.setDetailCount(taskDetailsByTime.size());
+		operateDTO.setJsonStr(JSONObject.parseObject(taskDetailsByTime.get(0).getTaskchangeafterjson()));
+		operateDTO.setAccounts(control_task_records.getAccounts());
 		return operateDTO;
 	}
 
 	@Override
+	@Transactional
 	public Object BatchAcounts(BatchAcountsDTO accounts) {
-		// TODO Auto-generated method stub
 		if(CollectionUtil.isNotEmpty(accounts.getTasks())) {
 			List<Miss_control_task_records> missControlTaskRecords = taskRecordsMapper.getCurrentTrialStatusByTaskids(accounts.getTasks());
-			if(accounts.getAccounts().equals("account")){
-				for (Miss_control_task_records taskRecord : missControlTaskRecords) {
-					taskRecord.setAccounts("account");
-//					iOperateService.accounts(taskRecord);
-				}
-			}
-		}else if(CollectionUtil.isNotEmpty(accounts.getTasks())) {
-			List<Miss_control_task_records> missControlTaskRecords = taskRecordsMapper.getCurrentTrialStatusByTaskids(accounts.getTasks());
-			if(accounts.getAccounts().equals("unaccount")){
-				for (Miss_control_task_records taskRecord : missControlTaskRecords) {
-					taskRecord.setAccounts("unaccount");
-//					iOperateService.unaccounts(taskRecord);
+			for (Miss_control_task_records missControlTaskRecord : missControlTaskRecords) {
+				for (IOperateService operateService : operateServices) {
+					if(operateService.isFilter(missControlTaskRecord.getTaskmenutype())){
+						operateService.accounts(missControlTaskRecord, accounts.getAccounts());
+					}
 				}
 			}
 		}
 		return null;
+	}
+
+	@Override
+	@Transactional
+	public void resetTask(BatchResetTaskDTO batchResetTaskDTO){
+		List<String> tasks = batchResetTaskDTO.getTasks();
+		List<Miss_control_task_records> currentTrialStatusByTaskids = taskRecordsMapper.getCurrentTrialStatusByTaskids(tasks);
+		for (Miss_control_task_records controlTaskRecords : currentTrialStatusByTaskids) {
+			if(batchResetTaskDTO.getResetFinalAuditedUser() != null && batchResetTaskDTO.getResetFinalAuditedUser()){
+				controlTaskRecords.setTaskfinaltrialcode(null);
+			}
+			if(batchResetTaskDTO.getResetFirstAuditedUser() != null && batchResetTaskDTO.getResetFirstAuditedUser()){
+				controlTaskRecords.setTaskfirsttrialcode(null);
+			}
+			if(batchResetTaskDTO.getResetSecondAuditedUser() != null && batchResetTaskDTO.getResetSecondAuditedUser()){
+				controlTaskRecords.setTasksecondtrialcode(null);
+			}
+			controlTaskRecords.setUpdateTime(new Date());
+			taskRecordsMapper.updateByPrimaryKey(controlTaskRecords);
+			for (IOperateService operateService : operateServices) {
+				if(operateService.isFilter(controlTaskRecords.getTaskmenutype())){
+					operateService.resetStatus(controlTaskRecords, batchResetTaskDTO.getResetStatus());
+				}
+			}
+		}
+	}
+
+	@Override
+	@Transactional
+	public void resetCreateUser(BatchResetTaskDTO batchResetTaskDTO) {
+		List<String> tasks = batchResetTaskDTO.getTasks();
+		taskRecordsMapper.resetCreateUserByTaskids(tasks, batchResetTaskDTO.getUserCode());
 	}
 }

@@ -424,14 +424,44 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
     }
 
     @Override
-    public String accounts(Miss_control_task_records miss_control_task_records) {
+    public String accounts(Miss_control_task_records miss_control_task_records, String accounts) {
+        miss_control_task_records.setTaskStatus(accounts);
     	taskRecordsMapper.updateByPrimaryKey(miss_control_task_records);
-    	return null;
+        BaseService<T> baseService = baseService(miss_control_task_records.getTaskmenutype());
+        String recordJson = miss_control_task_records.getTaskpublishfinalcontentjson();
+        F objectF = (F) JSON.parseObject(recordJson, getCurrentObjectClass());
+        T object = converseObject(objectF);
+        object.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        object.setDatastatus(accounts);
+        baseService.updateByTaskIdSelective(object);
+        return null;
     }
 
     @Override
-	public String unaccounts(Miss_control_task_records miss_control_task_records) {
-    	taskRecordsMapper.updateByPrimaryKey(miss_control_task_records);
-    	return null;
-	}
+    public void resetStatus(Miss_control_task_records controlTaskRecords, String resetStatus) {
+        controlTaskRecords.setTaskStatus(resetStatus);
+        taskRecordsMapper.updateByPrimaryKey(controlTaskRecords);
+        BaseService<T> baseService = baseService(controlTaskRecords.getTaskmenutype());
+        String recordJson = controlTaskRecords.getTaskpublishfinalcontentjson();
+        F objectF = (F) JSON.parseObject(recordJson, getCurrentObjectClass());
+        T object = converseObject(objectF);
+        object.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        object.setDatastatus(resetStatus);
+        baseService.updateByTaskIdSelective(object);
+        Miss_control_task_detailWithBLOBs taskLastData = getTaskLastData(controlTaskRecords.getTaskId());
+        Miss_control_task_detailWithBLOBs controlTaskDetail = new Miss_control_task_detailWithBLOBs();
+        if (null != taskLastData) {
+            controlTaskDetail.setTaskstatuschangebefore(taskLastData.getTaskstatuschangeafter());
+            controlTaskDetail.setTaskchangebeforejson(taskLastData.getTaskchangeafterjson());
+        }
+        controlTaskDetail.setTaskId(controlTaskRecords.getTaskId());
+        controlTaskDetail.setTaskmenutype(controlTaskRecords.getTaskmenutype());
+        controlTaskDetail.setTaskstatuschangeafter(resetStatus);
+        controlTaskDetail.setTaskchangeusercode(DefaultTokenManager.getLocalUserCode().getUserCode());
+        controlTaskDetail.setTaskuuid(UuidUtils.generateUUID());
+        controlTaskDetail.setTaskchangetime(new Timestamp(System.currentTimeMillis()));
+        controlTaskDetail.setTaskchangeday(getToday());
+        controlTaskDetail.setTaskchangeafterjson(taskLastData.getTaskchangeafterjson());
+        taskDetailMapper.insert(controlTaskDetail);
+    }
 }

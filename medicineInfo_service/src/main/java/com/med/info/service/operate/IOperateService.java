@@ -17,7 +17,7 @@ public interface IOperateService {
 	
 	public boolean isFilter(String taskMenuType);
 	
-	public String accounts(Miss_control_task_records miss_control_task_records);
+	public String accounts(Miss_control_task_records miss_control_task_records, String accounts);
 
-	public String unaccounts(Miss_control_task_records miss_control_task_records);
+    void resetStatus(Miss_control_task_records controlTaskRecords, String resetStatus);
 }

@@ -8,7 +8,6 @@ public class BatchAcountsDTO {
      *传递需要修改的结算状态：
      * 
      */
-
     private String accounts;
 	public String getAccounts() {
 		return accounts;

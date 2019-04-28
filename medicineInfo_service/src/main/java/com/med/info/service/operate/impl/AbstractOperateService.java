@@ -427,9 +427,10 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
     public String accounts(Miss_control_task_records miss_control_task_records, String accounts) {
         miss_control_task_records.setTaskStatus(accounts);
     	taskRecordsMapper.updateByPrimaryKey(miss_control_task_records);
+        Miss_control_task_detailWithBLOBs taskLastData = getTaskLastData(miss_control_task_records.getTaskId());
         BaseService<T> baseService = baseService(miss_control_task_records.getTaskmenutype());
         String recordJson = miss_control_task_records.getTaskpublishfinalcontentjson();
-        F objectF = (F) JSON.parseObject(recordJson, getCurrentObjectClass());
+        F objectF = (F) JSON.parseObject(taskLastData.getTaskchangeafterjson(), getCurrentObjectClass());
         T object = converseObject(objectF);
         object.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         object.setDatastatus(accounts);

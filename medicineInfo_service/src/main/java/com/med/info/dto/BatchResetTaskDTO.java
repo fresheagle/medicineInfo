@@ -6,9 +6,7 @@ public class BatchResetTaskDTO {
 
     private List<String> tasks;
     private String resetStatus;
-    private Boolean resetFirstAuditedUser;
-    private Boolean resetSecondAuditedUser;
-    private Boolean resetFinalAuditedUser;
+    private List<String> trialUser;
     private String userCode;
 
     public List<String> getTasks() {
@@ -26,29 +24,12 @@ public class BatchResetTaskDTO {
     public void setResetStatus(String resetStatus) {
         this.resetStatus = resetStatus;
     }
-
-    public Boolean getResetFirstAuditedUser() {
-        return resetFirstAuditedUser;
+    public List<String> getTrialUser() {
+        return trialUser;
     }
 
-    public void setResetFirstAuditedUser(Boolean resetFirstAuditedUser) {
-        this.resetFirstAuditedUser = resetFirstAuditedUser;
-    }
-
-    public Boolean getResetSecondAuditedUser() {
-        return resetSecondAuditedUser;
-    }
-
-    public void setResetSecondAuditedUser(Boolean resetSecondAuditedUser) {
-        this.resetSecondAuditedUser = resetSecondAuditedUser;
-    }
-
-    public Boolean getResetFinalAuditedUser() {
-        return resetFinalAuditedUser;
-    }
-
-    public void setResetFinalAuditedUser(Boolean resetFinalAuditedUser) {
-        this.resetFinalAuditedUser = resetFinalAuditedUser;
+    public void setTrialUser(List<String> trialUser) {
+        this.trialUser = trialUser;
     }
 
     public String getUserCode() {

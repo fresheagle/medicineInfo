@@ -124,7 +124,7 @@ public class MissionController {
     }
 
     @RequestMapping(value = "batch/reset", method = RequestMethod.PUT)
-    public Response batchReset(BatchResetTaskDTO batchResetTaskDTO){
+    public Response batchReset(@RequestBody BatchResetTaskDTO batchResetTaskDTO){
         try {
             missionService.resetTask(batchResetTaskDTO);
             return new Response().success("操作成功");
@@ -135,7 +135,7 @@ public class MissionController {
     }
 
     @RequestMapping(value = "batch/new/createuser", method = RequestMethod.PUT)
-    public Response batchNewuser(BatchResetTaskDTO batchResetTaskDTO){
+    public Response batchNewuser(@RequestBody BatchResetTaskDTO batchResetTaskDTO){
         try {
             missionService.resetCreateUser(batchResetTaskDTO);
             return new Response().success("操作成功");

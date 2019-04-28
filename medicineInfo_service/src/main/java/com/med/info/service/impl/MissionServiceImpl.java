@@ -352,13 +352,13 @@ public class MissionServiceImpl implements MissionService {
 		List<String> tasks = batchResetTaskDTO.getTasks();
 		List<Miss_control_task_records> currentTrialStatusByTaskids = taskRecordsMapper.getCurrentTrialStatusByTaskids(tasks);
 		for (Miss_control_task_records controlTaskRecords : currentTrialStatusByTaskids) {
-			if(batchResetTaskDTO.getResetFinalAuditedUser() != null && batchResetTaskDTO.getResetFinalAuditedUser()){
+			if(batchResetTaskDTO.getTrialUser() != null && batchResetTaskDTO.getTrialUser().contains("finalTrialUser")){
 				controlTaskRecords.setTaskfinaltrialcode(null);
 			}
-			if(batchResetTaskDTO.getResetFirstAuditedUser() != null && batchResetTaskDTO.getResetFirstAuditedUser()){
+			if(batchResetTaskDTO.getTrialUser() != null && batchResetTaskDTO.getTrialUser().contains("secondTrialUser"))){
 				controlTaskRecords.setTaskfirsttrialcode(null);
 			}
-			if(batchResetTaskDTO.getResetSecondAuditedUser() != null && batchResetTaskDTO.getResetSecondAuditedUser()){
+			if(batchResetTaskDTO.getTrialUser() != null && batchResetTaskDTO.getTrialUser().contains("firstTrialUser")){
 				controlTaskRecords.setTasksecondtrialcode(null);
 			}
 			controlTaskRecords.setUpdateTime(new Date());

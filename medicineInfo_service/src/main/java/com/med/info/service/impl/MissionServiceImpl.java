@@ -355,7 +355,7 @@ public class MissionServiceImpl implements MissionService {
 			if(batchResetTaskDTO.getTrialUser() != null && batchResetTaskDTO.getTrialUser().contains("finalTrialUser")){
 				controlTaskRecords.setTaskfinaltrialcode(null);
 			}
-			if(batchResetTaskDTO.getTrialUser() != null && batchResetTaskDTO.getTrialUser().contains("secondTrialUser"))){
+			if(batchResetTaskDTO.getTrialUser() != null && batchResetTaskDTO.getTrialUser().contains("secondTrialUser")){
 				controlTaskRecords.setTaskfirsttrialcode(null);
 			}
 			if(batchResetTaskDTO.getTrialUser() != null && batchResetTaskDTO.getTrialUser().contains("firstTrialUser")){

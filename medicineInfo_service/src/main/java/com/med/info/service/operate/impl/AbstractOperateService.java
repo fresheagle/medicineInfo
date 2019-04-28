@@ -441,14 +441,13 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
     public void resetStatus(Miss_control_task_records controlTaskRecords, String resetStatus) {
         controlTaskRecords.setTaskStatus(resetStatus);
         taskRecordsMapper.updateByPrimaryKey(controlTaskRecords);
+        Miss_control_task_detailWithBLOBs taskLastData = getTaskLastData(controlTaskRecords.getTaskId());
         BaseService<T> baseService = baseService(controlTaskRecords.getTaskmenutype());
-        String recordJson = controlTaskRecords.getTaskpublishfinalcontentjson();
-        F objectF = (F) JSON.parseObject(recordJson, getCurrentObjectClass());
+        F objectF = (F) JSON.parseObject(taskLastData.getTaskchangeafterjson(), getCurrentObjectClass());
         T object = converseObject(objectF);
         object.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         object.setDatastatus(resetStatus);
         baseService.updateByTaskIdSelective(object);
-        Miss_control_task_detailWithBLOBs taskLastData = getTaskLastData(controlTaskRecords.getTaskId());
         Miss_control_task_detailWithBLOBs controlTaskDetail = new Miss_control_task_detailWithBLOBs();
         if (null != taskLastData) {
             controlTaskDetail.setTaskstatuschangebefore(taskLastData.getTaskstatuschangeafter());

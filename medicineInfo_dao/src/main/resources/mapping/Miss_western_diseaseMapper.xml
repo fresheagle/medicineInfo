@@ -27,6 +27,9 @@
     <result column="infectivity" jdbcType="INTEGER" property="infectivity" />
     <result column="department_pid" jdbcType="BIGINT" property="departmentPid" />
     <result column="department_id" jdbcType="BIGINT" property="departmentId" />
+    
+    <result column="edit_doctor" jdbcType="BIGINT" property="editDoctor" />
+    <result column="audit_doctor" jdbcType="BIGINT" property="auditDoctor" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.med.info.domain.Miss_western_diseaseWithBLOBs">
     <!--
@@ -71,7 +74,7 @@
     -->
     id, disease_id, reserve1, reserve2, reserve3, dataStatus, task_id, task_status, chinese_name, 
     english_name, related_diseases, disease_type, location_pid, location_disease, main_causes, 
-    common_symptom, multiple_population, infectivity, department_pid, department_id
+    common_symptom, multiple_population, infectivity, department_pid, department_id, edit_doctor, audit_doctor
   </sql>
   <sql id="Blob_Column_List">
     <!--
@@ -135,7 +138,7 @@
       drug_resistance, dietary_conditioning, 
       attention_matter, data_reference, 
       task_json, introduction, consultation, 
-      section, treatment_cost)
+      section, treatment_cost, edit_doctor, audit_doctor)
     values (#{id,jdbcType=BIGINT}, #{diseaseId,jdbcType=BIGINT}, #{reserve1,jdbcType=VARCHAR}, 
       #{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR}, #{datastatus,jdbcType=VARCHAR}, 
       #{taskId,jdbcType=VARCHAR}, #{taskStatus,jdbcType=VARCHAR}, #{chineseName,jdbcType=VARCHAR}, 
@@ -154,7 +157,7 @@
       #{drugResistance,jdbcType=LONGVARCHAR}, #{dietaryConditioning,jdbcType=LONGVARCHAR}, 
       #{attentionMatter,jdbcType=LONGVARCHAR}, #{dataReference,jdbcType=LONGVARCHAR}, 
       #{taskJson,jdbcType=LONGVARCHAR}, #{introduction,jdbcType=LONGVARCHAR}, #{consultation,jdbcType=LONGVARCHAR}, 
-      #{section,jdbcType=LONGVARCHAR}, #{treatmentCost,jdbcType=LONGVARCHAR})
+      #{section,jdbcType=LONGVARCHAR}, #{treatmentCost,jdbcType=LONGVARCHAR},#{editDoctor,jdbcType=BIGINT},#{auditDoctor,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.med.info.domain.Miss_western_diseaseWithBLOBs">
     <!--
@@ -309,6 +312,13 @@
       <if test="treatmentCost != null">
         treatment_cost,
       </if>
+      
+      <if test="editDoctor != null">
+        edit_doctor,
+      </if>
+      <if test="auditDoctor != null">
+        audit_doctor,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       #{id,jdbcType=BIGINT},
@@ -452,6 +462,13 @@
       </if>
       <if test="treatmentCost != null">
         #{treatmentCost,jdbcType=LONGVARCHAR},
+      </if>
+      
+      <if test="editDoctor != null">
+        #{editDoctor,jdbcType=BIGINT},
+      </if>
+      <if test="auditDoctor != null">
+        #{auditDoctor,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -604,6 +621,13 @@
       <if test="treatmentCost != null">
         treatment_cost = #{treatmentCost,jdbcType=LONGVARCHAR},
       </if>
+      
+      <if test="editDoctor != null">
+        edit_doctor = #{editDoctor,jdbcType=BIGINT},
+      </if>
+      <if test="auditDoctor != null">
+        audit_doctor = #{auditDoctor,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -660,7 +684,9 @@
       introduction = #{introduction,jdbcType=LONGVARCHAR},
       consultation = #{consultation,jdbcType=LONGVARCHAR},
       section = #{section,jdbcType=LONGVARCHAR},
-      treatment_cost = #{treatmentCost,jdbcType=LONGVARCHAR}
+      treatment_cost = #{treatmentCost,jdbcType=LONGVARCHAR},
+      edit_doctor = #{editDoctor,jdbcType=BIGINT},
+      audit_doctor = #{auditDoctor,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.med.info.domain.Miss_western_disease">
@@ -688,7 +714,9 @@
       multiple_population = #{multiplePopulation,jdbcType=VARCHAR},
       infectivity = #{infectivity,jdbcType=INTEGER},
       department_pid = #{departmentPid,jdbcType=BIGINT},
-      department_id = #{departmentId,jdbcType=BIGINT}
+      department_id = #{departmentId,jdbcType=BIGINT},
+      edit_doctor = #{editDoctor,jdbcType=BIGINT},
+      audit_doctor = #{auditDoctor,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
     <select id="showDataCondition" parameterType="com.med.info.domain.Miss_western_diseaseWithBLOBs" resultMap="ResultMapWithBLOBs">

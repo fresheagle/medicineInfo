@@ -756,4 +756,22 @@ public class Miss_institution extends BaseDomain{
 	public void setCityCode(String cityCode) {
 		this.cityCode = cityCode;
 	}
+	
+	private Long editDoctor;
+	private Long auditDoctor;
+	public Long getEditDoctor() {
+		return editDoctor;
+	}
+
+	public void setEditDoctor(Long editDoctor) {
+		this.editDoctor = editDoctor;
+	}
+
+	public Long getAuditDoctor() {
+		return auditDoctor;
+	}
+
+	public void setAuditDoctor(Long auditDoctor) {
+		this.auditDoctor = auditDoctor;
+	}
 }

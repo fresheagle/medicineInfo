@@ -627,4 +627,21 @@ public class Miss_western_disease extends BaseDomain {
    public void setDepartmentId(Long departmentId) {
        this.departmentId = departmentId;
    }
+   private Long editDoctor;
+   private Long auditDoctor;
+public Long getEditDoctor() {
+	return editDoctor;
+}
+
+public void setEditDoctor(Long editDoctor) {
+	this.editDoctor = editDoctor;
+}
+
+public Long getAuditDoctor() {
+	return auditDoctor;
+}
+
+public void setAuditDoctor(Long auditDoctor) {
+	this.auditDoctor = auditDoctor;
+}
 }

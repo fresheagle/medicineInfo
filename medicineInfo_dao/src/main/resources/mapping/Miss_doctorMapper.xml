@@ -22,6 +22,9 @@
     <result column="dataStatus" jdbcType="VARCHAR" property="datastatus" />
     <result column="task_id" jdbcType="VARCHAR" property="taskId" />
     <result column="task_status" jdbcType="VARCHAR" property="taskStatus" />
+    
+    <result column="edit_doctor" jdbcType="BIGINT" property="editDoctor" />
+    <result column="audit_doctor" jdbcType="BIGINT" property="auditDoctor" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.med.info.domain.Miss_doctorWithBLOBs">
     <!--
@@ -57,7 +60,7 @@
       This element was generated on Sat Apr 27 19:22:50 CST 2019.
     -->
     id, name, sex, origin, nation, birthday, dieday, thumbnail, graduate, profession, 
-    inaugural_institution, birthplace_district_code, dataStatus, task_id, task_status
+    inaugural_institution, birthplace_district_code, dataStatus, task_id, task_status, edit_doctor, audit_doctor
   </sql>
   <sql id="Blob_Column_List">
     <!--
@@ -112,7 +115,7 @@
       production, awards, science, 
       socialization, thesis, bookmaking, 
       heritage_map, reference_material, 
-      task_json)
+      task_json, edit_doctor, audit_doctor)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
       #{origin,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, 
       #{dieday,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR}, #{graduate,jdbcType=VARCHAR}, 
@@ -125,7 +128,7 @@
       #{production,jdbcType=LONGVARCHAR}, #{awards,jdbcType=LONGVARCHAR}, #{science,jdbcType=LONGVARCHAR}, 
       #{socialization,jdbcType=LONGVARCHAR}, #{thesis,jdbcType=LONGVARCHAR}, #{bookmaking,jdbcType=LONGVARCHAR}, 
       #{heritageMap,jdbcType=LONGVARCHAR}, #{referenceMaterial,jdbcType=LONGVARCHAR}, 
-      #{taskJson,jdbcType=LONGVARCHAR})
+      #{taskJson,jdbcType=LONGVARCHAR},#{editDoctor,jdbcType=BIGINT},#{auditDoctor,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.med.info.domain.Miss_doctorWithBLOBs">
     <!--
@@ -241,6 +244,12 @@
       <if test="taskJson != null">
         task_json,
       </if>
+      <if test="editDoctor != null">
+        edit_doctor,
+      </if>
+      <if test="auditDoctor != null">
+        audit_doctor,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       #{id,jdbcType=BIGINT},
@@ -345,6 +354,13 @@
       </if>
       <if test="taskJson != null">
         #{taskJson,jdbcType=LONGVARCHAR},
+      </if>
+      
+      <if test="editDoctor != null">
+        #{editDoctor,jdbcType=BIGINT},
+      </if>
+      <if test="auditDoctor != null">
+        #{auditDoctor,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -458,6 +474,13 @@
       <if test="taskJson != null">
         task_json = #{taskJson,jdbcType=LONGVARCHAR},
       </if>
+      
+      <if test="editDoctor != null">
+        edit_doctor = #{editDoctor,jdbcType=BIGINT},
+      </if>
+      <if test="auditDoctor != null">
+        audit_doctor = #{auditDoctor,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -501,7 +524,9 @@
       bookmaking = #{bookmaking,jdbcType=LONGVARCHAR},
       heritage_map = #{heritageMap,jdbcType=LONGVARCHAR},
       reference_material = #{referenceMaterial,jdbcType=LONGVARCHAR},
-      task_json = #{taskJson,jdbcType=LONGVARCHAR}
+      task_json = #{taskJson,jdbcType=LONGVARCHAR},
+      edit_doctor = #{editDoctor,jdbcType=BIGINT},
+      audit_doctor = #{auditDoctor,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.med.info.domain.Miss_doctor">
@@ -524,7 +549,9 @@
       birthplace_district_code = #{birthplaceDistrictCode,jdbcType=VARCHAR},
       dataStatus = #{datastatus,jdbcType=VARCHAR},
       task_id = #{taskId,jdbcType=VARCHAR},
-      task_status = #{taskStatus,jdbcType=VARCHAR}
+      task_status = #{taskStatus,jdbcType=VARCHAR},
+      edit_doctor = #{editDoctor,jdbcType=BIGINT},
+      audit_doctor = #{auditDoctor,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 

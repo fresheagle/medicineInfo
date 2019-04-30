@@ -768,4 +768,21 @@ public class Miss_chinese_disease extends BaseDomain{
    public void setThumbnail(String thumbnail) {
        this.thumbnail = thumbnail == null ? null : thumbnail.trim();
    }
+   private Long editDoctor;
+   private Long auditDoctor;
+public Long getEditDoctor() {
+	return editDoctor;
+}
+
+public void setEditDoctor(Long editDoctor) {
+	this.editDoctor = editDoctor;
+}
+
+public Long getAuditDoctor() {
+	return auditDoctor;
+}
+
+public void setAuditDoctor(Long auditDoctor) {
+	this.auditDoctor = auditDoctor;
+}
 }

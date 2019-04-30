@@ -31,6 +31,10 @@
     <result column="west_medical_department" jdbcType="VARCHAR" property="westMedicalDepartment" />
     <result column="chinese_medical_type" jdbcType="VARCHAR" property="chineseMedicalType" />
     <result column="chinese_medical_department" jdbcType="VARCHAR" property="chineseMedicalDepartment" />
+    
+    
+    <result column="edit_doctor" jdbcType="BIGINT" property="editDoctor" />
+    <result column="audit_doctor" jdbcType="BIGINT" property="auditDoctor" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.med.info.domain.Miss_medicalWithBLOBs">
     <!--
@@ -93,7 +97,7 @@
     id, medical_type, com_name, chinese_pinyin, alisa_name, shop_name, english_name, 
     drug_type, ytime, enterprise, approval_num, health_type, storage_method, drug_identifying, 
     address, recipe_type, price, picture_path, dataStatus, task_id, task_status, west_medical_department, 
-    chinese_medical_type, chinese_medical_department
+    chinese_medical_type, chinese_medical_department, edit_doctor, audit_doctor
   </sql>
   <sql id="Blob_Column_List">
     <!--
@@ -166,7 +170,7 @@
       physician_advice, route_administration, 
       dosage_form, functional_classification, 
       disease_classification, thumbnail, 
-      adaptation)
+      adaptation, edit_doctor, audit_doctor)
     values (#{id,jdbcType=BIGINT}, #{medicalType,jdbcType=INTEGER}, #{comName,jdbcType=VARCHAR}, 
       #{chinesePinyin,jdbcType=VARCHAR}, #{alisaName,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR}, 
       #{englishName,jdbcType=VARCHAR}, #{drugType,jdbcType=VARCHAR}, #{ytime,jdbcType=VARCHAR}, 
@@ -192,7 +196,7 @@
       #{physicianAdvice,jdbcType=LONGVARCHAR}, #{routeAdministration,jdbcType=LONGVARCHAR}, 
       #{dosageForm,jdbcType=LONGVARCHAR}, #{functionalClassification,jdbcType=LONGVARCHAR}, 
       #{diseaseClassification,jdbcType=LONGVARCHAR}, #{thumbnail,jdbcType=LONGVARCHAR}, 
-      #{adaptation,jdbcType=LONGVARCHAR})
+      #{adaptation,jdbcType=LONGVARCHAR},#{editDoctor,jdbcType=BIGINT},#{auditDoctor,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.med.info.domain.Miss_medicalWithBLOBs">
     <!--
@@ -410,6 +414,13 @@
       <if test="adaptation != null">
         adaptation,
       </if>
+      
+      <if test="editDoctor != null">
+        edit_doctor,
+      </if>
+      <if test="auditDoctor != null">
+        audit_doctor,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       #{id,jdbcType=BIGINT},
@@ -616,6 +627,13 @@
       </if>
       <if test="adaptation != null">
         #{adaptation,jdbcType=LONGVARCHAR},
+      </if>
+      
+      <if test="editDoctor != null">
+        #{editDoctor,jdbcType=BIGINT},
+      </if>
+      <if test="auditDoctor != null">
+        #{auditDoctor,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -831,6 +849,13 @@
       <if test="adaptation != null">
         adaptation = #{adaptation,jdbcType=LONGVARCHAR},
       </if>
+      
+      <if test="editDoctor != null">
+        edit_doctor = #{editDoctor,jdbcType=BIGINT},
+      </if>
+      <if test="auditDoctor != null">
+        audit_doctor = #{auditDoctor,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -908,7 +933,9 @@
       functional_classification = #{functionalClassification,jdbcType=LONGVARCHAR},
       disease_classification = #{diseaseClassification,jdbcType=LONGVARCHAR},
       thumbnail = #{thumbnail,jdbcType=LONGVARCHAR},
-      adaptation = #{adaptation,jdbcType=LONGVARCHAR}
+      adaptation = #{adaptation,jdbcType=LONGVARCHAR},
+      edit_doctor = #{editDoctor,jdbcType=BIGINT},
+      audit_doctor = #{auditDoctor,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.med.info.domain.Miss_medical">
@@ -940,7 +967,9 @@
       task_status = #{taskStatus,jdbcType=VARCHAR},
       west_medical_department = #{westMedicalDepartment,jdbcType=VARCHAR},
       chinese_medical_type = #{chineseMedicalType,jdbcType=VARCHAR},
-      chinese_medical_department = #{chineseMedicalDepartment,jdbcType=VARCHAR}
+      chinese_medical_department = #{chineseMedicalDepartment,jdbcType=VARCHAR},
+      edit_doctor = #{editDoctor,jdbcType=BIGINT},
+      audit_doctor = #{auditDoctor,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 

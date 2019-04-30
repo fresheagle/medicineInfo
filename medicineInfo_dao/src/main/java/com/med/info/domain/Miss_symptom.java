@@ -660,4 +660,21 @@ public class Miss_symptom extends BaseDomain{
    public void setCommonDiseasesOld(String commonDiseasesOld) {
        this.commonDiseasesOld = commonDiseasesOld == null ? null : commonDiseasesOld.trim();
    }
+   private Long editDoctor;
+   private Long auditDoctor;
+public Long getEditDoctor() {
+	return editDoctor;
+}
+
+public void setEditDoctor(Long editDoctor) {
+	this.editDoctor = editDoctor;
+}
+
+public Long getAuditDoctor() {
+	return auditDoctor;
+}
+
+public void setAuditDoctor(Long auditDoctor) {
+	this.auditDoctor = auditDoctor;
+}
 }

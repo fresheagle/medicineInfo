@@ -31,6 +31,9 @@
     <result column="department_pid" jdbcType="BIGINT" property="departmentPid" />
     <result column="department_id" jdbcType="BIGINT" property="departmentId" />
     <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail" />
+    
+    <result column="edit_doctor" jdbcType="BIGINT" property="editDoctor" />
+    <result column="audit_doctor" jdbcType="BIGINT" property="auditDoctor" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.med.info.domain.Miss_chinese_diseaseWithBLOBs">
     <!--
@@ -87,7 +90,7 @@
     id, chinese_name, disease_id, reserve1, reserve2, reserve3, dataStatus, task_id, 
     task_status, english_name, other_name, latin_name, related_diseases, disease_type, 
     location_pid, location_disease, main_causes, common_symptom, multiple_population, 
-    infectivity, sea_characteristic, department_pid, department_id, thumbnail
+    infectivity, sea_characteristic, department_pid, department_id, thumbnail, edit_doctor, audit_doctor
   </sql>
   <sql id="Blob_Column_List">
     <!--
@@ -160,7 +163,7 @@
       differential_diagnosis, prevention_treatment, 
       treatment_prognosis, nursing, prevention_measures, 
       dietary_conditioning, drug_resistance, 
-      picture_path)
+      picture_path, edit_doctor, audit_doctor)
     values (#{id,jdbcType=BIGINT}, #{chineseName,jdbcType=VARCHAR}, #{diseaseId,jdbcType=BIGINT}, 
       #{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR}, 
       #{datastatus,jdbcType=VARCHAR}, #{taskId,jdbcType=VARCHAR}, #{taskStatus,jdbcType=VARCHAR}, 
@@ -186,7 +189,7 @@
       #{differentialDiagnosis,jdbcType=LONGVARCHAR}, #{preventionTreatment,jdbcType=LONGVARCHAR}, 
       #{treatmentPrognosis,jdbcType=LONGVARCHAR}, #{nursing,jdbcType=LONGVARCHAR}, #{preventionMeasures,jdbcType=LONGVARCHAR}, 
       #{dietaryConditioning,jdbcType=LONGVARCHAR}, #{drugResistance,jdbcType=LONGVARCHAR}, 
-      #{picturePath,jdbcType=LONGVARCHAR})
+      #{picturePath,jdbcType=LONGVARCHAR},#{editDoctor,jdbcType=BIGINT},#{auditDoctor,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.med.info.domain.Miss_chinese_diseaseWithBLOBs">
     <!--
@@ -386,6 +389,13 @@
       <if test="picturePath != null">
         picture_path,
       </if>
+      
+      <if test="editDoctor != null">
+        edit_doctor,
+      </if>
+      <if test="auditDoctor != null">
+        audit_doctor,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       #{id,jdbcType=BIGINT},
@@ -574,6 +584,13 @@
       </if>
       <if test="picturePath != null">
         #{picturePath,jdbcType=LONGVARCHAR},
+      </if>
+      
+      <if test="editDoctor != null">
+        #{editDoctor,jdbcType=BIGINT},
+      </if>
+      <if test="auditDoctor != null">
+        #{auditDoctor,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -771,6 +788,14 @@
       <if test="picturePath != null">
         picture_path = #{picturePath,jdbcType=LONGVARCHAR},
       </if>
+      
+      
+      <if test="editDoctor != null">
+        edit_doctor = #{editDoctor,jdbcType=BIGINT},
+      </if>
+      <if test="auditDoctor != null">
+        audit_doctor = #{auditDoctor,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -842,7 +867,9 @@
       prevention_measures = #{preventionMeasures,jdbcType=LONGVARCHAR},
       dietary_conditioning = #{dietaryConditioning,jdbcType=LONGVARCHAR},
       drug_resistance = #{drugResistance,jdbcType=LONGVARCHAR},
-      picture_path = #{picturePath,jdbcType=LONGVARCHAR}
+      picture_path = #{picturePath,jdbcType=LONGVARCHAR},
+      edit_doctor = #{editDoctor,jdbcType=BIGINT},
+      audit_doctor = #{auditDoctor,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.med.info.domain.Miss_chinese_disease">
@@ -874,7 +901,9 @@
       sea_characteristic = #{seaCharacteristic,jdbcType=VARCHAR},
       department_pid = #{departmentPid,jdbcType=BIGINT},
       department_id = #{departmentId,jdbcType=BIGINT},
-      thumbnail = #{thumbnail,jdbcType=VARCHAR}
+      thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      edit_doctor = #{editDoctor,jdbcType=BIGINT},
+      audit_doctor = #{auditDoctor,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="showDataCondition" parameterType="com.med.info.domain.Miss_chinese_diseaseWithBLOBs" resultMap="ResultMapWithBLOBs">

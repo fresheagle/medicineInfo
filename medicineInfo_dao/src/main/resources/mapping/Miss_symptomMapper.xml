@@ -27,6 +27,10 @@
     <result column="task_status" jdbcType="VARCHAR" property="taskStatus" />
     <result column="symptom_type" jdbcType="VARCHAR" property="symptomType" />
     <result column="common_diseases_old" jdbcType="VARCHAR" property="commonDiseasesOld" />
+    
+    
+    <result column="edit_doctor" jdbcType="BIGINT" property="editDoctor" />
+    <result column="audit_doctor" jdbcType="BIGINT" property="auditDoctor" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.med.info.domain.Miss_symptomWithBLOBs">
     <!--
@@ -77,7 +81,7 @@
     -->
     id, chinese_name, english_name, other_name, symptom, treatment, clinical_manifestation, 
     department_id, main_causes, common_symptom, multiple_population, infectivity, reserve1, 
-    reserve2, reserve3, dataStatus, task_id, task_status, symptom_type, common_diseases_old
+    reserve2, reserve3, dataStatus, task_id, task_status, symptom_type, common_diseases_old, edit_doctor, audit_doctor
   </sql>
   <sql id="Blob_Column_List">
     <!--
@@ -144,7 +148,7 @@
       syndrome_different_treatment, acupuncture_therapy, 
       syndrome_differentiation, prognosis, 
       introduction, thumbnail, epidemiology, 
-      preventive_measure, picturepath)
+      preventive_measure, picturepath, edit_doctor, audit_doctor)
     values (#{id,jdbcType=BIGINT}, #{chineseName,jdbcType=VARCHAR}, #{englishName,jdbcType=VARCHAR}, 
       #{otherName,jdbcType=VARCHAR}, #{symptom,jdbcType=VARCHAR}, #{treatment,jdbcType=VARCHAR}, 
       #{clinicalManifestation,jdbcType=VARCHAR}, #{departmentId,jdbcType=BIGINT}, #{mainCauses,jdbcType=VARCHAR}, 
@@ -165,7 +169,7 @@
       #{syndromeDifferentTreatment,jdbcType=LONGVARCHAR}, #{acupunctureTherapy,jdbcType=LONGVARCHAR}, 
       #{syndromeDifferentiation,jdbcType=LONGVARCHAR}, #{prognosis,jdbcType=LONGVARCHAR}, 
       #{introduction,jdbcType=LONGVARCHAR}, #{thumbnail,jdbcType=LONGVARCHAR}, #{epidemiology,jdbcType=LONGVARCHAR}, 
-      #{preventiveMeasure,jdbcType=LONGVARCHAR}, #{picturepath,jdbcType=LONGVARCHAR})
+      #{preventiveMeasure,jdbcType=LONGVARCHAR}, #{picturepath,jdbcType=LONGVARCHAR},#{editDoctor,jdbcType=BIGINT},#{auditDoctor,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.med.info.domain.Miss_symptomWithBLOBs">
     <!--
@@ -338,6 +342,13 @@
       <if test="picturepath != null">
         picturepath,
       </if>
+      
+      <if test="editDoctor != null">
+        edit_doctor,
+      </if>
+      <if test="auditDoctor != null">
+        audit_doctor,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       #{id,jdbcType=BIGINT},
@@ -499,6 +510,13 @@
       </if>
       <if test="picturepath != null">
         #{picturepath,jdbcType=LONGVARCHAR},
+      </if>
+      
+      <if test="editDoctor != null">
+        #{editDoctor,jdbcType=BIGINT},
+      </if>
+      <if test="auditDoctor != null">
+        #{auditDoctor,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -669,6 +687,13 @@
       <if test="picturepath != null">
         picturepath = #{picturepath,jdbcType=LONGVARCHAR},
       </if>
+      
+      <if test="editDoctor != null">
+        edit_doctor = #{editDoctor,jdbcType=BIGINT},
+      </if>
+      <if test="auditDoctor != null">
+        audit_doctor = #{auditDoctor,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -731,7 +756,9 @@
       thumbnail = #{thumbnail,jdbcType=LONGVARCHAR},
       epidemiology = #{epidemiology,jdbcType=LONGVARCHAR},
       preventive_measure = #{preventiveMeasure,jdbcType=LONGVARCHAR},
-      picturepath = #{picturepath,jdbcType=LONGVARCHAR}
+      picturepath = #{picturepath,jdbcType=LONGVARCHAR},
+      edit_doctor = #{editDoctor,jdbcType=BIGINT},
+      audit_doctor = #{auditDoctor,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.med.info.domain.Miss_symptom">
@@ -759,7 +786,9 @@
       task_id = #{taskId,jdbcType=VARCHAR},
       task_status = #{taskStatus,jdbcType=VARCHAR},
       symptom_type = #{symptomType,jdbcType=VARCHAR},
-      common_diseases_old = #{commonDiseasesOld,jdbcType=VARCHAR}
+      common_diseases_old = #{commonDiseasesOld,jdbcType=VARCHAR},
+      edit_doctor = #{editDoctor,jdbcType=BIGINT},
+      audit_doctor = #{auditDoctor,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
   

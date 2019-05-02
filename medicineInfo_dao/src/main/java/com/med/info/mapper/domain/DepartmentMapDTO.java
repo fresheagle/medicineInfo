@@ -16,6 +16,7 @@ public class DepartmentMapDTO implements Serializable{
 	private String departmentCode;
 	private String departmentName;
 	private String departmentLevel;
+	
 	public Long getId() {
 		return departmentId;
 	}

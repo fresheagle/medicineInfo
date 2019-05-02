@@ -67,6 +67,8 @@ public class MissInstitutionOperateService extends AbstractOperateService<Miss_i
                 record.setInstitutionId(objectF.getId());
                 record.setLevel(departmentMapDTO2.getDepartmentLevel());
                 record.setDepartmentId(departmentMapDTO2.getId());
+                record.setDepartmentId(departmentMapDTO2.getParentDepartmentId());
+                record.setOffice(departmentMapDTO2.getOffice());
                 record.setDatastatus(objectF.getDatastatus());
                 record.setTaskId(objectF.getTaskId());
                 record.setTaskStatus(objectF.getTaskStatus());

@@ -72,7 +72,6 @@ public class MissInstitutionOperateService extends AbstractOperateService<Miss_i
                 record.setDatastatus(objectF.getDatastatus());
                 record.setTaskId(objectF.getTaskId());
                 record.setTaskStatus(objectF.getTaskStatus());
-                
                 institution_keypartment_mappingMapper.insert(record);
             }
         }

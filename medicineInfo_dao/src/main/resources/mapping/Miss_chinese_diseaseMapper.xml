@@ -28,8 +28,8 @@
     <result column="multiple_population" jdbcType="VARCHAR" property="multiplePopulation" />
     <result column="infectivity" jdbcType="INTEGER" property="infectivity" />
     <result column="sea_characteristic" jdbcType="VARCHAR" property="seaCharacteristic" />
-    <result column="department_pid" jdbcType="BIGINT" property="departmentPid" />
-    <result column="department_id" jdbcType="BIGINT" property="departmentId" />
+    <result column="department_pid" jdbcType="VARCHAR" property="departmentPid" />
+    <result column="department_id" jdbcType="VARCHAR" property="departmentId" />
     <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail" />
     
     <result column="edit_doctor" jdbcType="BIGINT" property="editDoctor" />
@@ -171,7 +171,7 @@
       #{relatedDiseases,jdbcType=VARCHAR}, #{diseaseType,jdbcType=VARCHAR}, #{locationPid,jdbcType=BIGINT}, 
       #{locationDisease,jdbcType=BIGINT}, #{mainCauses,jdbcType=VARCHAR}, #{commonSymptom,jdbcType=VARCHAR}, 
       #{multiplePopulation,jdbcType=VARCHAR}, #{infectivity,jdbcType=INTEGER}, #{seaCharacteristic,jdbcType=VARCHAR}, 
-      #{departmentPid,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}, #{thumbnail,jdbcType=VARCHAR}, 
+      #{departmentPid,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR}, #{thumbnail,jdbcType=VARCHAR}, 
       #{introduction,jdbcType=LONGVARCHAR}, #{nounInterpretation,jdbcType=LONGVARCHAR}, 
       #{history,jdbcType=LONGVARCHAR}, #{relationshipWestern,jdbcType=LONGVARCHAR}, #{pathogeny,jdbcType=LONGVARCHAR}, 
       #{pathogenesis,jdbcType=LONGVARCHAR}, #{examinationPoints,jdbcType=LONGVARCHAR}, 
@@ -460,10 +460,10 @@
         #{seaCharacteristic,jdbcType=VARCHAR},
       </if>
       <if test="departmentPid != null">
-        #{departmentPid,jdbcType=BIGINT},
+        #{departmentPid,jdbcType=VARCHAR},
       </if>
       <if test="departmentId != null">
-        #{departmentId,jdbcType=BIGINT},
+        #{departmentId,jdbcType=VARCHAR},
       </if>
       <if test="thumbnail != null">
         #{thumbnail,jdbcType=VARCHAR},
@@ -663,10 +663,10 @@
         sea_characteristic = #{seaCharacteristic,jdbcType=VARCHAR},
       </if>
       <if test="departmentPid != null">
-        department_pid = #{departmentPid,jdbcType=BIGINT},
+        department_pid = #{departmentPid,jdbcType=VARCHAR},
       </if>
       <if test="departmentId != null">
-        department_id = #{departmentId,jdbcType=BIGINT},
+        department_id = #{departmentId,jdbcType=VARCHAR},
       </if>
       <if test="thumbnail != null">
         thumbnail = #{thumbnail,jdbcType=VARCHAR},
@@ -826,8 +826,8 @@
       multiple_population = #{multiplePopulation,jdbcType=VARCHAR},
       infectivity = #{infectivity,jdbcType=INTEGER},
       sea_characteristic = #{seaCharacteristic,jdbcType=VARCHAR},
-      department_pid = #{departmentPid,jdbcType=BIGINT},
-      department_id = #{departmentId,jdbcType=BIGINT},
+      department_pid = #{departmentPid,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=VARCHAR},
       thumbnail = #{thumbnail,jdbcType=VARCHAR},
       introduction = #{introduction,jdbcType=LONGVARCHAR},
       noun_interpretation = #{nounInterpretation,jdbcType=LONGVARCHAR},
@@ -899,8 +899,8 @@
       multiple_population = #{multiplePopulation,jdbcType=VARCHAR},
       infectivity = #{infectivity,jdbcType=INTEGER},
       sea_characteristic = #{seaCharacteristic,jdbcType=VARCHAR},
-      department_pid = #{departmentPid,jdbcType=BIGINT},
-      department_id = #{departmentId,jdbcType=BIGINT},
+      department_pid = #{departmentPid,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=VARCHAR},
       thumbnail = #{thumbnail,jdbcType=VARCHAR},
       edit_doctor = #{editDoctor,jdbcType=BIGINT},
       audit_doctor = #{auditDoctor,jdbcType=BIGINT}

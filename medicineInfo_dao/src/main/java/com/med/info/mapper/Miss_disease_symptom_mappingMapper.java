@@ -60,4 +60,6 @@ public interface Miss_disease_symptom_mappingMapper extends BaseMapper<Miss_dise
     int updateByPrimaryKey(Miss_disease_symptom_mapping record);
     
     void deleteByDiseaseId(Long id);
+    
+    void deleteBySymptomId(Long id);
 }

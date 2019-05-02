@@ -1,17 +1,26 @@
 package com.med.info.service.operate.impl;
 
+import java.util.Date;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import com.med.info.domain.Miss_disease_symptom_mapping;
 import com.med.info.domain.Miss_symptomWithBLOBs;
+import com.med.info.domain.Miss_symptom_dislocation_mapping;
 import com.med.info.dto.MissSymptomDTO;
+import com.med.info.mapper.Miss_disease_symptom_mappingMapper;
 import com.med.info.mapper.Miss_symptom_dislocation_mappingMapper;
 import com.med.info.mapper.Miss_symptom_medical_mappingMapper;
+import com.med.info.mapper.domain.DislocationMapDTO;
 import com.med.info.service.BaseService;
 import com.med.info.service.MissSymptomService;
+import com.med.info.utils.CollectionUtil;
 
 @Component
 @Order(7)
@@ -21,7 +30,8 @@ public class MissChineseSymptomOperateService extends AbstractOperateService<Mis
     @Autowired
     private Miss_symptom_dislocation_mappingMapper symptom_dislocation_mappingMapper;
     @Autowired
-    private Miss_symptom_medical_mappingMapper symptom_medical_mappingMapper;
+    private Miss_disease_symptom_mappingMapper miss_disease_symptom_mappingMapper;
+
     private static Logger logger = LoggerFactory.getLogger(MissWesternSymptomOperateService.class);
 
     @Override
@@ -31,19 +41,70 @@ public class MissChineseSymptomOperateService extends AbstractOperateService<Mis
 
     @Override
     public String getCurrentMenuType() {
-        return "missSymptom";
+        return "missChineseSymptom";
     }
 
     @Override
     public BaseService<Miss_symptomWithBLOBs> baseService(String menuType) {
         return symptomService;
-    }
+    } 
 
     @Override
     public Class<?> getCurrentObjectClass() {
-        return Miss_symptomWithBLOBs.class;
+        return MissSymptomDTO.class;
     }
 
+    @Override
+    public Miss_symptomWithBLOBs converseObject(MissSymptomDTO missSymptomDTO) {
+    	Miss_symptomWithBLOBs miss_symptomWithBLOBs = new Miss_symptomWithBLOBs();
+    	BeanUtils.copyProperties(missSymptomDTO, miss_symptomWithBLOBs);
+    	return miss_symptomWithBLOBs;
+    }
+    
+    @Override
+    protected void dealMapperRelashionShip(MissSymptomDTO objectF) {
+    	symptom_dislocation_mappingMapper.deleteBySymptomId(objectF.getId());
+    	List<DislocationMapDTO> dislocationList = objectF.getDislocationList();
+    	if(CollectionUtil.isNotEmpty(dislocationList)) {
+    		for(DislocationMapDTO dislocationMapDTO : dislocationList) {
+    			Miss_symptom_dislocation_mapping record = new Miss_symptom_dislocation_mapping();
+    			record.setCreateTime(new Date());
+    			record.setSymptomId(objectF.getId());
+    			record.setDislocationId(dislocationMapDTO.getId());
+    			record.setTaskId(objectF.getTaskId());
+    			record.setDatastatus(objectF.getDataStatus());
+    			record.setTaskStatus(objectF.getTaskStatus());
+    			symptom_dislocation_mappingMapper.insert(record);
+    		}
+    	}
+    	miss_disease_symptom_mappingMapper.deleteBySymptomId(objectF.getId());
+    	List<Long> chineseDiseaseList = objectF.getChineseDiseaseList();
+    	if(CollectionUtil.isNotEmpty(chineseDiseaseList)) {
+    		for(Long chineseDiseaseId : chineseDiseaseList) {
+    			Miss_disease_symptom_mapping record = new Miss_disease_symptom_mapping();
+    			record.setCreateTime(new Date());
+    			record.setDiseaseId(chineseDiseaseId);
+    			record.setSymptomId(objectF.getId());
+    			record.setTaskId(objectF.getTaskId());
+    			record.setDatastatus(objectF.getDataStatus());
+    			record.setTaskStatus(objectF.getTaskStatus());
+    			miss_disease_symptom_mappingMapper.insert(record);
+    		}
+    	}
+    	List<Long> westernDiseaseList = objectF.getWesternDiseaseList();
+    	if(CollectionUtil.isNotEmpty(chineseDiseaseList)) {
+    		for(Long westernDiseaseId : westernDiseaseList) {
+    			Miss_disease_symptom_mapping record = new Miss_disease_symptom_mapping();
+    			record.setCreateTime(new Date());
+    			record.setDiseaseId(westernDiseaseId);
+    			record.setSymptomId(objectF.getId());
+    			record.setTaskId(objectF.getTaskId());
+    			record.setDatastatus(objectF.getDataStatus());
+    			record.setTaskStatus(objectF.getTaskStatus());
+    			miss_disease_symptom_mappingMapper.insert(record);
+    		}
+    	}
+    }
 //    @Override
 //    protected void dealMapperRelashionShip(OperateDTO operateDTO) {
 //        {
@@ -77,7 +138,7 @@ public class MissChineseSymptomOperateService extends AbstractOperateService<Mis
 
     @Override
     public String getJsonParamKey() {
-        return "missSymptom";
+        return "missWesternSymptom";
     }
 
 }

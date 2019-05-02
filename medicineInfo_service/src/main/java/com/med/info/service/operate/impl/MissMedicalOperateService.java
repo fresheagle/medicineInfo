@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component
-@Order(10)
+@Order(6)
 public class MissMedicalOperateService extends AbstractOperateService<Miss_medicalWithBLOBs, Miss_medicalWithBLOBs> {
 
     @Autowired

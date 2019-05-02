@@ -25,8 +25,8 @@
     <result column="common_symptom" jdbcType="VARCHAR" property="commonSymptom" />
     <result column="multiple_population" jdbcType="VARCHAR" property="multiplePopulation" />
     <result column="infectivity" jdbcType="INTEGER" property="infectivity" />
-    <result column="department_pid" jdbcType="BIGINT" property="departmentPid" />
-    <result column="department_id" jdbcType="BIGINT" property="departmentId" />
+    <result column="department_pid" jdbcType="VARCHAR" property="departmentPid" />
+    <result column="department_id" jdbcType="VARCHAR" property="departmentId" />
     
     <result column="edit_doctor" jdbcType="BIGINT" property="editDoctor" />
     <result column="audit_doctor" jdbcType="BIGINT" property="auditDoctor" />
@@ -145,7 +145,7 @@
       #{englishName,jdbcType=VARCHAR}, #{relatedDiseases,jdbcType=VARCHAR}, #{diseaseType,jdbcType=VARCHAR}, 
       #{locationPid,jdbcType=BIGINT}, #{locationDisease,jdbcType=BIGINT}, #{mainCauses,jdbcType=VARCHAR}, 
       #{commonSymptom,jdbcType=VARCHAR}, #{multiplePopulation,jdbcType=VARCHAR}, #{infectivity,jdbcType=INTEGER}, 
-      #{departmentPid,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}, #{epidemiology,jdbcType=LONGVARCHAR}, 
+      #{departmentPid,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR}, #{epidemiology,jdbcType=LONGVARCHAR}, 
       #{tRelatedDiseases,jdbcType=LONGVARCHAR}, #{etiologyPathogenesis,jdbcType=LONGVARCHAR}, 
       #{pathology,jdbcType=LONGVARCHAR}, #{clinicalTypesClass,jdbcType=LONGVARCHAR}, 
       #{clinicalManifestation,jdbcType=LONGVARCHAR}, #{symptom,jdbcType=LONGVARCHAR}, 
@@ -374,10 +374,10 @@
         #{infectivity,jdbcType=INTEGER},
       </if>
       <if test="departmentPid != null">
-        #{departmentPid,jdbcType=BIGINT},
+        #{departmentPid,jdbcType=VARCHAR},
       </if>
       <if test="departmentId != null">
-        #{departmentId,jdbcType=BIGINT},
+        #{departmentId,jdbcType=VARCHAR},
       </if>
       <if test="epidemiology != null">
         #{epidemiology,jdbcType=LONGVARCHAR},
@@ -532,10 +532,10 @@
         infectivity = #{infectivity,jdbcType=INTEGER},
       </if>
       <if test="departmentPid != null">
-        department_pid = #{departmentPid,jdbcType=BIGINT},
+        department_pid = #{departmentPid,jdbcType=VARCHAR},
       </if>
       <if test="departmentId != null">
-        department_id = #{departmentId,jdbcType=BIGINT},
+        department_id = #{departmentId,jdbcType=VARCHAR},
       </if>
       <if test="epidemiology != null">
         epidemiology = #{epidemiology,jdbcType=LONGVARCHAR},
@@ -655,8 +655,8 @@
       common_symptom = #{commonSymptom,jdbcType=VARCHAR},
       multiple_population = #{multiplePopulation,jdbcType=VARCHAR},
       infectivity = #{infectivity,jdbcType=INTEGER},
-      department_pid = #{departmentPid,jdbcType=BIGINT},
-      department_id = #{departmentId,jdbcType=BIGINT},
+      department_pid = #{departmentPid,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=VARCHAR},
       epidemiology = #{epidemiology,jdbcType=LONGVARCHAR},
       t_related_diseases = #{tRelatedDiseases,jdbcType=LONGVARCHAR},
       etiology_pathogenesis = #{etiologyPathogenesis,jdbcType=LONGVARCHAR},
@@ -713,8 +713,8 @@
       common_symptom = #{commonSymptom,jdbcType=VARCHAR},
       multiple_population = #{multiplePopulation,jdbcType=VARCHAR},
       infectivity = #{infectivity,jdbcType=INTEGER},
-      department_pid = #{departmentPid,jdbcType=BIGINT},
-      department_id = #{departmentId,jdbcType=BIGINT},
+      department_pid = #{departmentPid,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=VARCHAR},
       edit_doctor = #{editDoctor,jdbcType=BIGINT},
       audit_doctor = #{auditDoctor,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}

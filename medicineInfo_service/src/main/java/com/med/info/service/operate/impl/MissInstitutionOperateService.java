@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component
-@Order(8)
+@Order(3)
 public class MissInstitutionOperateService extends AbstractOperateService<Miss_institutionWithBLOBs, MissInstitutionDTO> {
 
     @Autowired
@@ -67,6 +67,9 @@ public class MissInstitutionOperateService extends AbstractOperateService<Miss_i
                 record.setInstitutionId(objectF.getId());
                 record.setLevel(departmentMapDTO2.getDepartmentLevel());
                 record.setDepartmentId(departmentMapDTO2.getId());
+                record.setDatastatus(objectF.getDatastatus());
+                record.setTaskId(objectF.getTaskId());
+                record.setTaskStatus(objectF.getTaskStatus());
                 institution_keypartment_mappingMapper.insert(record);
             }
         }

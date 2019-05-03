@@ -336,30 +336,27 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
 
     public List<Miss_control_reference> getReferences(OperateDTO operateDTO) {
         List<Miss_control_reference> result = new ArrayList<>();
-        JSONArray refrences = operateDTO.getJsonStr().getJSONArray("refrences");
-        if(null != refrences){
-            refrences.forEach(o -> {
-
-                RefrenceDTO refrenceDTO = JSONObject.parseObject(o.toString(), RefrenceDTO.class);
-                if(null != refrenceDTO.getImage()){
-                    for (MissReferenceDTO missReferenceDTO : refrenceDTO.getImage()) {
-                        createReference(operateDTO, result, missReferenceDTO, "image");
-                    }
-                }
-                if(null != refrenceDTO.getTextcontent()){
-                    for (MissReferenceDTO missReferenceDTO : refrenceDTO.getTextcontent()) {
-//                    Miss_control_reference miss_control_reference = new Miss_control_reference();
-//                    BeanUtils.copyProperties(missReferenceDTO, miss_control_reference);
-//                    miss_control_reference.setReferenceType("text");
-//                    miss_control_reference.setReferColumnschinese(missReferenceDTO.getReferColumnschineses().toString());
-//                    miss_control_reference.setReferColumnscode(missReferenceDTO.getReferColumnscodes().toString());
-//                    miss_control_reference.setTaskId(operateDTO.getTaskId());
-//                    result.add(miss_control_reference);
-                        createReference(operateDTO, result, missReferenceDTO, "text");
-                    }
-                }
-            });
-
+        JSONObject o = operateDTO.getJsonStr().getJSONObject("refrences");
+        if(null == o){
+            return result;
+        }
+        RefrenceDTO refrenceDTO = JSONObject.parseObject(o.toString(), RefrenceDTO.class);
+        if(null != refrenceDTO.getImage()){
+            for (MissReferenceDTO missReferenceDTO : refrenceDTO.getImage()) {
+                createReference(operateDTO, result, missReferenceDTO, "image");
+            }
+        }
+        if(null != refrenceDTO.getTextcontent()){
+            for (MissReferenceDTO missReferenceDTO : refrenceDTO.getTextcontent()) {
+                    Miss_control_reference miss_control_reference = new Miss_control_reference();
+                    BeanUtils.copyProperties(missReferenceDTO, miss_control_reference);
+                    miss_control_reference.setReferenceType("text");
+                    miss_control_reference.setReferColumnschinese(missReferenceDTO.getReferColumnschineses().toString());
+                    miss_control_reference.setReferColumnscode(missReferenceDTO.getReferColumnscodes().toString());
+                    miss_control_reference.setTaskId(operateDTO.getTaskId());
+                    result.add(miss_control_reference);
+                createReference(operateDTO, result, missReferenceDTO, "text");
+            }
         }
         return result;
     }

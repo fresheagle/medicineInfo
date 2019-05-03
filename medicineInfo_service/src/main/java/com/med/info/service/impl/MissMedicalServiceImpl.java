@@ -1,6 +1,7 @@
 package com.med.info.service.impl;
 
 import com.med.info.domain.Miss_medicalWithBLOBs;
+import com.med.info.domain.Miss_symptomWithBLOBs;
 import com.med.info.mapper.BaseMapper;
 import com.med.info.mapper.Miss_medicalMapper;
 import com.med.info.mapper.domain.MedicalDTO;
@@ -9,11 +10,14 @@ import com.med.info.mapper.domain.OperateDTO;
 import com.med.info.response.PageObject;
 import com.med.info.service.MissMedicalCompanyService;
 import com.med.info.service.MissMedicalService;
+import com.med.info.utils.CollectionUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class MissMedicalServiceImpl extends BaseServiceImpl<Miss_medicalWithBLOBs> implements MissMedicalService {
@@ -69,4 +73,15 @@ public class MissMedicalServiceImpl extends BaseServiceImpl<Miss_medicalWithBLOB
     public String getKeyName() {
         return "missMedical";
     }
+
+	@Override
+	public String checkMedicalInfo(String comName, String englishName, String chinesePinyin, String shopName)
+			throws Exception {
+		// TODO Auto-generated method stub
+		List<Miss_medicalWithBLOBs> miss_medicalWithBLOBs = medicalMapper.check(comName, englishName, chinesePinyin, shopName);
+		if(!CollectionUtil.isNotEmpty(miss_medicalWithBLOBs)){
+			return UUID.randomUUID().toString().replace("-", "");
+		}
+		throw new Exception("该药品信息已经存在！");
+	}
 }

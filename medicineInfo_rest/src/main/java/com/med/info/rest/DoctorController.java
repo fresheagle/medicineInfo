@@ -21,7 +21,8 @@ import com.med.info.service.MissDoctorService;
 @RequestMapping("/api/doctor")
 public class DoctorController {
 	private static final Logger log = Logger.getLogger(DoctorController.class);
-	@Autowired MissDoctorService doctorService;
+	@Autowired 
+	MissDoctorService doctorService;
 	
 	@RequestMapping(path = "/page", method = RequestMethod.GET)
 	public Response getByPage(@RequestParam("currentPage") Integer currentPage,
@@ -38,4 +39,17 @@ public class DoctorController {
 			return new Response().failure(e.getMessage());
 		}
 	}
+	
+	@RequestMapping(value = "check", method = RequestMethod.GET)
+    public Response checkInfo(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "sex", required = false) String sex, @RequestParam(value = "birthday", required = false) String birthday) {
+        if (null == name && null == sex && null == birthday) {
+            return new Response().failure("校验条件至少传递一个");
+        }
+        try {
+            String taskId = doctorService.chechDoctorInfo(name, sex, birthday);
+            return new Response().success(taskId);
+        } catch (Exception e) {
+            return new Response().failure(e.getMessage());
+        }
+    }
 }

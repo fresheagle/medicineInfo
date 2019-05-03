@@ -12,4 +12,5 @@ public interface MissMedicalService extends BaseService<Miss_medicalWithBLOBs>{
 
 	Object getByPage(Integer currentPage, Integer pageSize, String name, String chinesePinyin, String alisaName, String shopName, String englishName);
 
+	String checkMedicalInfo(String comName, String englishName, String chinesePinyin, String shopName) throws Exception;
 }

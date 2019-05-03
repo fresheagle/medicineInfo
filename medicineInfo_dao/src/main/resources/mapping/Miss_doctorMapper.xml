@@ -580,4 +580,22 @@
 		</where>
 	</select>
 
+	<select id="check" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from miss_doctor
+		<where>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="sex != null">
+				or sex = #{sex,jdbcType=VARCHAR}
+			</if>
+			<if test="birthday != null">
+				or birthday = #{birthday,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
 </mapper>

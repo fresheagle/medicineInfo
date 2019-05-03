@@ -2,6 +2,7 @@ package com.med.info.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.med.info.domain.Miss_institutionWithBLOBs;
 import com.med.info.domain.Miss_symptomWithBLOBs;
+import com.med.info.domain.Miss_western_diseaseWithBLOBs;
 import com.med.info.mapper.BaseMapper;
 import com.med.info.mapper.Miss_symptomMapper;
 import com.med.info.mapper.domain.DiseaseDTO;
@@ -21,6 +23,7 @@ import com.med.info.response.PageObject;
 import com.med.info.service.MissDislocationService;
 import com.med.info.service.MissMedicalService;
 import com.med.info.service.MissSymptomService;
+import com.med.info.utils.CollectionUtil;
 
 @Service
 public class MissSymptomServiceImpl extends BaseServiceImpl<Miss_symptomWithBLOBs> implements MissSymptomService{
@@ -90,5 +93,15 @@ public class MissSymptomServiceImpl extends BaseServiceImpl<Miss_symptomWithBLOB
 	@Override
 	public String getKeyName() {
 		return "missSymptom";
+	}
+
+	@Override
+	public String checkSymptomInfo(String chineseName, String englishName, String otherName) throws Exception {
+		// TODO Auto-generated method stub
+		List<Miss_symptomWithBLOBs> miss_symptomWithBLOBs = symptomMapper.check(chineseName, englishName, otherName);
+		if(!CollectionUtil.isNotEmpty(miss_symptomWithBLOBs)){
+			return UUID.randomUUID().toString().replace("-", "");
+		}
+		throw new Exception("该症状信息已经存在！");
 	}
 }

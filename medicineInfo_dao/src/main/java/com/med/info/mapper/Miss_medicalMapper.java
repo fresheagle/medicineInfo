@@ -2,6 +2,9 @@ package com.med.info.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.med.info.domain.Miss_doctorWithBLOBs;
 import com.med.info.domain.Miss_medical;
 import com.med.info.domain.Miss_medicalWithBLOBs;
 import com.med.info.mapper.domain.MedicalMapDTO;
@@ -66,4 +69,7 @@ public interface Miss_medicalMapper extends BaseMapper<Miss_medicalWithBLOBs>{
 
 
 	List<MedicalMapDTO> getMedicalMapDTOBySymptomId(Long id);
+	
+	List<Miss_medicalWithBLOBs> check(@Param("comName") String comName, @Param("englishName") String englishName,  
+			@Param("chinesePinyin") String chinesePinyin, @Param("shopName") String shopName);
 }

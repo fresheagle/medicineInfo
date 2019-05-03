@@ -1,7 +1,12 @@
 package com.med.info.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.med.info.domain.Miss_chinese_disease;
 import com.med.info.domain.Miss_chinese_diseaseWithBLOBs;
+import com.med.info.domain.Miss_institutionWithBLOBs;
 
 public interface Miss_chinese_diseaseMapper extends BaseMapper<Miss_chinese_diseaseWithBLOBs>{
     /**
@@ -59,4 +64,6 @@ public interface Miss_chinese_diseaseMapper extends BaseMapper<Miss_chinese_dise
      * @mbg.generated Mon Nov 26 11:32:45 CST 2018
      */
     int updateByPrimaryKey(Miss_chinese_disease record);
+    
+    List<Miss_chinese_diseaseWithBLOBs> check(@Param("chineseName") String chineseName, @Param("englishName") String englishName,  @Param("otherName") String otherName);
 }

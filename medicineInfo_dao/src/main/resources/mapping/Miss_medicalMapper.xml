@@ -1011,4 +1011,25 @@
   
   </select>
 
+	<select id="check" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from miss_medical
+		<where>
+			<if test="comName != null">
+				com_name = #{comName,jdbcType=VARCHAR }
+			</if>
+			<if test="englishName != null">
+				or english_name = #{englishName,jdbcType=VARCHAR}
+			</if>
+			<if test="chinesePinyin != null">
+				or chinese_pinyin = #{chinesePinyin,jdbcType=VARCHAR}
+			</if>
+			<if test="shopName != null">
+				or shop_name = #{shopName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
 </mapper>

@@ -1,5 +1,10 @@
 package com.med.info.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.med.info.domain.Miss_chinese_diseaseWithBLOBs;
 import com.med.info.domain.Miss_western_disease;
 import com.med.info.domain.Miss_western_diseaseWithBLOBs;
 
@@ -59,4 +64,6 @@ public interface Miss_western_diseaseMapper extends BaseMapper<Miss_western_dise
      * @mbg.generated Sat Nov 17 18:29:49 CST 2018
      */
     int updateByPrimaryKey(Miss_western_disease record);
+    
+    List<Miss_western_diseaseWithBLOBs> check(@Param("chineseName") String chineseName, @Param("englishName") String englishName,  @Param("otherName") String otherName);
 }

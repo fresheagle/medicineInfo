@@ -1,9 +1,15 @@
 package com.med.info.rest;
 
+import com.med.info.mapper.domain.DepartmentMapDTO;
 import com.med.info.mapper.domain.InstitutionInfoDTO;
 import com.med.info.response.Response;
 import com.med.info.service.InstitutionInfoService;
+import com.med.info.service.MissDepartmentService;
+import com.med.info.service.MissInstitutionDepartmentService;
 import com.med.info.service.MissInstitutionService;
+
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +28,8 @@ public class InstitutionController {
     InstitutionInfoService institutionInfoService;
     @Autowired
     MissInstitutionService missInstitutionService;
+    @Autowired
+    MissDepartmentService missDepartmentService;
 
     @RequestMapping(path = "/page", method = RequestMethod.GET)
     public Response getByPage(@RequestParam("currentPage") Integer currentPage,
@@ -52,6 +60,19 @@ public class InstitutionController {
         }
     }
 
+    @RequestMapping(path = "/department", method = RequestMethod.GET)
+    public Response getDepartment(@RequestParam("currentPage") Integer currentPage,
+                              @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+                              @RequestParam(value = "id", required = false) Long id) {
+        try {
+        	List<DepartmentMapDTO> byPage = missDepartmentService.getDepartmentMapByInstitutionId(id);
+            return new Response().success(byPage);
+        } catch (Exception e) {
+            log.error("查询数据错误", e);
+            return new Response().failure(e.getMessage());
+        }
+    }
+    
     /**
      * 添加医疗机构信息
      *

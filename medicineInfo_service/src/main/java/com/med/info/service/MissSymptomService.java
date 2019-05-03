@@ -13,4 +13,5 @@ public interface MissSymptomService extends BaseService<Miss_symptomWithBLOBs>{
 	
 	Object getByPage(Integer currentPage, Integer pageSize, String chineseName, String englishName, String otherName, String symptom, String commonSymptom);
 	
+	String checkSymptomInfo(String chineseName, String englishName, String otherName) throws Exception;
 }

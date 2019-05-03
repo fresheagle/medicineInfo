@@ -1,12 +1,17 @@
 package com.med.info.service.impl;
 
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.med.info.domain.Miss_chinese_diseaseWithBLOBs;
 import com.med.info.domain.Miss_western_diseaseWithBLOBs;
 import com.med.info.mapper.BaseMapper;
 import com.med.info.mapper.Miss_western_diseaseMapper;
 import com.med.info.service.MissWesternDiseaseService;
+import com.med.info.utils.CollectionUtil;
 
 @Service
 public class MissWesternDiseaseServiceImpl extends BaseServiceImpl<Miss_western_diseaseWithBLOBs> implements MissWesternDiseaseService{
@@ -47,5 +52,15 @@ public class MissWesternDiseaseServiceImpl extends BaseServiceImpl<Miss_western_
 	@Override
 	public String getKeyName() {
 		return "missWestern";
+	}
+
+	@Override
+	public String checkWestDiseaseInfo(String chineseName, String englishName, String otherName) throws Exception {
+		// TODO Auto-generated method stub
+		List<Miss_western_diseaseWithBLOBs> miss_western_diseaseWithBLOBs = westernDiseaseMapper.check(chineseName, englishName,otherName);
+		if(!CollectionUtil.isNotEmpty(miss_western_diseaseWithBLOBs)){
+			return UUID.randomUUID().toString().replace("-", "");
+		}
+		throw new Exception("该西医疾病信息已经存在！");
 	}
 }

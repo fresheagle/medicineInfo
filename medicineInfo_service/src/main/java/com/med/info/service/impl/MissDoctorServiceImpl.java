@@ -2,6 +2,7 @@ package com.med.info.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.med.info.domain.Miss_doctorWithBLOBs;
+import com.med.info.domain.Miss_symptomWithBLOBs;
 import com.med.info.mapper.BaseMapper;
 import com.med.info.mapper.Miss_doctorMapper;
 import com.med.info.mapper.domain.DiseaseDTO;
@@ -18,6 +20,7 @@ import com.med.info.response.PageObject;
 import com.med.info.service.MissDepartmentService;
 import com.med.info.service.MissDoctorService;
 import com.med.info.service.MissInstitutionService;
+import com.med.info.utils.CollectionUtil;
 
 @Service
 public class MissDoctorServiceImpl extends BaseServiceImpl<Miss_doctorWithBLOBs> implements MissDoctorService {
@@ -74,5 +77,15 @@ public class MissDoctorServiceImpl extends BaseServiceImpl<Miss_doctorWithBLOBs>
 	@Override
 	public String getKeyName() {
 		return "missDoctor";
+	}
+
+	@Override
+	public String chechDoctorInfo(String name, String sex, String birthday) throws Exception{
+		// TODO Auto-generated method stub
+		List<Miss_doctorWithBLOBs> miss_doctorWithBLOBs = doctorMapper.check(name, sex, birthday);
+		if(!CollectionUtil.isNotEmpty(miss_doctorWithBLOBs)){
+			return UUID.randomUUID().toString().replace("-", "");
+		}
+		throw new Exception("该医生信息已经存在！");
 	}
 }

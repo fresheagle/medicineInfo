@@ -14,4 +14,7 @@ public interface MissDoctorService extends BaseService<Miss_doctorWithBLOBs>{
 	 * @return
 	 */
 	public Object getByPage(Integer currentPage, Integer pageSize, String name, String sex, String graduate, String profession, String origin);
+	
+	
+	String chechDoctorInfo(String name, String sex, String birthday) throws Exception;
 }

@@ -919,4 +919,22 @@
       </if>
     </where>
   </select>
+  <select id="check" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from miss_chinese_disease
+		<where>
+			<if test="chineseName != null">
+				chinese_name = #{chineseName,jdbcType=VARCHAR }
+			</if>
+			<if test="englishName != null">
+				or english_name = #{englishName,jdbcType=VARCHAR}
+			</if>
+			<if test="otherName != null">
+				or other_name = #{otherName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
 </mapper>

@@ -101,4 +101,17 @@ public class WestDiseaseController {
 			return new Response().failure();
 		}
 	}
+	
+	@RequestMapping(value = "check", method = RequestMethod.GET)
+    public Response checkInfo(@RequestParam(value = "chineseName", required = false) String chineseName, @RequestParam(value = "englishName", required = false) String englishName, @RequestParam(value = "otherName", required = false) String otherName) {
+        if (null == chineseName && null == englishName && null == otherName) {
+            return new Response().failure("校验条件至少传递一个");
+        }
+        try {
+            String taskId = missWestDiseaseService.checkWestDiseaseInfo(chineseName, englishName, otherName);
+            return new Response().success(taskId);
+        } catch (Exception e) {
+            return new Response().failure(e.getMessage());
+        }
+    }
 }

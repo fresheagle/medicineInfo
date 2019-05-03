@@ -31,4 +31,6 @@ public interface MissWesternDiseaseService extends BaseService<Miss_western_dise
 	 * @return 西医疾病信息id
 	 */
 	Integer deleteWestDiseaseBlogInfo(Long western_diseaseId);
+	
+	String checkWestDiseaseInfo(String chineseName, String englishName, String otherName) throws Exception;
 }

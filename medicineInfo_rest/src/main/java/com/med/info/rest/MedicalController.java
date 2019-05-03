@@ -34,4 +34,17 @@ public class MedicalController {
 		return new Response().success(byPage);
 	}
 
+	@RequestMapping(value = "check", method = RequestMethod.GET)
+    public Response checkInfo(@RequestParam(value = "comName", required = false) String comName, @RequestParam(value = "englishName", required = false) String englishName, 
+    		@RequestParam(value = "chinesePinyin", required = false) String chinesePinyin, @RequestParam(value = "shopName", required = false) String shopName) {
+        if (null == comName && null == englishName && null == chinesePinyin && null == shopName) {
+            return new Response().failure("校验条件至少传递一个");
+        }
+        try {
+            String taskId = missMedicalService.checkMedicalInfo(comName, englishName, chinesePinyin, shopName);
+            return new Response().success(taskId);
+        } catch (Exception e) {
+            return new Response().failure(e.getMessage());
+        }
+    }
 }

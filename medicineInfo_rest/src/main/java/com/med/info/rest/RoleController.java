@@ -42,7 +42,7 @@ public class RoleController {
 	 */
 	@RequestMapping(path="/page", method = RequestMethod.GET)
 	public Response showRole(@RequestParam("currentPage") Integer currentPage,
-							 @RequestParam(value="pageSize", defaultValue = "10") Integer pageSize,
+							 @RequestParam(value="pageSize", defaultValue = "10", required = false) Integer pageSize,
 							 @RequestParam(value="roleName", required = false) String roleName){
 		Miss_control_role miss_control_role = new Miss_control_role();
 		if(roleName != null){

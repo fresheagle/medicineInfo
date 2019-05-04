@@ -138,7 +138,7 @@ public class MissChineseSymptomOperateService extends AbstractOperateService<Mis
 
     @Override
     public String getJsonParamKey() {
-        return "missWesternSymptom";
+        return "missChineseSymptom";
     }
 
 }

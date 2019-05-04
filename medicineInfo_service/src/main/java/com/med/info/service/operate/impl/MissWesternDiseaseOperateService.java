@@ -2,11 +2,14 @@ package com.med.info.service.operate.impl;
 
 import com.med.info.domain.Miss_diseaseWithBLOBs;
 import com.med.info.domain.Miss_disease_department_mapping;
+import com.med.info.domain.Miss_disease_dislocation_mapping;
 import com.med.info.domain.Miss_western_diseaseWithBLOBs;
 import com.med.info.dto.MissWesternDiseaseDTO;
 import com.med.info.mapper.Miss_diseaseMapper;
 import com.med.info.mapper.Miss_disease_department_mappingMapper;
+import com.med.info.mapper.Miss_disease_dislocation_mappingMapper;
 import com.med.info.mapper.domain.DepartmentMapDTO;
+import com.med.info.mapper.domain.DislocationMapDTO;
 import com.med.info.service.BaseService;
 import com.med.info.service.MissWesternDiseaseService;
 import com.med.info.utils.CollectionUtil;
@@ -31,6 +34,8 @@ public class MissWesternDiseaseOperateService extends AbstractOperateService<Mis
     private Miss_diseaseMapper miss_diseaseMapper;
     @Autowired
     private Miss_disease_department_mappingMapper miss_disease_department_mappingMapper;
+    @Autowired
+    private Miss_disease_dislocation_mappingMapper miss_disease_dislocation_mappingMapper;
     private static Logger logger = LoggerFactory.getLogger(MissWesternDiseaseOperateService.class);
     @Override
     public String getCurrentMenuType() {
@@ -54,6 +59,7 @@ public class MissWesternDiseaseOperateService extends AbstractOperateService<Mis
     	miss_diseaseMapper.deleteByPrimaryKey(missWesternDiseaseDTO.getId());
     	Miss_diseaseWithBLOBs miss_disease = new Miss_diseaseWithBLOBs();
     	miss_disease.setId(missWesternDiseaseDTO.getId());
+    	miss_disease.setEnglishName(missWesternDiseaseDTO.getEnglishName());
     	miss_disease.setCreateTime(new Date());
     	miss_disease.setTaskId(missWesternDiseaseDTO.getTaskId());
     	miss_disease.setDatastatus(missWesternDiseaseDTO.getDataStatus());
@@ -72,6 +78,20 @@ public class MissWesternDiseaseOperateService extends AbstractOperateService<Mis
     			record.setTaskId(missWesternDiseaseDTO.getTaskId());
     			record.setTaskStatus(missWesternDiseaseDTO.getDataStatus());
     			miss_disease_department_mappingMapper.insert(record);
+    		}
+    	}
+    	List<DislocationMapDTO> dislocationMapDTO = missWesternDiseaseDTO.getDislocationList();
+    	if(CollectionUtil.isNotEmpty(dislocationMapDTO)) {
+    		miss_disease_dislocation_mappingMapper.deleteByDiseaseId(missWesternDiseaseDTO.getId());
+    		for (DislocationMapDTO dislocationMap : dislocationMapDTO) {
+    			Miss_disease_dislocation_mapping record = new Miss_disease_dislocation_mapping();
+    			record.setCreateTime(new Date());
+    			record.setDiseaseId(missWesternDiseaseDTO.getId());
+    			record.setDislocationId(dislocationMap.getDislocationId());
+    			record.setDatastatus(missWesternDiseaseDTO.getDataStatus());
+    			record.setTaskId(missWesternDiseaseDTO.getTaskId());
+    			record.setTaskStatus(missWesternDiseaseDTO.getDataStatus());
+    			miss_disease_dislocation_mappingMapper.insert(record);
     		}
     	}
     }

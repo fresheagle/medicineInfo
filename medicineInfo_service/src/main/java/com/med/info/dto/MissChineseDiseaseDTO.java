@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.med.info.mapper.domain.DepartmentMapDTO;
+import com.med.info.mapper.domain.DislocationMapDTO;
 
 public class MissChineseDiseaseDTO implements Serializable{
 
@@ -73,6 +74,7 @@ public class MissChineseDiseaseDTO implements Serializable{
 	private Long editDoctor;
 	private Long auditDoctor;
 	private List<DepartmentMapDTO> departmentMapDTO;
+	private List<DislocationMapDTO> dislocationList;
 	public Long getId() {
 		return id;
 	}
@@ -468,6 +470,12 @@ public class MissChineseDiseaseDTO implements Serializable{
 	}
 	public void setDepartmentMapDTO(List<DepartmentMapDTO> departmentMapDTO) {
 		this.departmentMapDTO = departmentMapDTO;
+	}
+	public List<DislocationMapDTO> getDislocationList() {
+		return dislocationList;
+	}
+	public void setDislocationList(List<DislocationMapDTO> dislocationList) {
+		this.dislocationList = dislocationList;
 	}
 
 

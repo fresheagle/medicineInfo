@@ -9,6 +9,7 @@ public class DislocationMapDTO implements Serializable{
 	private Long id;
 	private String level;
 	private String dislocationName;
+	private Long dislocationId;
 	private Long parentDislocationId;
 
 	public Long getId() {
@@ -41,5 +42,13 @@ public class DislocationMapDTO implements Serializable{
 
 	public void setParentDislocationId(Long parentDislocationId) {
 		this.parentDislocationId = parentDislocationId;
+	}
+
+	public Long getDislocationId() {
+		return dislocationId;
+	}
+
+	public void setDislocationId(Long dislocationId) {
+		this.dislocationId = dislocationId;
 	}
 }

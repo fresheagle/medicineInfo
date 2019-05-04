@@ -71,6 +71,7 @@ public class MissDoctorOperateService extends AbstractOperateService<Miss_doctor
     			record.setCreateTime(new Date());
     			record.setDoctorId(objectF.getId());
     			record.setInstitutionId(institutionDepartMapDTO.getInstitutionId());
+    			record.setExportsTime(institutionDepartMapDTO.getExportsTime());
     			record.setDatastatus(objectF.getDataStatus());
     			record.setTaskId(objectF.getTaskId());
     			record.setTaskStatus(objectF.getTaskStatus());

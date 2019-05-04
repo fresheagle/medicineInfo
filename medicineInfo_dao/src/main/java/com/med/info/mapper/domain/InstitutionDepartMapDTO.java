@@ -10,6 +10,7 @@ public class InstitutionDepartMapDTO implements Serializable{
 	private String institutionName;
 	private Long departmentId;
 	private String departmentName;
+	private String exportsTime;
 	public Long getInstitutionId() {
 		return institutionId;
 	}
@@ -33,6 +34,12 @@ public class InstitutionDepartMapDTO implements Serializable{
 	}
 	public void setDepartmentName(String departmentName) {
 		this.departmentName = departmentName;
+	}
+	public String getExportsTime() {
+		return exportsTime;
+	}
+	public void setExportsTime(String exportsTime) {
+		this.exportsTime = exportsTime;
 	}
 	
 	

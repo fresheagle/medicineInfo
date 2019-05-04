@@ -5,10 +5,13 @@ import com.med.info.domain.Miss_chinese_diseaseWithBLOBs;
 import com.med.info.domain.Miss_disease;
 import com.med.info.domain.Miss_diseaseWithBLOBs;
 import com.med.info.domain.Miss_disease_department_mapping;
+import com.med.info.domain.Miss_disease_dislocation_mapping;
 import com.med.info.dto.MissChineseDiseaseDTO;
 import com.med.info.mapper.Miss_diseaseMapper;
 import com.med.info.mapper.Miss_disease_department_mappingMapper;
+import com.med.info.mapper.Miss_disease_dislocation_mappingMapper;
 import com.med.info.mapper.domain.DepartmentMapDTO;
+import com.med.info.mapper.domain.DislocationMapDTO;
 import com.med.info.service.BaseService;
 import com.med.info.service.MissChineseDiseaseService;
 import com.med.info.utils.CollectionUtil;
@@ -33,6 +36,8 @@ public class MissChineseDiseaseOperateService extends AbstractOperateService<Mis
     private Miss_diseaseMapper miss_diseaseMapper;
     @Autowired
     private Miss_disease_department_mappingMapper miss_disease_department_mappingMapper;
+    @Autowired
+    private Miss_disease_dislocation_mappingMapper miss_disease_dislocation_mappingMapper;
     private static Logger logger = LoggerFactory.getLogger(MissChineseDiseaseOperateService.class);
 
     @Override
@@ -63,6 +68,7 @@ public class MissChineseDiseaseOperateService extends AbstractOperateService<Mis
     	miss_diseaseMapper.deleteByPrimaryKey(MissChineseDiseaseDTO.getId());
     	Miss_diseaseWithBLOBs miss_disease = new Miss_diseaseWithBLOBs();
     	miss_disease.setId(MissChineseDiseaseDTO.getId());
+    	miss_disease.setChineseName(MissChineseDiseaseDTO.getChineseName());
     	miss_disease.setCreateTime(new Date());
     	miss_disease.setTaskId(MissChineseDiseaseDTO.getTaskId());
     	miss_disease.setDatastatus(MissChineseDiseaseDTO.getDataStatus());
@@ -81,6 +87,21 @@ public class MissChineseDiseaseOperateService extends AbstractOperateService<Mis
     			record.setTaskId(MissChineseDiseaseDTO.getTaskId());
     			record.setTaskStatus(MissChineseDiseaseDTO.getDataStatus());
     			miss_disease_department_mappingMapper.insert(record);
+    		}
+    	}
+    	
+    	List<DislocationMapDTO> dislocationMapDTO = MissChineseDiseaseDTO.getDislocationList();
+    	if(CollectionUtil.isNotEmpty(dislocationMapDTO)) {
+    		miss_disease_dislocation_mappingMapper.deleteByDiseaseId(MissChineseDiseaseDTO.getId());
+    		for (DislocationMapDTO dislocationMap : dislocationMapDTO) {
+    			Miss_disease_dislocation_mapping record = new Miss_disease_dislocation_mapping();
+    			record.setCreateTime(new Date());
+    			record.setDiseaseId(MissChineseDiseaseDTO.getId());
+    			record.setDislocationId(dislocationMap.getDislocationId());
+    			record.setDatastatus(MissChineseDiseaseDTO.getDataStatus());
+    			record.setTaskId(MissChineseDiseaseDTO.getTaskId());
+    			record.setTaskStatus(MissChineseDiseaseDTO.getDataStatus());
+    			miss_disease_dislocation_mappingMapper.insert(record);
     		}
     	}
     }

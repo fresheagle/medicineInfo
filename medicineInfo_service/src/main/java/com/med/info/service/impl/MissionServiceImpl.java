@@ -139,6 +139,7 @@ public class MissionServiceImpl implements MissionService {
 						throw new Exception("当前任务不是都为一审中，请检查！");
 					}
 				}
+				return true;
 			}
 			//二审状态
 			if(nextTrailStatus.equals(TrialStatusEnum.SECOND_AUDITED_FAILED.getId()) || nextTrailStatus.equals(TrialStatusEnum.SECOND_AUDITED_SUCCESS.getId())){
@@ -147,6 +148,7 @@ public class MissionServiceImpl implements MissionService {
 						throw new Exception("当前任务不是都为二审中，请检查！");
 					}
 				}
+				return true;
 			}
 			//终审状态
 			if(nextTrailStatus.equals(TrialStatusEnum.FINAL_AUDITED_FAILED.getId()) || nextTrailStatus.equals(TrialStatusEnum.FINAL_AUDITED_SUCCESS.getId())){
@@ -155,6 +157,7 @@ public class MissionServiceImpl implements MissionService {
 						throw new Exception("当前任务不是都为终审中，请检查！");
 					}
 				}
+				return true;
 			}
 
 			//上线
@@ -164,9 +167,8 @@ public class MissionServiceImpl implements MissionService {
 						throw new Exception("当前任务不是都为终审通过，请检查！");
 					}
 				}
+				return true;
 			}
-
-
 		}
 		throw new Exception("批量操作任务状态不正确，请检查！");
 

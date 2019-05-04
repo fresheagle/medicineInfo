@@ -73,7 +73,7 @@
 		level, weight, office, dataStatus,
 		task_id, task_status, task_json
 		)
-		values (##{institutionId,jdbcType=BIGINT},
+		values (#{institutionId,jdbcType=BIGINT},
 		#{departmentId,jdbcType=BIGINT},#{parentDepartmentId,jdbcType=BIGINT},
 		#{level,jdbcType=VARCHAR}, #{weight,jdbcType=VARCHAR}, #{office,jdbcType=VARCHAR}, #{datastatus,jdbcType=VARCHAR},
 		#{taskId,jdbcType=VARCHAR}, #{taskStatus,jdbcType=VARCHAR},

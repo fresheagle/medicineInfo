@@ -254,5 +254,6 @@
 			<generatedKey column="id"
 				sqlStatement="select uuid_short()" identity="false" />
 		</table>
+		
 	</context>
 </generatorConfiguration>

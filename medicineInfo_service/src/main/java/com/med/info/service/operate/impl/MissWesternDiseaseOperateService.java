@@ -83,7 +83,7 @@ public class MissWesternDiseaseOperateService extends AbstractOperateService<Mis
 
     @Override
     public Class<?> getCurrentObjectClass() {
-        return Miss_western_diseaseWithBLOBs.class;
+        return MissWesternDiseaseDTO.class;
     }
 
     @Override

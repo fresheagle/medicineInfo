@@ -23,7 +23,7 @@ import com.med.info.service.MissSymptomService;
 import com.med.info.utils.CollectionUtil;
 
 @Component
-@Order(7)
+@Order(2)
 public class MissChineseSymptomOperateService extends AbstractOperateService<Miss_symptomWithBLOBs, MissSymptomDTO> {
     @Autowired
     private MissSymptomService symptomService;

@@ -8,7 +8,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
-@Order(3)
+@Order(8)
 public class MissDepartmentOperateService extends AbstractOperateService<Miss_department, Miss_department> {
 
     @Autowired

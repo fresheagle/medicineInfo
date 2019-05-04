@@ -23,10 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public abstract class AbstractOperateService<T extends BaseDomain, F> implements IOperateService {
 
@@ -168,6 +165,10 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
 
     private void doOperate(OperateDTO operateDTO, T object, BaseService<T> baseService, TrialStatusEnum trialStatusEnum) {
         String taskId = operateDTO.getTaskId();
+        if(null == taskId){
+            taskId = UUID.randomUUID().toString().replace("-", "");
+            operateDTO.setTaskId(taskId);
+        }
         Miss_control_task_records taskRecordByTaskId = getTaskRecordByTaskId(taskId);
         //如果为空表示新建的task数据需要创建taskRecord
         if (null == taskRecordByTaskId) {

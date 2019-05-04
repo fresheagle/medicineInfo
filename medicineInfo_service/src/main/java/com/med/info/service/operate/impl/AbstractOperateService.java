@@ -165,7 +165,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
 
     private void doOperate(OperateDTO operateDTO, T object, BaseService<T> baseService, TrialStatusEnum trialStatusEnum) {
         String taskId = operateDTO.getTaskId();
-        if(null == taskId){
+        if(StringUtil.isEmpty(taskId)){
             taskId = UUID.randomUUID().toString().replace("-", "");
             operateDTO.setTaskId(taskId);
         }

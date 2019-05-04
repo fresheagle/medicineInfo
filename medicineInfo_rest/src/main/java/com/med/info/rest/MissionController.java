@@ -32,6 +32,9 @@ public class MissionController {
     public Response save(@RequestBody OperateDTO operateDTO) {
         try {
             Object saveMission = missionService.saveMission(operateDTO);
+            if(null == saveMission){
+                throw new Exception("对应操作类型未定义！");
+            }
             return new Response().success(saveMission);
         } catch (Exception e) {
             logger.error("保存任务状态失败；", e);

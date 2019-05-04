@@ -34,7 +34,7 @@ public class MissWesternDiseaseOperateService extends AbstractOperateService<Mis
     private static Logger logger = LoggerFactory.getLogger(MissWesternDiseaseOperateService.class);
     @Override
     public String getCurrentMenuType() {
-        return "missWesternDisease";
+        return "missWsetDisease";
     }
 
     @Override
@@ -88,7 +88,7 @@ public class MissWesternDiseaseOperateService extends AbstractOperateService<Mis
 
     @Override
     public String getJsonParamKey() {
-        return "missWesternDisease";
+        return "missWsetDisease";
     }
 
 }

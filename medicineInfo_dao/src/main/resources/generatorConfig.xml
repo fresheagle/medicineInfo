@@ -102,8 +102,8 @@
 			selectByExampleQueryId="false">
 			<generatedKey column="id"
 				sqlStatement="select uuid_short()" identity="false" />
-		</table>
-		<table tableName="miss_institution"
+		</table> -->
+		<!-- <table tableName="miss_institution"
 			domainObjectName="Miss_institution" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
@@ -125,14 +125,14 @@
 			selectByExampleQueryId="false">
 			<generatedKey column="id"
 				sqlStatement="select uuid_short()" identity="false" />
-		</table>
-		<table tableName="miss_medical" domainObjectName="Miss_medical"
+		</table>-->
+		<!-- <table tableName="miss_medical" domainObjectName="Miss_medical"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 			<generatedKey column="id"
 				sqlStatement="select uuid_short()" identity="false" />
-		</table> -->
+		</table>  -->
 		<!--<table tableName="miss_medical_company"-->
 			<!--domainObjectName="Miss_medical_company" enableCountByExample="false"-->
 			<!--enableUpdateByExample="false" enableDeleteByExample="false"-->
@@ -171,13 +171,13 @@
 			<!--<generatedKey column="id"-->
 				<!--sqlStatement="select uuid_short()" identity="false" />-->
 		<!--</table>-->
-		<!--<table tableName="miss_western_disease"-->
-			<!--domainObjectName="Miss_western_disease" enableCountByExample="false"-->
-			<!--enableUpdateByExample="false" enableDeleteByExample="false"-->
-			<!--enableSelectByExample="false" selectByExampleQueryId="false">-->
-			<!--<generatedKey column="id"-->
-				<!--sqlStatement="select uuid_short()" identity="false" />-->
-		<!--</table>-->
+		<!-- <table tableName="miss_western_disease"
+			domainObjectName="Miss_western_disease" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="select uuid_short()" identity="false" />
+		</table> -->
 		<!--<table tableName="miss_control_action"-->
 			<!--domainObjectName="Miss_control_action" enableCountByExample="false"-->
 			<!--enableUpdateByExample="false" enableDeleteByExample="false"-->
@@ -226,7 +226,7 @@
 			selectByExampleQueryId="false">
 		</table> -->
 		
-		<table tableName="miss_control_reference"
+		<!-- <table tableName="miss_control_reference"
 			domainObjectName="Miss_control_reference" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
@@ -235,6 +235,20 @@
 		</table>
 		<table tableName="miss_control_approval"
 			domainObjectName="Miss_control_approval" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="select uuid_short()" identity="false" />
+		</table> -->
+		<!-- <table tableName="miss_article"
+			domainObjectName="Miss_article" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+			<generatedKey column="id"
+				sqlStatement="select uuid_short()" identity="false" />
+		</table> -->
+		<table tableName="miss_disease_dislocation_mapping"
+			domainObjectName="Miss_disease_dislocation_mapping" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 			<generatedKey column="id"

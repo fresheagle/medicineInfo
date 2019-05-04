@@ -214,6 +214,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
             controlTaskRecord.setTaskFinalTrialTime(new Timestamp(System.currentTimeMillis()));
         }
         controlTaskRecord.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        controlTaskRecord.setTaskpublishfinalcontentjson(JSON.toJSONString(operateDTO.getJsonStr()));
         taskRecordsMapper.updateByTaskIdSelective(controlTaskRecord);
 
     }

@@ -542,7 +542,7 @@
 
 	<select id="getCurrentTrialStatusByTaskids" parameterType="java.util.List" resultMap="ResultMapWithBLOBs">
 		select
-		<include refid="Base_Column_List" />
+		<include refid="ResultMapWithBLOBs" />
 		from miss_control_task_records where task_id in
 		<foreach collection="taskIds" item="id" separator="," open="(" close=")">
 			#{id}

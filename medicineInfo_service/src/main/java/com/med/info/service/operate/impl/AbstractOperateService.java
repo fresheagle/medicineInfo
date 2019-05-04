@@ -75,6 +75,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         logger.info("上线taskId={}", miss_control_task_records.getTaskId());
         BaseService<T> baseService = baseService(miss_control_task_records.getTaskmenutype());
         String recordJson = miss_control_task_records.getTaskpublishfinalcontentjson();
+        logger.info("上线当前任务信息为 {}", recordJson);
         F objectF = (F) JSON.parseObject(recordJson, getCurrentObjectClass());
         T object = converseObject(objectF);
         object.setUpdateTime(new Timestamp(System.currentTimeMillis()));
@@ -214,7 +215,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
             controlTaskRecord.setTaskFinalTrialTime(new Timestamp(System.currentTimeMillis()));
         }
         controlTaskRecord.setUpdateTime(new Timestamp(System.currentTimeMillis()));
-        controlTaskRecord.setTaskpublishfinalcontentjson(JSON.toJSONString(operateDTO.getJsonStr()));
+        controlTaskRecord.setTaskpublishfinalcontentjson(JSON.toJSONString(getParmJsonObject(operateDTO.getJsonStr())));
         taskRecordsMapper.updateByTaskIdSelective(controlTaskRecord);
 
     }

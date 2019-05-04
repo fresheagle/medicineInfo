@@ -75,7 +75,7 @@
 			11:32:45 CST 2018. -->
 		task_id, taskCreaterUserCode, taskTitle, taskType, taskStatus,
 		taskMenuType, taskCreateDay,
-		taskCreateTime, taskPublishUserCode, taskPublishDay, taskPublishTime,
+		taskCreateTime, taskPublishUserCode, taskPublishDay, taskPublishTime,taskPublishFinalContentJson,
 		taskFirstTrialCode,
 		taskSecondTrialCode, taskFinalTrialCode, taskFirstTrialPoint, taskSecondTrialPoint, taskFinalTrialPint,
 		firstTrialRoleCode, secondTrialRoleCode, taskCreateRoleCode, taskFirstTrialTime,
@@ -542,7 +542,7 @@
 
 	<select id="getCurrentTrialStatusByTaskids" parameterType="java.util.List" resultMap="ResultMapWithBLOBs">
 		select
-		<include refid="ResultMapWithBLOBs" />
+		<include refid="Base_Column_List" />
 		from miss_control_task_records where task_id in
 		<foreach collection="taskIds" item="id" separator="," open="(" close=")">
 			#{id}

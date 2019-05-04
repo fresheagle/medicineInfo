@@ -34,7 +34,7 @@ import com.med.info.utils.Constants;
  *
  */
 @Order(2)
-@WebFilter(filterName="userPrivilegeFilter", urlPatterns="/test/*")
+@WebFilter(filterName="userPrivilegeFilter", urlPatterns="/*")
 public class UserPrivilegeFilter implements Filter{
 
 	private Logger logger = LoggerFactory.getLogger(UserPrivilegeFilter.class);

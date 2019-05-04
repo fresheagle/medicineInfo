@@ -202,15 +202,15 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         controlTaskRecord.setTasktitle(operateDTO.getTaskTitle());
         if (trialStatusEnum == TrialStatusEnum.FIRST_AUDITEDING) {
             // 添加用户角色权限校验，一审中只能对应相同用户才能操作
-            Assert.assertEquals("初审用户与当前用户不一致，无审批权限", taskRecordByTaskId.getFirstTrialRoleCode(), DefaultTokenManager.getLocalUserCode().getUserCode());
+            Assert.assertEquals("初审用户与当前用户不一致，无审批权限", taskRecordByTaskId.getTaskfirsttrialcode(), DefaultTokenManager.getLocalUserCode().getUserCode());
             controlTaskRecord.setTaskFirstTrialTime(new Timestamp(System.currentTimeMillis()));
         }
         if (trialStatusEnum == TrialStatusEnum.SECOND_AUDITEDING) {
-            Assert.assertEquals("二审用户与当前用户不一致，无审批权限", taskRecordByTaskId.getSecondTrialRoleCode(), DefaultTokenManager.getLocalUserCode().getUserCode());
+            Assert.assertEquals("二审用户与当前用户不一致，无审批权限", taskRecordByTaskId.getTasksecondtrialcode(), DefaultTokenManager.getLocalUserCode().getUserCode());
             controlTaskRecord.setTaskSecondTrialTime(new Timestamp(System.currentTimeMillis()));
         }
         if (trialStatusEnum == TrialStatusEnum.FINAL_AUDITEDING) {
-            Assert.assertEquals("终审用户与当前用户不一致，无审批权限", taskRecordByTaskId.getFinalTrialRoleCode(), DefaultTokenManager.getLocalUserCode().getUserCode());
+            Assert.assertEquals("终审用户与当前用户不一致，无审批权限", taskRecordByTaskId.getTaskfinaltrialcode(), DefaultTokenManager.getLocalUserCode().getUserCode());
             controlTaskRecord.setTaskFinalTrialTime(new Timestamp(System.currentTimeMillis()));
         }
         controlTaskRecord.setUpdateTime(new Timestamp(System.currentTimeMillis()));

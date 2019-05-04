@@ -90,6 +90,7 @@ public class MissionServiceImpl implements MissionService {
 	public Object BatchSaveMission(BatchOperateDTO batchOperateDTO) throws Exception {
 		if(CollectionUtil.isNotEmpty(batchOperateDTO.getTasks())){
 			List<Miss_control_task_records> missControlTaskRecords = taskRecordsMapper.getCurrentTrialStatusByTaskids(batchOperateDTO.getTasks());
+			logger.info("批量操作任务，数量为：{}, tasks:{}", null == missControlTaskRecords ? 0 : missControlTaskRecords.size(), batchOperateDTO.getTasks());
 			checkTaskStatus(missControlTaskRecords, batchOperateDTO.getTrailStatus());
 			if(batchOperateDTO.getTrailStatus().equals(TrialStatusEnum.ONLINE.getId())){
 				for (Miss_control_task_records taskRecord : missControlTaskRecords) {

@@ -1,6 +1,9 @@
 package com.med.info.dto;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.med.info.mapper.domain.PictureInfoDTO;
 
 public class MissMedicalDTO implements Serializable{
 	private Long id;
@@ -37,15 +40,15 @@ public class MissMedicalDTO implements Serializable{
 	private String storageMethod;
 	private String interactions;
 	private String history;
-	private String drugIdentifying;
+	private List<PictureInfoDTO> drugIdentifying;
 	private String drugIntroduce;
 	private String awards;
 	private String research;
 	private String monograph;
 	private String address;
-	private String messageFrom;
+	private List<PictureInfoDTO> messageFrom;
 	private String recipeType;
-	private String productInfo;
+	private List<PictureInfoDTO> productInfo;
 	private String price;
 	private String indication;
 	private String dosage;
@@ -277,10 +280,10 @@ public class MissMedicalDTO implements Serializable{
 	public void setHistory(String history) {
 		this.history = history;
 	}
-	public String getDrugIdentifying() {
+	public List<PictureInfoDTO> getDrugIdentifying() {
 		return drugIdentifying;
 	}
-	public void setDrugIdentifying(String drugIdentifying) {
+	public void setDrugIdentifying(List<PictureInfoDTO> drugIdentifying) {
 		this.drugIdentifying = drugIdentifying;
 	}
 	public String getDrugIntroduce() {
@@ -313,10 +316,10 @@ public class MissMedicalDTO implements Serializable{
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getMessageFrom() {
+	public List<PictureInfoDTO> getMessageFrom() {
 		return messageFrom;
 	}
-	public void setMessageFrom(String messageFrom) {
+	public void setMessageFrom(List<PictureInfoDTO> messageFrom) {
 		this.messageFrom = messageFrom;
 	}
 	public String getRecipeType() {
@@ -325,10 +328,10 @@ public class MissMedicalDTO implements Serializable{
 	public void setRecipeType(String recipeType) {
 		this.recipeType = recipeType;
 	}
-	public String getProductInfo() {
+	public List<PictureInfoDTO> getProductInfo() {
 		return productInfo;
 	}
-	public void setProductInfo(String productInfo) {
+	public void setProductInfo(List<PictureInfoDTO> productInfo) {
 		this.productInfo = productInfo;
 	}
 	public String getPrice() {

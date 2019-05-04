@@ -1,5 +1,6 @@
 package com.med.info.service.operate.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.med.info.domain.Miss_medicalWithBLOBs;
 import com.med.info.domain.Miss_medical_medicalcompany_mapping;
@@ -50,6 +51,9 @@ public class MissWesternMedicalOperateService extends AbstractOperateService<Mis
     @Override
     public Miss_medicalWithBLOBs converseObject(MissMedicalDTO missMedicalDTO) {
     	Miss_medicalWithBLOBs miss_medicalWithBLOBs = new Miss_medicalWithBLOBs();
+    	miss_medicalWithBLOBs.setDrugIdentifying(JSON.toJSONString(missMedicalDTO.getDrugIdentifying()));
+    	miss_medicalWithBLOBs.setProductInfo(JSON.toJSONString(missMedicalDTO.getProductInfo()));
+    	miss_medicalWithBLOBs.setMessageFrom(missMedicalDTO.getMedicFormat());
     	BeanUtils.copyProperties(missMedicalDTO, miss_medicalWithBLOBs);
     	return miss_medicalWithBLOBs;
     }

@@ -42,8 +42,14 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.POST)
 	public Response addUser(@RequestBody Miss_control_user missControlUser) {
 		missControlUser.setUserUuid(UuidUtils.generateUUID());
+		try {
 		userInfoService.insert(missControlUser);
 		return new Response().success();
+		}catch(Exception e) {
+			e.printStackTrace();
+			log.error("新增用户数据错误", e);
+            return new Response().failure("用户添加失败，用户已存在");
+		}
 	}
 	/**
 	 * 为用户添加权限

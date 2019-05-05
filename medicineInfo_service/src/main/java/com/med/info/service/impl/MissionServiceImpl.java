@@ -135,7 +135,7 @@ public class MissionServiceImpl implements MissionService {
 			//初审状态
 			if(nextTrailStatus.equals(TrialStatusEnum.FIRST_AUDITED_FAILED.getId()) || nextTrailStatus.equals(TrialStatusEnum.FIRST_AUDITED_SUCCESS.getId())){
 				for (Miss_control_task_records records : missControlTaskRecords) {
-					if(!records.getTaskstatus().equals(TrialStatusEnum.FINAL_AUDITEDING.getId())){
+					if(!records.getTaskstatus().equals(TrialStatusEnum.FIRST_AUDITEDING.getId())){
 						throw new Exception("当前任务不是都为一审中，请检查！");
 					}
 				}

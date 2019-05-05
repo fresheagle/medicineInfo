@@ -31,8 +31,6 @@
     <result column="west_medical_department" jdbcType="VARCHAR" property="westMedicalDepartment" />
     <result column="chinese_medical_type" jdbcType="VARCHAR" property="chineseMedicalType" />
     <result column="chinese_medical_department" jdbcType="VARCHAR" property="chineseMedicalDepartment" />
-    
-    
     <result column="edit_doctor" jdbcType="BIGINT" property="editDoctor" />
     <result column="audit_doctor" jdbcType="BIGINT" property="auditDoctor" />
   </resultMap>
@@ -77,7 +75,6 @@
     <result column="children_durg" jdbcType="LONGVARCHAR" property="childrenDurg" />
     <result column="elderly_durg" jdbcType="LONGVARCHAR" property="elderlyDurg" />
     <result column="durg_overdose" jdbcType="LONGVARCHAR" property="durgOverdose" />
-    <result column="miss_medicalcol" jdbcType="LONGVARCHAR" property="missMedicalcol" />
     <result column="pharmacokinetics" jdbcType="LONGVARCHAR" property="pharmacokinetics" />
     <result column="combined_medication" jdbcType="LONGVARCHAR" property="combinedMedication" />
     <result column="physician_advice" jdbcType="LONGVARCHAR" property="physicianAdvice" />
@@ -107,10 +104,9 @@
     -->
     constitute, property, func, main_attend, standard, pharmacology, toxicological_effects, 
     clinical_application, adverse_reactions, taboo, notice, identify, pharmacy_check, 
-    content_pic, medic_format, notes, component, main_meffect, analyze, interactions, 
-    history, drug_introduce, awards, research, monograph, message_from, product_info, 
+    content_pic, medic_format, notes, component, main_meffect, `analyze`, interactions, history, drug_introduce, awards, research, monograph, message_from, product_info, 
     indication, dosage, introduction, task_json, gravida_durg, children_durg, elderly_durg, 
-    durg_overdose, miss_medicalcol, pharmacokinetics, combined_medication, physician_advice, 
+    durg_overdose, pharmacokinetics, combined_medication, physician_advice, 
     route_administration, dosage_form, functional_classification, disease_classification, 
     thumbnail, adaptation
   </sql>
@@ -165,7 +161,7 @@
       monograph, message_from, product_info, 
       indication, dosage, introduction, 
       task_json, gravida_durg, children_durg, 
-      elderly_durg, durg_overdose, miss_medicalcol, 
+      elderly_durg, durg_overdose,  
       pharmacokinetics, combined_medication, 
       physician_advice, route_administration, 
       dosage_form, functional_classification, 
@@ -191,7 +187,7 @@
       #{monograph,jdbcType=LONGVARCHAR}, #{messageFrom,jdbcType=LONGVARCHAR}, #{productInfo,jdbcType=LONGVARCHAR}, 
       #{indication,jdbcType=LONGVARCHAR}, #{dosage,jdbcType=LONGVARCHAR}, #{introduction,jdbcType=LONGVARCHAR}, 
       #{taskJson,jdbcType=LONGVARCHAR}, #{gravidaDurg,jdbcType=LONGVARCHAR}, #{childrenDurg,jdbcType=LONGVARCHAR}, 
-      #{elderlyDurg,jdbcType=LONGVARCHAR}, #{durgOverdose,jdbcType=LONGVARCHAR}, #{missMedicalcol,jdbcType=LONGVARCHAR}, 
+      #{elderlyDurg,jdbcType=LONGVARCHAR}, #{durgOverdose,jdbcType=LONGVARCHAR}, 
       #{pharmacokinetics,jdbcType=LONGVARCHAR}, #{combinedMedication,jdbcType=LONGVARCHAR}, 
       #{physicianAdvice,jdbcType=LONGVARCHAR}, #{routeAdministration,jdbcType=LONGVARCHAR}, 
       #{dosageForm,jdbcType=LONGVARCHAR}, #{functionalClassification,jdbcType=LONGVARCHAR}, 
@@ -383,9 +379,6 @@
       </if>
       <if test="durgOverdose != null">
         durg_overdose,
-      </if>
-      <if test="missMedicalcol != null">
-        miss_medicalcol,
       </if>
       <if test="pharmacokinetics != null">
         pharmacokinetics,
@@ -597,9 +590,6 @@
       </if>
       <if test="durgOverdose != null">
         #{durgOverdose,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="missMedicalcol != null">
-        #{missMedicalcol,jdbcType=LONGVARCHAR},
       </if>
       <if test="pharmacokinetics != null">
         #{pharmacokinetics,jdbcType=LONGVARCHAR},
@@ -819,9 +809,6 @@
       <if test="durgOverdose != null">
         durg_overdose = #{durgOverdose,jdbcType=LONGVARCHAR},
       </if>
-      <if test="missMedicalcol != null">
-        miss_medicalcol = #{missMedicalcol,jdbcType=LONGVARCHAR},
-      </if>
       <if test="pharmacokinetics != null">
         pharmacokinetics = #{pharmacokinetics,jdbcType=LONGVARCHAR},
       </if>
@@ -924,7 +911,6 @@
       children_durg = #{childrenDurg,jdbcType=LONGVARCHAR},
       elderly_durg = #{elderlyDurg,jdbcType=LONGVARCHAR},
       durg_overdose = #{durgOverdose,jdbcType=LONGVARCHAR},
-      miss_medicalcol = #{missMedicalcol,jdbcType=LONGVARCHAR},
       pharmacokinetics = #{pharmacokinetics,jdbcType=LONGVARCHAR},
       combined_medication = #{combinedMedication,jdbcType=LONGVARCHAR},
       physician_advice = #{physicianAdvice,jdbcType=LONGVARCHAR},

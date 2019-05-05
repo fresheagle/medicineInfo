@@ -591,10 +591,10 @@
 				name = #{name,jdbcType=VARCHAR}
 			</if>
 			<if test="sex != null">
-				or sex = #{sex,jdbcType=VARCHAR}
+				and sex = #{sex,jdbcType=VARCHAR}
 			</if>
 			<if test="birthday != null">
-				or birthday = #{birthday,jdbcType=VARCHAR}
+				and birthday = #{birthday,jdbcType=VARCHAR}
 			</if>
 		</where>
 	</select>

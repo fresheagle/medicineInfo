@@ -629,6 +629,7 @@ public class Miss_western_disease extends BaseDomain {
    }
    private Long editDoctor;
    private Long auditDoctor;
+   private String otherName;
 public Long getEditDoctor() {
 	return editDoctor;
 }
@@ -643,5 +644,13 @@ public Long getAuditDoctor() {
 
 public void setAuditDoctor(Long auditDoctor) {
 	this.auditDoctor = auditDoctor;
+}
+
+public String getOtherName() {
+	return otherName;
+}
+
+public void setOtherName(String otherName) {
+	this.otherName = otherName;
 }
 }

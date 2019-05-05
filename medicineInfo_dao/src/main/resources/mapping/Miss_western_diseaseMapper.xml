@@ -27,7 +27,7 @@
     <result column="infectivity" jdbcType="INTEGER" property="infectivity" />
     <result column="department_pid" jdbcType="VARCHAR" property="departmentPid" />
     <result column="department_id" jdbcType="VARCHAR" property="departmentId" />
-    
+    <result column="other_name" jdbcType="VARCHAR" property="otherName" />
     <result column="edit_doctor" jdbcType="BIGINT" property="editDoctor" />
     <result column="audit_doctor" jdbcType="BIGINT" property="auditDoctor" />
   </resultMap>
@@ -74,7 +74,7 @@
     -->
     id, disease_id, reserve1, reserve2, reserve3, dataStatus, task_id, task_status, chinese_name, 
     english_name, related_diseases, disease_type, location_pid, location_disease, main_causes, 
-    common_symptom, multiple_population, infectivity, department_pid, department_id, edit_doctor, audit_doctor
+    common_symptom, multiple_population, infectivity, department_pid, department_id, edit_doctor, audit_doctor,other_name
   </sql>
   <sql id="Blob_Column_List">
     <!--
@@ -138,7 +138,7 @@
       drug_resistance, dietary_conditioning, 
       attention_matter, data_reference, 
       task_json, introduction, consultation, 
-      section, treatment_cost, edit_doctor, audit_doctor)
+      section, treatment_cost, edit_doctor, audit_doctor,other_name)
     values (#{id,jdbcType=BIGINT}, #{diseaseId,jdbcType=BIGINT}, #{reserve1,jdbcType=VARCHAR}, 
       #{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR}, #{datastatus,jdbcType=VARCHAR}, 
       #{taskId,jdbcType=VARCHAR}, #{taskStatus,jdbcType=VARCHAR}, #{chineseName,jdbcType=VARCHAR}, 
@@ -157,7 +157,7 @@
       #{drugResistance,jdbcType=LONGVARCHAR}, #{dietaryConditioning,jdbcType=LONGVARCHAR}, 
       #{attentionMatter,jdbcType=LONGVARCHAR}, #{dataReference,jdbcType=LONGVARCHAR}, 
       #{taskJson,jdbcType=LONGVARCHAR}, #{introduction,jdbcType=LONGVARCHAR}, #{consultation,jdbcType=LONGVARCHAR}, 
-      #{section,jdbcType=LONGVARCHAR}, #{treatmentCost,jdbcType=LONGVARCHAR},#{editDoctor,jdbcType=BIGINT},#{auditDoctor,jdbcType=BIGINT})
+      #{section,jdbcType=LONGVARCHAR}, #{treatmentCost,jdbcType=LONGVARCHAR},#{editDoctor,jdbcType=BIGINT},#{auditDoctor,jdbcType=BIGINT}, #{otherName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.med.info.domain.Miss_western_diseaseWithBLOBs">
     <!--
@@ -319,6 +319,9 @@
       <if test="auditDoctor != null">
         audit_doctor,
       </if>
+      <if test="otherName != null">
+        other_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       #{id,jdbcType=BIGINT},
@@ -469,6 +472,9 @@
       </if>
       <if test="auditDoctor != null">
         #{auditDoctor,jdbcType=BIGINT},
+      </if>
+      <if test="auditDoctor != null">
+        #{otherName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -628,6 +634,9 @@
       <if test="auditDoctor != null">
         audit_doctor = #{auditDoctor,jdbcType=BIGINT},
       </if>
+      <if test="otherName != null">
+        other_name = #{otherName,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -686,7 +695,8 @@
       section = #{section,jdbcType=LONGVARCHAR},
       treatment_cost = #{treatmentCost,jdbcType=LONGVARCHAR},
       edit_doctor = #{editDoctor,jdbcType=BIGINT},
-      audit_doctor = #{auditDoctor,jdbcType=BIGINT}
+      audit_doctor = #{auditDoctor,jdbcType=BIGINT},
+      other_name = #{otherName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.med.info.domain.Miss_western_disease">
@@ -716,7 +726,8 @@
       department_pid = #{departmentPid,jdbcType=VARCHAR},
       department_id = #{departmentId,jdbcType=VARCHAR},
       edit_doctor = #{editDoctor,jdbcType=BIGINT},
-      audit_doctor = #{auditDoctor,jdbcType=BIGINT}
+      audit_doctor = #{auditDoctor,jdbcType=BIGINT},
+      other_name = #{otherName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
     <select id="showDataCondition" parameterType="com.med.info.domain.Miss_western_diseaseWithBLOBs" resultMap="ResultMapWithBLOBs">

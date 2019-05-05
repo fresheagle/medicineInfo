@@ -42,6 +42,7 @@ public class MissWesternDiseaseDTO implements Serializable{
 	private String introduction;
 	private String chineseName;
 	private String englishName;
+	private String otherName;
 	private String relatedDiseases;
 	private String diseaseType;
 	private Long locationPid;
@@ -370,6 +371,12 @@ public class MissWesternDiseaseDTO implements Serializable{
 	}
 	public void setDislocationList(List<DislocationMapDTO> dislocationList) {
 		this.dislocationList = dislocationList;
+	}
+	public String getOtherName() {
+		return otherName;
+	}
+	public void setOtherName(String otherName) {
+		this.otherName = otherName;
 	}
 
 	

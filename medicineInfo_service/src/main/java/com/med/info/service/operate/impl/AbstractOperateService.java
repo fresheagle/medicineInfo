@@ -60,7 +60,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         operateDTO.setTaskTitle(miss_control_task_records.getTasktitle());
         operateDTO.setTaskId(miss_control_task_records.getTaskId());
         operateDTO.setTaskType(miss_control_task_records.getTasktype());
-        operateDTO.setTaskStatus(miss_control_task_records.getTaskStatus());
+        operateDTO.setTaskStatus(miss_control_task_records.getTaskstatus());
         operateDTO.setOperateCode(operateCode);
         operateDTO.setTaskMenuType(miss_control_task_records.getTaskmenutype());
         operateDTO.setTaskChangeComments(approveMessage);

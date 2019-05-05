@@ -105,6 +105,10 @@ public class MissInstitutionDTO implements Serializable {
     private String clinicalTeaching;
 
     private List<DepartmentMapDTO> departmentMapDTO;
+    
+    private Long editDoctor;
+	private Long auditDoctor;
+	private String doctorInfo;
 
     public Long getId() {
         return id;
@@ -497,4 +501,28 @@ public class MissInstitutionDTO implements Serializable {
     public void setDepartmentMapDTO(List<DepartmentMapDTO> departmentMapDTO) {
         this.departmentMapDTO = departmentMapDTO;
     }
+
+	public Long getEditDoctor() {
+		return editDoctor;
+	}
+
+	public void setEditDoctor(Long editDoctor) {
+		this.editDoctor = editDoctor;
+	}
+
+	public Long getAuditDoctor() {
+		return auditDoctor;
+	}
+
+	public void setAuditDoctor(Long auditDoctor) {
+		this.auditDoctor = auditDoctor;
+	}
+
+	public String getDoctorInfo() {
+		return doctorInfo;
+	}
+
+	public void setDoctorInfo(String doctorInfo) {
+		this.doctorInfo = doctorInfo;
+	}
 }

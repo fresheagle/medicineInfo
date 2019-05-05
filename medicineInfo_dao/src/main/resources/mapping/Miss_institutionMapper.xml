@@ -69,6 +69,7 @@
 		<result column="bus_lines" jdbcType="LONGVARCHAR" property="busLines" />
 		<result column="clinical_teaching" jdbcType="LONGVARCHAR"
 			property="clinicalTeaching" />
+		<result column="doctor_info" jdbcType="LONGVARCHAR" property="doctorInfo" />
 	</resultMap>
 	<resultMap type="com.med.info.mapper.domain.InstitutionInfoMapDTO"
 		id="InstitutionInfoMapResult">
@@ -100,7 +101,7 @@
 		academic_monograph, academic_activity, honor,
 		reference, license,
 		advertise_review_certify,
-		task_json,leadteam_info,affgroup,special,equipment,emergency_room,appointment_consultation,bus_lines,clinical_teaching
+		task_json,leadteam_info,affgroup,special,equipment,emergency_room,appointment_consultation,bus_lines,clinical_teaching,doctor_info
 	</sql>
 	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
 		resultMap="ResultMapWithBLOBs">
@@ -148,7 +149,7 @@
 		reference, license,
 		advertise_review_certify,
 		task_json,leadteam_info,affgroup,special,equipment,emergency_room,appointment_consultation,bus_lines,clinical_teaching,
-		edit_doctor, audit_doctor
+		edit_doctor, audit_doctor,doctor_info
 		)
 		values
 		(#{name,jdbcType=VARCHAR},
@@ -187,7 +188,7 @@
 		#{emergencyRoom,jdbcType=LONGVARCHAR},
 		#{appointmentConsultation,jdbcType=LONGVARCHAR},
 		#{busLines,jdbcType=LONGVARCHAR},
-		#{clinicalTeaching,jdbcType=LONGVARCHAR},#{editDoctor,jdbcType=BIGINT},#{auditDoctor,jdbcType=BIGINT}
+		#{clinicalTeaching,jdbcType=LONGVARCHAR},#{editDoctor,jdbcType=BIGINT},#{auditDoctor,jdbcType=BIGINT},#{doctorInfo,jdbcType=LONGVARCHAR}
 		)
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select
@@ -348,6 +349,9 @@
 			<if test="auditDoctor != null">
 				audit_doctor
 			</if>
+			<if test="doctorInfo != null">
+				doctor_info
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="name != null">
@@ -496,6 +500,9 @@
 			</if>
 			<if test="auditDoctor != null">
 				#{auditDoctor,jdbcType=BIGINT}
+			</if>
+			<if test="doctorInfo != null">
+				#{doctorInfo,jdbcType=LONGVARCHAR}
 			</if>
 		</trim>
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -661,6 +668,9 @@
       		<if test="auditDoctor != null">
         		audit_doctor = #{auditDoctor,jdbcType=BIGINT}
       		</if>
+      		<if test="doctorInfo != null">
+        		doctor_info = #{doctorInfo,jdbcType=LONGVARCHAR}
+      		</if>
 		</set>
 		where task_id = #{taskId,jdbcType=VARCHAR}
 	</update>
@@ -816,6 +826,9 @@
 				clinical_teaching =
 				#{clinicalTeaching,jdbcType=LONGVARCHAR}
 			</if>
+			<if test="doctorInfo != null">
+				doctor_info = #{doctorInfo,jdbcType=LONGVARCHAR},
+			</if>
 		</set>
 		where id = #{id,jdbcType=BIGINT}
 	</update>
@@ -900,7 +913,8 @@
 		emergency_room = #{emergencyRoom,jdbcType=LONGVARCHAR},
 		appointment_consultation = #{appointmentConsultation,jdbcType=LONGVARCHAR},
 		bus_lines = #{busLines,jdbcType=LONGVARCHAR},
-		clinical_teaching = #{clinicalTeaching,jdbcType=LONGVARCHAR}
+		clinical_teaching = #{clinicalTeaching,jdbcType=LONGVARCHAR},
+		doctor_info = #{doctorInfo,jdbcType=LONGVARCHAR}
 		where id =
 		#{id,jdbcType=BIGINT}
 	</update>

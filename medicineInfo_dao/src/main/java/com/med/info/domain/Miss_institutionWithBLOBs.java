@@ -151,6 +151,8 @@ public class Miss_institutionWithBLOBs extends Miss_institution {
     private String busLines;
     
     private String clinicalTeaching;
+    
+    private String doctorInfo;
 
     public String getLeadteamInfo() {
 		return leadteamInfo;
@@ -575,4 +577,12 @@ public class Miss_institutionWithBLOBs extends Miss_institution {
     public void setTaskJson(String taskJson) {
         this.taskJson = taskJson == null ? null : taskJson.trim();
     }
+
+	public String getDoctorInfo() {
+		return doctorInfo;
+	}
+
+	public void setDoctorInfo(String doctorInfo) {
+		this.doctorInfo = doctorInfo;
+	}
 }

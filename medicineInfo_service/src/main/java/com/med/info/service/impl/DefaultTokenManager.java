@@ -31,8 +31,8 @@ import com.med.info.utils.StringUtil;
 @Component("tokenManager")
 public class DefaultTokenManager implements TokenManager, CommandLineRunner {
 	/** token过期时间，默认10分钟 **/
-	@Value("${token.expire.time:10}")
-	private static Integer token_expire_time = 10;
+	@Value("${token.expire.time:40}")
+	private static Integer token_expire_time = 40;
 	
 	/** 将token存储到JVM内存(ConcurrentHashMap)中   (@author: DELETE) */      
 	private static Map<LoginInfoDTO, String> tokenMap = new ConcurrentHashMap<>();

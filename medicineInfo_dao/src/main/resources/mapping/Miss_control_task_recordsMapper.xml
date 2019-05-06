@@ -535,7 +535,11 @@
 				and updateTime &lt;= #{updateTimeEnd,jdbcType=TIMESTAMP}
 			</if>
 			<if test="currentUser != null">
-				and (taskcreaterusercode = #{currentUser} or taskfirsttrialcode = #{currentUser} or tasksecondtrialcode = #{currentUser} or tasksecondtrialcode = #{currentUser} or taskfinaltrialcode = #{currentUser})
+				and (taskcreaterusercode = #{currentUser} or taskfirsttrialcode = #{currentUser} or tasksecondtrialcode = #{currentUser} or tasksecondtrialcode = #{currentUser} or taskfinaltrialcode = #{currentUser}
+				<if test="poolId != null">
+				or 1=1
+				</if>
+				  )
 			</if>
 		</where>
 	</select>

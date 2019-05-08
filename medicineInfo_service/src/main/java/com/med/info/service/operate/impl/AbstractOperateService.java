@@ -226,7 +226,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
             return TrialStatusEnum.DRAFTS;
         }
         if (operateCode.equals(OperateEnum.approveSuccess.toString()) && trialStatusEnum == TrialStatusEnum.DRAFTS) {
-            if (controlTaskRecords.getFirstTrialRoleCode() != null) {
+            if (controlTaskRecords.getTaskfirsttrialcode() != null) {
                 return TrialStatusEnum.FIRST_AUDITEDING;
             }
             return TrialStatusEnum.TO_FIRST_AUDITED;
@@ -236,7 +236,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
             return TrialStatusEnum.DRAFTS;
         }
         if (trialStatusEnum == TrialStatusEnum.FIRST_AUDITED_FAILED && operateCode.equals(OperateEnum.approveSuccess.toString())) {
-            if (controlTaskRecords.getFirstTrialRoleCode() != null) {
+            if (controlTaskRecords.getTaskfirsttrialcode() != null) {
                 return TrialStatusEnum.FIRST_AUDITEDING;
             }
             return TrialStatusEnum.TO_FIRST_AUDITED;
@@ -247,7 +247,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
             return TrialStatusEnum.FIRST_AUDITED_FAILED;
         }
         if (trialStatusEnum == TrialStatusEnum.FIRST_AUDITEDING && operateCode.equals(OperateEnum.approveSuccess.toString())) {
-            if (controlTaskRecords.getSecondTrialRoleCode() != null) {
+            if (controlTaskRecords.getTasksecondtrialcode() != null) {
                 return TrialStatusEnum.SECOND_AUDITEDING;
             }
             return TrialStatusEnum.TO_SECOND_AUDITED;
@@ -258,7 +258,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
             return TrialStatusEnum.FIRST_AUDITED_FAILED;
         }
         if (trialStatusEnum == TrialStatusEnum.SECOND_AUDITED_FAILED && operateCode.equals(OperateEnum.approveSuccess.toString())) {
-            if (controlTaskRecords.getSecondTrialRoleCode() != null) {
+            if (controlTaskRecords.getTasksecondtrialcode() != null) {
                 return TrialStatusEnum.SECOND_AUDITEDING;
             }
             return TrialStatusEnum.TO_SECOND_AUDITED;
@@ -269,7 +269,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
             return TrialStatusEnum.SECOND_AUDITED_FAILED;
         }
         if (trialStatusEnum == TrialStatusEnum.SECOND_AUDITEDING && operateCode.equals(OperateEnum.approveSuccess.toString())) {
-            if (controlTaskRecords.getFinalTrialRoleCode() != null) {
+            if (controlTaskRecords.getTaskfinaltrialcode() != null) {
                 return TrialStatusEnum.FINAL_AUDITEDING;
             }
             return TrialStatusEnum.TO_FINAL_AUDITED;
@@ -280,7 +280,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
             return TrialStatusEnum.SECOND_AUDITED_FAILED;
         }
         if (trialStatusEnum == TrialStatusEnum.FINAL_AUDITED_FAILED && operateCode.equals(OperateEnum.approveSuccess.toString())) {
-            if (controlTaskRecords.getSecondTrialRoleCode() != null) {
+            if (controlTaskRecords.getTaskfinaltrialcode() != null) {
                 return TrialStatusEnum.FINAL_AUDITEDING;
             }
             return TrialStatusEnum.TO_FINAL_AUDITED;

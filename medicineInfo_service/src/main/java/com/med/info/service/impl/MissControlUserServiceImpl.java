@@ -39,7 +39,7 @@ public class MissControlUserServiceImpl extends BaseServiceImpl<Miss_control_use
 	public boolean isOnlyEditor(String userCode) {
 		// TODO Auto-generated method stub
 		List<String> roleList = userMapper.getUserRoleCode(userCode);
-		if(0 == roleList.size() &&  roleList.get(0).equals("001")) {
+		if(1 == roleList.size() &&  roleList.get(0).equals("001")) {
 			return true;
 		}
 		return false;

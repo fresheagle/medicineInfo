@@ -18,15 +18,15 @@ public interface MissionService {
 	
 	public Object getByPage(SelectTaskDTO selectTaskDTO, boolean useCurrentUser);
 
-	public void deleteMission(List<String> taskIds);
+	public void deleteMission(List<String> taskIds) throws Exception;
 	
 	public Object getMissionDetailPage(Integer currentPage, Integer pageSize, String taskId);
 
 	public Object claimTask(ClaimTaskDTO claimTaskDTO) throws Exception;
 
-	public Object BatchAcounts(BatchAcountsDTO accounts);
+	public Object BatchAcounts(BatchAcountsDTO accounts) throws Exception;
 
-	void resetTask(BatchResetTaskDTO batchResetTaskDTO);
+	void resetTask(BatchResetTaskDTO batchResetTaskDTO) throws Exception;
 
-	void resetCreateUser(BatchResetTaskDTO batchResetTaskDTO);
+	void resetCreateUser(BatchResetTaskDTO batchResetTaskDTO) throws Exception;
 }

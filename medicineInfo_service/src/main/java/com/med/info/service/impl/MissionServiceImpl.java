@@ -209,7 +209,10 @@ public class MissionServiceImpl implements MissionService {
 
     @Override
 	@Transactional
-    public void deleteMission(List<String> taskIds) {
+    public void deleteMission(List<String> taskIds) throws Exception{
+    	if(!missControlUserService.isAdministrator(DefaultTokenManager.getLocalUserCode().getUserCode())) {
+    		throw new Exception("当前用户无权限批量操作");
+    	}
 		taskIds.forEach(s -> {
 			Miss_control_task_records taskRecord = taskRecordsMapper.selectByPrimaryKey(s);
 			taskRecord.setTaskStatus(TrialStatusEnum.DRAFTS.getId());
@@ -342,7 +345,10 @@ public class MissionServiceImpl implements MissionService {
 
 	@Override
 	@Transactional
-	public Object BatchAcounts(BatchAcountsDTO accounts) {
+	public Object BatchAcounts(BatchAcountsDTO accounts) throws Exception{
+		if(!missControlUserService.isAdministrator(DefaultTokenManager.getLocalUserCode().getUserCode())) {
+    		throw new Exception("当前用户无权限批量操作");
+    	}
 		if(CollectionUtil.isNotEmpty(accounts.getTasks())) {
 			List<Miss_control_task_records> missControlTaskRecords = taskRecordsMapper.getCurrentTrialStatusByTaskids(accounts.getTasks());
 			for (Miss_control_task_records missControlTaskRecord : missControlTaskRecords) {
@@ -358,7 +364,10 @@ public class MissionServiceImpl implements MissionService {
 
 	@Override
 	@Transactional
-	public void resetTask(BatchResetTaskDTO batchResetTaskDTO){
+	public void resetTask(BatchResetTaskDTO batchResetTaskDTO) throws Exception{
+		if(!missControlUserService.isAdministrator(DefaultTokenManager.getLocalUserCode().getUserCode())) {
+    		throw new Exception("当前用户无权限批量操作");
+    	}
 		List<String> tasks = batchResetTaskDTO.getTasks();
 		List<Miss_control_task_records> currentTrialStatusByTaskids = taskRecordsMapper.getCurrentTrialStatusByTaskids(tasks);
 		for (Miss_control_task_records controlTaskRecords : currentTrialStatusByTaskids) {
@@ -383,7 +392,10 @@ public class MissionServiceImpl implements MissionService {
 
 	@Override
 	@Transactional
-	public void resetCreateUser(BatchResetTaskDTO batchResetTaskDTO) {
+	public void resetCreateUser(BatchResetTaskDTO batchResetTaskDTO) throws Exception{
+		if(!missControlUserService.isAdministrator(DefaultTokenManager.getLocalUserCode().getUserCode())) {
+    		throw new Exception("当前用户无权限批量操作");
+    	}
 		List<String> tasks = batchResetTaskDTO.getTasks();
 		taskRecordsMapper.resetCreateUserByTaskids(tasks, batchResetTaskDTO.getUserCode());
 	}

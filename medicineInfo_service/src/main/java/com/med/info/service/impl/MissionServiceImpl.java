@@ -94,6 +94,7 @@ public class MissionServiceImpl implements MissionService {
 		if((batchOperateDTO.getTrailStatus().equals("online") || batchOperateDTO.getTrailStatus().equals("offline")) && !missControlUserService.isAdministrator(DefaultTokenManager.getLocalUserCode().getUserCode())) {
 			throw new Exception("当前用户无权限批量操作");
 		}
+		
 		if(CollectionUtil.isNotEmpty(batchOperateDTO.getTasks())){
 			List<Miss_control_task_records> missControlTaskRecords = taskRecordsMapper.getCurrentTrialStatusByTaskids(batchOperateDTO.getTasks());
 			logger.info("批量操作任务，数量为：{}, tasks:{}", null == missControlTaskRecords ? 0 : missControlTaskRecords.size(), batchOperateDTO.getTasks());

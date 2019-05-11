@@ -107,4 +107,12 @@ public class UserController {
 		PageObject<Miss_control_user> selectPage = userInfoService.selectPage(currentPage, pageSize, miss_control_user);
 		return new Response().success(selectPage);
 	}
+	
+	@RequestMapping(path="/userCode", method = RequestMethod.GET)
+	public Response selectCode(@RequestParam("currentPage") Integer currentPage, 
+			@RequestParam(value="pageSize", defaultValue = "100") Integer pageSize,
+			@RequestParam(value="userCode") String userCode) {
+		PageObject<String> selectPage = userInfoService.selectByCode(userCode, currentPage, pageSize);
+		return new Response().success(selectPage);
+	}
 }

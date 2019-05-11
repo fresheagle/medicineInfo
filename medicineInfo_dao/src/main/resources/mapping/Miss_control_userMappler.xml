@@ -98,4 +98,8 @@
 	<select id="getUserRoleCode" parameterType="java.lang.String" resultType="java.lang.String">
 		select roleCode from miss_control_userandrole where userCode=#{userCode}
 	</select>
+	
+	<select id="selectCode" parameterType="java.lang.String" resultType="java.lang.String">
+		select userCode from miss_control_user where userCode like CONCAT('%',#{userCode},'%')
+	</select>
 </mapper>

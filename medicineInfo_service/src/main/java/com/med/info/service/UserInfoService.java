@@ -5,6 +5,7 @@ package com.med.info.service;
 
 import com.med.info.domain.Miss_control_user;
 import com.med.info.mapper.domain.LoginInfoDTO;
+import com.med.info.response.PageObject;
 
 /**
  * @author jialin.jiang
@@ -27,4 +28,6 @@ public interface UserInfoService extends BaseService<Miss_control_user>{
 	public boolean login(String userCode, String userPassWord);
 
 	public int deleteUserByCode(String userCode);
+	
+	public PageObject<String> selectByCode(String userCode,Integer currentPage, Integer pageSize);
 }

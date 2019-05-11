@@ -13,12 +13,15 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.med.info.domain.Miss_control_action;
 import com.med.info.domain.Miss_control_user;
 import com.med.info.mapper.BaseMapper;
 import com.med.info.mapper.Miss_control_userMapper;
 import com.med.info.mapper.domain.LoginInfoDTO;
 import com.med.info.mapper.domain.UserPrivilegeDTO;
+import com.med.info.response.PageObject;
 import com.med.info.service.MissControlActionService;
 import com.med.info.service.UserInfoService;
 import com.med.info.utils.StringUtil;
@@ -118,5 +121,18 @@ public class UserInfoServiceImpl extends BaseServiceImpl<Miss_control_user> impl
 		}
 		throw new Exception("登录失败，获取用户为空");
 	}
+
+	@Override
+	public PageObject<String> selectByCode(String userCode, Integer currentPage, Integer pageSize) {
+		// TODO Auto-generated method stub
+		PageHelper.startPage(currentPage, pageSize);
+		Page<String> codeList = (Page<String>)miss_control_userMapper.selectCode(userCode);
+		PageObject object = new PageObject<String>();
+		object.setCurrentPage(codeList.getPageNum());
+		object.setParams(codeList);
+		object.setTotal(codeList.getTotal());
+		return object;
+	}
+
 
 }

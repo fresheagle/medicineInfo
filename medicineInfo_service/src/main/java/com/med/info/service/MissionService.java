@@ -16,7 +16,7 @@ public interface MissionService {
 
 	public Object BatchSaveMission(BatchOperateDTO batchOperateDTO) throws Exception;
 	
-	public Object getByPage(SelectTaskDTO selectTaskDTO, boolean useCurrentUser);
+	public Object getByPage(SelectTaskDTO selectTaskDTO, boolean useCurrentUser) throws Exception;
 
 	public void deleteMission(List<String> taskIds);
 	

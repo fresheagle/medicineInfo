@@ -175,8 +175,22 @@ public class MissionServiceImpl implements MissionService {
 	}
 
 	@Override
-	public Object getByPage(SelectTaskDTO selectTaskDTO, boolean useCurrentUser) {
+	public Object getByPage(SelectTaskDTO selectTaskDTO, boolean useCurrentUser) throws Exception {
 
+
+		List<String> roleCodes = DefaultTokenManager.getLocalUserCode().getRoleCodes();
+		if(selectTaskDTO.getPoolId() != null){
+			List<String> taskStatus = selectTaskDTO.getTaskStatus();
+			if(taskStatus.contains(TrialStatusEnum.TO_FIRST_AUDITED) && (!roleCodes.contains("002") || !roleCodes.contains("000"))){
+				throw new Exception("当前用户不包含初审角色，不能查看待初审任务");
+			}
+			if(taskStatus.contains(TrialStatusEnum.TO_SECOND_AUDITED) && (!roleCodes.contains("003") || !roleCodes.contains("000"))){
+				throw new Exception("当前用户不包含二审角色，不能查看待二审任务");
+			}
+			if(taskStatus.contains(TrialStatusEnum.TO_FINAL_AUDITED) && (!roleCodes.contains("004") || !roleCodes.contains("000"))){
+				throw new Exception("当前用户不包含终审角色，不能查看待终审任务");
+			}
+		}
 		selectTaskDTO.setCreateUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getCreateUser()));
 		selectTaskDTO.setFinalTrialUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getFinalTrialUser()));
 		selectTaskDTO.setFirstTrialUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getFirstTrialUser()));

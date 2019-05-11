@@ -80,8 +80,14 @@ public class MissionController {
     @RequestMapping(value = "/data/page", method = RequestMethod.POST)
     public Response getByPage(@RequestBody SelectTaskDTO selectTaskDTO) {
 
-        Object byPage = missionService.getByPage(selectTaskDTO, true);
-        return new Response().success(byPage);
+        Object byPage = null;
+        try {
+            byPage = missionService.getByPage(selectTaskDTO, true);
+            return new Response().success(byPage);
+        } catch (Exception e) {
+            logger.error("查询任务失败；", e);
+            return new Response().failure(e.getMessage());
+        }
     }
 
     @RequestMapping(value = "/data/pool/page", method = RequestMethod.POST)
@@ -101,7 +107,13 @@ public class MissionController {
             status.add(TrialStatusEnum.TO_FINAL_AUDITED.getId());
             selectTaskDTO.setTaskStatus(status);
         }
-        Object byPage = missionService.getByPage(selectTaskDTO, false);
+        Object byPage = null;
+        try {
+            byPage = missionService.getByPage(selectTaskDTO, false);
+        } catch (Exception e) {
+            logger.error("查询任务失败；", e);
+            return new Response().failure(e.getMessage());
+        }
         return new Response().success(byPage);
     }
 

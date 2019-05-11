@@ -45,9 +45,13 @@ public class MissionController {
     @RequestMapping(value = "deleteMission", method = RequestMethod.DELETE)
     @ResponseBody
     public Response delete(@RequestParam String taskId){
-
-        missionService.deleteMission(Arrays.asList(taskId.split(",")));
-        return new Response().success("删除数据成功");
+    	try {
+    		missionService.deleteMission(Arrays.asList(taskId.split(",")));
+    		return new Response().success("删除数据成功");
+    	}catch (Exception e) {
+    		logger.error("删除任务状态失败；", e);
+            return new Response().failure(e.getMessage());
+    	}
     }
 
     @RequestMapping(value = "batch/saveMission", method = RequestMethod.PUT)

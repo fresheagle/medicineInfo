@@ -34,4 +34,26 @@ public class MissControlUserServiceImpl extends BaseServiceImpl<Miss_control_use
 		}
 		return userMapper.selectUserCodeByNames(names);
 	}
+
+	@Override
+	public boolean isOnlyEditor(String userCode) {
+		// TODO Auto-generated method stub
+		List<String> roleList = userMapper.getUserRoleCode(userCode);
+		if(1 == roleList.size() &&  roleList.get(0).equals("001")) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isAdministrator(String userCode) {
+		// TODO Auto-generated method stub
+		List<String> roleList = userMapper.getUserRoleCode(userCode);
+		for (String role : roleList) {
+			if(role.equals("000")) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

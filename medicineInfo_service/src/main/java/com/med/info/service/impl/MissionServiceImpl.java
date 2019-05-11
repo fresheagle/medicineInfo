@@ -198,6 +198,7 @@ public class MissionServiceImpl implements MissionService {
 				throw new Exception("当前用户不包含终审角色，不能查看待终审任务");
 			}
 		}
+		logger.info("当前查询部分参数为：poolId:{}, roleCodes:{}, taskStatus: {}",selectTaskDTO.getPoolId(), roleCodes, selectTaskDTO.getTaskStatus());
 		selectTaskDTO.setCreateUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getCreateUser()));
 		selectTaskDTO.setFinalTrialUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getFinalTrialUser()));
 		selectTaskDTO.setFirstTrialUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getFirstTrialUser()));

@@ -153,6 +153,8 @@ public class Miss_control_task_records extends BaseDomain{
 
     private String accounts;
     
+    private String dataStatus;
+    
     @Override
     public Date getUpdateTime() {
         return updateTime;
@@ -609,5 +611,13 @@ public class Miss_control_task_records extends BaseDomain{
 
 	public void setAccounts(String accounts) {
 		this.accounts = accounts;
+	}
+
+	public String getDataStatus() {
+		return dataStatus;
+	}
+
+	public void setDataStatus(String dataStatus) {
+		this.dataStatus = dataStatus;
 	}
 }

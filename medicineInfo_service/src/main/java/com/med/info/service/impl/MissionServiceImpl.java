@@ -389,10 +389,10 @@ public class MissionServiceImpl implements MissionService {
 			if(batchResetTaskDTO.getTrialUser() != null && batchResetTaskDTO.getTrialUser().contains("finalTrialUser")){
 				controlTaskRecords.setTaskfinaltrialcode(null);
 			}
-			if(batchResetTaskDTO.getTrialUser() != null && batchResetTaskDTO.getTrialUser().contains("secondTrialUser")){
+			if(batchResetTaskDTO.getTrialUser() != null && batchResetTaskDTO.getTrialUser().contains("firstTrialUser")){
 				controlTaskRecords.setTaskfirsttrialcode(null);
 			}
-			if(batchResetTaskDTO.getTrialUser() != null && batchResetTaskDTO.getTrialUser().contains("firstTrialUser")){
+			if(batchResetTaskDTO.getTrialUser() != null && batchResetTaskDTO.getTrialUser().contains("secondTrialUser")){
 				controlTaskRecords.setTasksecondtrialcode(null);
 			}
 			controlTaskRecords.setUpdateTime(new Date());

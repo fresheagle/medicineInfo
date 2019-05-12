@@ -3,6 +3,7 @@ package com.med.info.utils;
 public enum TrialStatusEnum {
 	
 	DRAFTS("drafts","草稿"),
+	RECYCLE("recycle","回收站"),
 	TO_FIRST_AUDITED("toFirAudited","待初审"),
 	FIRST_AUDITEDING("firAuditeding","初审中"),
 	FIRST_AUDITED_FAILED("firAuditedFailed","初审未通过"),

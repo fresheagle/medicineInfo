@@ -41,6 +41,7 @@ public class OperateDTO implements Serializable {
     private String pageNo;
     private String contentNo;
     private String accounts;
+    private String dataStatus;
     private JSONObject jsonStr;
 
 
@@ -286,5 +287,13 @@ public class OperateDTO implements Serializable {
 
     public void setOperateCode(String operateCode) {
         this.operateCode = operateCode;
+    }
+
+    public String getDataStatus() {
+        return dataStatus;
+    }
+
+    public void setDataStatus(String dataStatus) {
+        this.dataStatus = dataStatus;
     }
 }

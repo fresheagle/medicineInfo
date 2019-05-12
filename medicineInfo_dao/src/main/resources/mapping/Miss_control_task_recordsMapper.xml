@@ -547,6 +547,9 @@
 			<if test="updateTimeEnd != null">
 				and updateTime &lt;= #{updateTimeEnd,jdbcType=TIMESTAMP}
 			</if>
+			<if test="dataStatus != null">
+				and dataStatus = #{dataStatus}
+			</if>
 			<if test="currentUser != null">
 				and (taskcreaterusercode = #{currentUser} or taskfirsttrialcode = #{currentUser} or tasksecondtrialcode = #{currentUser} or tasksecondtrialcode = #{currentUser} or taskfinaltrialcode = #{currentUser}
 				<if test="poolId != null">

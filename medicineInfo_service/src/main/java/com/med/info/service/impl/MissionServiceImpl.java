@@ -230,8 +230,13 @@ public class MissionServiceImpl implements MissionService {
     	}
 		taskIds.forEach(s -> {
 			Miss_control_task_records taskRecord = taskRecordsMapper.selectByPrimaryKey(s);
-			taskRecord.setTaskStatus(TrialStatusEnum.DRAFTS.getId());
+			taskRecord.setTaskStatus(TrialStatusEnum.RECYCLE.getId());
 			taskRecordsMapper.updateByTaskIdSelective(taskRecord);
+			for (IOperateService operateService : operateServices) {
+				if(operateService.isFilter(taskRecord.getTaskmenutype())){
+					operateService.doOffline(taskRecord);
+				}
+			}
 		});
     }
 
@@ -354,7 +359,9 @@ public class MissionServiceImpl implements MissionService {
 		List<Miss_control_task_detailWithBLOBs> taskDetailsByTime = taskDetailMapper.getTaskDetailsByTime(control_task_records.getTaskId());
 		operateDTO.setDetailCount(taskDetailsByTime.size());
 		operateDTO.setJsonStr(JSONObject.parseObject(taskDetailsByTime.get(0).getTaskchangeafterjson()));
+		operateDTO.setTaskChangeComments(taskDetailsByTime.get(0).getTaskchangecomments());
 		operateDTO.setAccounts(control_task_records.getAccounts());
+		operateDTO.setDataStatus(control_task_records.getDataStatus());
 		return operateDTO;
 	}
 

@@ -9,6 +9,7 @@ public class SelectTaskDTO {
     private String taskTitle;
     private String taskType;
     private Integer poolId;
+    private String dataStatus;
     private List<String> taskStatus;
     private String taskMenuType;
     private List<String> createUser;
@@ -184,5 +185,13 @@ public class SelectTaskDTO {
 
     public void setPoolId(Integer poolId) {
         this.poolId = poolId;
+    }
+
+    public String getDataStatus() {
+        return dataStatus;
+    }
+
+    public void setDataStatus(String dataStatus) {
+        this.dataStatus = dataStatus;
     }
 }

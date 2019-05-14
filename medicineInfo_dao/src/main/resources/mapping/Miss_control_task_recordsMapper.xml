@@ -122,7 +122,7 @@
 		taskPublishFinalContentJson,taskFirstTrialPoint,taskSecondTrialPoint,
 		taskFinalTrialPint, firstTrialRoleCode, secondTrialRoleCode,
 		finalTrialRoleCode, taskCreateRoleCode, taskFirstTrialTime,
-		taskSecondTrialTime, taskFinalTrialTime, updateTime, accounts)
+		taskSecondTrialTime, taskFinalTrialTime, updateTime, accounts, dataStatus)
 		values (#{taskId,jdbcType=VARCHAR}, #{taskcreaterusercode,jdbcType=VARCHAR},
 		#{tasktitle,jdbcType=VARCHAR},
 		#{tasktype,jdbcType=VARCHAR}, #{taskstatus,jdbcType=VARCHAR}, #{taskmenutype,jdbcType=VARCHAR},
@@ -223,7 +223,7 @@
 			<if test="accounts != null">
 				accounts
 			</if>
-			<if test="accounts != null">
+			<if test="dataStatus != null">
 				dataStatus
 			</if>
 		</trim>
@@ -398,7 +398,7 @@
 			<if test="accounts != null">
 				accounts = #{accounts}
 			</if>
-			<if test="accounts != null">
+			<if test="dataStatus != null">
 				dataStatus = #{dataStatus}
 			</if>
 		</set>

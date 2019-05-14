@@ -1033,5 +1033,9 @@
 			</if>
 		</where>
 	</select>
-
+	
+	<select id="exportSQL " resultMap="ResultMapWithBLOBs">
+		SELECT id, name, level, province_code, city_code, county_id, address, picturepath, thumbnail, nature, type, category, insurance, found_date, manage_department, telephone, website, mobile_website, publish_service, dean, advantage, punishment, history, environment, treat_guide, intro, research_result, academic_monograph, academic_activity, honor, parent_id, reference, license, advertise_review_certify, emergency_time, outpatient_time, registration_time, institution_type, leadteam_info, affiliated_group, special, treat_range, office, doctor_info, emergency_center, order_refer, bus_lines, clinical_teaching, edit_doctor, audit_doctor
+FROM miss_institution where dataStatus='1'
+	</select>
 </mapper>

@@ -3,7 +3,9 @@ package com.med.info.rest;
 import com.med.info.dto.*;
 import com.med.info.mapper.domain.OperateDTO;
 import com.med.info.response.Response;
+import com.med.info.service.MissControlUserService;
 import com.med.info.service.MissionService;
+import com.med.info.service.impl.DefaultTokenManager;
 import com.med.info.utils.TrialStatusEnum;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,6 @@ public class MissionController {
 
     @Autowired
     private MissionService missionService;
-
     private static Logger logger = org.slf4j.LoggerFactory.getLogger(MissionController.class);
 
     @RequestMapping(value = "/saveMission", method = RequestMethod.POST)
@@ -46,6 +47,9 @@ public class MissionController {
     @ResponseBody
     public Response delete(@RequestBody List<String> taskIds){
     	try {
+            if(!DefaultTokenManager.getLocalUserCode().getRoleCodes().contains("000")) {
+                throw new Exception("当前用户无权限批量操作");
+            }
     		missionService.deleteMission(taskIds);
     		return new Response().success("删除数据成功");
     	}catch (Exception e) {

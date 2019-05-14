@@ -440,7 +440,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
 
     @Override
     public void resetStatus(Miss_control_task_records controlTaskRecords, String resetStatus) {
-        controlTaskRecords.setTaskStatus(resetStatus);
+        controlTaskRecords.setTaskstatus(resetStatus);
         taskRecordsMapper.updateByPrimaryKey(controlTaskRecords);
         Miss_control_task_detailWithBLOBs taskLastData = getTaskLastData(controlTaskRecords.getTaskId());
         BaseService<T> baseService = baseService(controlTaskRecords.getTaskmenutype());

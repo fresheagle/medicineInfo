@@ -48,7 +48,7 @@ public class MissionController {
     public Response delete(@RequestBody List<String> taskIds){
     	try {
             if(!DefaultTokenManager.getLocalUserCode().getRoleCodes().contains("000")) {
-                throw new Exception("当前用户无权限批量操作");
+                throw new Exception("当前用户无删除操作权限");
             }
     		missionService.deleteMission(taskIds);
     		return new Response().success("删除数据成功");

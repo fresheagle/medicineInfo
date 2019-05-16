@@ -759,6 +759,9 @@ public class Miss_institution extends BaseDomain{
 	
 	private Long editDoctor;
 	private Long auditDoctor;
+	private String emergencyCenter;
+	private String orderRefer;
+	private String doctors;
 	public Long getEditDoctor() {
 		return editDoctor;
 	}
@@ -773,5 +776,29 @@ public class Miss_institution extends BaseDomain{
 
 	public void setAuditDoctor(Long auditDoctor) {
 		this.auditDoctor = auditDoctor;
+	}
+
+	public String getEmergencyCenter() {
+		return emergencyCenter;
+	}
+
+	public void setEmergencyCenter(String emergencyCenter) {
+		this.emergencyCenter = emergencyCenter;
+	}
+
+	public String getDoctors() {
+		return doctors;
+	}
+
+	public void setDoctors(String doctors) {
+		this.doctors = doctors;
+	}
+
+	public String getOrderRefer() {
+		return orderRefer;
+	}
+
+	public void setOrderRefer(String orderRefer) {
+		this.orderRefer = orderRefer;
 	}
 }

@@ -109,6 +109,9 @@ public class MissInstitutionDTO implements Serializable {
     private Long editDoctor;
 	private Long auditDoctor;
 	private String doctorInfo;
+	private String emergencyCenter;
+	private String orderRefer;
+	private String doctors;
 
     public Long getId() {
         return id;
@@ -524,5 +527,29 @@ public class MissInstitutionDTO implements Serializable {
 
 	public void setDoctorInfo(String doctorInfo) {
 		this.doctorInfo = doctorInfo;
+	}
+
+	public String getEmergencyCenter() {
+		return emergencyCenter;
+	}
+
+	public void setEmergencyCenter(String emergencyCenter) {
+		this.emergencyCenter = emergencyCenter;
+	}
+
+	public String getOrderRefer() {
+		return orderRefer;
+	}
+
+	public void setOrderRefer(String orderRefer) {
+		this.orderRefer = orderRefer;
+	}
+
+	public String getDoctors() {
+		return doctors;
+	}
+
+	public void setDoctors(String doctors) {
+		this.doctors = doctors;
 	}
 }

@@ -53,6 +53,7 @@ public class MissInstitutionOperateService extends AbstractOperateService<Miss_i
         BeanUtils.copyProperties(missInstitutionDTO, institutionWithBLOBs);
         institutionWithBLOBs.setLeadteamInfo(JSON.toJSONString(missInstitutionDTO.getLeadteamInfo()));
         institutionWithBLOBs.setEnvironment(JSON.toJSONString(missInstitutionDTO.getEnvironment()));
+        institutionWithBLOBs.setDoctors(JSON.toJSONString(missInstitutionDTO.getDoctors()));
         return institutionWithBLOBs;
     }
 

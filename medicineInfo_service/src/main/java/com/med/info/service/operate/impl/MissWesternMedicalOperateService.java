@@ -35,7 +35,7 @@ public class MissWesternMedicalOperateService extends AbstractOperateService<Mis
     
     @Override
     public String getCurrentMenuType() {
-        return "missWestMedical";
+        return "missWesternMedical";
     }
 
     @Override
@@ -66,6 +66,6 @@ public class MissWesternMedicalOperateService extends AbstractOperateService<Mis
 	@Override
 	public String getJsonParamKey() {
 		// TODO Auto-generated method stub
-		return "missWestMedical";
+		return "missWesternMedical";
 	}
 }

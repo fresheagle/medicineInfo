@@ -19,6 +19,7 @@ public enum TrialStatusEnum {
 	FINAL_AUDITED_FAILED("finalAuditedFailed","终审未通过"),
 	FINAL_AUDITED_SUCCESS("finished","终审通过"),
 	OFFLINE("offline","下线"),
+	KNOWN("known","未知状态"),
 	ONLINE("online","上线");
 
 	
@@ -51,7 +52,7 @@ public enum TrialStatusEnum {
 				return value;
 			}
 		}
-		return null;
+		return KNOWN;
 	}
 	
 }

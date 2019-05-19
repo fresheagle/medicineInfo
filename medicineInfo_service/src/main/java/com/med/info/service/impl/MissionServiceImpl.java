@@ -1,6 +1,7 @@
 package com.med.info.service.impl;
 
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.med.info.domain.Miss_control_role;
@@ -14,6 +15,13 @@ import com.med.info.utils.CollectionUtil;
 import com.med.info.utils.OperateEnum;
 import com.med.info.utils.SelectMapUtil;
 import com.med.info.utils.TrialStatusEnum;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +65,8 @@ public class MissionServiceImpl implements MissionService {
 
 	private static Map<String, String> taskStatusToNextStatus = new HashMap<>();
 
+	private static List<String> title = new ArrayList<>();
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	static {
 		taskStatusToRecordField.put("toFirAudited", "taskfirsttrialcode");
 		taskStatusToRecordField.put("toSecAudited", "tasksecondtrialcode");
@@ -66,6 +76,12 @@ public class MissionServiceImpl implements MissionService {
 		taskStatusToRoleCode.put("taskfirsttrialcode", "001");
 		taskStatusToRoleCode.put("tasksecondtrialcode", "001");
 		taskStatusToRoleCode.put("taskfinaltrialcode", "001");
+
+        title.add("标题");title.add("最新进度");title.add("作者");title.add("创建日期");
+        title.add("编辑组");title.add("初审者");title.add("初审得分");title.add("初审日期");
+        title.add("二审者");title.add("二审得分");title.add("二审日期");title.add("终审者");
+        title.add("终审得分");title.add("终审日期");title.add("更新日期");title.add("版本");
+        title.add("在线状态");title.add("其他状态");
 	}
 
 	static {
@@ -208,19 +224,92 @@ public class MissionServiceImpl implements MissionService {
 			record.put("currentUser", DefaultTokenManager.getLocalUserCode().getUserCode());
 		}
 		logger.info("查询任务，record={}",JSON.toJSONString(record));
-        PageHelper.startPage(selectTaskDTO.getCurrentPage(), selectTaskDTO.getPageSize() == null ? 10 : selectTaskDTO.getPageSize());
+		PageHelper.startPage(selectTaskDTO.getCurrentPage(), selectTaskDTO.getPageSize() == null ? 10 : selectTaskDTO.getPageSize());
         Page<Miss_control_task_records> showDataCondition = (Page<Miss_control_task_records>) taskRecordsMapper
 				.selectPageBySelective(record);
 		List<OperateDTO> list = new ArrayList<>();
 		for (Miss_control_task_records miss_control_task_records : showDataCondition) {
 			list.add(converseToOperataDTO(miss_control_task_records));
 		}
-		PageObject object = new PageObject<Miss_control_task_records>();
+		PageObject object = new PageObject<OperateDTO>();
 		object.setCurrentPage(showDataCondition.getPageNum());
 		object.setParams(list);
 		object.setTotal(showDataCondition.getTotal());
 		return object;
 	}
+
+	@Override
+	public XSSFWorkbook exportDatas(SelectTaskDTO selectTaskDTO, boolean useCurrentUser) throws Exception {
+		PageObject<OperateDTO> byPage = (PageObject<OperateDTO>) this.getByPage(selectTaskDTO, useCurrentUser);
+		XSSFWorkbook wb = new XSSFWorkbook();
+		XSSFSheet sheet = wb.createSheet("sheet1");
+		int rowNum = 0;
+        XSSFRow row = sheet.createRow(rowNum++);
+        HSSFCell cell = null;
+        for(int i=0;i<title.size();i++){
+            row.createCell(i).setCellValue(title.get(i));
+        }
+
+		List<String> roleCodes = DefaultTokenManager.getLocalUserCode().getRoleCodes();
+		if(selectTaskDTO.getPoolId() != null){
+			List<String> taskStatus = selectTaskDTO.getTaskStatus();
+			if(taskStatus.contains(TrialStatusEnum.TO_FIRST_AUDITED.getId()) && !(roleCodes.contains("002") || roleCodes.contains("000"))){
+				throw new Exception("当前用户不包含初审角色，不能查看待初审任务");
+			}
+			if(taskStatus.contains(TrialStatusEnum.TO_SECOND_AUDITED.getId()) && !(roleCodes.contains("003") || roleCodes.contains("000"))){
+				throw new Exception("当前用户不包含二审角色，不能查看待二审任务");
+			}
+			if(taskStatus.contains(TrialStatusEnum.TO_FINAL_AUDITED.getId()) && !(roleCodes.contains("004") || roleCodes.contains("000"))){
+				throw new Exception("当前用户不包含终审角色，不能查看待终审任务");
+			}
+		}
+		logger.info("当前查询部分参数为：poolId:{}, roleCodes:{}, taskStatus: {}",selectTaskDTO.getPoolId(), roleCodes, selectTaskDTO.getTaskStatus());
+		selectTaskDTO.setCreateUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getCreateUser()));
+		selectTaskDTO.setFinalTrialUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getFinalTrialUser()));
+		selectTaskDTO.setFirstTrialUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getFirstTrialUser()));
+		selectTaskDTO.setSecondTrialUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getSecondTrialUser()));
+		Map<String, Object> record = SelectMapUtil.converseObjectToMap(selectTaskDTO);
+		if(useCurrentUser){
+			record.put("currentUser", DefaultTokenManager.getLocalUserCode().getUserCode());
+		}
+		logger.info("查询任务，record={}",JSON.toJSONString(record));
+		List<Miss_control_task_records> showDataCondition = taskRecordsMapper.selectPageBySelective(record);
+		List<OperateDTO> list = new ArrayList<>();
+		for (Miss_control_task_records miss_control_task_records : showDataCondition) {
+			OperateDTO param = converseToOperataDTO(miss_control_task_records);
+			row = sheet.createRow(rowNum++);
+			List<String> data = new ArrayList<>(title.size());
+			data.add(param.getTaskTitle());
+			data.add(TrialStatusEnum.getTrialStatusEnum(param.getTaskStatus()).getDesc());
+			data.add(param.getCreateUser().getUserName());
+			data.add(getTimeStr(param.getTaskCreateTime()));
+			data.add(param.getCreateUser().getUserCode());
+			data.add(param.getFirstTrialUser().getUserName());
+			data.add(param.getTaskFirstTrialPoint());
+			data.add(getTimeStr(param.getTaskFirstTrialTime()));
+			data.add(param.getSecondTrialUser().getUserName());
+			data.add(param.getTaskSecondTrialPoint());
+			data.add(getTimeStr(param.getTaskSecondTrialTime()));
+			data.add(param.getFinalTrialUser().getUserName());
+			data.add(param.getTaskFinalTrialPint());
+			data.add(getTimeStr(param.getTaskFinalTrialTime()));
+			data.add(getTimeStr(param.getUpdateTime()));
+			data.add(param.getDetailCount().toString());
+			data.add(param.getDataStatus() == null ? "":param.getDataStatus().equalsIgnoreCase("1") ? "上线":"下线");
+			data.add(param.getAccounts());
+			for(int j=0;j<data.size();j++) {
+				row.createCell(j).setCellValue(data.get(j));
+			}
+		}
+        return wb;
+	}
+
+	private String getTimeStr(Date time) {
+	    if(time == null){
+	        return "";
+        }
+        return sdf.format(time);
+    }
 
     @Override
 	@Transactional

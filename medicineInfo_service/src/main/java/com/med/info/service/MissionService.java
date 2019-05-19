@@ -2,6 +2,7 @@ package com.med.info.service;
 
 import com.med.info.dto.*;
 import com.med.info.mapper.domain.OperateDTO;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.util.List;
 
@@ -17,6 +18,8 @@ public interface MissionService {
 	public Object BatchSaveMission(BatchOperateDTO batchOperateDTO) throws Exception;
 	
 	public Object getByPage(SelectTaskDTO selectTaskDTO, boolean useCurrentUser) throws Exception;
+
+	public XSSFWorkbook exportDatas(SelectTaskDTO selectTaskDTO, boolean useCurrentUser) throws Exception;
 
 	public void deleteMission(List<String> taskIds) throws Exception;
 	

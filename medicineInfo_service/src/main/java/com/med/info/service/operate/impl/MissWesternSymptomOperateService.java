@@ -3,13 +3,16 @@ package com.med.info.service.operate.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.med.info.domain.Miss_disease_symptom_mapping;
 import com.med.info.domain.Miss_symptomWithBLOBs;
+import com.med.info.domain.Miss_symptom_department_mapping;
 import com.med.info.domain.Miss_symptom_dislocation_mapping;
 import com.med.info.domain.Miss_symptom_medical_mapping;
 import com.med.info.dto.MissInstitutionDTO;
 import com.med.info.dto.MissSymptomDTO;
 import com.med.info.mapper.Miss_disease_symptom_mappingMapper;
+import com.med.info.mapper.Miss_symptom_department_mappingMapper;
 import com.med.info.mapper.Miss_symptom_dislocation_mappingMapper;
 import com.med.info.mapper.Miss_symptom_medical_mappingMapper;
+import com.med.info.mapper.domain.DepartmentMapDTO;
 import com.med.info.mapper.domain.DislocationMapDTO;
 import com.med.info.mapper.domain.MedicalMapDTO;
 import com.med.info.mapper.domain.OperateDTO;
@@ -37,6 +40,8 @@ public class MissWesternSymptomOperateService extends AbstractOperateService<Mis
     private Miss_symptom_dislocation_mappingMapper symptom_dislocation_mappingMapper;
     @Autowired
     private Miss_disease_symptom_mappingMapper miss_disease_symptom_mappingMapper;
+    @Autowired
+    private Miss_symptom_department_mappingMapper miss_symptom_department_mappingMapper;
 
     private static Logger logger = LoggerFactory.getLogger(MissWesternSymptomOperateService.class);
 
@@ -81,6 +86,20 @@ public class MissWesternSymptomOperateService extends AbstractOperateService<Mis
     			record.setDatastatus(objectF.getDataStatus());
     			record.setTaskStatus(objectF.getTaskStatus());
     			symptom_dislocation_mappingMapper.insert(record);
+    		}
+    	}
+    	miss_symptom_department_mappingMapper.deleteBySymptomId(objectF.getId());
+    	List<DepartmentMapDTO> departmentMapDTO = objectF.getDepartmentMapDTO();
+    	if(CollectionUtil.isNotEmpty(departmentMapDTO)) {
+    		for(DepartmentMapDTO departmentMapList : departmentMapDTO) {
+    			Miss_symptom_department_mapping record = new Miss_symptom_department_mapping();
+    			record.setCreateTime(new Date());
+    			record.setSymptomId(objectF.getId());
+    			record.setDepartmentId(departmentMapList.getId());
+    			record.setTaskId(objectF.getTaskId());
+    			record.setDatastatus(objectF.getDataStatus());
+    			record.setTaskStatus(objectF.getTaskStatus());
+    			miss_symptom_department_mappingMapper.insert(record);
     		}
     	}
     	miss_disease_symptom_mappingMapper.deleteBySymptomId(objectF.getId());

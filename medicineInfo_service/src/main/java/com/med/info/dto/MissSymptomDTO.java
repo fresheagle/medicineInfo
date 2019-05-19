@@ -3,6 +3,7 @@ package com.med.info.dto;
 import java.io.Serializable;
 import java.util.List;
 
+import com.med.info.mapper.domain.DepartmentMapDTO;
 import com.med.info.mapper.domain.DislocationMapDTO;
 
 public class MissSymptomDTO implements Serializable{
@@ -63,6 +64,7 @@ public class MissSymptomDTO implements Serializable{
 	private Long editDoctor;
 	private Long auditDoctor;
 
+	private List<DepartmentMapDTO> departmentMapDTO;
 	private List<DislocationMapDTO> dislocationList;
 	private List<Long> chineseDiseaseList;
 	private List<Long> westernDiseaseList;
@@ -419,5 +421,11 @@ public class MissSymptomDTO implements Serializable{
 	}
 	public void setWesternDiseaseList(List<Long> westernDiseaseList) {
 		this.westernDiseaseList = westernDiseaseList;
+	}
+	public List<DepartmentMapDTO> getDepartmentMapDTO() {
+		return departmentMapDTO;
+	}
+	public void setDepartmentMapDTO(List<DepartmentMapDTO> departmentMapDTO) {
+		this.departmentMapDTO = departmentMapDTO;
 	}
 }

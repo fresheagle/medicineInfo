@@ -104,8 +104,6 @@ public class MissionController {
     public Response exportDatas(@RequestBody SelectTaskDTO selectTaskDTO, HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            selectTaskDTO.setPageSize(-1);
-            selectTaskDTO.setCurrentPage(1);
             XSSFWorkbook xssfWorkbook = missionService.exportDatas(selectTaskDTO, true);
             setResponseHeader(response,"export_file.xlsx");
             OutputStream os = response.getOutputStream();

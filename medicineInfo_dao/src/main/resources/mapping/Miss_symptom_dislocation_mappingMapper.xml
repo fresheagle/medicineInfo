@@ -187,6 +187,6 @@
   </update>
     <delete id="deleteBySymptomId" parameterType="java.lang.Long">
   	delete from miss_symptom_dislocation_mapping
-    where symptom_id = #{id,jdbcType=BIGINT}
+    where symptom_id = #{symptomId,jdbcType=BIGINT}
   </delete>
 </mapper>

@@ -12,8 +12,8 @@
     <result column="english_name" jdbcType="VARCHAR" property="englishName" />
     <result column="other_name" jdbcType="VARCHAR" property="otherName" />
     <result column="symptom" jdbcType="VARCHAR" property="symptom" />
-    <result column="treatment" jdbcType="VARCHAR" property="treatment" />
-    <result column="clinical_manifestation" jdbcType="VARCHAR" property="clinicalManifestation" />
+    <result column="treatment" jdbcType="LONGVARCHAR" property="treatment" />
+    <result column="clinical_manifestation" jdbcType="LONGVARCHAR" property="clinicalManifestation" />
     <result column="department_id" jdbcType="BIGINT" property="departmentId" />
     <result column="main_causes" jdbcType="VARCHAR" property="mainCauses" />
     <result column="common_symptom" jdbcType="VARCHAR" property="commonSymptom" />
@@ -150,8 +150,8 @@
       introduction, thumbnail, epidemiology, 
       preventive_measure, picturepath, edit_doctor, audit_doctor)
     values (#{id,jdbcType=BIGINT}, #{chineseName,jdbcType=VARCHAR}, #{englishName,jdbcType=VARCHAR}, 
-      #{otherName,jdbcType=VARCHAR}, #{symptom,jdbcType=VARCHAR}, #{treatment,jdbcType=VARCHAR}, 
-      #{clinicalManifestation,jdbcType=VARCHAR}, #{departmentId,jdbcType=BIGINT}, #{mainCauses,jdbcType=VARCHAR}, 
+      #{otherName,jdbcType=VARCHAR}, #{symptom,jdbcType=VARCHAR}, #{treatment,jdbcType=LONGVARCHAR}, 
+      #{clinicalManifestation,jdbcType=LONGVARCHAR}, #{departmentId,jdbcType=BIGINT}, #{mainCauses,jdbcType=VARCHAR}, 
       #{commonSymptom,jdbcType=VARCHAR}, #{multiplePopulation,jdbcType=VARCHAR}, #{infectivity,jdbcType=INTEGER}, 
       #{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR}, 
       #{datastatus,jdbcType=VARCHAR}, #{taskId,jdbcType=VARCHAR}, #{taskStatus,jdbcType=VARCHAR}, 
@@ -365,10 +365,10 @@
         #{symptom,jdbcType=VARCHAR},
       </if>
       <if test="treatment != null">
-        #{treatment,jdbcType=VARCHAR},
+        #{treatment,jdbcType=LONGVARCHAR},
       </if>
       <if test="clinicalManifestation != null">
-        #{clinicalManifestation,jdbcType=VARCHAR},
+        #{clinicalManifestation,jdbcType=LONGVARCHAR},
       </if>
       <if test="departmentId != null">
         #{departmentId,jdbcType=BIGINT},
@@ -541,10 +541,10 @@
         symptom = #{symptom,jdbcType=VARCHAR},
       </if>
       <if test="treatment != null">
-        treatment = #{treatment,jdbcType=VARCHAR},
+        treatment = #{treatment,jdbcType=LONGVARCHAR},
       </if>
       <if test="clinicalManifestation != null">
-        clinical_manifestation = #{clinicalManifestation,jdbcType=VARCHAR},
+        clinical_manifestation = #{clinicalManifestation,jdbcType=LONGVARCHAR},
       </if>
       <if test="departmentId != null">
         department_id = #{departmentId,jdbcType=BIGINT},
@@ -708,8 +708,8 @@
       english_name = #{englishName,jdbcType=VARCHAR},
       other_name = #{otherName,jdbcType=VARCHAR},
       symptom = #{symptom,jdbcType=VARCHAR},
-      treatment = #{treatment,jdbcType=VARCHAR},
-      clinical_manifestation = #{clinicalManifestation,jdbcType=VARCHAR},
+      treatment = #{treatment,jdbcType=LONGVARCHAR},
+      clinical_manifestation = #{clinicalManifestation,jdbcType=LONGVARCHAR},
       department_id = #{departmentId,jdbcType=BIGINT},
       main_causes = #{mainCauses,jdbcType=VARCHAR},
       common_symptom = #{commonSymptom,jdbcType=VARCHAR},
@@ -772,8 +772,8 @@
       english_name = #{englishName,jdbcType=VARCHAR},
       other_name = #{otherName,jdbcType=VARCHAR},
       symptom = #{symptom,jdbcType=VARCHAR},
-      treatment = #{treatment,jdbcType=VARCHAR},
-      clinical_manifestation = #{clinicalManifestation,jdbcType=VARCHAR},
+      treatment = #{treatment,jdbcType=LONGVARCHAR},
+      clinical_manifestation = #{clinicalManifestation,jdbcType=LONGVARCHAR},
       department_id = #{departmentId,jdbcType=BIGINT},
       main_causes = #{mainCauses,jdbcType=VARCHAR},
       common_symptom = #{commonSymptom,jdbcType=VARCHAR},

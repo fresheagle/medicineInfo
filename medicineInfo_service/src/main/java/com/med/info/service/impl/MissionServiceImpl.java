@@ -274,6 +274,11 @@ public class MissionServiceImpl implements MissionService {
 			}
 		}
 		logger.info("当前查询部分参数为：poolId:{}, roleCodes:{}, taskStatus: {}", selectTaskDTO.getPoolId(), roleCodes, selectTaskDTO.getTaskStatus());
+		if (roleCodes.contains("000")) {
+			Map<String, Object> record = SelectMapUtil.converseObjectToMap(selectTaskDTO);
+			logger.info("查询任务，record={}", JSON.toJSONString(record));
+			return record;
+		}
 		selectTaskDTO.setCreateUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getCreateUser()));
 		selectTaskDTO.setFinalTrialUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getFinalTrialUser()));
 		selectTaskDTO.setFirstTrialUserCode(missControlUserService.selectUserCodeByNames(selectTaskDTO.getFirstTrialUser()));

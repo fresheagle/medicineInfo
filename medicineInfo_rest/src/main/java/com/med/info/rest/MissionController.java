@@ -125,6 +125,12 @@ public class MissionController {
         response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
         response.addHeader("Pargam", "no-cache");
         response.addHeader("Cache-Control", "no-cache");
+
+//        response.setHeader("Expires", "0");
+//        response.setHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
+//        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+//        response.setHeader("Pragma", "public");
+//        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
     }
 
 

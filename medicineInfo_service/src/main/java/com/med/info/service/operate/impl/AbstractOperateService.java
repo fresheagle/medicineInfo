@@ -75,6 +75,9 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         logger.info("上线taskId={}", miss_control_task_records.getTaskId());
         BaseService<T> baseService = baseService(miss_control_task_records.getTaskmenutype());
         String recordJson = miss_control_task_records.getTaskpublishfinalcontentjson();
+        miss_control_task_records.setDataStatus("1");
+        miss_control_task_records.setUpdateTime(new Date());
+        taskRecordsMapper.updateByTaskIdSelective(miss_control_task_records);
         logger.info("上线当前任务信息为 {}", recordJson);
         F objectF = (F) JSON.parseObject(recordJson, getCurrentObjectClass());
         T object = converseObject(objectF);
@@ -101,6 +104,9 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         if (needDealMapper()) {
             dealMapperRelashionShip(objectF);
         }
+        miss_control_task_records.setDataStatus("0");
+        miss_control_task_records.setUpdateTime(new Date());
+        taskRecordsMapper.updateByTaskIdSelective(miss_control_task_records);
         missControlApprovalService.deleteByTaskId(miss_control_task_records.getTaskId());
         return null;
     }
@@ -203,15 +209,21 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         controlTaskRecord.setTasktitle(operateDTO.getTaskTitle());
         if (trialStatusEnum == TrialStatusEnum.FIRST_AUDITEDING) {
             // 添加用户角色权限校验，一审中只能对应相同用户才能操作
-            Assert.assertEquals("初审用户与当前用户不一致，无审批权限", taskRecordByTaskId.getTaskfirsttrialcode(), DefaultTokenManager.getLocalUserCode().getUserCode());
+            if(!DefaultTokenManager.getLocalUserCode().getRoleCodes().contains("000")){
+                Assert.assertEquals("初审用户与当前用户不一致，无审批权限", taskRecordByTaskId.getTaskfirsttrialcode(), DefaultTokenManager.getLocalUserCode().getUserCode());
+            }
             controlTaskRecord.setTaskFirstTrialTime(new Timestamp(System.currentTimeMillis()));
         }
         if (trialStatusEnum == TrialStatusEnum.SECOND_AUDITEDING) {
-            Assert.assertEquals("二审用户与当前用户不一致，无审批权限", taskRecordByTaskId.getTasksecondtrialcode(), DefaultTokenManager.getLocalUserCode().getUserCode());
+            if(!DefaultTokenManager.getLocalUserCode().getRoleCodes().contains("000")) {
+                Assert.assertEquals("二审用户与当前用户不一致，无审批权限", taskRecordByTaskId.getTasksecondtrialcode(), DefaultTokenManager.getLocalUserCode().getUserCode());
+            }
             controlTaskRecord.setTaskSecondTrialTime(new Timestamp(System.currentTimeMillis()));
         }
         if (trialStatusEnum == TrialStatusEnum.FINAL_AUDITEDING) {
-            Assert.assertEquals("终审用户与当前用户不一致，无审批权限", taskRecordByTaskId.getTaskfinaltrialcode(), DefaultTokenManager.getLocalUserCode().getUserCode());
+            if(!DefaultTokenManager.getLocalUserCode().getRoleCodes().contains("000")) {
+                Assert.assertEquals("终审用户与当前用户不一致，无审批权限", taskRecordByTaskId.getTaskfinaltrialcode(), DefaultTokenManager.getLocalUserCode().getUserCode());
+            }
             controlTaskRecord.setTaskFinalTrialTime(new Timestamp(System.currentTimeMillis()));
         }
         controlTaskRecord.setUpdateTime(new Timestamp(System.currentTimeMillis()));
@@ -312,6 +324,7 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         controlTaskRecord.setTaskmenutype(operateDTO.getTaskMenuType());
         controlTaskRecord.setTasktype(operateDTO.getTaskType());
         controlTaskRecord.setTasktitle(operateDTO.getTaskTitle());
+        controlTaskRecord.setDataStatus("0");
         taskRecordsMapper.insert(controlTaskRecord);
         return controlTaskRecord;
     }

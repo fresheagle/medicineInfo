@@ -192,6 +192,14 @@ public class MissionServiceImpl implements MissionService {
 				}
 				return true;
 			}
+			if(nextTrailStatus.equals(TrialStatusEnum.OFFLINE.getId())){
+                for (Miss_control_task_records records : missControlTaskRecords) {
+                    if(!records.getDatastatus().equals(TrialStatusEnum.ONLINE.getId())){
+                        throw new Exception("当前任务不是都为已上线，请检查！");
+                    }
+                }
+                return true;
+            }
 		}
 		throw new Exception("批量操作任务状态不正确，请检查！");
 

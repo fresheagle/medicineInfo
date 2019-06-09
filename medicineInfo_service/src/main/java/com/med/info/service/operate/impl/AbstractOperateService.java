@@ -75,14 +75,14 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         logger.info("上线taskId={}", miss_control_task_records.getTaskId());
         BaseService<T> baseService = baseService(miss_control_task_records.getTaskmenutype());
         String recordJson = miss_control_task_records.getTaskpublishfinalcontentjson();
-        miss_control_task_records.setDataStatus("1");
+        miss_control_task_records.setDataStatus("online");
         miss_control_task_records.setUpdateTime(new Date());
         taskRecordsMapper.updateByTaskIdSelective(miss_control_task_records);
         logger.info("上线当前任务信息为 {}", recordJson);
         F objectF = (F) JSON.parseObject(recordJson, getCurrentObjectClass());
         T object = converseObject(objectF);
         object.setUpdateTime(new Timestamp(System.currentTimeMillis()));
-        object.setDatastatus("1");
+        object.setDatastatus("online");
         baseService.updateByTaskIdSelective(object);
         if (needDealMapper()) {
             dealMapperRelashionShip(objectF);
@@ -99,12 +99,12 @@ public abstract class AbstractOperateService<T extends BaseDomain, F> implements
         F objectF = (F) JSON.parseObject(recordJson, getCurrentObjectClass());
         T object = converseObject(objectF);
         object.setUpdateTime(new Timestamp(System.currentTimeMillis()));
-        object.setDatastatus("0");
+        object.setDatastatus("offline");
         baseService.updateByTaskIdSelective(object);
         if (needDealMapper()) {
             dealMapperRelashionShip(objectF);
         }
-        miss_control_task_records.setDataStatus("0");
+        miss_control_task_records.setDataStatus("offline");
         miss_control_task_records.setUpdateTime(new Date());
         taskRecordsMapper.updateByTaskIdSelective(miss_control_task_records);
         missControlApprovalService.deleteByTaskId(miss_control_task_records.getTaskId());

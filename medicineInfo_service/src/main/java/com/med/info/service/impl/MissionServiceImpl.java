@@ -73,9 +73,9 @@ public class MissionServiceImpl implements MissionService {
 		taskStatusToRecordField.put("toFinalAudited", "taskfinaltrialcode");
 
 
-		taskStatusToRoleCode.put("taskfirsttrialcode", "001");
-		taskStatusToRoleCode.put("tasksecondtrialcode", "001");
-		taskStatusToRoleCode.put("taskfinaltrialcode", "001");
+		taskStatusToRoleCode.put("taskfirsttrialcode", "002");
+		taskStatusToRoleCode.put("tasksecondtrialcode", "003");
+		taskStatusToRoleCode.put("taskfinaltrialcode", "004");
 
         title.add("标题");title.add("最新进度");title.add("作者");title.add("创建日期");
         title.add("编辑组");title.add("初审者");title.add("初审得分");title.add("初审日期");

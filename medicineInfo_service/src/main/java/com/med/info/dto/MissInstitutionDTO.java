@@ -111,7 +111,8 @@ public class MissInstitutionDTO implements Serializable {
 	private String doctorInfo;
 	private String emergencyCenter;
 	private String orderRefer;
-	private String doctors;
+	private List<InsDoctorsDTO> doctors;
+	private String office;
 
     public Long getId() {
         return id;
@@ -545,11 +546,19 @@ public class MissInstitutionDTO implements Serializable {
 		this.orderRefer = orderRefer;
 	}
 
-	public String getDoctors() {
+	public List<InsDoctorsDTO> getDoctors() {
 		return doctors;
 	}
 
-	public void setDoctors(String doctors) {
+	public void setDoctors(List<InsDoctorsDTO> doctors) {
 		this.doctors = doctors;
+	}
+
+	public String getOffice() {
+		return office;
+	}
+
+	public void setOffice(String office) {
+		this.office = office;
 	}
 }

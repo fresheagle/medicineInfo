@@ -75,6 +75,14 @@ public class MissChineseDiseaseDTO implements Serializable{
 	private Long auditDoctor;
 	private List<DepartmentMapDTO> departmentMapDTO;
 	private List<DislocationMapDTO> dislocationList;
+	private String consultation;
+	private String section;
+	private String medicalExamination;
+	private String familyTreatment;
+	private String department;
+	private String doctorConsultation;
+	private String expectedInspection;
+	private String expectedTreatment;
 	public Long getId() {
 		return id;
 	}
@@ -476,6 +484,54 @@ public class MissChineseDiseaseDTO implements Serializable{
 	}
 	public void setDislocationList(List<DislocationMapDTO> dislocationList) {
 		this.dislocationList = dislocationList;
+	}
+	public String getConsultation() {
+		return consultation;
+	}
+	public void setConsultation(String consultation) {
+		this.consultation = consultation;
+	}
+	public String getSection() {
+		return section;
+	}
+	public void setSection(String section) {
+		this.section = section;
+	}
+	public String getMedicalExamination() {
+		return medicalExamination;
+	}
+	public void setMedicalExamination(String medicalExamination) {
+		this.medicalExamination = medicalExamination;
+	}
+	public String getFamilyTreatment() {
+		return familyTreatment;
+	}
+	public void setFamilyTreatment(String familyTreatment) {
+		this.familyTreatment = familyTreatment;
+	}
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+	public String getDoctorConsultation() {
+		return doctorConsultation;
+	}
+	public void setDoctorConsultation(String doctorConsultation) {
+		this.doctorConsultation = doctorConsultation;
+	}
+	public String getExpectedInspection() {
+		return expectedInspection;
+	}
+	public void setExpectedInspection(String expectedInspection) {
+		this.expectedInspection = expectedInspection;
+	}
+	public String getExpectedTreatment() {
+		return expectedTreatment;
+	}
+	public void setExpectedTreatment(String expectedTreatment) {
+		this.expectedTreatment = expectedTreatment;
 	}
 
 

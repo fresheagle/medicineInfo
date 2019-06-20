@@ -3,8 +3,9 @@
  */
 package com.med.info.mapper;
 
-import java.awt.*;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author jialin.jiang
@@ -42,4 +43,6 @@ public interface BaseMapper<T> {
 	 * @return
 	 */
 	public int updateByPrimaryKeySelective(T t);
+	
+	public List<T> exportSQL(@Param("taskId")List<String> taskId);
 }

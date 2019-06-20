@@ -153,6 +153,12 @@ public class Miss_institutionWithBLOBs extends Miss_institution {
     private String clinicalTeaching;
     
     private String doctorInfo;
+    
+    private String office;
+    
+	private String emergencyCenter;
+	private String orderRefer;
+	private String doctors;
 
     public String getLeadteamInfo() {
 		return leadteamInfo;
@@ -584,5 +590,37 @@ public class Miss_institutionWithBLOBs extends Miss_institution {
 
 	public void setDoctorInfo(String doctorInfo) {
 		this.doctorInfo = doctorInfo;
+	}
+
+	public String getOffice() {
+		return office;
+	}
+
+	public void setOffice(String office) {
+		this.office = office;
+	}
+
+	public String getEmergencyCenter() {
+		return emergencyCenter;
+	}
+
+	public void setEmergencyCenter(String emergencyCenter) {
+		this.emergencyCenter = emergencyCenter;
+	}
+
+	public String getOrderRefer() {
+		return orderRefer;
+	}
+
+	public void setOrderRefer(String orderRefer) {
+		this.orderRefer = orderRefer;
+	}
+
+	public String getDoctors() {
+		return doctors;
+	}
+
+	public void setDoctors(String doctors) {
+		this.doctors = doctors;
 	}
 }

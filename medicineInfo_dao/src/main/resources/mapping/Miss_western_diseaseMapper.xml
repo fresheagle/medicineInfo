@@ -99,6 +99,18 @@
     consultation, section, treatment_cost, picture_path, medical_examination, family_treatment, 
     department, doctor_consultation, expected_inspection, expected_treatment
   </sql>
+  <sql id="Export_List">
+  	id, disease_id, reserve1, reserve2, reserve3, dataStatus, task_id, task_status, chinese_name, 
+    english_name, related_diseases, disease_type, location_pid, location_disease, main_causes, 
+    common_symptom, multiple_population, infectivity, department_pid, department_id, 
+    edit_doctor, audit_doctor, other_name, type, epidemiology, t_related_diseases, etiology_pathogenesis, pathology, clinical_types_class, 
+    clinical_manifestation, symptom, sign, laboratory_examination, text_other_check, 
+    diagnostic_points, differential_diagnosis, prevention_treatment, treatment_prognosis, 
+    management, preventive_nursing, nursing, prevention_measures, modern_research, drug_resistance, 
+    dietary_conditioning, attention_matter, data_reference, introduction, 
+    consultation, section, treatment_cost, picture_path, medical_examination, family_treatment, 
+    department, doctor_consultation, expected_inspection, expected_treatment
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     <!--
       WARNING - @mbg.generated
@@ -857,5 +869,12 @@
 				or other_name = #{otherName,jdbcType=VARCHAR}
 			</if>
 		</where>
+	</select>
+	<select id="exportSQL" parameterType="java.util.List" resultMap="ResultMapWithBLOBs">
+		SELECT <include refid="Export_List" />
+		FROM miss_western_disease where task_id in 
+		<foreach collection="taskId" item="taskId" separator="," open="(" close=")">
+			#{taskId}
+		</foreach>
 	</select>
 </mapper>

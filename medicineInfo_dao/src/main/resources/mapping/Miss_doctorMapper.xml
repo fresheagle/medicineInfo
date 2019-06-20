@@ -72,6 +72,13 @@
     experts_time, treat_area, research_area, academic, production, awards, science, socialization, 
     thesis, bookmaking, heritage_map, reference_material, task_json
   </sql>
+  <sql id="Export_List">
+  	id, name, sex, origin, nation, birthday, dieday, thumbnail, graduate, profession, 
+    inaugural_institution, birthplace_district_code, dataStatus, task_id, task_status, edit_doctor, audit_doctor, 
+    intro, picturepath, honorary, clinic_professional, edu_professional, education, work_experience, 
+    experts_time, treat_area, research_area, academic, production, awards, science, socialization, 
+    thesis, bookmaking, heritage_map, reference_material
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     <!--
       WARNING - @mbg.generated
@@ -597,5 +604,12 @@
 				and birthday = #{birthday,jdbcType=VARCHAR}
 			</if>
 		</where>
+	</select>
+	<select id="exportSQL" parameterType="java.util.List" resultMap="ResultMapWithBLOBs">
+		SELECT <include refid="Export_List" />
+		FROM miss_doctor where task_id in 
+		<foreach collection="taskId" item="taskId" separator="," open="(" close=")">
+			#{taskId}
+		</foreach>
 	</select>
 </mapper>

@@ -52,6 +52,11 @@
     -->
     intro, content, picturepath, task_json
   </sql>
+  <sql id="exportSQL">
+  	id, title, author, thumbnail, keyword, description, publish_time, reading, reserve1, 
+    reserve2, reserve3, dataStatus, task_id, task_status, edit_doctor, audit_doctor,
+    intro, content, picturepath
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     <!--
       WARNING - @mbg.generated
@@ -363,5 +368,12 @@
 				or author = #{author,jdbcType=VARCHAR}
 			</if>
 		</where>
+	</select>
+	<select id="exportSQL" parameterType="java.util.List" resultMap="ResultMapWithBLOBs">
+		SELECT <include refid="Export_List" />
+		FROM miss_article where task_id in 
+		<foreach collection="taskId" item="taskId" separator="," open="(" close=")">
+			#{taskId}
+		</foreach>
 	</select>
 </mapper>

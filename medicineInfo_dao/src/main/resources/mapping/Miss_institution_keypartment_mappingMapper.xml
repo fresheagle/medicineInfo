@@ -251,8 +251,11 @@
 		delete from miss_institution_keypartment_mapping
 		where institution_id = #{id,jdbcType=BIGINT}
 	</delete>
-	<select id="exportSQL" resultMap="InstitutionDepartmentExportMap">
-		select <include refid="Export_List"/>
-		from miss_institution_keypartment_mapping
+	<select id="exportSQL" parameterType="java.util.List" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List" />
+		FROM miss_institution_keypartment_mapping where task_id in 
+		<foreach collection="taskId" item="taskId" separator="," open="(" close=")">
+			#{taskId}
+		</foreach>
 	</select>
 </mapper>

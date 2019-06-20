@@ -189,4 +189,11 @@
   	delete from miss_symptom_dislocation_mapping
     where symptom_id = #{symptomId,jdbcType=BIGINT}
   </delete>
+  <select id="exportSQL" parameterType="java.util.List" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List" />
+		FROM miss_symptom_dislocation_mapping where task_id in 
+		<foreach collection="taskId" item="taskId" separator="," open="(" close=")">
+			#{taskId}
+		</foreach>
+	</select>
 </mapper>

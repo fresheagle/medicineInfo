@@ -195,4 +195,12 @@
   	delete from miss_disease_symptom_mapping
     where symptom_id = #{id,jdbcType=BIGINT}
   </delete>
+  
+  <select id="exportSQL" parameterType="java.util.List" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List" />
+		FROM miss_disease_symptom_mapping where task_id in 
+		<foreach collection="taskId" item="taskId" separator="," open="(" close=")">
+			#{taskId}
+		</foreach>
+  </select>
 </mapper>

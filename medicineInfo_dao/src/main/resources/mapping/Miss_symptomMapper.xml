@@ -97,6 +97,18 @@
     acupuncture_therapy, syndrome_differentiation, prognosis, introduction, thumbnail, 
     epidemiology, preventive_measure, picturepath
   </sql>
+  <sql id="exportSQL">
+  	id, chinese_name, english_name, other_name, symptom, treatment, clinical_manifestation, 
+    department_id, main_causes, common_symptom, multiple_population, infectivity, reserve1, 
+    reserve2, reserve3, dataStatus, task_id, task_status, symptom_type, common_diseases_old, edit_doctor, audit_doctor,
+    inspection_items, t_other_therapies, common_diseases, t_preventive_nursing, syndrome, 
+    data_reference, chinese_medicine, pathogeny, pathogenesis, dialectical_points, symptom_analysis, 
+    common_chinese_medicine, t_common_syndrome_types, symptom_origin, inspect, 
+    diagnosi, differential_diagnosis, clinical_significance, daily_nursing, attention_matter, 
+    influence_factor, consultation, section, prescription, syndrome_different_treatment, 
+    acupuncture_therapy, syndrome_differentiation, prognosis, introduction, thumbnail, 
+    epidemiology, preventive_measure, picturepath
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     <!--
       WARNING - @mbg.generated
@@ -885,5 +897,12 @@
 				or other_name = #{otherName,jdbcType=VARCHAR}
 			</if>
 		</where>
+	</select>
+	<select id="exportSQL" parameterType="java.util.List" resultMap="ResultMapWithBLOBs">
+		SELECT <include refid="Export_List" />
+		FROM miss_symptom where task_id in 
+		<foreach collection="taskId" item="taskId" separator="," open="(" close=")">
+			#{taskId}
+		</foreach>
 	</select>
 </mapper>

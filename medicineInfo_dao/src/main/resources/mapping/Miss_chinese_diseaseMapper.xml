@@ -119,6 +119,22 @@
     treatment_cost, medical_read, medical_examination, family_treatment, department, 
     doctor_consultation, expected_inspection, expected_treatment
   </sql>
+  <sql id="Export_List">
+  	id, chinese_name, disease_id, reserve1, reserve2, reserve3, dataStatus, task_id, 
+    task_status, english_name, other_name, latin_name, related_diseases, disease_type, 
+    location_pid, location_disease, main_causes, common_symptom, multiple_population, 
+    infectivity, sea_characteristic, department_pid, department_id, thumbnail, edit_doctor, 
+    audit_doctor, type, location, introduction, noun_interpretation, history, relationship_western, pathogeny, pathogenesis, 
+    examination_points, clinical_manifestation, diagnosis_basis, disease_identification, 
+    related_examinations, dialectical_treatment, dialectical_points, syndrome_differentiation, 
+    treatment, treatment_principles, syndrome_type, external_therapy, other_therapies, 
+    preventive_nursing, clinical_preparation, literature_abstract, modern_research, text_dietary_conditioning, 
+    attention_matter, data_reference, clinical_types_class, sign, laboratory_examination, 
+    diagnostic_points, differential_diagnosis, prevention_treatment, treatment_prognosis, 
+    nursing, prevention_measures, dietary_conditioning, drug_resistance, picture_path, 
+    treatment_cost, medical_read, medical_examination, family_treatment, department, 
+    doctor_consultation, expected_inspection, expected_treatment
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     <!--
       WARNING - @mbg.generated
@@ -1073,5 +1089,12 @@
 				or other_name = #{otherName,jdbcType=VARCHAR}
 			</if>
 		</where>
+	</select>
+	<select id="exportSQL" parameterType="java.util.List" resultMap="ResultMapWithBLOBs">
+		SELECT <include refid="Export_List" />
+		FROM miss_chinese_disease where task_id in 
+		<foreach collection="taskId" item="taskId" separator="," open="(" close=")">
+			#{taskId}
+		</foreach>
 	</select>
 </mapper>

@@ -110,6 +110,19 @@
     route_administration, dosage_form, functional_classification, disease_classification, 
     thumbnail, adaptation
   </sql>
+  <sql id="exportSQL">
+  	id, medical_type, com_name, chinese_pinyin, alisa_name, shop_name, english_name, 
+    drug_type, ytime, enterprise, approval_num, health_type, storage_method, drug_identifying, 
+    address, recipe_type, price, picture_path, dataStatus, task_id, task_status, west_medical_department, 
+    chinese_medical_type, chinese_medical_department, edit_doctor, audit_doctor,
+    constitute, property, func, main_attend, standard, pharmacology, toxicological_effects, 
+    clinical_application, adverse_reactions, taboo, notice, identify, pharmacy_check, 
+    content_pic, medic_format, notes, component, main_meffect, `analyze`, interactions, history, drug_introduce, awards, research, monograph, message_from, product_info, 
+    indication, dosage, introduction, gravida_durg, children_durg, elderly_durg, 
+    durg_overdose, pharmacokinetics, combined_medication, physician_advice, 
+    route_administration, dosage_form, functional_classification, disease_classification, 
+    thumbnail, adaptation
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     <!--
       WARNING - @mbg.generated
@@ -1017,5 +1030,12 @@
 				or shop_name = #{shopName,jdbcType=VARCHAR}
 			</if>
 		</where>
+	</select>
+	<select id="exportSQL" parameterType="java.util.List" resultMap="ResultMapWithBLOBs">
+		SELECT <include refid="Export_List" />
+		FROM miss_medical where task_id in 
+		<foreach collection="taskId" item="taskId" separator="," open="(" close=")">
+			#{taskId}
+		</foreach>
 	</select>
 </mapper>

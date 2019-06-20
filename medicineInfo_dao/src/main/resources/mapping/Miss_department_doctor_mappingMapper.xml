@@ -189,4 +189,11 @@
   	delete from miss_department_doctor_mapping
     where doctor_id = #{id,jdbcType=BIGINT}
   </delete>
+  <select id="exportSQL" parameterType="java.util.List" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List" />
+		FROM miss_department_doctor_mapping where task_id in 
+		<foreach collection="taskId" item="taskId" separator="," open="(" close=")">
+			#{taskId}
+		</foreach>
+	</select>
 </mapper>

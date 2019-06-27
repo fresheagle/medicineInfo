@@ -9,6 +9,7 @@ import com.med.info.domain.Miss_control_user;
 import com.med.info.dto.*;
 import com.med.info.mapper.domain.UserInfoDTO;
 import com.med.info.mapper.domain.UserRoleDTO;
+import com.med.info.service.ExportService;
 import com.med.info.service.MissControlRoleService;
 import com.med.info.service.MissControlUserService;
 import com.med.info.utils.CollectionUtil;
@@ -56,6 +57,8 @@ public class MissionServiceImpl implements MissionService {
 	private MissControlUserService missControlUserService;
 	@Autowired
 	private MissControlRoleService missControlRoleService;
+	@Autowired
+	private ExportService exportService;
 	
 	private static Logger logger = org.slf4j.LoggerFactory.getLogger(MissionServiceImpl.class);
 
@@ -116,10 +119,12 @@ public class MissionServiceImpl implements MissionService {
 			logger.info("批量操作任务，数量为：{}, tasks:{}", null == missControlTaskRecords ? 0 : missControlTaskRecords.size(), batchOperateDTO.getTasks());
 			checkTaskStatus(missControlTaskRecords, batchOperateDTO.getTrailStatus());
 			if(batchOperateDTO.getTrailStatus().equals(TrialStatusEnum.ONLINE.getId())){
-				for (Miss_control_task_records taskRecord : missControlTaskRecords) {
-					for (IOperateService operateService : operateServices) {
-						if (operateService.isFilter(taskRecord.getTaskmenutype())) {
-							operateService.doOnline(taskRecord);
+				if("success".equals(exportService.exportFile(missControlTaskRecords, batchOperateDTO))){
+					for (Miss_control_task_records taskRecord : missControlTaskRecords) {
+						for (IOperateService operateService : operateServices) {
+							if (operateService.isFilter(taskRecord.getTaskmenutype())) {
+								operateService.doOnline(taskRecord);
+							}
 						}
 					}
 				}

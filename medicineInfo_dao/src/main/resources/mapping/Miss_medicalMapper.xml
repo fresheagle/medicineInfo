@@ -110,7 +110,7 @@
     route_administration, dosage_form, functional_classification, disease_classification, 
     thumbnail, adaptation
   </sql>
-  <sql id="exportSQL">
+  <sql id="Export_List">
   	id, medical_type, com_name, chinese_pinyin, alisa_name, shop_name, english_name, 
     drug_type, ytime, enterprise, approval_num, health_type, storage_method, drug_identifying, 
     address, recipe_type, price, picture_path, dataStatus, task_id, task_status, west_medical_department, 

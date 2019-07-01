@@ -97,7 +97,7 @@
     acupuncture_therapy, syndrome_differentiation, prognosis, introduction, thumbnail, 
     epidemiology, preventive_measure, picturepath
   </sql>
-  <sql id="exportSQL">
+  <sql id="Export_List">
   	id, chinese_name, english_name, other_name, symptom, treatment, clinical_manifestation, 
     department_id, main_causes, common_symptom, multiple_population, infectivity, reserve1, 
     reserve2, reserve3, dataStatus, task_id, task_status, symptom_type, common_diseases_old, edit_doctor, audit_doctor,

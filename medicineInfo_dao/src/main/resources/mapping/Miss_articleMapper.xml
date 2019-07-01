@@ -52,7 +52,7 @@
     -->
     intro, content, picturepath, task_json
   </sql>
-  <sql id="exportSQL">
+  <sql id="Export_List">
   	id, title, author, thumbnail, keyword, description, publish_time, reading, reserve1, 
     reserve2, reserve3, dataStatus, task_id, task_status, edit_doctor, audit_doctor,
     intro, content, picturepath

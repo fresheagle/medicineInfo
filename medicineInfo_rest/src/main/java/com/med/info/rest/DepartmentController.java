@@ -1,6 +1,8 @@
 package com.med.info.rest;
 
-import org.apache.log4j.Logger;
+import com.med.info.mapper.domain.DepartmentMapDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +14,8 @@ import com.med.info.response.PageObject;
 import com.med.info.response.Response;
 import com.med.info.service.MissDepartmentService;
 
+import java.util.List;
+
 /**
  * Title: 部门科室参数配置管理 
  * Description: 对部门科室相关参数的增删改查
@@ -22,7 +26,7 @@ import com.med.info.service.MissDepartmentService;
 @RestController
 @RequestMapping("/api/department")
 public class DepartmentController {
-	private static final Logger log = Logger.getLogger(DiseaseController.class);
+	private static final Logger log = LoggerFactory.getLogger(DepartmentController.class);
 	
 	@Autowired
 	MissDepartmentService missDepartmentService;
@@ -48,4 +52,16 @@ public class DepartmentController {
 		PageObject<Miss_department> selectPage = missDepartmentService.selectPage(currentPage, pageSize, miss_department);
 		return new Response().success(selectPage);
 	}
+
+	@RequestMapping(path = "/select/institution", method = RequestMethod.GET)
+	public Response selectByDeInstitution(@RequestParam(value="institutionId") Long institutionId){
+		try {
+			List<DepartmentMapDTO> missDepartmentList = missDepartmentService.getDepartmentMapByInstitutionId(institutionId);
+			return new Response().success(missDepartmentList);
+		} catch (Exception e) {
+			log.error("查询对应部分失败， institutionId = {}", institutionId.toString(), e);
+			return new Response().failure("查询失败");
+		}
+	}
+
 }

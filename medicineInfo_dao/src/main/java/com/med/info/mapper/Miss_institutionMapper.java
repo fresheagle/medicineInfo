@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.med.info.domain.Miss_institution;
 import com.med.info.domain.Miss_institutionWithBLOBs;
+import com.med.info.mapper.domain.InstitutionInfoDTO;
 import com.med.info.mapper.domain.InstitutionInfoMapDTO;
 import org.apache.ibatis.annotations.Param;
 
@@ -67,4 +68,6 @@ public interface Miss_institutionMapper extends BaseMapper<Miss_institutionWithB
 	List<InstitutionInfoMapDTO> getInstitutionInfoMapDTOByDoctorId(Long id);
 
     List<Miss_institutionWithBLOBs> check(@Param("name") String name, @Param("website") String website);
+
+    List<InstitutionInfoMapDTO> getInstitutionInfoMapsByName(@Param("name") String name);
 }

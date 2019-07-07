@@ -1162,6 +1162,13 @@
 			</if>
 		</where>
 	</select>
+
+	<select id="getInstitutionInfoMapsByName" parameterType="java.lang.String"
+			resultMap="InstitutionInfoMapResult">
+		select id, name, level, address
+		from miss_institution
+		where name like CONCAT('%', #{name}, '%')
+	</select>
 	
 	<select id="exportSQL" parameterType="java.util.List" resultMap="ResultMapWithBLOBs">
 		SELECT <include refid="Export_List" />

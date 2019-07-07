@@ -78,7 +78,13 @@ public class MissInstitutionServiceImpl extends BaseServiceImpl<Miss_institution
 		throw new Exception("该医院信息已经存在！");
 	}
 
-	@Override
+    @Override
+    public List<InstitutionInfoMapDTO> getByName(String name) {
+		return institutionMapper.getInstitutionInfoMapsByName(name);
+
+    }
+
+    @Override
 	public String getKeyName() {
 		return "missInstitution";
 	}

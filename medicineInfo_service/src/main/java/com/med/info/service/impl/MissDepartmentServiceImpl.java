@@ -2,6 +2,7 @@ package com.med.info.service.impl;
 
 import java.util.List;
 
+import com.med.info.mapper.domain.InstitutionInfoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,4 +39,6 @@ public class MissDepartmentServiceImpl extends BaseServiceImpl<Miss_department> 
 	public List<DepartmentMapDTO> getDepartmentMapByInstitutionId(Long id) {
 		return departmentMapper.getDepartmentMapByInstitutionId(id);
 	}
+
+
 }

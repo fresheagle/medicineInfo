@@ -2,6 +2,7 @@ package com.med.info.rest;
 
 import com.med.info.mapper.domain.DepartmentMapDTO;
 import com.med.info.mapper.domain.InstitutionInfoDTO;
+import com.med.info.mapper.domain.InstitutionInfoMapDTO;
 import com.med.info.response.Response;
 import com.med.info.service.InstitutionInfoService;
 import com.med.info.service.MissDepartmentService;
@@ -72,7 +73,18 @@ public class InstitutionController {
             return new Response().failure(e.getMessage());
         }
     }
-    
+
+    @RequestMapping(path = "/name", method = RequestMethod.GET)
+    public Response getByName(@RequestParam("name") String name){
+        try {
+            List<InstitutionInfoMapDTO> institutionInfoDTOS = missInstitutionService.getByName(name);
+            return new Response().success(institutionInfoDTOS);
+        } catch (Exception e) {
+            log.error("查询数据错误", e);
+            return new Response().failure("查询错误");
+        }
+    }
+
     /**
      * 添加医疗机构信息
      *

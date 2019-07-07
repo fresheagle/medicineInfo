@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.med.info.domain.Miss_department;
 import com.med.info.mapper.domain.DepartmentMapDTO;
+import com.med.info.mapper.domain.InstitutionInfoDTO;
 
 public interface MissDepartmentService extends BaseService<Miss_department>{
 	

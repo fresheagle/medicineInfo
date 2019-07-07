@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.med.info.domain.Miss_department;
 import com.med.info.mapper.domain.DepartmentMapDTO;
+import com.med.info.mapper.domain.InstitutionInfoDTO;
+import org.apache.ibatis.annotations.Param;
 
 public interface Miss_departmentMapper extends BaseMapper<Miss_department>{
     /**

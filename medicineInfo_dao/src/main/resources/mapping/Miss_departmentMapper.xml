@@ -22,9 +22,12 @@
 	
 	<resultMap type="com.med.info.mapper.domain.DepartmentMapDTO"
 		id="DepartmentMapResult">
-				<id column="id" jdbcType="BIGINT" property="id" />
+		<id column="id" jdbcType="BIGINT" property="id" />
 		<result column="department_name" jdbcType="VARCHAR"
 			property="departmentName" />
+		<result column="parent_department_id" jdbcType="BIGINT"
+				property="parentDepartmentId" />
+
 	</resultMap>
 
 	
@@ -274,14 +277,14 @@
 	<select id="getDepartmentMapByDoctorId" parameterType="java.lang.Long"
 		resultMap="DepartmentMapResult">
 		select
-		b.id as id, b.department_name as department_name 
+		b.id as id, b.department_name as department_name , b.parent_department_id as parent_department_id
 		from miss_department_doctor_mapping a left join miss_department b on a.department_id = b.id where a.doctor_id = #{id}
 	</select>
 	
 	<select id="getDepartmentMapByInstitutionId" parameterType="java.lang.Long"
 		resultMap="DepartmentMapResult">
 		select
-		b.id as id, b.department_name as department_name 
+		b.id as id, b.department_name as department_name , b.parent_department_id as parent_department_id
 		from miss_institution_keypartment_mapping a left join miss_department b on a.department_id = b.id where a.institution_id = #{id}
 		</select>
 
